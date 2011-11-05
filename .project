@@ -13,9 +13,6 @@
 	</buildSpec>
 	<natures>
 		<nature>com.aptana.projects.webnature</nature>
-<<<<<<< HEAD
-		<nature>com.aptana.editor.php.phpNature</nature>
-=======
->>>>>>> 9a4b783a708dc9cba8d761aabea782e2371cd3ed
-	</natures>
+		<nature>com.aptana.editor.php.phpNature</nature>	
+</natures>
 </projectDescription>
