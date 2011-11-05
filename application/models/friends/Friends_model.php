@@ -8,6 +8,6 @@ class Friends_model extends CI_Model
         parent::__construct();
     }
 
-    
+    function 
     
 }
