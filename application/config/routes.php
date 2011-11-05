@@ -38,8 +38,14 @@
 |
 */
 
-$route['default_controller'] = "welcome";
+// Fehlerseiten
 $route['404_override'] = '';
+
+// Hauptseiten
+$route["default_controller"] = "base/welcome";
+$route["timeline"] = "timeline/timeline";
+$route["map"] = "map/map";
+$route["friends"] = "friends/friends";
 
 
 /* End of file routes.php */
