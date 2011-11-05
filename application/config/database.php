@@ -47,10 +47,10 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = "http://www.rawsteel.de";
-$db['default']['username'] = "web2";
-$db['default']['password'] = "aQOp52RJ";
-$db['default']['database'] = "usr_web2_1";
+$db['default']['hostname'] = "www.rawsteel.de";
+$db['default']['username'] = "igehweg";
+$db['default']['password'] = "igehweg";
+$db['default']['database'] = "igehweg";
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;

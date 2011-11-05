@@ -7,12 +7,12 @@ class Timeline extends CI_Controller
   {
     parent::__construct();
  
-    $this->load->model("timeline/Timeline_datetime");
+    $this->load->model("timeline/Timeline_event");
   }
        
   public function index()
   {
-     echo "blub";
+     
   }
 
 }
