@@ -21,9 +21,13 @@
 					<?php
 						$names = $friends["friend_names"];
 						$pics = $friends["friend_pics"];
+						if(!is_null($names)) {
+						
 						foreach($names as $name)
 						{
 							echo "<li class='ui-state-default friend_list_entry'><span class='ui-icon ui-icon-arrowthick-2-n-s'></span><img align='absmiddle' src='".$pics."'/> ".$name."</li>";	
+						}
+						
 						}
 					?>
 				</ul>
