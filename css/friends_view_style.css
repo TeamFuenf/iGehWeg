@@ -12,16 +12,23 @@ ul#friends_slide_list {
 	position: relative;
 	margin: 0px;
 	padding: 0px;
+	width: 300%;
+	height: 100%;
 }
 
 #friends_slide_list>li {
 	float: left;
 	width: 320px;
-	height: 640px;
-	border: 1px solid black;
+	height: 480px;
 }
 
 /*----- friends_main -----*/
+
+div#friends {
+	width: 320px;
+	height: 480px;
+	overflow: hidden;
+}
 
 ul#friends_friend_list {
 	margin: 0px;
