@@ -1,38 +1,48 @@
 <head>
-	<link rel="stylesheet" type="text/css" href="../css/friends_mainview_style.css">
+	<link rel="stylesheet" type="text/css" href="../css/friends_view_style.css">
 	
 	<script src="../javascript/jquery.js" ></script>
 	<script src="../javascript/jquery-ui.js" ></script>
 	
 	<script>
+	
 		$(function() {
-			$( "#sortable" ).sortable();
-			$( "#sortable" ).disableSelection();
+			$(".friend_list_entry").on("click", function() {
+				$detail_id = $(this).attr("id");
+				$.ajax({
+					url: "/friends/friends_control/get_detail/" + $detail_id,
+					success: function(data)
+					{
+						$("#friend_detail").html(data);
+						$("#friends_slide_list").animate({left : "-320px"}, 500);
+  					}
+				});
+			});
 		});
+		
 	</script>
 </head>
 <body>
 	<div id="friends">
-		<div id="friends_you"><div class="imgbox"><img align='absmiddle' src="http://profile.ak.fbcdn.net/hprofile-ak-ash2/260743_1054310596_3552414_n.jpg" /></div> <?php echo $current_user  ?> </div>
-		<div id="friends_add"><a href="">+</a></div>
-		<div id="friends_list">
-			<div class="demo">
-				<ul id="sortable">
-					<?php
-						$names = $friends["friend_names"];
-						$pics = $friends["friend_pics"];
-						if(!is_null($names)) {
-						
-						foreach($names as $name)
-						{
-							echo "<li class='ui-state-default friend_list_entry'><span class='ui-icon ui-icon-arrowthick-2-n-s'></span><img align='absmiddle' src='".$pics."'/> ".$name."</li>";	
-						}
-						
-						}
-					?>
-				</ul>
-			</div>
-		</div>
-		<div id="friends_groups"><a href="">groups</a></div>
+		<ul id="friends_slide_list">
+			<!-- FRIENDS MAIN -->
+			<li>
+				<div id="friends_main">
+					<?php echo $friends_main; ?>
+				</div>
+			</li>
+			<!-- FRIEND DETAIL -->
+			<li>
+				<div id="friend_detail">
+					
+				</div>
+			</li>
+			<!-- ADD TO GROUP -->
+			<li>
+				<div id="add_to_group">
+					ADD TO GROUP
+				</div>
+			</li>
+		</ul>
 	</div>
-</body>
+	</body>

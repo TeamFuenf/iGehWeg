@@ -1,0 +1,98 @@
+body {
+	font-family: verdana;
+	font-size: 12px;
+	color: black;
+	margin: 0px;
+	padding: 0px;
+}
+
+
+ul#friends_slide_list {
+	list-style: none;
+	position: relative;
+	margin: 0px;
+	padding: 0px;
+}
+
+#friends_slide_list>li {
+	float: left;
+	width: 320px;
+	height: 640px;
+	border: 1px solid black;
+}
+
+/*----- friends_main -----*/
+
+ul#friends_friend_list {
+	margin: 0px;
+	padding: 0px;
+}
+
+ul#friends_friend_list>li {
+	clear: both;
+	border: 1px dashed black;
+	list-style: none;
+	margin: 1px 1px;
+	padding: 0px;
+	cursor: pointer;
+	background-color: #F0F0F0;
+}
+
+ul#friends_friend_list>li>img {
+	height: 22px;
+	width: 22px;
+	vertical-align: middle;
+}
+
+div#friends_current_user {
+	float: left;
+	margin: 0px 0px 20px 0px;
+}
+
+img.big_user_image {
+	width: 44px;
+	height: 44px;
+	vertical-align: middle;
+}
+
+div#friends_add_button>a{
+	float: right;
+	padding: 10px 15px;
+	border: 1px dashed black;
+	background-color: #F0F0F0;
+}
+
+div#friends_groups {
+	margin: 20px 0px;
+}
+
+div#friends_groups>a{
+	padding: 10px 20px;
+	border: 1px dashed black;
+	background-color: #F0F0F0;
+}
+
+/*----- friend_detail -----*/
+
+a.group_links {
+	border: 1px dashed black;
+	background-color: #F0F0F0;
+	text-decoration: none;
+	color: black;
+	padding: 0px 2px;
+}
+
+#back_button {
+	border: 1px dashed black;
+	background-color: #F0F0F0;
+	cursor: pointer;
+	padding: 2px;
+}
+
+#add_to_button {
+	border: 1px dashed black;
+	background-color: #F0F0F0;
+	cursor: pointer;
+	padding: 0px 2px;
+}
+

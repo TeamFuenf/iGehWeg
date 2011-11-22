@@ -45,7 +45,7 @@ $route['404_override'] = '';
 $route["default_controller"] = "base/welcome";
 $route["timeline"] = "timeline/timeline";
 $route["map"] = "map/map";
-$route["friends"] = "friends/friends";
+$route["friends"] = "friends/friends_control";
 
 
 /* End of file routes.php */
