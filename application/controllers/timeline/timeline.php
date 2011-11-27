@@ -13,7 +13,7 @@ class Timeline extends CI_Controller
     // TODO global nach login
     $this->session->set_userdata("userid", "alex");
   }
-       
+
   public function index()
   {
     $this->session->set_userdata("neweventid", uniqid("event", true));
@@ -22,7 +22,6 @@ class Timeline extends CI_Controller
     $this->load->view("timeline/timeline", $data);
   }
   
-
 // --- Neues Event erstellen --------------------------------------------------
 
   public function newevent()
