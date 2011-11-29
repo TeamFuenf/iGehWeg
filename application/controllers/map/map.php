@@ -1,20 +1,19 @@
 <?php
 class Map extends CI_Controller {
 	
-	
-	/*
-	 * Scharfrichterhaus: lat='48.5748142' lon='13.4693767'
-	 * 
-	 * Aquarium: lat='48.5738242' lon='13.4635546'
-	 * 
-	 * Shamrock: lat='48.5755427' lon='13.4604024'
-	 * 
-	 */
-	
+  public function __construct()
+  {
+    parent::__construct();
+    $this->load->model("map/Marker_model");
+  }
 
 	function index()
 	{
-		$this->load->view('map/mapview');
+	  $data["markerLocations"] = $this->Marker_model->getLocations();
+    $data["markerFriends"] = $this->Marker_model->getFriends();
+    $data["markerEvents"] = $this->Marker_model->getEvents();
+    
+		$this->layout->view("map/mapview", $data);
 	}
 	
 	public function addLocation()

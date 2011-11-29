@@ -42,7 +42,7 @@
 $route['404_override'] = '';
 
 // Hauptseiten
-$route["default_controller"] = "base/welcome";
+$route["default_controller"] = "dashboard/dashboard";
 $route["timeline"] = "timeline/timeline";
 $route["map"] = "map/map";
 $route["friends"] = "friends/friends_control";

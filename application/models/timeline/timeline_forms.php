@@ -69,7 +69,13 @@ class Timeline_forms extends CI_Model
       $buffer = anchor("timeline", "fertigstellen", "class=\"button\"");
       return $buffer;
     }
-    
+
+    public function createlink()
+    {
+      $buffer = anchor("timeline/timeline/newevent", "+", "class=\"button\"");
+      return $buffer;
+    }
+        
 // --------------------------------------------------------------------------------------------------------------------
 
     function getFriends()
