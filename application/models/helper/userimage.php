@@ -9,7 +9,7 @@ class Userimage extends CI_Model
   
   private $plainsize = array(64,64);
 
-  private $markersize = array(64,64);
+  private $markersize = array(44,54);
   private $markerarrowsize = array(30,15);  
   private $markerborder = 0;
   
@@ -37,9 +37,8 @@ class Userimage extends CI_Model
       $userimagesize = getimagesize($imgurl);  
       imagecopyresampled($image, $userimage, 0, 0, 0, 0, 64, 64, $userimagesize[0], $userimagesize[1]);
             
+      header("Content-Type: image/png;");
       imagepng($image);
-      imagedestroy($image);
-      echo $image;
     }
   
     public function marker($userid)
@@ -49,11 +48,12 @@ class Userimage extends CI_Model
       $mw = $this->markerarrowsize[0];
       $mh = $this->markerarrowsize[1];
       $b = $this->markerborder;
-      
-      $image = @imagecreatetruecolor($pw, $ph+$mh);
-      imagesavealpha($image, true);
-      $trans_color = imagecolorallocatealpha($image, 255, 255, 255, 0);
-      imagefill($image, 0, 0, $trans_color);
+  
+      $image=imagecreatetruecolor($pw, $ph+$mh);
+      imagealphablending($image,false);
+      $col=imagecolorallocatealpha($image,255,255,255,127);
+      imagefilledrectangle($image,0,0,$pw,$ph+$mh,$col);
+      imagealphablending($image,true);
 
       $back_color = imagecolorallocate($image, 32, 32, 32);      
             
@@ -71,19 +71,10 @@ class Userimage extends CI_Model
       $userimagesize = getimagesize($imgurl);
       imagecopyresampled($image, $userimage, $b, $b, 0, 0, $pw-2*$b+1, $ph-2*$b+1, $userimagesize[0], $userimagesize[1]);
 
-/*
-      $image2 = imagecreate($pw, $ph);
-      imagecopy($image2, $image, 0, 0, 0, 0, $pw, $ph);
-      for ($i=0; $i<10; $i++)
-      {
-        imagefilter($image, IMG_FILTER_GAUSSIAN_BLUR);
-      }
-      imagecopy ($image, $image2, 0, 0, 0, 0, $pw, $ph);
-*/
-
+      header("Content-Type: image/png;");
+      imagealphablending($image,false);
+      imagesavealpha($image,true);
       imagepng($image);
-      imagedestroy($image);
-      return $image;
     }
 
     public function timeline($userid)
@@ -93,11 +84,12 @@ class Userimage extends CI_Model
       $mw = $this->timelinearrowsize[0];
       $mh = $this->timelinearrowsize[1];
       $b = $this->timelineborder;
-      
-      $image = @imagecreatetruecolor($pw+$mw, $ph);
-      imagesavealpha($image, true);
-      $trans_color = imagecolorallocatealpha($image, 255, 255, 255, 0);
-      imagefill($image, 0, 0, $trans_color);
+ 
+      $image=imagecreatetruecolor($pw+$mw, $ph);
+      imagealphablending($image,false);
+      $col=imagecolorallocatealpha($image,255,255,255,127);
+      imagefilledrectangle($image,0,0,$pw+$mw,$ph,$col);
+      imagealphablending($image,true);
 
       $back_color = imagecolorallocate($image, 64, 64, 64);      
             
@@ -115,9 +107,10 @@ class Userimage extends CI_Model
       $userimagesize = getimagesize($imgurl);
       imagecopyresampled($image, $userimage, $b+$mw, $b, 0, 0, $pw-2*$b, $ph-2*$b, $userimagesize[0], $userimagesize[1]);
 
+      header("Content-Type: image/png;");
+      imagealphablending($image,false);
+      imagesavealpha($image,true);
       imagepng($image);
-      imagedestroy($image);
-      return $image;
     }
 
 // ----------------------------------------------------------------------------

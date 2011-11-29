@@ -19,7 +19,8 @@ class Timeline extends CI_Controller
     $this->session->set_userdata("neweventid", uniqid("event", true));
     $userid = $this->session->userdata("userid");
     $data["events"] = $this->Event->getEvents($userid);
-    $this->load->view("timeline/timeline", $data);
+    $data["createlink"] = $this->Timeline_forms->createlink();
+    $this->layout->view("timeline/timeline", $data);
   }
   
 // --- Neues Event erstellen --------------------------------------------------
@@ -31,7 +32,7 @@ class Timeline extends CI_Controller
     $data["step3form"] = $this->Timeline_forms->comment();
     $data["backlink"] = $this->Timeline_forms->backlink();
     $this->Event_ajax->newEventEntry($this->session->userdata("neweventid"));
-    $this->load->view("timeline/newevent", $data);            
+    $this->layout->view("timeline/newevent", $data);            
   }
 
 // --- AJAX Funktionen -------------------------------------------------------

@@ -1,4 +1,4 @@
-<a href="timeline/newevent">+</a>
+<?php echo $createlink; ?>
 
 <div id="events">
 <h1>Events:</h1>  

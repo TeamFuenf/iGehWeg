@@ -6,9 +6,7 @@ class Friends extends CI_Controller {
 		$current_user = "123";
 		$data["friends"] = $this->get_friends($current_user);
 		$data["current_user"] = "Hannes Köppel";
-		$this->load->view("base/top_bar");
-		$this->load->view("friends/friends_view", $data);
-		$this->load->view("base/bottom_bar");
+		$this->layout->view("friends/friends_view", $data);
 	}
 	
 	function get_friends($current_user) 

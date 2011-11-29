@@ -15,8 +15,6 @@ class Images extends CI_Controller
     $userid = $this->uri->segment(5);
     $image = "";
     
-    header ("Content-Type: image/png"); 
-
     if ($type == "plain")
     {
       $image = $this->Userimage->plain($userid);

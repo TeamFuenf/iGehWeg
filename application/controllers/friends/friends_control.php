@@ -10,9 +10,7 @@ class Friends_control extends CI_Controller {
 				
 		$data["friends_main"] = $this->get_friends($current_user);
 				
-		$this->load->view("base/top_bar");
-		$this->load->view("friends/friends_view", $data);
-		$this->load->view("base/bottom_bar");
+		$this->layout->view("friends/friends_view", $data);
 	}
 	
 	/*
