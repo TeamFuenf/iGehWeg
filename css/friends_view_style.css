@@ -28,6 +28,7 @@ div#friends {
 	width: 320px;
 	height: 480px;
 	overflow: hidden;
+	border: 1px solid blue;
 }
 
 ul#friends_friend_list {
@@ -97,6 +98,15 @@ a.group_links {
 }
 
 #add_to_button {
+	border: 1px dashed black;
+	background-color: #F0F0F0;
+	cursor: pointer;
+	padding: 0px 2px;
+}
+
+/*----- add_to_group -----*/
+
+#to_details_button {
 	border: 1px dashed black;
 	background-color: #F0F0F0;
 	cursor: pointer;

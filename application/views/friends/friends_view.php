@@ -8,9 +8,9 @@
 	
 		$(function() {
 			$(".friend_list_entry").on("click", function() {
-				$detail_id = $(this).attr("id");
+				var detail_id = $(this).attr("id");
 				$.ajax({
-					url: "/friends/friends_control/get_detail/" + $detail_id,
+					url: "/friends/friends_control/get_detail/" + detail_id,
 					success: function(data)
 					{
 						$("#friend_detail").html(data);

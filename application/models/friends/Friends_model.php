@@ -73,7 +73,7 @@ class Friends_model extends CI_Model
 	}
 	
 	/**
-	 * Holt alle Gruppen des eines Benutzeres.
+	 * Holt alle Gruppen eines Benutzeres.
 	 * 
 	 * <- $user_id
 	 * -> $data Array mit allen Gruppen mit id, name
@@ -81,6 +81,48 @@ class Friends_model extends CI_Model
 	function get_groups($user_id) 
 	{
 		$query = $this->db->query("SELECT * FROM `group` WHERE userid = '".$user_id."';");
+		
+		if($query->num_rows() > 0) 
+		{
+			foreach($query->result() as $item) 
+			{
+				$data[] = $item;
+			}
+			
+			return $data;
+		}	
+	}
+	
+	/**
+	 * Holt alle Gruppen eines Benutzeres mit bestimmten Freund darin.
+	 * 
+	 * <- $user_id
+	 * -> $data Array mit den Gruppen mit id, name
+	 */
+	function get_groups_with_friend($user_id, $friend_id) 
+	{
+		$query = $this->db->query("SELECT * FROM group_member LEFT JOIN `group` ON `group`.id = group_member.groupid WHERE `group`.userid = '".$user_id."' AND group_member.memberid = '".$friend_id."';");
+		
+		if($query->num_rows() > 0) 
+		{
+			foreach($query->result() as $item) 
+			{
+				$data[] = $item;
+			}
+			
+			return $data;
+		}	
+	}
+	
+	/**
+	 * Holt alle Gruppen eines Benutzeres ohne bestimmten Freund darin.
+	 * 
+	 * <- $user_id
+	 * -> $data Array mit den Gruppen mit id, name
+	 */
+	function get_groups_without_friend($user_id, $friend_id) 
+	{
+		$query = $this->db->query("SELECT * FROM `group` WHERE userid = '".$user_id."' AND id <> ();");
 		
 		if($query->num_rows() > 0) 
 		{
