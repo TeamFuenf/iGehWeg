@@ -1,8 +1,9 @@
 <style>
   #pages li
   {
-    font-size:20em;
+    font-size:15em;
     color:#9fccda;
+    color:#eeeeee;
     vertical-align: middle;
     text-align:center;
   }  

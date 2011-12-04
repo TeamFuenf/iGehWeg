@@ -11,11 +11,26 @@
     $("#scroll span:nth-child("+(nr+1)+") a").html("&#9679;");
     activepage = nr;
     var offset = -nr*windowwidth;
-    $("#pages").animate({left : offset+"px"}, 1000);      
+    $("#pages").animate({"left" : offset+"px"}, 1000);      
+  }
+
+  function pagePrev()
+  {
+    if (activepage > 0)
+    {
+      page(activepage-1);
+    }
+  }
+  
+  function pageNext()
+  {
+    if (activepage < (numpages-1))
+    {
+      page(activepage+1);
+    }
   }
 
   $(document).ready(function() {
-
     numpages = $("#pages > li").size();
     windowwidth = $("#window").width();
     
@@ -44,4 +59,17 @@
 
     // Mit Seite 1 initialisieren
     page(0);
-  });
+    
+    $("html").keyup(function(event)
+    {
+      if (event.which == 39)
+      {
+        pageNext();
+      }
+      if (event.which == 37)
+      {
+        pagePrev();
+      }
+    });
+    
+});

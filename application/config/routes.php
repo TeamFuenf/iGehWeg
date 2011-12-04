@@ -43,10 +43,21 @@ $route['404_override'] = '';
 
 // Hauptseiten
 $route["default_controller"] = "dashboard/dashboard";
-$route["timeline"] = "timeline/timeline";
-$route["map"] = "map/map";
 $route["friends"] = "friends/friends_control";
 
+// Map
+$route["map"] = "map/map";
+$route["map/snippet/(:any)"] = "map/map/snippet";
+
+// Events & Timeline
+$route["timeline"] = "timeline/timeline";
+$route["event"] = "event/event";
+$route["event/new"] = "event/event/newevent";
+$route["event/edit/(:any)"] = "event/event/editevent";
+$route["event/update/basedata"] = "event/event/updateBasedata";
+$route["event/update/members"] = "event/event/updateMembers";
+$route["event/update/comment"] = "event/event/updateComment";
+$route["event/(:any)"] = "event/event/index";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

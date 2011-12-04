@@ -1,0 +1,23 @@
+div#event_members ul
+{
+  margin:0px;
+  padding:0px;
+  list-style-type:none;
+}
+
+div#event_members ul li
+{
+  margin:0px;
+  padding:0px;
+  border:1px solid #afdcea;
+  -moz-border-radius: 0.25em;
+  background:#9eb4ba;
+  width:90%;
+  line-height:2em;
+  height:2em;
+  margin-bottom:0.5em;
+  padding:0.5em;
+  padding-left:5em;
+  color:#fff;
+  font-size:1em;
+}

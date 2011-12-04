@@ -12,7 +12,9 @@ class Layout
     {
       $CI =& get_instance();
       
+      $data["css"][] = link_tag("../css/normalize.css");
       $data["css"][] = link_tag("../css/main.css");
+      $data["css"][] = link_tag("../css/timeline.css");
       
       $data["javascript"][] = "<script src=\"".base_url()."javascript/jquery.js\" type=\"text/javascript\"></script>";
       $data["javascript"][] = "<script src=\"".base_url()."javascript/meetupp.js\" type=\"text/javascript\"></script>";
