@@ -1,7 +1,7 @@
 <style>
-  #pages li
+  #pages li h1
   {
-    font-size:15em;
+    font-size:5em;
     color:#9fccda;
     color:#eeeeee;
     vertical-align: middle;
@@ -10,7 +10,11 @@
 </style>
 <div id="window">
   <ul id="pages">
-    <li>Seite 1</li>
+    <li>
+      <h1>Seite 1</h1>
+      <?php echo $loginform; ?>
+      
+    </li>
     <li>Seite 2</li>
     <li>Seite 3</li>
     <li>Seite 4</li>

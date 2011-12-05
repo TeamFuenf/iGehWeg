@@ -3,9 +3,16 @@
 class Dashboard extends CI_Controller
 {
   
+  public function __construct()
+  {
+    parent::__construct();  
+    $this->load->model("base/Login_model");    
+  }
+  
   public function index()
-  {    
-    $this->layout->view("dashboard/dashboard");
+  {
+    $data["loginform"] = $this->Login_model->getUsers();    
+    $this->layout->view("dashboard/dashboard", $data);
   }
 
 }

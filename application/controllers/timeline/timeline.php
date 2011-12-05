@@ -7,9 +7,6 @@ class Timeline extends CI_Controller
   {
     parent::__construct();  
     $this->load->model("timeline/Timeline_model");    
-
-    // TODO global nach login
-    $this->session->set_userdata("userid", "alex");
   }
 
   public function index()

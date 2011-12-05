@@ -22,6 +22,7 @@ div.olControlAttribution
         var size = new OpenLayers.Size(21,25);
         var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
         var icon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker.png',size,offset);
+        var locationicon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker.png',size,offset);
 
         var friendIconSize = new OpenLayers.Size(44,54);
         var friendIconOffset = new OpenLayers.Pixel(-(friendIconSize.w/2), -friendIconSize.h);
@@ -57,13 +58,6 @@ div.olControlAttribution
             
         // Locations
         <?php echo $markerLocations; ?>;
-        
-        var scharfrichter = new OpenLayers.Marker(new OpenLayers.LonLat(13.4693767, 48.5748142).transform(fromProj, toProj), icon);
-        var aquarium = new OpenLayers.Marker(new OpenLayers.LonLat(13.4635546, 48.5738242).transform(fromProj, toProj), icon.clone());
-        var shamrock = new OpenLayers.Marker(new OpenLayers.LonLat(13.4604024, 48.5755427).transform(fromProj, toProj), icon.clone());        
-        locations.addMarker(scharfrichter);
-        locations.addMarker(aquarium);
-        locations.addMarker(shamrock);
 
         // Friends
         <?php echo $markerFriends; ?>;

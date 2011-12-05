@@ -6,10 +6,7 @@ class Event extends CI_Controller
   public function __construct()
   {
     parent::__construct();
-    $this->load->model("event/Event_model");    
-
-    // TODO global nach login
-    $this->session->set_userdata("userid", "alex");
+    $this->load->model("event/Event_model");
   }
   
 // --------------------------------------------------------------------------------------------------------------------
@@ -25,7 +22,7 @@ class Event extends CI_Controller
     $data["members"] = $this->Event_model->getMembers($eventid);
     $data["comments"] = $this->Event_model->getComments($eventid);
     
-    $data["commentForm"] = $this->Event_model->getCommentForm(null);
+    $data["commentForm"] = $this->Event_model->getCommentForm();
 
     $this->layout->view("event/showevent", $data);
   }  
@@ -36,9 +33,13 @@ class Event extends CI_Controller
   {
     $data["title"] = "Neues Event erstellen";
     
+    $data["basedataUrl"] = base_url("event/update/basedata");
+    $data["memberUrl"] = base_url("event/update/member");
+    $data["commentUrl"] = base_url("event/update/comment");
+
     $data["basedataForm"] = $this->Event_model->getBasedataForm(null);
     $data["memberForm"] = $this->Event_model->getMemberForm(null);
-    $data["commentForm"] = $this->Event_model->getCommentForm(null);
+    $data["commentForm"] = $this->Event_model->getCommentForm();
     
     $data["comments"] = $this->Event_model->getComments(null);
     
@@ -49,6 +50,10 @@ class Event extends CI_Controller
   {
     $eventid = $this->uri->segment(3);
 
+    $data["basedataUrl"] = base_url("event/update/basedata");
+    $data["memberUrl"] = base_url("event/update/member");
+    $data["commentUrl"] = base_url("event/update/comment");
+    
     $data["title"] = "Event bearbeiten";
     $data["basedataForm"] = $this->Event_model->getBasedataForm($eventid);
     $data["memberForm"] = $this->Event_model->getMemberForm($eventid);
@@ -95,6 +100,7 @@ class Event extends CI_Controller
     $eventid = $this->input->post("eventid");
     $members = $this->input->post("members", true);
     $this->Event_model->updateMembers($eventid, $members);
+    echo "okay";
   }
 
   public function updateComment()
@@ -103,7 +109,7 @@ class Event extends CI_Controller
     $data["author"] = $this->session->userdata("userid");    
     $data["comment"] = $this->input->post("comment");
     $data["time"] = time();
-    $this->Event_model->updateComment($data);    
+    $this->Event_model->updateComment($data);
   }
   
 }

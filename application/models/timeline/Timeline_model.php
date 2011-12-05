@@ -16,22 +16,25 @@ class Timeline_model extends CI_Model
     return anchor("event/new", "+");
   }
     
+
   public function getEvents($userid)
   {
     $events = $this->Event_model->getEvents($userid);    
     
     $buffer  = "";
-    $buffer .= "<ul>";
+    $buffer .= "<ul id='events'>";
     foreach($events as $event)
     {
-      $viewlink = anchor("event/".$event->id, $event->title);   
-      $editlink = anchor("event/edit/".$event->id, "edit");
+      $button = "<button type='button' class='grey title'>".$event["title"]."</button>";
+      $editbutton = "<button type='button' class='darkgrey edit'>edit</button>";
+      $viewlink = anchor("event/".$event["id"], $button);   
+      $editlink = anchor("event/edit/".$event["id"], $editbutton);
       $buffer .= "<li>".$viewlink . nbs(5) . $editlink."</li>";
     }
     $buffer .= "</ul>";
     return $buffer;
   }
-  
+
 // --------------------------------------------------------------------------------------------------------------------
 
 }

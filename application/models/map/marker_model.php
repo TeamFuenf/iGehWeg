@@ -11,6 +11,15 @@ class Marker_model extends CI_Model
   public function getLocations()
   {
     $marker = "";
+    
+    $query = $this->db->get("location");
+    foreach ($query->result() as $row)
+    {
+      $markername = "location".$row->id;
+      $marker .= "var ".$markername." = new OpenLayers.Marker(new OpenLayers.LonLat(".$row->lon.", ".$row->lat.").transform(fromProj, toProj), locationicon.clone());";
+      $marker .= "locations.addMarker(".$markername.");";         
+    }
+
     return $marker;
   }
     

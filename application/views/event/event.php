@@ -7,12 +7,14 @@ $(document).ready(function()
     if (typeof attr !== 'undefined' && attr !== false)
     {
       $(this).removeAttr("selected");  
-      $(this).css("background-color","#9eb4ba");
+      $(this).css("background-color","#669933");
+      $(this).css("color","#f0f0f0");
     }
     else
     {
       $(this).attr("selected",true);
-      $(this).css("background-color","#2f9aba");
+      $(this).css("background-color","#e9e9e9");
+      $(this).css("color","#606060");
     }
   });
 
@@ -43,7 +45,7 @@ $(document).ready(function()
     var comment = $("textarea[name=comment]").val();
     if (comment != "")
     {
-      $.post("../update/comment", {
+      $.post("<?php echo $commentUrl; ?>", {
         eventid: $("input[name=eventid]").val(),
         comment: comment
       }, 
@@ -65,7 +67,7 @@ function updateBasedata()
   
   if (eventTitle != "" && eventLocation != "")
   {
-    $.post("../update/basedata", {
+    $.post("<?php echo $basedataUrl; ?>", {
       eventid: eventId,
       title: eventTitle,
       location: eventLocation,
@@ -90,7 +92,7 @@ function updateMembers()
     memberArray.push($(this).attr("id"));
   });
 
-  $.post("../update/members", {
+  $.post("<?php echo $memberUrl; ?>", {
     eventid: $("input[name=eventid]").val(),
     "members[]": memberArray 
   });

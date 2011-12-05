@@ -9,6 +9,9 @@ class Event_model extends CI_Model
     $this->load->helper("form");
   }
   
+  /**
+   * Belegungen der Dropdown Felder
+   */
   private $hours = array("00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23");
   private $minutes = array("00","05","10","15","20","25","30","35","40","45","50","55");
   private $days = array("01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31");
@@ -17,6 +20,14 @@ class Event_model extends CI_Model
     
 // --------------------------------------------------------------------------------------------------------------------
   
+  /**
+   * Formular zum eintragen der Basisdaten eines Events
+   * 
+   * in:  falls eine eventid übergeben wird, wird dieses event verwendet um die Felder zum editieren auszufüllen
+   *      wird keine id übergeben wird das Formular mit leeren String vorbelegt
+   * 
+   * out: Das (fertig ausgefüllte) Formular
+   */
   public function getBasedataForm($eventid)
   {
     //TODO date("Y") auf Array mappen
@@ -76,34 +87,17 @@ class Event_model extends CI_Model
     return $buffer;
   }
 
-//--- 8< snip -----------
-    //TODO aus Friend Model
-    function getFriends()
-    {
-      $friends;
-      $friends["hannes"] = "Hannes Koeppel";
-      $friends["philipp"] = "Philipp Fauser";
-      $friends["alex"] = "Alexander Psiuk";
-      $friends["martin"] = "Martin Jergler";
-      $friends["fana"] = "Christoph Grill";
-      $friends["doedl"] = "Markus Doering";
-      $friends["marco"] = "Marco Polo";
-      
-      $buffer = "";
-      foreach ($friends as $key=>$value)
-      {
-        $buffer .= "<li id=\"".$key."\">".$value."</li>";        
-        next($friends); 
-      }
-
-      return $buffer;
-    }
-//--- 8< snap -----------
-    
+  /**
+   * Formular zum auswählen der Teilnehmer eines Events
+   * 
+   * in:  eine eventid; Die Daten des Events werden zur Vorbelegung genutzt
+   * 
+   * out: Eine Liste von Freunden (=Teilnehmer) des Eventerstellers
+   */
   public function getMemberForm($eventid)
   {
-    //TODO ggf. Vorbelegung einfügen    
-    $friends = $this->getFriends();
+    //TODO Vorbelegung einfügen
+    $friends = $this->getFriendsArray();
     
     $nextButton["name"] = "members_next";
     $nextButton["content"] = "weiter";
@@ -120,7 +114,14 @@ class Event_model extends CI_Model
     return $buffer;
   }
 
-  public function getCommentForm($eventid)
+  /**
+   * Formular zum abschicken eines Kommentars zu einem Event
+   * 
+   * in:  -
+   * 
+   * out: Ein Formular für das Erstellen eines Kommentars zu einem Event
+   */
+  public function getCommentForm()
   {
     $prevButton["name"] = "comments_prev";
     $prevButton["content"] = "zur&uuml;ck";
@@ -139,6 +140,13 @@ class Event_model extends CI_Model
 
 // --------------------------------------------------------------------------------------------------------------------
 
+  /**
+   * liefert formatierte Basisdaten eines Events
+   * 
+   * in:  die ID des Events
+   * 
+   * out: formatiertes HTML
+   */
   public function getBasedata($eventid)
   {
     $this->db->where("id", $eventid);
@@ -159,6 +167,13 @@ class Event_model extends CI_Model
     return $buffer;      
   }
 
+  /**
+   * liefert formatierte Teilnehmerdaten eines Events
+   * 
+   * in:  die ID des Events
+   * 
+   * out: formatiertes HTML
+   */  
   public function getMembers($eventid)
   {
     $this->db->where("eventid", $eventid);
@@ -176,6 +191,13 @@ class Event_model extends CI_Model
     return $buffer;      
   }
 
+  /**
+   * liefert formatierte Kommentare zu einem Event
+   * 
+   * in:  die ID des Events
+   * 
+   * out: formatiertes HTML
+   */  
   public function getComments($eventid)
   {
     $this->db->where("eventid", $eventid);
@@ -194,14 +216,28 @@ class Event_model extends CI_Model
 
 // ----------------------------------------------------------------------------
 
+    /**
+     * Liefert alle Events eines Users zurück
+     * 
+     * in:  Die ID des Users
+     * 
+     * out: die Events des Users als Array
+     */
     public function getEvents($userid)
     {     
       $this->db->where("creator", $userid);
       $this->db->order_by("from", "desc"); 
       $query = $this->db->get("event");
-      return $query->result();
+      return $query->result_array();
     }
 
+    /**
+     * Liefert ein bestimmtes Event zurück
+     * 
+     * in:  Die ID des Events
+     * 
+     * out: Das Event als Array
+     */
     public function getEvent($eventid)
     {
       $this->db->where("id", $eventid);
@@ -219,6 +255,13 @@ class Event_model extends CI_Model
     
 // ----------------------------------------------------------------------------
     
+    /**
+     * Setzt Basisdaten eines Events
+     * 
+     * in:  Das zu schreibende Tupel
+     * 
+     * out: -
+     */
     public function updateBasedata($data)
     {
       // 1) Daten löschen
@@ -229,6 +272,14 @@ class Event_model extends CI_Model
       $this->db->insert("event", $data);
     }
 
+    /**
+     * Setzt Teilnehmerdaten eines Events
+     * 
+     * in:  Die ID des Events
+     *      Eine Liste mit den Teilnehmer IDs
+     * 
+     * out: -
+     */
     public function updateMembers($eventid, $members)
     {
       // 1) Alle Teilnehmer löschen
@@ -244,9 +295,44 @@ class Event_model extends CI_Model
       }
     }
 
+    /**
+     * Setzt einen neuen Kommentar zu einem Event
+     * 
+     * in:  das zu schreibende Tupel
+     * 
+     * out: -
+     */
     public function updateComment($data)
     {
       $this->db->insert("event_comment", $data);      
       echo $this->getComments($data["eventid"]);
     }
+
+// ----------------------------------------------------------------------------
+
+
+//--- 8< snip -----------
+    //TODO das kommt später mal aus dem Friend Model -> Philipp
+    public function getFriendsArray()
+    {
+      $friends;
+      $friends["hannes"] = "Hannes Koeppel";
+      $friends["philipp"] = "Philipp Fauser";
+      $friends["alex"] = "Alexander Psiuk";
+      $friends["martin"] = "Martin Jergler";
+      $friends["fana"] = "Christoph Grill";
+      $friends["doedl"] = "Markus Doering";
+      $friends["marco"] = "Marco Polo";
+      
+      $buffer = "";
+      foreach ($friends as $key=>$value)
+      {
+        $buffer .= "<li id=\"".$key."\">".$value."</li>";        
+        next($friends); 
+      }
+
+      return $buffer;
+    }
+//--- 8< snap -----------
+
 }
