@@ -20,11 +20,11 @@ class Friends_control extends CI_Controller {
 	{
 		$this->load->model('friends/friends_model');
 		//Hier werden die Freunde des aktuellen Users geholt
-		$friends = $this->friends_model->get_friends($current_user[0]->id);
+		$friends = $this->friends_model->get_friends($current_user->id);
 		
 		$this->load->model('friends/friends_format_model');
 		//Hier werden die Daten formatiert
-		$detail_string = $this->friends_format_model->format_friend_main($current_user[0], $friends);
+		$detail_string = $this->friends_format_model->format_friend_main($current_user, $friends);
 		
 		return $detail_string;
 	}

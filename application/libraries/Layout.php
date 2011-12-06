@@ -18,6 +18,7 @@ class Layout
       
       $data["javascript"][] = "<script src=\"".base_url()."javascript/jquery.js\" type=\"text/javascript\"></script>";
       $data["javascript"][] = "<script src=\"".base_url()."javascript/meetupp.js\" type=\"text/javascript\"></script>";
+      $data["javascript"][] = "<script src=\"".base_url()."javascript/OpenLayers.js\" type=\"text/javascript\"></script>";
       
       $data["control_dashboard"] = anchor("/", img("../images/control_dashboard.png"));
       $data["control_map"] = anchor("/map", img("../images/control_map.png"));

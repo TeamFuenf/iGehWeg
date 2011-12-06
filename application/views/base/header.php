@@ -24,5 +24,14 @@
     ?>
     
   </head>
-  <body>
+
+  <script>
+  function BlockMove(event)
+  {
+    // Tell Safari not to move the window.
+    //event.preventDefault() ;
+  }
+  </script>
+
+  <body ontouchmove="BlockMove(event);">
     <div id="content">

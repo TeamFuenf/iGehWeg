@@ -16,12 +16,12 @@ class Event extends CI_Controller
     $eventid = $this->uri->segment(2);
     $event = $this->Event_model->getEvent($eventid);
   
-    $data["title"] = $event["title"];
-
+    $data["eventid"] = $eventid;
     $data["basedata"] = $this->Event_model->getBasedata($eventid);
     $data["members"] = $this->Event_model->getMembers($eventid);
     $data["comments"] = $this->Event_model->getComments($eventid);
-    
+
+    $data["commentUrl"] = base_url("event/update/comment");    
     $data["commentForm"] = $this->Event_model->getCommentForm();
 
     $this->layout->view("event/showevent", $data);
@@ -97,9 +97,10 @@ class Event extends CI_Controller
 
   public function updateMembers()
   {
-    $eventid = $this->input->post("eventid");
-    $members = $this->input->post("members", true);
-    $this->Event_model->updateMembers($eventid, $members);
+    $data["eventid"] = $this->input->post("eventid");    
+    $data["memberid"] = $this->input->post("memberid");    
+    $data["status"] = $this->input->post("status");    
+    $this->Event_model->updateMembers($data);
     echo "okay";
   }
 

@@ -12,22 +12,14 @@ class Friends_model extends CI_Model
 	 * Holt einen Benutzer.
 	 * 
 	 * <- $user_id
-	 * -> $data Array mit id, name und picture
+	 * -> Objekt mit id, name und picture
 	 */
     function get_user($user_id) 
     {
-    	$query = $this->db->query("SELECT id, name, picture FROM user WHERE id =".$user_id);
-		
-		if($query->num_rows() > 0) 
-		{
-			foreach ($query->result() as $row)
-			{
-				$data[] = $row;
-			}	
-			
-			return $data;
-		}
-	}
+      $this->db->where("id", $user_id);      
+    	$query = $this->db->get("user");
+		  return $query->row();
+    }
 
 	/**
 	 * Holt alle Freunde eines Benutzeres.

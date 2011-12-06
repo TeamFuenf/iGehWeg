@@ -2,7 +2,8 @@
 
 html
 {
-  background-color:#7facba;
+/*  background-color:#7facba; */
+  background-color:#ddd;
   margin:0px;
   padding:0px;
   overflow:hidden;
@@ -19,10 +20,11 @@ body
 div#content
 {
   width:100%;
-  height:85%;
+  height:90%;
   max-width:1024px;
   margin:0px auto;
-  background-color:#8fbcca;
+/*  background-color:#8fbcca; */
+  background-color:#eee;
 }
 
 div#controls
@@ -31,8 +33,7 @@ div#controls
   bottom:0px;
   left:0px;
   width:100%;
-  height:15%;
-  min-height:100px;
+  height:10%;
   background-color:#555555;
   text-align:center;
 }
@@ -45,10 +46,17 @@ div#controls ul
   margin:0px auto;
   padding:0px;
   background-color:#666666;
+  list-style-type:none
 }
 
 div#controls li
 {
+  display:inline-block;
+  margin-top:10px;
+  margin-left:4%;
+  margin-right:4%;
+  
+/*
   display:inline-block;
   width:80px;
   height:90%;
@@ -57,12 +65,13 @@ div#controls li
   margin-left:4%;
   margin-right:4%;
   margin-top:20px;
+*/
 }
 
 div#controls li img
 {
   border:0px;
-  width:100%;
+/*  width:100%;*/
 }
 
 /* --- Seiten ------------------------------------------------------------------------------------------------------ */
@@ -72,7 +81,7 @@ div#window
   width:100%;
   height:100%;
   overflow-x: hidden; 
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 div#scroll
@@ -125,28 +134,6 @@ ul#pages > li > div
 
 /* --- Überschriften ----------------------------------------------------------------------------------------------- */
 
-h1
-{
-  color:#AfDcEa;
-  font-size:2em;
-  line-height:2em;
-  overflow:hidden;
-  margin:0px;
-  padding:0px;
-}
-
-h2
-{
-  color:#BfEcFa;
-  font-size:1.5em;
-  line-height:2em;
-  overflow:hidden;
-  margin:0px;
-  padding:0px;
-}
-
-/* --- Überschriften ----------------------------------------------------------------------------------------------- */
-
 /* --- Buttons ----------------------------------------------------------------------------------------------------- */
 
 /* http://css3button.net/13291 */
@@ -157,14 +144,7 @@ button
   font-size: 16px;
   color: #606060;
   padding: 5px 8px;
-  background: -moz-linear-gradient(
-    top,
-    #ededed 0%,
-    #e9e9e9);
-  background: -webkit-gradient(
-    linear, left top, left bottom, 
-    from(#ededed),
-    to(#e9e9e9));
+  background-color:#e9e9e9;
   border-radius: 4px;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
@@ -175,9 +155,6 @@ button
   -webkit-box-shadow:
     0px 1px 1px rgba(000,000,000,0.1),
     inset 0px 1px 1px rgba(255,255,255,1);
-  text-shadow:
-    0px 1px 1px rgba(255,255,255,1),
-    0px 1px 0px rgba(255,255,255,1); 
 }
 
 button a
@@ -188,30 +165,19 @@ button a
 button.grey
 {
   color: #606060;
-  background: -moz-linear-gradient(
-    top,
-    #ededed 0%,
-    #e9e9e9);
-  background: -webkit-gradient(
-    linear, left top, left bottom, 
-    from(#ededed),
-    to(#e9e9e9));
+  background-color:#e9e9e9;
+}
+
+button.green
+{
+  color: #eeeeee;
+  background-color:#669933;
 }
 
 button.darkgrey
 {
   color: #ffffff;
-  background: -moz-linear-gradient(
-    top,
-    #808080 0%,
-    #6b6b6b);
-  background: -webkit-gradient(
-    linear, left top, left bottom, 
-    from(#808080),
-    to(#6b6b6b));
-  text-shadow:
-    0px 1px 1px rgba(99,99,99,1),
-    0px 1px 0px rgba(92,92,92,1);
+  background-color:#666666;
 }
 
 

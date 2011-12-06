@@ -1,21 +1,39 @@
 <script>
 $(document).ready(function()
 {
-  $("div#event_members ul li").on("click", function()
+  $("button.invite").on("click", function()
   {
-    var attr = $(this).attr("selected");
-    if (typeof attr !== 'undefined' && attr !== false)
+    var button = $(this);
+    var memberid = $(this).attr("id");
+    var status = $(this).attr("status");
+    
+    if (status == undefined || status == "null")
     {
-      $(this).removeAttr("selected");  
-      $(this).css("background-color","#669933");
-      $(this).css("color","#f0f0f0");
+      status = "invited";
     }
-    else
+    else if (status == "invited")
     {
-      $(this).attr("selected",true);
-      $(this).css("background-color","#e9e9e9");
-      $(this).css("color","#606060");
+      status = "null";
     }
+    
+    $.post("<?php echo $memberUrl; ?>", 
+    { 
+      eventid: $("input[name=eventid]").val(),
+      memberid: memberid,
+      status: status
+    },
+    function()
+    {
+      if (status == "invited")
+      {
+        button.html("Einladung gesendet");
+      }
+      else
+      {
+        button.html("Einladen");
+      }
+        button.attr("status", status);
+    });
   });
 
   $("button[name=basedata_next]").on("click", function()
@@ -26,7 +44,6 @@ $(document).ready(function()
 
   $("button[name=members_next]").on("click", function()
   {
-    updateMembers();
     pageNext();
   });
 
@@ -83,19 +100,6 @@ function updateBasedata()
       to_minute: $("select[name=to_minute]").val()
      });
   }
-}
-
-function updateMembers()
-{
-  var memberArray = new Array();
-  $("div#event_members ul li[selected]").each(function (){
-    memberArray.push($(this).attr("id"));
-  });
-
-  $.post("<?php echo $memberUrl; ?>", {
-    eventid: $("input[name=eventid]").val(),
-    "members[]": memberArray 
-  });
 }
 
 </script>

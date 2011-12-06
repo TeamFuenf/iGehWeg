@@ -55,7 +55,7 @@ $route["event"] = "event/event";
 $route["event/new"] = "event/event/newevent";
 $route["event/edit/(:any)"] = "event/event/editevent";
 $route["event/update/basedata"] = "event/event/updateBasedata";
-$route["event/update/members"] = "event/event/updateMembers";
+$route["event/update/member"] = "event/event/updateMembers";
 $route["event/update/comment"] = "event/event/updateComment";
 $route["event/(:any)"] = "event/event/index";
 

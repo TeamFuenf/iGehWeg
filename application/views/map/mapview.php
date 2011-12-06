@@ -5,11 +5,7 @@ div.olControlAttribution
   display:none;
 }       
 </style>
-		
-<script src="http://www.openlayers.org/api/OpenLayers.js"></script>
-<!--
-    <script src="../javascript/OpenLayers.js"></script>
--->
+
 		<script>
 
 			var init = function()

@@ -7,6 +7,7 @@ class Event_model extends CI_Model
   {
     parent::__construct();
     $this->load->helper("form");
+    $this->load->model("friends/Friends_model");
   }
   
   /**
@@ -96,21 +97,61 @@ class Event_model extends CI_Model
    */
   public function getMemberForm($eventid)
   {
-    //TODO Vorbelegung einfügen
-    $friends = $this->getFriendsArray();
-    
+    $this->db->where("eventid", $eventid);
+    $query = $this->db->get("event_member");
+    $members = $query->result();    
+    $userid = $this->session->userdata("userid");
+    $friends = $this->Friends_model->get_friends($userid);
+
     $nextButton["name"] = "members_next";
     $nextButton["content"] = "weiter";
     $prevButton["name"] = "members_prev";
     $prevButton["content"] = "zur&uuml;ck";
-    
+            
     $buffer  = "";
-    $buffer .= "<ul>";
-    $buffer .= $friends;
-    $buffer .= "</ul>";
+    $buffer .= "<table cellspacing='0' cellpadding='0'>";
+
+    if (count($friends) == 0)
+    {
+      return;
+    }
+    
+    foreach ($friends as $friend)
+    {
+      $status = "none";
+      foreach ($members as $member)
+      {
+        if ($member->memberid == $friend->id)
+        {
+          $status = $member->status;
+          break;
+        }
+      }
+      $buffer .= "<tr class='member'>";
+      $buffer .= "<td width='64'><img src='".$friend->picture."' width=64 height=64/></td>";
+      $buffer .= "<td>".$friend->name."</td>";
+      if ($status == "invited")
+      {
+        $buffer .= "<td width='200'><button style='width:100%' class='button invite' status='invited' id='".$friend->id."'>Einladung gesendet</button></td>";        
+      }
+      else if ($status == "attending")
+      {
+        $buffer .= "<td width='200'><button style='width:100%' class='button green invite' status='attending' id='".$friend->id."'>Nimmt teil</button></td>";        
+      }
+      else
+      {
+        $buffer .= "<td width='200'><button style='width:100%' class='button invite' id='".$friend->id."'>Einladen</button></td>";
+      }
+      $buffer .= "</tr>";
+      $buffer .= "<tr><td colspan='3'>&nbsp;</td></tr>";
+      
+//      $buffer .= "<li id=\"".$friend->id."\">".$friend->name."(".$status.")</li>";      
+      
+    }
+    $buffer .= "</table>";
     $buffer .= form_button($prevButton);
     $buffer .= form_button($nextButton);
-    
+
     return $buffer;
   }
 
@@ -123,19 +164,27 @@ class Event_model extends CI_Model
    */
   public function getCommentForm()
   {
-    $prevButton["name"] = "comments_prev";
-    $prevButton["content"] = "zur&uuml;ck";
-
     $postCommentButton["name"] = "post_comment";
     $postCommentButton["content"] = "Kommentar senden";
 
+    $textarea["name"] = "comment";
+    $textarea["rows"] = "5";
+    $textarea["cols"] = "40";
+    
     $buffer  = "";
     $buffer .= form_label("Kommentar", "comment");
-    $buffer .= form_textarea("comment");
-    $buffer .= form_button($postCommentButton);
     $buffer .= br();
-    $buffer .= form_button($prevButton);
+    $buffer .= form_textarea($textarea);
+    $buffer .= br();
+    $buffer .= form_button($postCommentButton);
     return $buffer;
+  }
+
+  public function getButton($name, $caption)
+  {
+    $button["name"] = $name;
+    $button["content"] = $caption;  
+    return form_button($button);
   }
 
 // --------------------------------------------------------------------------------------------------------------------
@@ -152,19 +201,17 @@ class Event_model extends CI_Model
     $this->db->where("id", $eventid);
     $query = $this->db->get("event");
     $event = $query->row();
+    $creator = $this->Friends_model->get_user($event->creator);
     
-    $buffer  = "";
-    $buffer .= "Titel: ".$event->title;
-    $buffer .= br();
-    $buffer .= "Location: ".$event->location;
-    $buffer .= br();
-    $buffer .= "Von: ". date("H:i, d.m.Y", $event->from);
-    $buffer .= br();
-    $buffer .= "Bis: ". date("H:i, d.m.Y", $event->to);
-    $buffer .= br();
-    $buffer .= "Erstellt von: ".$event->creator;
-    
-    return $buffer;      
+    $basedata->title = $event->title;
+    $basedata->location = $event->location;
+    $basedata->from = date("H:i, d.m.Y", $event->from);
+    $basedata->to = date("H:i, d.m.Y", $event->to);
+    $basedata->title = $event->title;
+    $basedata->creator = $creator->name;
+    $basedata->creatorpicture = $creator->picture;
+
+    return $basedata;      
   }
 
   /**
@@ -180,14 +227,13 @@ class Event_model extends CI_Model
     $query = $this->db->get("event_member");
     
     $buffer  = "";
-
-    $members = array();
+    $buffer .= "<ul>";
     foreach ($query->result() as $row)
     {
-      $members[] = $row->memberid;
+      $member = $this->Friends_model->get_user($row->memberid);
+      $buffer .= "<li class='userprofile'><img src='".$member->picture."'/>".$member->name."</li>";
     } 
-    $buffer .= ul($members);
-    
+    $buffer .= "</ul>";
     return $buffer;      
   }
 
@@ -205,11 +251,24 @@ class Event_model extends CI_Model
     $query = $this->db->get("event_comment");
     
     $buffer  = "";
-    $buffer = "<ul>";
+    $buffer = "<ul id='comments'>";
     foreach ($query->result() as $row)
-      {
-        $buffer .= "<li><span class='event_comment_author'><img src=\"autor\"></span><span class='event_comment_body'>".$row->comment."</span></li>";
-      }  
+    {
+      $author = $this->Friends_model->get_user($row->author);
+      $buffer .= "<li>";
+      $buffer .= "<table border='0'>";
+      $buffer .= "<tr>";
+      $buffer .= "<td rowspan='2'><img src='".$author->picture."' width='64' height='64'/></td>";
+      $buffer .= "<td><b>".$author->name."</b></td>";
+      $buffer .= "</tr>";      
+      $buffer .= "<tr>";
+      $buffer .= "<td>".nl2br($row->comment)."</td>";
+      $buffer .= "</tr>";      
+      $buffer .= "</table>"; 
+      $buffer .= "</li>";
+      
+      //$buffer .= "<li><span class='event_comment_author'>".$author->name."</span><br><span class='event_comment_body'>".$row->comment."</span></li>";
+    }  
     $buffer .= "</ul>";
     return $buffer;
   }
@@ -275,24 +334,19 @@ class Event_model extends CI_Model
     /**
      * Setzt Teilnehmerdaten eines Events
      * 
-     * in:  Die ID des Events
-     *      Eine Liste mit den Teilnehmer IDs
+     * in:  das zu schreibende Tupel
      * 
      * out: -
      */
-    public function updateMembers($eventid, $members)
+    public function updateMembers($data)
     {
-      // 1) Alle Teilnehmer löschen
-      $this->db->where("eventid", $eventid);
+      // 1) Teilnehmer Tupel löschen
+      $this->db->where("eventid", $data["eventid"]);
+      $this->db->where("memberid", $data["memberid"]);
       $this->db->delete("event_member");  
 
-      // 2) neue Teilnehmer eintragen
-      foreach($members as $member)
-      {
-        $data["eventid"] = $eventid;
-        $data["memberid"] = $member;
-        $this->db->insert("event_member", $data);
-      }
+      // 2) Teilnehmer und neuen Status eintragen
+      $this->db->insert("event_member", $data);
     }
 
     /**
@@ -309,30 +363,5 @@ class Event_model extends CI_Model
     }
 
 // ----------------------------------------------------------------------------
-
-
-//--- 8< snip -----------
-    //TODO das kommt später mal aus dem Friend Model -> Philipp
-    public function getFriendsArray()
-    {
-      $friends;
-      $friends["hannes"] = "Hannes Koeppel";
-      $friends["philipp"] = "Philipp Fauser";
-      $friends["alex"] = "Alexander Psiuk";
-      $friends["martin"] = "Martin Jergler";
-      $friends["fana"] = "Christoph Grill";
-      $friends["doedl"] = "Markus Doering";
-      $friends["marco"] = "Marco Polo";
-      
-      $buffer = "";
-      foreach ($friends as $key=>$value)
-      {
-        $buffer .= "<li id=\"".$key."\">".$value."</li>";        
-        next($friends); 
-      }
-
-      return $buffer;
-    }
-//--- 8< snap -----------
 
 }
