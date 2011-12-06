@@ -1,0 +1,14 @@
+div#event_members table
+{
+  width:95%;
+  margin:0px auto;
+  padding:0px;
+}
+
+div#event_members tr.member td
+{
+  margin-bottom:10px;
+  background-color:rgba(0, 0, 0, 0.1);
+  padding-right:10px;
+  text-align:left;
+}
