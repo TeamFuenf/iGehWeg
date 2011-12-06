@@ -104,15 +104,15 @@ class Friends_format_model extends CI_Model
 		if($groups_with_friend != null) 
 		{
 			foreach($groups_with_friend as $item) {
-				$groups_with = $groups_with." <a class='group_links' href=''>".$item->name."</a>";	
+				$groups_with = $groups_with." <a class='group_links del_group' id='".$item->id."' href=''>".$item->name."</a>";	
 			}
 		}
 		
 		$groups_without = "";
-		if($groups_with_friend != null) 
+		if($groups_without_friend != null) 
 		{
 			foreach($groups_without_friend as $item) {
-				$groups_without = $groups_without." <a class='group_links' href=''>".$item->name."</a>";	
+				$groups_without = $groups_without." <span class='group_links add_group' id='".$item->id."'>".$item->name."</span>";	
 			}
 		}
 		
@@ -120,9 +120,27 @@ class Friends_format_model extends CI_Model
 								$('#to_details_button').on('click', function(){
 									$('#friends_slide_list').animate({left : '-320px'}, 500);
 								});
+								
+								$('.add_group').on('click', function() {
+									var detail_id = 126;
+									var group_id = $(this).attr('id');
+									$.ajax({
+										url: '/friends/friends_control/add_groups/' + detail_id + '/' + group_id,
+										success: function(data)
+										{
+												$.ajax({
+													url: '/friends/friends_control/get_groups/' + detail_id,
+													success: function(data)
+													{
+														$('#add_to_group').html(data);
+  													}
+  												})
+										}
+									});
+								});
 							</script>";
 		
-		$string = "	<br/><br/>
+		$string = "	<h2>Add to group</h2><br/><br/>
 					".$groups_without."
 					<hr />
 					<span>Groups:</span><br/>

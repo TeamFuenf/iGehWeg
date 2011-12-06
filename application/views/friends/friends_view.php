@@ -13,8 +13,8 @@
 					url: "/friends/friends_control/get_detail/" + detail_id,
 					success: function(data)
 					{
-						$("#friend_detail").html(data);
 						$("#friends_slide_list").animate({left : "-320px"}, 500);
+						$("#friend_detail").html(data);
   					}
 				});
 			});
