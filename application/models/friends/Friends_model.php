@@ -29,17 +29,22 @@ class Friends_model extends CI_Model
 	 */
     function get_friends($user_id) 
     {
-    	$query = $this->db->query("SELECT u.id, u.name, u.picture FROM user AS u, friend AS f WHERE u.id = f.friendid AND f.id=".$user_id);
-		
-		if($query->num_rows() > 0) 
-		{
+      $this->db->where("user.id", $user_id);
+      $this->db->from("user");
+      $this->db->join("friend", "user.id = friend.friendid");
+      $query = $this->db->get();
+      return $query->result();
+/*
+      if($query->num_rows() > 0) 
+      {
 			foreach ($query->result() as $row)
 			{
 				$data[] = $row;
 			}	
 			
 			return $data;
-		}
+		  }
+*/      
     } 
 
 	/**
