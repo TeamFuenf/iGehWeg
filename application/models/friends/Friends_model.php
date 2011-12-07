@@ -20,6 +20,18 @@ class Friends_model extends CI_Model
     	$query = $this->db->get("user");
 		  return $query->row();
     }
+	
+	/**
+	 * Holt alle Benutzer.
+	 * 
+	 * <- 
+	 * -> Objekt mit id, name und picture
+	 */
+    function get_all_users() 
+    {      
+    	$query = $this->db->get("user");
+		  return $query->result();
+    }
 
 	/**
 	 * Holt alle Freunde eines Benutzeres.
@@ -55,7 +67,7 @@ class Friends_model extends CI_Model
 	 */
 	function add_friend($friend_id, $user_id) 
 	{
-		$this->db->query("INSERT INTO friend ('friendid', 'id') VALUES ('".$friend_id."', '".$user_id."');");
+		$this->db->query("INSERT INTO friend (friendid, id) VALUES ('".$friend_id."', '".$user_id."');");
 	}
 	
 	/**
@@ -67,6 +79,7 @@ class Friends_model extends CI_Model
 	function delete_friend($friend_id, $user_id) 
 	{
 		$this->db->query("DELETE FROM friend WHERE id = '".$user_id."' AND friendid = '".$friend_id."';");
+		$this->db->query("DELETE FROM group_member WHERE memberid = '".$friend_id."';");
 	}
 	
 	/**

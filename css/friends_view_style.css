@@ -24,19 +24,19 @@ ul#friends_slide_list {
 
 /*----- friends_main -----*/
 
-div#friends {
+div#friends, div#add_friend {
 	width: 320px;
 	height: 480px;
 	overflow: hidden;
 	border: 1px solid blue;
 }
 
-ul#friends_friend_list {
+ul#friends_friend_list, ul#users_list {
 	margin: 0px;
 	padding: 0px;
 }
 
-ul#friends_friend_list>li {
+ul#friends_friend_list>li, ul#users_list>li {
 	clear: both;
 	border: 1px dashed black;
 	list-style: none;
@@ -46,7 +46,7 @@ ul#friends_friend_list>li {
 	background-color: #F0F0F0;
 }
 
-ul#friends_friend_list>li>img {
+ul#friends_friend_list>li>img, ul#users_list>li>img {
 	height: 22px;
 	width: 22px;
 	vertical-align: middle;
@@ -107,7 +107,7 @@ a.group_links, span.group_links, span#delete_user {
 
 /*----- add_to_group -----*/
 
-#to_details_button {
+#to_details_button, #back_to_friends_button {
 	border: 1px dashed black;
 	background-color: #F0F0F0;
 	cursor: pointer;

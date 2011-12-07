@@ -7,17 +7,13 @@
 	<script>
 	
 		$(function() {
-			$(".friend_list_entry").on("click", function() {
-				var detail_id = $(this).attr("id");
-				$.ajax({
-					url: "/friends/friends_control/get_detail/" + detail_id,
+			$.ajax({
+					url: "/friends/friends_control/get_friends/",
 					success: function(data)
 					{
-						$("#friends_slide_list").animate({left : "-320px"}, 500);
-						$("#friend_detail").html(data);
+						$("#friends_main").html(data);
   					}
 				});
-			});
 		});
 		
 	</script>
@@ -28,7 +24,7 @@
 			<!-- FRIENDS MAIN -->
 			<li>
 				<div id="friends_main">
-					<?php if($friends_main != null) { echo $friends_main; }; ?>
+					
 				</div>
 			</li>
 			<!-- FRIEND DETAIL -->

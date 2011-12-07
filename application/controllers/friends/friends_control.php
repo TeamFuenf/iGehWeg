@@ -7,26 +7,31 @@ class Friends_control extends CI_Controller {
 		
 		$this->load->model('friends/friends_model');
 		$current_user = $this->friends_model->get_user($current_user);
+		
+		$this->session->set_userdata('current_user', $current_user);
 				
-		$data["friends_main"] = $this->get_friends($current_user);
+		//$this->get_friends();
+		//$data["friends_main"] = $this->get_friends();
 				
-		$this->layout->view("friends/friends_view", $data);
+		$this->layout->view("friends/friends_view");
 	}
 	
 	/*
 	 * FRIENDS MAIN
 	 */
-	function get_friends($current_user) 
+	function get_friends() 
 	{
 		$this->load->model('friends/friends_model');
 		//Hier werden die Freunde des aktuellen Users geholt
+		$current_user = $this->session->userdata('current_user');
 		$friends = $this->friends_model->get_friends($current_user->id);
 		
 		$this->load->model('friends/friends_format_model');
 		//Hier werden die Daten formatiert
 		$detail_string = $this->friends_format_model->format_friend_main($current_user, $friends);
 		
-		return $detail_string;
+		echo $detail_string;
+		
 	}
 	
 	/*
@@ -80,6 +85,42 @@ class Friends_control extends CI_Controller {
 	{
 		$this->load->model('friends/friends_model');
 		$this->friends_model->delete_from_group($group_id, $friend_id);
+	}
+	
+	/*
+	 * DELETE FRIEND
+	 */
+	function del_friend($friend_id) 
+	{
+		$current_user = $this->session->userdata('current_user');
+		$this->load->model('friends/friends_model');
+		$this->friends_model->delete_friend($friend_id, $current_user->id);
+	}
+	
+	/*
+	 * ADD FRIEND MAIN
+	 */
+	function add_friends_main() 
+	{
+		$this->load->model('friends/friends_model');
+		$users = $this->friends_model->get_all_users();
+		
+		$this->load->model('friends/friends_format_model');
+		//Hier werden die Daten formatiert
+		$data["detail_string"] = $this->friends_format_model->format_add_friends($users);
+		
+		$this->layout->view('friends/addfriend_view', $data);
+	}
+	
+	/*
+	 * ADD FRIEND
+	 */
+	function add_friend($friend_id) 
+	{
+		$current_user = $this->session->userdata('current_user');
+		
+		$this->load->model('friends/friends_model');
+		$this->friends_model->add_friend($friend_id, $current_user->id);
 	}
 }
 ?>

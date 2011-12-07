@@ -24,21 +24,35 @@ class Friends_format_model extends CI_Model
 			}
 		}
 		
+		$string_script = " <script>
+						$('.friend_list_entry').on('click', function() {
+							var detail_id = $(this).attr('id');
+							$.ajax({
+								url: '/friends/friends_control/get_detail/' + detail_id,
+								success: function(data)
+								{
+									$('#friends_slide_list').animate({left : '-320px'}, 500);
+									$('#friend_detail').html(data);
+  								}
+							});
+						});
+						</script>";
+		
     	$string = 	"<div id='friends_current_user'>
-						<img class='big_user_image' src='".$current_user->picture."' />
-						".$current_user->name." 
-					</div>
-					<div id='friends_add_button'>
-						<a href=''>+</a>
-					</div>
-					<ul id='friends_friend_list'>"
-					.$friends_list.			
-					"</ul>
-					<div id='friends_groups'>
-						<a href=''>groups</a>
-					</div>";
+    					<img class='big_user_image' src='".$current_user->picture."' />"
+    					.$current_user->name."
+    				 </div>
+    				 <div id='friends_add_button'>
+    				 	<a href='/friends/friends_control/add_friends_main'>+</a>
+    				 </div>
+    				 <ul id='friends_friend_list'>"
+    				 	.$friends_list."
+    				 </ul>
+    				 <div id='friends_groups'>
+    				 	<a href=''>groups</a>
+    				 </div>";
 					
-		return $string;
+		return $string.$string_script;
     }
 	
 	/**
@@ -62,25 +76,27 @@ class Friends_format_model extends CI_Model
 									$('#friends_slide_list').animate({left : '0px'}, 500);
 								});
 								$('#add_to_button').on('click', function() {
-									var detail_id = ".$details->id."
+									var detail_id = '".$details->id."';
 									$.ajax({
 										url: '/friends/friends_control/get_groups/' + detail_id,
 										success: function(data)
 										{
 												$('#add_to_group').html(data);
+												alert('asd2');
 												$('#friends_slide_list').animate({left : '-640px'}, 500);
+												alert('asd3');
   										}
 									});
 								});
 								
 								$('#delete_user').on('click', function() {
-									var detail_id = ".$details->id."
+									var detail_id = '".$details->id."';
 									$.ajax({
-										url: '/friends/friends_control/get_friends_main',
+										url: '/friends/friends_control/del_friend/' + detail_id,
 										success: function(data)
 										{
 												$.ajax({
-													url: '/friends/friends_control/get_friends_main',
+													url: '/friends/friends_control/get_friends',
 													success: function(data)
 													{
 															$('#friends_main').html(data);
@@ -136,7 +152,7 @@ class Friends_format_model extends CI_Model
 		
 		$script_string = "	<script>
 								$('#to_details_button').on('click', function() {
-									var detail_id = ".$friend_id."
+									var detail_id = '".$friend_id."';
 									$.ajax({
 										url: '/friends/friends_control/get_detail/' + detail_id,
 										success: function(data)
@@ -192,5 +208,45 @@ class Friends_format_model extends CI_Model
 		
 		return $script_string.$string;
     }
+	
+	/**
+	 * 
+	 * 
+	 * <- 
+	 * -> 
+	 */
+    function format_add_friends($users) 
+    {
+    	$users_list = "";
+		
+    	if(!is_null($users)) {
+			foreach($users as $item) {
+				$users_list = $users_list."<li class='users_list_entry' id='".$item->id."'><img src='".$item->picture."'/>".$item->name."</li>";
+			}
+		}
+		
+		$string_script = " <script>
+							$('.users_list_entry').on('click', function() {
+								var detail_id = $(this).attr('id');
+								console.log(detail_id);
+								$.ajax({
+									url: '/friends/friends_control/add_friend/' + detail_id,
+									success: function(data)
+									{
+										
+	  								}
+								});
+							});
+							</script>";
+		
+		
+    	$string = 	"<ul id='users_list'>"
+    				 	.$users_list."
+    				 </ul>
+    				<a id='back_to_friends_button' href='/friends'>OK</a>";
+					
+		return $string.$string_script;
+    }
+	
 	
 }
