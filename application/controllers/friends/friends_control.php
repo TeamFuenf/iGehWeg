@@ -42,7 +42,7 @@ class Friends_control extends CI_Controller {
 		
 		$this->load->model('friends/friends_format_model');
 		//Hier werden die Daten formatiert
-		$detail_string = $this->friends_format_model->format_friend_details($details[0], $groups);
+		$detail_string = $this->friends_format_model->format_friend_details($details, $groups);
 
 		echo $detail_string;
 	}
@@ -58,7 +58,7 @@ class Friends_control extends CI_Controller {
 		
 		$this->load->model('friends/friends_format_model');
 		//Hier werden die Daten formatiert
-		$detail_string = $this->friends_format_model->format_add_to_group($groups_with_friend, $groups_without_friend);
+		$detail_string = $this->friends_format_model->format_add_to_group($groups_with_friend, $groups_without_friend, $friend_id);
 		
 		echo $detail_string;
 	}
@@ -69,15 +69,17 @@ class Friends_control extends CI_Controller {
 	function add_groups($friend_id, $group_id) 
 	{
 		$this->load->model('friends/friends_model');
-		$this->friends_model->add_to_group($group_id, $friend_id); /*
-		$groups_with_friend = $this->friends_model->get_groups_with_friend("123", $friend_id);
-		$groups_without_friend = $this->friends_model->get_groups_without_friend("123", $friend_id);
+		$this->friends_model->add_to_group($group_id, $friend_id);
+	}
+		 
 		
-		$this->load->model('friends/friends_format_model');
-		//Hier werden die Daten formatiert
-		$detail_string = $this->friends_format_model->format_add_to_group($groups_with_friend, $groups_without_friend);
-		
-		echo $detail_string; */
+	/*
+	 * DELETE FROM GROUP
+	 */
+	function del_groups($friend_id, $group_id) 
+	{
+		$this->load->model('friends/friends_model');
+		$this->friends_model->delete_from_group($group_id, $friend_id);
 	}
 }
 ?>

@@ -82,12 +82,13 @@ div#friends_groups>a{
 
 /*----- friend_detail -----*/
 
-a.group_links {
+a.group_links, span.group_links, span#delete_user {
 	border: 1px dashed black;
 	background-color: #F0F0F0;
 	text-decoration: none;
 	color: black;
 	padding: 0px 2px;
+	cursor: pointer;
 }
 
 #back_button {

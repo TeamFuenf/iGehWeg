@@ -28,10 +28,10 @@ class Friends_model extends CI_Model
 	 * -> $data Array mit allen Freunden mit id, name und picture
 	 */
     function get_friends($user_id) 
-    {
-      $this->db->where("user.id", $user_id);
-      $this->db->from("user");
-      $this->db->join("friend", "user.id = friend.friendid");
+    {	  
+	  $this->db->where("friend.id", $user_id);
+      $this->db->from("friend");
+      $this->db->join("user", "user.id = friend.friendid");
       $query = $this->db->get();
       return $query->result();
 /*
@@ -203,7 +203,7 @@ class Friends_model extends CI_Model
 	 * -> nix
 	 */
 	function delete_from_group($group_id, $friend_id) 
-	{
+	{/*
 		$query = $this->db->query("SELECT userid, name FROM `groups` WHERE id = '".$group_id."';");
 		
 		if($query->num_rows() > 0) 
@@ -214,7 +214,14 @@ class Friends_model extends CI_Model
 			}
 			
 			$this->db->query("DELETE FROM `groups` WHERE name = '".$data[0]->name."' AND userid = '".$data[0]->userid."' AND friendid = '".$friend_id."';");
-		}	
+		}	*/
+		
+		$query = $this->db->query("SELECT * FROM `group_member` WHERE groupid = '".$group_id."' AND memberid = '".$friend_id."';");
+		
+		if($query->num_rows() != 0) 
+		{
+			$this->db->query("DELETE FROM group_member WHERE groupid = '".$group_id."' AND memberid = '".$friend_id."';");
+		}
 	}
 }
 

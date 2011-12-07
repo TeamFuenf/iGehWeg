@@ -28,7 +28,7 @@
 			<!-- FRIENDS MAIN -->
 			<li>
 				<div id="friends_main">
-					<?php echo $friends_main; ?>
+					<?php if($friends_main != null) { echo $friends_main; }; ?>
 				</div>
 			</li>
 			<!-- FRIEND DETAIL -->

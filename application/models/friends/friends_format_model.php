@@ -72,6 +72,24 @@ class Friends_format_model extends CI_Model
   										}
 									});
 								});
+								
+								$('#delete_user').on('click', function() {
+									var detail_id = ".$details->id."
+									$.ajax({
+										url: '/friends/friends_control/get_friends_main',
+										success: function(data)
+										{
+												$.ajax({
+													url: '/friends/friends_control/get_friends_main',
+													success: function(data)
+													{
+															$('#friends_main').html(data);
+															$('#friends_slide_list').animate({left : '0px'}, 500);
+			  										}
+												});
+										}
+									});
+								});
 							</script>";
 		
 		$string = "	<div id='current_detail'>
@@ -81,7 +99,7 @@ class Friends_format_model extends CI_Model
 						.$details->name."
 					</div>
 					<br/><br/>
-					<a href=''>DELETE</a>
+					<span id='delete_user'>DELETE</span>
 					<hr />
 					<span>Groups:</span><br/>
 					".$gruppen."
@@ -98,13 +116,13 @@ class Friends_format_model extends CI_Model
 	 * <- 
 	 * -> 
 	 */
-    function format_add_to_group($groups_with_friend, $groups_without_friend) 
+    function format_add_to_group($groups_with_friend, $groups_without_friend, $friend_id) 
     {
     	$groups_with = "";
 		if($groups_with_friend != null) 
 		{
 			foreach($groups_with_friend as $item) {
-				$groups_with = $groups_with." <a class='group_links del_group' id='".$item->id."' href=''>".$item->name."</a>";	
+				$groups_with = $groups_with." <span class='group_links del_group' id='".$item->id."' href=''>".$item->name."</span>";	
 			}
 		}
 		
@@ -117,19 +135,43 @@ class Friends_format_model extends CI_Model
 		}
 		
 		$script_string = "	<script>
-								$('#to_details_button').on('click', function(){
-									$('#friends_slide_list').animate({left : '-320px'}, 500);
+								$('#to_details_button').on('click', function() {
+									var detail_id = ".$friend_id."
+									$.ajax({
+										url: '/friends/friends_control/get_detail/' + detail_id,
+										success: function(data)
+										{
+											$('#friends_slide_list').animate({left : '-320px'}, 500);
+											$('#friend_detail').html(data);
+  										}
+								});
 								});
 								
 								$('.add_group').on('click', function() {
-									var detail_id = 126;
 									var group_id = $(this).attr('id');
 									$.ajax({
-										url: '/friends/friends_control/add_groups/' + detail_id + '/' + group_id,
+										url: '/friends/friends_control/add_groups/' + ".$friend_id." + '/' + group_id,
 										success: function(data)
 										{
 												$.ajax({
-													url: '/friends/friends_control/get_groups/' + detail_id,
+													url: '/friends/friends_control/get_groups/' + ".$friend_id.",
+													success: function(data)
+													{
+														$('#add_to_group').html(data);
+  													}
+  												})
+										}
+									});
+								});
+								
+								$('.del_group').on('click', function() {
+									var group_id = $(this).attr('id');
+									$.ajax({
+										url: '/friends/friends_control/del_groups/' + ".$friend_id." + '/' + group_id,
+										success: function(data)
+										{
+												$.ajax({
+													url: '/friends/friends_control/get_groups/' + ".$friend_id.",
 													success: function(data)
 													{
 														$('#add_to_group').html(data);
