@@ -1,9 +1,29 @@
 <style>
 
-div.olControlAttribution
-{
-  display:none;
-}       
+  div.olControlAttribution
+  {
+    display:none;
+  }       
+
+  #pages ul
+  {
+    margin:0px;
+    padding:0px;
+    list-style-type:none;
+  }
+
+  #pages ul li
+  {
+    padding-top:1em;
+    padding-bottom:1em;
+  }
+
+  #pages a
+  {
+    color:#666;
+    text-decoration:none;
+  }
+
 </style>
 
 		<script>
@@ -45,7 +65,7 @@ div.olControlAttribution
         //map.zoomToMaxExtent();
                 
         // Layer
-				var meetuppMap = new OpenLayers.Layer.OSM("meetupp", "http://dl.dropbox.com/u/948390/Tiles/${z}/${x}/${y}.png");
+		var meetuppMap = new OpenLayers.Layer.OSM("meetupp", "http://dl.dropbox.com/u/948390/Tiles/${z}/${x}/${y}.png");
         var originalMap = new OpenLayers.Layer.OSM();
 
         var locations = new OpenLayers.Layer.Markers("Locations");
@@ -84,9 +104,38 @@ div.olControlAttribution
 
 		</script>
 	</head>
-	<body>
+
+		
+
+
+
+
+
+
+
+
+<div id="window">
+  <ul id="pages">
+    <li>
+
 		<div id="map"></div>
 		<script>
 		  init();
 		</script>
-		
+
+    </li>
+    <li>
+      <div>
+        <h1>Seite 2</h1>
+          
+      </div>
+    </li>
+    <li>
+      <div>
+        <h1>Seite 3</h1>
+      </div>
+    </li>
+  </ul>
+</div>
+
+

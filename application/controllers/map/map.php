@@ -11,14 +11,16 @@ class Map extends CI_Controller {
 // --------------------------------------------------------------------------------------------------------------------
 
   // Normale Kartenansicht
-	function index()
-	{
-	  $data["markerLocations"] = $this->Marker_model->getLocations();
+  function index()
+  {
+	$data["markerLocations"] = $this->Marker_model->getLocations();
     $data["markerFriends"] = $this->Marker_model->getFriends();
     $data["markerEvents"] = $this->Marker_model->getEvents();
     
-		$this->layout->view("map/mapview", $data);
-	}
+	$this->layout->view("map/map", $data);
+  }
+
+
 
   // Kleine Karte mit Vorschau für eine Location
   function snippet()
