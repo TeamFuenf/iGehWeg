@@ -55,9 +55,24 @@ $route["event"] = "event/event";
 $route["event/new"] = "event/event/newevent";
 $route["event/edit/(:any)"] = "event/event/editevent";
 $route["event/update/basedata"] = "event/event/updateBasedata";
-$route["event/update/member"] = "event/event/updateMembers";
+$route["event/update/location"] = "event/event/updateLocation";
+$route["event/update/member"] = "event/event/updateMember";
+$route["event/update/status/(:any)"] = "event/event/updateStatus";
 $route["event/update/comment"] = "event/event/updateComment";
-$route["event/(:any)"] = "event/event/index";
+
+// übler hack aber geht grad nicht anders, da pfade in meetupp.js nicht von Coderigniter geparst werden
+$route["event/event/update/basedata"] = "event/event/updateBasedata";
+$route["event/event/update/location"] = "event/event/updateLocation";
+$route["event/event/update/member"] = "event/event/updateMember";
+$route["event/event/update/status/(:any)"] = "event/event/updateStatus";
+$route["event/event/update/comment"] = "event/event/updateComment";
+// ---
+
+$route["event/show/(:any)"] = "event/event/index";
+
+// Nachrichtensystem
+$route["mail/show/(:any)"] = "messaging/messaging/show";
+$route["mail/send"] = "messaging/messaging/send";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

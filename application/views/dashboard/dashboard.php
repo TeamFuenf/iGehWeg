@@ -61,7 +61,6 @@
     
 </style>
 
-
 <div id="window">
   <ul id="pages">
     <li>
@@ -72,7 +71,16 @@
         </div>
 
         <div class="contentbox">
-          Keine neuen Nachrichten
+          <?php
+            if (empty($inbox))
+            {
+              echo "Du hast keine neuen Nachrichten";
+            }
+            else
+            {
+              echo "Du hast ".count($inbox). " ungelesene Nachrichten";
+            }
+          ?>  
         </div>
         
         <div class="contentbox">
@@ -98,6 +106,10 @@
     <li>
       <div>
         <h1>Seite 3</h1>
+        <h2>Inbox</h2>
+        todo
+        <h2>neue Nachricht</h2>
+        <?php echo $messageform; ?>        
       </div>
     </li>
   </ul>

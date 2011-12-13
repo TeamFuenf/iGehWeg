@@ -92,7 +92,7 @@ ul
                 <h1><?php echo $basedata->title; ?></h1>
               </td>
               <td width="200" height="200" rowspan="5">
-                <iframe src="../map/snippet/10" width="250" height="250" frameborder="0">
+                <iframe src="../../map/snippet/10" width="250" height="250" frameborder="0">
                 </iframe>
               </td>              
             <tr>

@@ -8,64 +8,103 @@ class Event extends CI_Controller
     parent::__construct();
     $this->load->model("event/Event_model");
   }
-  
-// --------------------------------------------------------------------------------------------------------------------
 
-  public function index()
-  {
-    $eventid = $this->uri->segment(2);
-    $event = $this->Event_model->getEvent($eventid);
-  
-    $data["eventid"] = $eventid;
-    $data["basedata"] = $this->Event_model->getBasedata($eventid);
-    $data["members"] = $this->Event_model->getMembers($eventid);
-    $data["comments"] = $this->Event_model->getComments($eventid);
-
-    $data["commentUrl"] = base_url("event/update/comment");    
-    $data["commentForm"] = $this->Event_model->getCommentForm();
-
-    $this->layout->view("event/showevent", $data);
-  }  
 
 // --------------------------------------------------------------------------------------------------------------------
 
   public function newevent()
   {
+    $this->Event_model->cleanup();
+    
+    $event->title = "";
+    $event->begintime = time();
+    $event->endtime = time();
+    $event->location = 0;
+    
+    $data["eventid"] = uniqid("event", true);
     $data["title"] = "Neues Event erstellen";
-    
-    $data["basedataUrl"] = base_url("event/update/basedata");
-    $data["memberUrl"] = base_url("event/update/member");
-    $data["commentUrl"] = base_url("event/update/comment");
-
-    $data["basedataForm"] = $this->Event_model->getBasedataForm(null);
-    $data["memberForm"] = $this->Event_model->getMemberForm(null);
-    $data["commentForm"] = $this->Event_model->getCommentForm();
-    
-    $data["comments"] = $this->Event_model->getComments(null);
-    
+    $data["locations"] = $this->Event_model->getEventLocations();
+    $data["members"] = $this->Event_model->getEventMembers();
+    $data["event"] = $event;
+        
     $this->layout->view("event/event", $data);
   }
-  
+
   public function editevent()
   {
+    $this->Event_model->cleanup();
     $eventid = $this->uri->segment(3);
-
+    $memberstats = $this->Event_model->getMemberStatus($eventid);
+    if (!empty($memberstats))
+    {
+      foreach($memberstats as $stat)
+      {
+        $memberstatus[$stat->memberid] = $stat->status;  
+      }
+    }
+    else
+    {
+      $memberstatus = array();
+    }
+    
+    $data["eventid"] = $eventid;
+    $data["title"] = "Event bearbeiten";
+    $data["locations"] = $this->Event_model->getEventLocations();
+    $data["members"] = $this->Event_model->getEventMembers();
+    $data["memberstatus"] = $memberstatus;
+    $data["event"] = $this->Event_model->getEvent($eventid);
+    
+/*
     $data["basedataUrl"] = base_url("event/update/basedata");
     $data["memberUrl"] = base_url("event/update/member");
     $data["commentUrl"] = base_url("event/update/comment");
     
-    $data["title"] = "Event bearbeiten";
     $data["basedataForm"] = $this->Event_model->getBasedataForm($eventid);
     $data["memberForm"] = $this->Event_model->getMemberForm($eventid);
     $data["commentForm"] = $this->Event_model->getCommentForm($eventid);
     
     $data["comments"] = $this->Event_model->getComments($eventid);
-
+*/
     $this->layout->view("event/event", $data);
   }  
   
 // --------------------------------------------------------------------------------------------------------------------
 
+  public function updateLocation()
+  {
+    $eventid = $this->input->post("eventid", true);
+    $locationid = $this->input->post("locationid", true);    
+    $this->Event_model->setLocation($eventid, $locationid);
+    echo "okay";
+  }
+  
+  public function updateMember()
+  {
+    $eventid = $this->input->post("eventid", true);
+    $memberid = $this->input->post("memberid", true);    
+    $status = $this->input->post("status", true);    
+    $this->Event_model->setStatus($eventid, $memberid, $status);
+    echo "okay";  
+  }
+  
+  public function updateBasedata()
+  {
+    $eventid = $this->input->post("eventid", true);
+    $title = $this->input->post("title", true);
+    $from_date = $this->input->post("from_date", true);
+    $from_time = $this->input->post("from_time", true);
+    $to_date = $this->input->post("to_date", true);
+    $to_time = $this->input->post("to_time", true);
+    
+    $from = strtotime($from_date." ".$from_time);
+    $to = strtotime($to_date." ".$to_time);
+  
+    $this->Event_model->setBasedata($eventid, $title, $from, $to);
+    
+    echo "okay";
+  }
+  
+/*
   public function updateBasedata()
   {
     $data["id"] = $this->input->post("eventid");
@@ -104,6 +143,15 @@ class Event extends CI_Controller
     echo "okay";
   }
 
+  public function updateStatus()
+  {
+    $data["eventid"] = $this->uri->segment(4); 
+    $data["memberid"] = $this->session->userdata("userid");   
+    $data["status"] = $this->uri->segment(5);   
+    $this->Event_model->updateMembers($data);
+    echo "okay";
+  }
+
   public function updateComment()
   {
     $data["eventid"] = $this->input->post("eventid");
@@ -112,6 +160,6 @@ class Event extends CI_Controller
     $data["time"] = time();
     $this->Event_model->updateComment($data);
   }
-  
+*/  
 }
 ?>

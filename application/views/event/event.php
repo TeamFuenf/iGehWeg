@@ -1,143 +1,160 @@
-<script>
-$(document).ready(function()
+<style>
+ul#eventlocations
 {
-  $("button.invite").on("click", function()
-  {
-    var button = $(this);
-    var memberid = $(this).attr("id");
-    var status = $(this).attr("status");
-    
-    if (status == undefined || status == "null")
-    {
-      status = "invited";
-    }
-    else if (status == "invited")
-    {
-      status = "null";
-    }
-    
-    $.post("<?php echo $memberUrl; ?>", 
-    { 
-      eventid: $("input[name=eventid]").val(),
-      memberid: memberid,
-      status: status
-    },
-    function()
-    {
-      if (status == "invited")
-      {
-        button.html("Einladung gesendet");
-      }
-      else
-      {
-        button.html("Einladen");
-      }
-        button.attr("status", status);
-    });
-  });
-
-  $("button[name=basedata_next]").on("click", function()
-  {
-    updateBasedata();
-    pageNext();
-  });
-
-  $("button[name=members_next]").on("click", function()
-  {
-    pageNext();
-  });
-
-  $("button[name=members_prev]").on("click", function()
-  {
-    pagePrev();
-  });
-
-  $("button[name=comments_prev]").on("click", function()
-  {
-    pagePrev();
-  });
-
-  $("button[name=post_comment]").on("click", function()
-  {
-    var comment = $("textarea[name=comment]").val();
-    if (comment != "")
-    {
-      $.post("<?php echo $commentUrl; ?>", {
-        eventid: $("input[name=eventid]").val(),
-        comment: comment
-      }, 
-      function(data) 
-      {
-        $("div#event_comments").html(data);
-        $("textarea").val("");
-      });
-    }    
-  });
-
-});
-
-function updateBasedata()
-{
-  var eventTitle = $("input[name=title]").val();
-  var eventLocation = $("input[name=location]").val();
-  var eventId = $("input[name=eventid]").val();
-  
-  if (eventTitle != "" && eventLocation != "")
-  {
-    $.post("<?php echo $basedataUrl; ?>", {
-      eventid: eventId,
-      title: eventTitle,
-      location: eventLocation,
-      from_day: $("select[name=from_day]").val(),
-      from_month: $("select[name=from_month]").val(),
-      from_year: $("select[name=from_year]").val(),
-      from_hour: $("select[name=from_hour]").val(),
-      from_minute: $("select[name=from_minute]").val(),
-      to_day: $("select[name=to_day]").val(),
-      to_month: $("select[name=to_month]").val(),
-      to_year: $("select[name=to_year]").val(),
-      to_hour: $("select[name=to_hour]").val(),
-      to_minute: $("select[name=to_minute]").val()
-     });
-  }
+  width:97%;
+  margin:0px auto;
+  padding:0px;
+  list-style-type:none;
 }
 
-</script>
+#eventlocations li
+{
+  color:#999;
+  border-bottom:1px solid #ccc;
+  padding:10px;
+  font-size:1em;
+}
+
+#eventlocations li.selected
+{
+  color:#eee;
+  background-color:#669933;
+}
+
+#eventlocations li b
+{
+  font-size:1.5em;
+}
+
+table#eventmembers 
+{
+  width:97%;
+  margin:0px auto;
+}
+  
+#eventmembers td:not(:first-child)
+{
+  padding:10px;
+  font-size:1em;
+}
+
+#eventmembers tr
+{
+  color:#999;
+  border-bottom:1px solid #ccc;
+  padding:10px;
+  font-size:1em;
+}
+
+#eventmembers img
+{
+  -moz-border-radius:10px;
+  border-radius:10px;
+  width:64px;
+  height:64px;
+}
+
+</style>
+
+<span id="eventid" eventid="<?php echo $eventid; ?>"></span>
+<?php $time = time();?>
 
 <div id="window">
   <ul id="pages">
+    
     <li>
       <div>
         <h1><?php echo $title; ?></h1>
-        <h2>Location festlegen</h2>
-        <div id="event_basedata">
-        <?php echo $basedataForm; ?>  
-        </div>
+        <h2>Eventdaten</h2>
+        <label for="eventname">Titel</label><input id="eventname" name="eventname" value="<?php echo $event->title; ?>"/>
+        <br/>
+
+        <label for="eventfromdate">Datum (Von)</label><input id="eventfromdate" name="eventfromdate" value="<?php echo date("d.m.Y", $event->begintime);?>"/>
+        <label for="eventfromtime">Uhrzeit (Von)</label><input id="eventfromtime" name="eventfromtime" value="<?php echo date("H:i:s", $event->begintime);?>"/>
+        <br/>
+      
+        <label for="eventtodate">Datum (Bis)</label><input id="eventtodate" name="eventtodate" value="<?php echo date("d.m.Y", $event->endtime);?>"/>
+        <label for="eventtotime">Uhrzeit (Bis)</label><input id="eventtotime" name="eventtotime" value="<?php echo date("H:i:s", $event->endtime);?>"/>
+        <br/>
+        <button class="button" id="eventbutton_basedata_next">weiter</button>
       </div>
     </li>
     
     <li>
       <div>
-        <h1><?php echo $title; ?></h1>
-        <h2>Freunde einladen</h2>
-        <div id="event_members">
-        <?php echo $memberForm; ?>  
-        </div>      
+        <h2>Location</h2>
+<!--
+        <label for="eventlocationsearch">Location suchen</label><input id="eventlocationsearch" name="eventlocationsearch"/> oder auswählen
+-->
+        <ul id="eventlocations">            
+        <?php
+          foreach ($locations as $location)
+          {
+            if ($location->id == $event->location)
+            {
+              echo "<li class='selected' locationid='".$location->id."'>";              
+            }
+            else
+            {
+              echo "<li locationid='".$location->id."'>";              
+            }
+            echo "<b>".$location->name."</b><br/>";
+            echo $location->street .", ".$location->city;
+            echo "</li>";
+          }
+        ?>
+        </ul>
+<!--
+        oder <a href="#">Neue Location anlegen</a>
+-->
+        <br/>
       </div>
-    </li>
-    
+    </li>                 
+
     <li>
       <div>
-        <h1><?php echo $title; ?></h1>
-        <h2>Kommentar abgeben</h2>
-        <div id="event_comments">          
-        <?php echo $comments; ?>  
-        </div>
-        <div id="event_commentform">
-        <?php echo $commentForm; ?>  
-        </div>
+        <h2>Teilnehmer</h2>
+        <table id="eventmembers">          
+        <?php
+          foreach ($members as $member)
+          {
+            echo "<tr>";
+            echo "<td width='64'><img src='".$member->picture."'/></td>";              
+            echo "<td>".$member->name."</td>";  
+                     
+            if (isset($memberstatus[$member->id]))
+            {
+              if ($memberstatus[$member->id] == "invited")
+              {
+                echo "<td width='200' align='right'><button status='invited' memberid='".$member->id."'>Einladung gesendet</button></td>";                                          
+              }
+              else
+              if ($memberstatus[$member->id] == "attending")
+              {
+                echo "<td width='200' align='right'><button status='attending' memberid='".$member->id."'>nimmt Teil</button></td>";                                          
+              }
+            } 
+            else
+            {
+              echo "<td width='200' align='right'><button status='none' memberid='".$member->id."'>einladen</button></td>";
+            }    
+            echo "</tr>";
+          }
+        ?>
+        </table>
+        <br/>
+        <button class="button" id="eventbutton_members_prev">zurück</button>
+        <button class="button" id="eventbutton_members_next">weiter</button>
       </div>
-    </li>     
-    
+    </li> 
+          
+    <li>
+      <div>
+        <h2>Kommentare</h2>
+        <button class="button" id="eventbutton_comment_prev">zurück</button>
+        <button class="button" id="eventbutton_comment_next">zurück</button>
+      </div>
+    </li>         
+
   </ul>
 </div>
