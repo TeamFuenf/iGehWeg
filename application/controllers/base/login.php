@@ -17,7 +17,9 @@ class Login extends CI_Controller {
   {
     $userid = $this->input->post("userid");
     $this->session->set_userdata("userid", $userid);
-    redirect("/");
+    //redirect("/");
+    
+    $this->layout->view("base/login");
   }
   
 }

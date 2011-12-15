@@ -82,9 +82,7 @@ class Friends_format_model extends CI_Model
 										success: function(data)
 										{
 												$('#add_to_group').html(data);
-												alert('asd2');
 												$('#friends_slide_list').animate({left : '-640px'}, 500);
-												alert('asd3');
   										}
 									});
 								});
@@ -166,11 +164,11 @@ class Friends_format_model extends CI_Model
 								$('.add_group').on('click', function() {
 									var group_id = $(this).attr('id');
 									$.ajax({
-										url: '/friends/friends_control/add_groups/' + ".$friend_id." + '/' + group_id,
+										url: '/friends/friends_control/add_groups/".$friend_id."/' + group_id,
 										success: function(data)
 										{
 												$.ajax({
-													url: '/friends/friends_control/get_groups/' + ".$friend_id.",
+													url: '/friends/friends_control/get_groups/".$friend_id."',
 													success: function(data)
 													{
 														$('#add_to_group').html(data);
@@ -183,11 +181,11 @@ class Friends_format_model extends CI_Model
 								$('.del_group').on('click', function() {
 									var group_id = $(this).attr('id');
 									$.ajax({
-										url: '/friends/friends_control/del_groups/' + ".$friend_id." + '/' + group_id,
+										url: '/friends/friends_control/del_groups/".$friend_id."/' + group_id,
 										success: function(data)
 										{
 												$.ajax({
-													url: '/friends/friends_control/get_groups/' + ".$friend_id.",
+													url: '/friends/friends_control/get_groups/".$friend_id."',
 													success: function(data)
 													{
 														$('#add_to_group').html(data);
