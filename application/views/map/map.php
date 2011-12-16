@@ -26,15 +26,15 @@
 
 </style>
 
-		<script>
+<script>
 
-			var init = function()
-			{
-        // Projektionen
+	var init = function()
+	{
+    	// Projektionen
         var fromProj = new OpenLayers.Projection("EPSG:4326"); // transform from WGS 1984
         var toProj = new OpenLayers.Projection("EPSG:900913"); // to Spherical Mercator Projection
 				
-				// Icons
+		// Icons
         var size = new OpenLayers.Size(21,25);
         var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
         var icon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker.png',size,offset);
@@ -50,17 +50,17 @@
         var eventIconOffset = new OpenLayers.Pixel(-(eventIconSize.w/2), -eventIconSize.h);
         var eventIcon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker.png',size,offset);
 
-				// Bounds
+		// Bounds
         var bounds = new OpenLayers.Bounds();
         bounds.extend(new OpenLayers.LonLat(13.3699780,48.5356778));
         bounds.extend(new OpenLayers.LonLat(13.4993596,48.5855492));
         bounds.transform(fromProj, toProj);
 				
-				// Map
-				map = new OpenLayers.Map("map", {
-				  projection : toProj, 
-				  controls: [new OpenLayers.Control.Navigation(), new OpenLayers.Control.ZoomPanel()]
-				});
+		// Map
+		map = new OpenLayers.Map("map", {
+				projection : toProj,
+				controls: [new OpenLayers.Control.Navigation(), new OpenLayers.Control.ZoomPanel()]
+			});
         map.setOptions({restrictedExtent: bounds});
         //map.zoomToMaxExtent();
                 
@@ -76,43 +76,54 @@
         <?php echo $markerLocations; ?>;
 
         // Friends
+        
         <?php echo $markerFriends; ?>;
 /*        
-        var friend123 = new OpenLayers.Marker(new OpenLayers.LonLat(13.4454215, 48.5631164).transform(fromProj, toProj), friendIcon123);0        
-        var friend124 = new OpenLayers.Marker(new OpenLayers.LonLat(13.4632595, 48.5732856).transform(fromProj, toProj), friendIcon124);0        
+        var friend123 = new OpenLayers.Marker(new OpenLayers.LonLat(13.4454215, 48.5631164).transform(fromProj, toProj), friendIcon123);0
+        friends.addMarker(friend123);        
+        var friend124 = new OpenLayers.Marker(new OpenLayers.LonLat(13.4632595, 48.5732856).transform(fromProj, toProj), friendIcon124);0
+        friends.addMarker(friend124);        
         var friend125 = new OpenLayers.Marker(new OpenLayers.LonLat(13.4672211, 48.5744110).transform(fromProj, toProj), friendIcon125);0        
-        friends.addMarker(friend123);
-        friends.addMarker(friend124);
         friends.addMarker(friend125);
 */        
         // Events
         <?php echo $markerEvents; ?>;
-                
+        
+
+        
+        
+        
         map.addLayer(originalMap);
         map.addLayer(meetuppMap);
+        
         map.addLayer(locations);
         map.addLayer(friends);
         map.addLayer(events);
+        
+        
+        
+       var textfile = "lat\t lon\t title\t description\t iconSize\t iconOffset\t icon\n 48.5744110\t 13.4672211\t title\t description\t 21,25\t -10,-25\t http://www.openlayers.org/dev/img/marker.png";
+
+        
+        
+        var pois = new OpenLayers.Layer.Text( "My Points",
+                    { location: textfile,
+                      projection: map.displayProjection
+                    });
+        
+        map.addLayer(pois);
                 
 
         // Map einrichten
         map.setCenter(new OpenLayers.LonLat(13.4635546,48.5738242).transform(fromProj, toProj), 13);
         map.addControl(new OpenLayers.Control.LayerSwitcher());
-        map.addControl(new OpenLayers.Control.Attribution());
+        //map.addControl(new OpenLayers.Control.Attribution());
         
       };
 
-		</script>
-	</head>
+</script>
 
-		
-
-
-
-
-
-
-
+</head>
 
 <div id="window">
   <ul id="pages">
