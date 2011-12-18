@@ -8,7 +8,7 @@ class Dashboard extends CI_Controller
     parent::__construct();  
     $this->load->model("base/Login_model");    
     $this->load->model("friends/Friends_model");    
-    $this->load->model("Messaging/Messaging_model");    
+    $this->load->model("messaging/Messaging_model");    
   }
   
   public function index()
