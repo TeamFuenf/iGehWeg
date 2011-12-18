@@ -72,13 +72,13 @@
 
         <div class="contentbox">
           <?php
-            if (empty($inbox))
+            if (empty($newmessages) || count($newmessages) < 1)
             {
-              echo "Du hast keine neuen Nachrichten";
+              echo anchor("mail/inbox", "Du hast keine neuen Nachrichten");
             }
             else
             {
-              echo "Du hast ".count($inbox). " ungelesene Nachrichten";
+              echo anchor("mail/inbox", "Neue Nachrichten: ".count($newmessages));
             }
           ?>  
         </div>
@@ -106,10 +106,6 @@
     <li>
       <div>
         <h1>Seite 3</h1>
-        <h2>Inbox</h2>
-        todo
-        <h2>neue Nachricht</h2>
-        <?php echo $messageform; ?>        
       </div>
     </li>
   </ul>

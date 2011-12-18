@@ -71,8 +71,10 @@ $route["event/event/update/comment"] = "event/event/updateComment";
 $route["event/show/(:any)"] = "event/event/index";
 
 // Nachrichtensystem
-$route["mail/show/(:any)"] = "messaging/messaging/show";
+$route["mail/delete/(:any)"] = "messaging/messaging/hide";
+$route["mail/inbox"] = "messaging/messaging/inbox";
 $route["mail/send"] = "messaging/messaging/send";
+$route["mail/(:any)"] = "messaging/messaging/show";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

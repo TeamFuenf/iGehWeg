@@ -80,28 +80,72 @@
 
 $(document).ready(function() {
 
-  $("form button[name=sendmail]").on("click", function() {
-    var mailstatus = $("form div#mailstatus");
-    var button = $(this);
-    var receiver = $("form select[name=receiver]");
-    var messagebox = $("form textarea[name=messagetext]");
-
-    $.post("../mail/send", 
+  /**
+   * Nachricht senden und an die Nachrichtenleiste anhängen
+   */
+  $("#sendmessage").on("click", function() {
+    var receiver = $("#receiver").val();
+    var messagebody = $("#messagebox").val();
+    
+    $.post("../../mail/send",
     {
-      to: receiver.val(),
-      message: messagebox.val()
-    }, 
-    function(data) {
+      "receiver": receiver,
+      "message": messagebody
+    },
+    function (data) {
       if (data == "okay")
       {
-        mailstatus.html("Nachricht wurde gesendet");        
-        messagebox.val("");
-        receiver.removeAttr('selected').find('option:first').attr('selected', 'selected');
+        var Monat = new Array("Januar", "Februar", "M&auml;rz", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember");
+        var now = new Date();
+        var sendtime = now.getDate() + ". " + Monat[now.getMonth()];
+        var sender = $("#sendername").val();
+        var senderimage = $("#senderimage").val();
+        messagebody = messagebody.replace(/\n/g, '<br />');
+        messagebody = messagebody.replace(/\r/g, '<br />');
+        $("#messages").append(
+          "<tr><td width='64'></td><td class='sent'><b>" + sender + "</b> am " + sendtime + "<br/><p>" + messagebody + "</p></td><td width='64px'><img width='64' src='" + senderimage + "'/></td></tr>" + 
+          "<tr><td colspan='3'><hr class='messageseparator'></td></tr>"
+        ); 
       }
     });
-    
   });
 
+  /**
+   * Sendet eine Nachricht vom Posteingang aus
+   */
+  $("#sendmessage_inbox").on("click", function() {
+    var receiver = $("#receiver").val();
+    var messagebody = $("#messagebox").val();
+    
+    $.post("../../mail/send",
+    {
+      "receiver": receiver,
+      "message": messagebody
+    },
+    function (data) {
+      if (data == "okay")
+      {
+        $("#messagestatus").html("<b>Nachricht gesendet</b>");
+        $("#messagebox").val("");
+      }
+    });
+  });
+
+  $(".deleteicon a").on("click", function(e) {
+    e.preventDefault();
+    
+    var row = $(this).parents("tr");
+    
+    $.post($(this).attr("href"),
+    function (data) {
+      if (data == "okay")
+      {
+        row.fadeOut();
+        row.next().fadeOut();
+      }      
+    });
+  });
+    
 });
 
 /* --- Eventsystem ------------------------------------------------------------------------------------------------- */

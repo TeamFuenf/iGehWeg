@@ -24,7 +24,7 @@ class Dashboard extends CI_Controller
     
     $data["user"] = $this->Friends_model->get_user($userid);
     
-    $data["inbox"] = $this->Messaging_model->getUnreadMessages();
+    $data["newmessages"] = $this->Messaging_model->countUnreadMessages();
     
     $data["eventlink"] = anchor("#", "Veranstaltung erstellen");
     $data["friendlink"] = anchor("#", "Freunde und Gruppen verwalten");
@@ -32,9 +32,6 @@ class Dashboard extends CI_Controller
     
     // Seite 2
     $data["loginform"] = $this->Login_model->getUsers();      
-
-    // Seite 3
-    $data["messageform"] = $this->Messaging_model->getNewMessageForm();
 
     $this->layout->view("dashboard/dashboard", $data);
   }
