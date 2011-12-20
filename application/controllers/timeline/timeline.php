@@ -17,8 +17,8 @@ class Timeline extends CI_Controller
     $data["ownevents"] = $this->Event_model->getOwnEvents();
     $data["participatingeventsts"] = $this->Event_model->getParticipatingEvents();
 
-    $this->layout->view("timeline/timeline", $data);
+    $this->layout->view("timeline/tl", $data);
   }
-
+  
 }
 ?>
