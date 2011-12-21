@@ -73,6 +73,62 @@ class Event_model extends CI_Model
     return $query->result();
   }
   
+  public function getEventsForTimeline()
+  {
+    $userid = $this->session->userdata("userid");
+$sql = "
+SELECT *,
+FROM_UNIXTIME(begintime, '%e') as 'day', 
+FROM_UNIXTIME(begintime, '%c') as 'month', 
+FROM_UNIXTIME(begintime, '%Y') as 'year',
+FROM_UNIXTIME(begintime, '%H') as 'eventbegin',
+FROM_UNIXTIME(begintime, '%i') as 'eventend',
+FROM_UNIXTIME(begintime, '%H')*20+FROM_UNIXTIME(begintime, '%i') as 'offset1',
+FROM_UNIXTIME(endtime, '%H')*20+FROM_UNIXTIME(endtime, '%i') as 'offset2'
+
+FROM
+(
+SELECT *,
+'creator' as 'status'
+FROM event
+WHERE creator = '".$userid."'
+
+UNION
+
+SELECT event.*,
+'member' as 'status'
+FROM event, event_member
+WHERE event.id = event_member.eventid
+AND event_member.memberid = '".$userid."'
+) as events
+ORDER BY begintime, endtime DESC
+";
+    
+    $query = $this->db->query($sql);
+    return $query->result();
+  }
+
+  public function getMembersForEvent($eventid)
+  { 
+    $userid = $this->session->userdata("userid");
+    $sql = "
+SELECT * 
+FROM user
+WHERE id IN
+(
+SELECT memberid
+FROM event_member
+WHERE eventid = '".$eventid."'
+
+UNION
+
+SELECT '".$userid."'
+)
+";
+    $query = $this->db->query($sql);
+    return $query->result();
+  }
+  
 // --------------------------------------------------------------------------------------------------------------------
 
   public function setLocation($eventid, $locationid)
