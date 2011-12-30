@@ -27,12 +27,15 @@ class Friends_format_model extends CI_Model
 		$string_script = " <script>
 						$('.friend_list_entry').on('click', function() {
 							var detail_id = $(this).attr('id');
+							var windowwidth = $('#friends').width();
+							var offset = -1*windowwidth;
 							$.ajax({
 								url: '/friends/friends_control/get_detail/' + detail_id,
 								success: function(data)
 								{
-									$('#friends_slide_list').animate({left : '-320px'}, 500);
+									$('#friends_slide_list').animate({left : offset+'px'}, 1000);
 									$('#friend_detail').html(data);
+									$('#friends').animate({ scrollTop: 0 }, 0)
   								}
 							});
 						});
@@ -73,16 +76,20 @@ class Friends_format_model extends CI_Model
 		
 		$script_string = "	<script>
 								$('#back_button').on('click', function(){
-									$('#friends_slide_list').animate({left : '0px'}, 500);
+									$('#friends_slide_list').animate({left : '0px'}, 1000);
+									$('#friends').animate({ scrollTop: 0 }, 0)
 								});
 								$('#add_to_button').on('click', function() {
 									var detail_id = '".$details->id."';
+									var windowwidth = $('#friends').width();
+									var offset = -2*windowwidth;
 									$.ajax({
 										url: '/friends/friends_control/get_groups/' + detail_id,
 										success: function(data)
 										{
 												$('#add_to_group').html(data);
-												$('#friends_slide_list').animate({left : '-640px'}, 500);
+												$('#friends_slide_list').animate({left : offset+'px'}, 1000);
+												$('#friends').animate({ scrollTop: 0 }, 0)
   										}
 									});
 								});
@@ -98,7 +105,8 @@ class Friends_format_model extends CI_Model
 													success: function(data)
 													{
 															$('#friends_main').html(data);
-															$('#friends_slide_list').animate({left : '0px'}, 500);
+															$('#friends_slide_list').animate({left : '0px'}, 1000);
+															$('#friends').animate({ scrollTop: 0 }, 0)
 			  										}
 												});
 										}
@@ -109,8 +117,8 @@ class Friends_format_model extends CI_Model
 		$string = "	<div id='current_detail'>
 						<div class='imgbox' id='detail_image'>
 							<img class='big_user_image' src='".$details->picture."' />
-						</div>"
-						.$details->name."
+							".$details->name."
+						</div>
 					</div>
 					<br/><br/>
 					<span id='delete_user'>DELETE</span>
@@ -136,7 +144,7 @@ class Friends_format_model extends CI_Model
 		if($groups_with_friend != null) 
 		{
 			foreach($groups_with_friend as $item) {
-				$groups_with = $groups_with." <span class='group_links del_group' id='".$item->id."' href=''>".$item->name."</span>";	
+				$groups_with = $groups_with." <span class='group_with_links del_group' id='".$item->id."' href=''>".$item->name."</span>";	
 			}
 		}
 		
@@ -144,19 +152,22 @@ class Friends_format_model extends CI_Model
 		if($groups_without_friend != null) 
 		{
 			foreach($groups_without_friend as $item) {
-				$groups_without = $groups_without." <span class='group_links add_group' id='".$item->id."'>".$item->name."</span>";	
+				$groups_without = $groups_without." <span class='group_without_links add_group' id='".$item->id."'>".$item->name."</span>";	
 			}
 		}
 		
 		$script_string = "	<script>
 								$('#to_details_button').on('click', function() {
 									var detail_id = '".$friend_id."';
+									var windowwidth = $('#friends').width();
+									var offset = -1*windowwidth;
 									$.ajax({
 										url: '/friends/friends_control/get_detail/' + detail_id,
 										success: function(data)
 										{
-											$('#friends_slide_list').animate({left : '-320px'}, 500);
+											$('#friends_slide_list').animate({left : offset+'px'}, 1000);
 											$('#friend_detail').html(data);
+											$('#friends').animate({ scrollTop: 0 }, 0)
   										}
 								});
 								});

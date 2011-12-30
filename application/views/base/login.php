@@ -14,13 +14,20 @@
             oauth      : true,
           });
         };
+        
         (function(d){
-           var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
-           js = d.createElement('script'); js.id = id; js.async = true;
+        	console.log("function d");
+           var js, id = 'facebook-jssdk'; 
+           if (d.getElementById(id)) {return;}
+           js = d.createElement('script'); 
+           js.id = id; 
+           js.async = true;
            js.src = "//connect.facebook.net/en_US/all.js";
            d.getElementsByTagName('head')[0].appendChild(js);
          }(document));
+         
       </script>
       <div class="fb-login-button">Login with Facebook</div>
+      <div id="permission"></div>
     </body>
  </html>
