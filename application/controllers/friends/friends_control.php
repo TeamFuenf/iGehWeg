@@ -102,8 +102,10 @@ class Friends_control extends CI_Controller {
 	 */
 	function add_friends_main() 
 	{
+		$current_user = $this->session->userdata('current_user');
+		
 		$this->load->model('friends/friends_model');
-		$users = $this->friends_model->get_all_users();
+		$users = $this->friends_model->get_all_users_without_friends($current_user->id);
 		
 		$this->load->model('friends/friends_format_model');
 		//Hier werden die Daten formatiert
@@ -121,6 +123,12 @@ class Friends_control extends CI_Controller {
 		
 		$this->load->model('friends/friends_model');
 		$this->friends_model->add_friend($friend_id, $current_user->id);
+		
+		$users = $this->friends_model->get_all_users_without_friends($current_user->id);
+		
+		$this->load->model('friends/friends_format_model');
+		//Hier werden die Daten formatiert und zurückgegeben bei Klick auf "Benutzer hinzufügen"
+		echo $this->friends_format_model->format_add_friends($users);
 	}
 }
 ?>

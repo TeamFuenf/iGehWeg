@@ -242,17 +242,21 @@ class Friends_format_model extends CI_Model
 									url: '/friends/friends_control/add_friend/' + detail_id,
 									success: function(data)
 									{
-										
+										$('#add_info').html('Freund hinzugefügt').hide();
+										$('#add_info').fadeIn('slow', function() {
+											$('#add_friend').html(data);											
+										});
 	  								}
 								});
 							});
 							</script>";
 		
 		
-    	$string = 	"<ul id='users_list'>"
+    	$string = 	"<a id='back_to_friends_button' href='/friends'>OK</a>
+    	<div id='add_info'></div>
+    	<ul id='users_list'>"
     				 	.$users_list."
-    				 </ul>
-    				<a id='back_to_friends_button' href='/friends'>OK</a>";
+    				 </ul>";
 					
 		return $string.$string_script;
     }
