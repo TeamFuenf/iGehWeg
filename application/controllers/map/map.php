@@ -6,6 +6,7 @@ class Map extends CI_Controller {
     parent::__construct();
     $this->load->model("map/Map_model");
     $this->load->model("map/Marker_model");
+	$this->load->model("friends/Friends_model");
   }
 
 // --------------------------------------------------------------------------------------------------------------------
@@ -13,9 +14,15 @@ class Map extends CI_Controller {
   // Normale Kartenansicht
   function index()
   {
-	$data["markerLocations"] = $this->Marker_model->getLocations();
-    $data["markerFriends"] = $this->Marker_model->getFriends();
-    $data["markerEvents"] = $this->Marker_model->getEvents();
+  	//$userid = $this->session->userdata("userid");
+    // HACK: Provisorische Lösung
+    $userid = 125;
+	
+  	//$friends = $this->Friends_model->get_friends($this->session->userdata("userid"));
+	$friends = $this->Friends_model->get_friends($userid);
+	$data["markerLocations"] = $this->Marker_model->getLocationsIcons();
+    $data["markerFriends"] = $this->Marker_model->getFriendsIcons($friends);
+    $data["markerEvents"] = $this->Marker_model->getEventsIcons();
     
 	$this->layout->view("map/map", $data);
   }

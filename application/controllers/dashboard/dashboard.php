@@ -6,9 +6,9 @@ class Dashboard extends CI_Controller
   public function __construct()
   {
     parent::__construct();  
-    $this->load->model("base/Login_model");    
-    $this->load->model("friends/Friends_model");    
-    $this->load->model("messaging/Messaging_model");    
+    $this->load->model("base/Login_model");
+    $this->load->model("friends/Friends_model");
+    $this->load->model("messaging/Messaging_model");
   }
   
   public function index()
