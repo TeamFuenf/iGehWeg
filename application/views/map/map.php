@@ -38,7 +38,10 @@
         var size = new OpenLayers.Size(21,25);
         var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
         var icon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker.png',size,offset);
-        var locationicon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker.png',size,offset);
+
+        var size = new OpenLayers.Size(24,24);
+        var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
+        var locationicon = new OpenLayers.Icon('<?php echo base_url("images/marker_event.png");; ?>',size,offset);
 
         var friendIconSize = new OpenLayers.Size(44,54);
         var friendIconOffset = new OpenLayers.Pixel(-(friendIconSize.w/2), -friendIconSize.h);

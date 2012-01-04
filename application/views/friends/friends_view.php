@@ -7,6 +7,10 @@
 	<script>
 	
 		$(function() {
+			var windowwidth = $('#friends').width();
+			$('li').css('width', windowwidth);
+			var ulwidth = 4*windowwidth;
+			$('#friends_slide_list').css('width', ulwidth);
 			$.ajax({
 					url: "/friends/friends_control/get_friends/",
 					success: function(data)

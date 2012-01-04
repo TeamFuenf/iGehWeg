@@ -51,7 +51,7 @@ $route["map/snippet/(:any)"] = "map/map/snippet";
 
 // Events & Timeline
 $route["timeline"] = "timeline/timeline";
-$route["event"] = "event/event";
+$route["event"] = "timeline/timeline/event";
 $route["event/new"] = "event/event/newevent";
 $route["event/update/basedata"] = "event/event/updateBasedata";
 $route["event/update/location"] = "event/event/updateLocation";
