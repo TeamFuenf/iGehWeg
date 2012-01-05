@@ -39,19 +39,19 @@
         var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
         var icon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker.png',size,offset);
 
-        var size = new OpenLayers.Size(24,24);
-        var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
-        var locationicon = new OpenLayers.Icon('<?php echo base_url("images/marker_event.png");; ?>',size,offset);
+        var locationIconSize = new OpenLayers.Size(24,24);
+        var locationOffset = new OpenLayers.Pixel(-(locationIconSize.w/2), -locationIconSize.h);
+        var locationicon = new OpenLayers.Icon('<?php echo base_url("images/marker_event.png");; ?>',locationIconSize,locationOffset);
 
-        var friendIconSize = new OpenLayers.Size(44,54);
+        var friendIconSize = new OpenLayers.Size(44,44);
         var friendIconOffset = new OpenLayers.Pixel(-(friendIconSize.w/2), -friendIconSize.h);
-        var friendIcon123 = new OpenLayers.Icon("../helper/images/user/marker/123", friendIconSize, friendIconOffset);
-        var friendIcon124 = new OpenLayers.Icon("../helper/images/user/marker/124", friendIconSize, friendIconOffset);
-        var friendIcon125 = new OpenLayers.Icon("../helper/images/user/marker/125", friendIconSize, friendIconOffset);
+        //var friendIcon123 = new OpenLayers.Icon("../helper/images/user/marker/123", friendIconSize, friendIconOffset);
+        //var friendIcon124 = new OpenLayers.Icon("../helper/images/user/marker/124", friendIconSize, friendIconOffset);
+        //var friendIcon125 = new OpenLayers.Icon("../helper/images/user/marker/125", friendIconSize, friendIconOffset);
 
         var eventIconSize = new OpenLayers.Size(32,32);
         var eventIconOffset = new OpenLayers.Pixel(-(eventIconSize.w/2), -eventIconSize.h);
-        var eventIcon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker.png',size,offset);
+        var eventIcon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker.png',eventIconSize,eventIconOffset);
 
 		// Bounds
         var bounds = new OpenLayers.Bounds();
@@ -76,21 +76,13 @@
         var events = new OpenLayers.Layer.Markers("Events");
             
         // Locations
-        <?php echo $markerLocations; ?>;
+        <?php echo $markerLocations; ?>
 
         // Friends
-        
-        <?php echo $markerFriends; ?>;
-/*        
-        var friend123 = new OpenLayers.Marker(new OpenLayers.LonLat(13.4454215, 48.5631164).transform(fromProj, toProj), friendIcon123);0
-        friends.addMarker(friend123);        
-        var friend124 = new OpenLayers.Marker(new OpenLayers.LonLat(13.4632595, 48.5732856).transform(fromProj, toProj), friendIcon124);0
-        friends.addMarker(friend124);        
-        var friend125 = new OpenLayers.Marker(new OpenLayers.LonLat(13.4672211, 48.5744110).transform(fromProj, toProj), friendIcon125);0        
-        friends.addMarker(friend125);
-*/        
+        <?php echo $markerFriends; ?>
+
         // Events
-        <?php echo $markerEvents; ?>;
+        <?php echo $markerEvents; ?>
         
 
         
@@ -105,16 +97,16 @@
         
         
         
-       var textfile = "lat\t lon\t title\t description\t iconSize\t iconOffset\t icon\n 48.5744110\t 13.4672211\t title\t description\t 21,25\t -10,-25\t http://www.openlayers.org/dev/img/marker.png";
+      // var textfile = "lat\t lon\t title\t description\t iconSize\t iconOffset\t icon\n 48.5744110\t 13.4672211\t title\t description\t 21,25\t -10,-25\t http://www.openlayers.org/dev/img/marker.png";
 
         
         
-        var pois = new OpenLayers.Layer.Text( "My Points",
-                    { location: textfile,
-                      projection: map.displayProjection
-                    });
+        //var pois = new OpenLayers.Layer.Text( "My Points",
+          //          { location: textfile,
+            //          projection: map.displayProjection
+              //      });
         
-        map.addLayer(pois);
+        //map.addLayer(pois);
                 
 
         // Map einrichten
@@ -141,12 +133,13 @@
     <li>
       <div>
         <h1>Seite 2</h1>
-          
+        Location Details
       </div>
     </li>
     <li>
       <div>
         <h1>Seite 3</h1>
+        neue Location hinzufügen
       </div>
     </li>
   </ul>
