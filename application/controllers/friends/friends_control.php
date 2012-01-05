@@ -53,7 +53,7 @@ class Friends_control extends CI_Controller {
 	}
 	
 	/*
-	 * ADD TO GROUP
+	 * GET GROUPS
 	 */
 	function get_groups($friend_id) 
 	{

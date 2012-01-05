@@ -52,7 +52,7 @@ class Friends_format_model extends CI_Model
     				 	.$friends_list."
     				 </ul>
     				 <div id='friends_groups'>
-    				 	<a href=''>groups</a>
+    				 	<a href='/friends/groups_control'>groups</a>
     				 </div>";
 					
 		return $string.$string_script;

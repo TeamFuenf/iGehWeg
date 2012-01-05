@@ -174,7 +174,7 @@ class Friends_model extends CI_Model
 	 */
 	function get_group_members($group_id) 
 	{
-		$query = $this->db->query("SELECT u.id, u.name, u.picture FROM groups AS g, user AS u WHERE g.id = '".$group_id."' AND g.friendid = u.id;");
+		$query = $this->db->query("SELECT gm.memberid, u.name, u.picture FROM group_member AS gm, user AS u WHERE gm.memberid = u.id AND groupid = '".$group_id."';");
 		
 		if($query->num_rows() > 0) 
 		{
@@ -194,13 +194,13 @@ class Friends_model extends CI_Model
 	 * -> nix
 	 */
 	function create_group($group_name, $user_id) 
-	{
+	{/*
 		$query = $this->db->query("SELECT * FROM `groups` WHERE name = '".$group_name."' AND userid = '".$user_id."';");
 		
 		if($query->num_rows() == 0) 
-		{
-			$this->db->query("INSERT INTO `groups` ('userid', 'name') VALUES ('".$user_id."', '".$group_name."');");
-		}		
+		{*/
+			$this->db->query("INSERT INTO `groups` (userid, name) VALUES ('".$user_id."', '".$group_name."');");
+		//}		
 	}
 	
 	/**
@@ -212,6 +212,7 @@ class Friends_model extends CI_Model
 	function delete_group($group_id) 
 	{
 		$this->db->query("DELETE FROM `groups` WHERE id = '".$group_id."';");
+		$this->db->query("DELETE FROM `group_member` WHERE groupid = '".$group_id."';");
 	}
 	
 	/**
