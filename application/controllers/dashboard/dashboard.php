@@ -16,11 +16,11 @@ class Dashboard extends CI_Controller
       
     $userid = $this->session->userdata("userid");
     // HACK: Provisorische Lösung
-    if ($userid == false)
+    /*if ($userid == false)
     {
       $this->session->set_userdata("userid", "123");
       $userid = 123;
-    }
+    }*/
     
     $data["user"] = $this->Friends_model->get_user($userid);
     

@@ -42,7 +42,7 @@
 $route['404_override'] = '';
 
 // Hauptseiten
-$route["default_controller"] = "dashboard/dashboard";
+$route["default_controller"] = "base/login_control";
 $route["friends"] = "friends/friends_control";
 
 // Map

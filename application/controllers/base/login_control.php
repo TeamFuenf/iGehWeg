@@ -2,30 +2,19 @@
 
 class Login_control extends CI_Controller {
 
-/**
- * NUR TESTWEISE 
- * 
- * um Userids in die Session zu legen bzw. zwischen Users zu wechseln
- */
-
   public function __construct()
   {
     parent::__construct();  
   }
 
   public function index()
-  {/*
-    $userid = $this->input->post("userid");
-    $this->session->set_userdata("userid", $userid);
-    //redirect("/");
-    
-    $this->layout->view("base/login");*/
-	
-	
-	//$this->load->model("/base/simplelogin");
-	
-	$this->layout->view("/base/login");
-	
+  {
+  	$is_logged_in = $this->session->userdata('is_logged_in');
+	if($is_logged_in == true) {
+		redirect("/dashboard/dashboard");
+  	} else {
+  		$this->layout->view("/base/login");
+  	}
   }
   
   public function validate_credentials() {
@@ -47,7 +36,7 @@ class Login_control extends CI_Controller {
 		);
 		
 		$this->session->set_userdata($data);
-		redirect("/");
+		redirect("/dashboard/dashboard");
 	} else {
 		$this->index();
 	}
@@ -91,39 +80,4 @@ class Login_control extends CI_Controller {
 		
 		$this->index();
   }
-  
-  /*public function login_user($username, $password) {
-  	$this->load->model("/base/simplelogin");
-	
-	$result = $this->simplelogin->login($username, $password);
-	
-	if($result != true) {
-		//$this->simplelogin->create($username, $password);
-		$this->CI =& get_instance();
-		$test = $this->CI->session->userdata('username');
-		echo $test;
-	} else {
-		
-		echo "<div>Hi, du bist jetzt eingelogged!</div>";
-	}
-  }
-  
-  public function logout_user() {
-  	$this->load->model("/base/simplelogin");
-	
-	$this->simplelogin->logout();
-	//$this->CI =& get_instance();
-	//$this->CI->session->unset_userdata('username');
-	
-  }
-  
-  public function session_test() {
-  	$this->CI =& get_instance();
-		
-	$test = $this->CI->session->userdata('username');
-	echo $test;
-  }*/
-  
-  
-  
 }
