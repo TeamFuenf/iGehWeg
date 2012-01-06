@@ -16,9 +16,10 @@ class Friends_model extends CI_Model
 	 */
     function get_user($user_id) 
     {
-      $this->db->where("id", $user_id);      
+      	$this->db->where("id", $user_id);      
     	$query = $this->db->get("user");
-		  return $query->row();
+		return $query->row();
+		//return $query->result();
     }
 	
 	/**

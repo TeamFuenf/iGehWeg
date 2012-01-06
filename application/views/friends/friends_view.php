@@ -1,14 +1,8 @@
-<head>
-	<link rel="stylesheet" type="text/css" href="../css/friends_view_style.css">
-	
-	<script src="../javascript/jquery.js" ></script>
-	<script src="../javascript/jquery-ui.js" ></script>
-	
-	<script>
+<script>
 	
 		$(function() {
 			var windowwidth = $('#friends').width();
-			$('li').css('width', windowwidth);
+			$('#friends_slide_list>li').css('width', windowwidth);
 			var ulwidth = 4*windowwidth;
 			$('#friends_slide_list').css('width', ulwidth);
 			$.ajax({
@@ -20,10 +14,9 @@
 				});
 		});
 		
-	</script>
-</head>
-<body>
-	<div id="friends">
+</script>
+
+<div id="friends">
 		<ul id="friends_slide_list">
 			<!-- FRIENDS MAIN -->
 			<li>
@@ -44,5 +37,4 @@
 				</div>
 			</li>
 		</ul>
-	</div>
-	</body>
+</div>

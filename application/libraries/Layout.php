@@ -15,8 +15,12 @@ class Layout
       $data["css"][] = link_tag("../css/normalize.css");
       $data["css"][] = link_tag("../css/main.css");
       $data["css"][] = link_tag("../css/timeline.css");
+	  $data["css"][] = link_tag("../css/friends_view_style.css");
+	  $data["css"][] = link_tag("../css/groups_view_style.css");
+	  $data["css"][] = link_tag("../css/login_style.css");
       
       $data["javascript"][] = "<script src=\"".base_url()."javascript/jquery.js\" type=\"text/javascript\"></script>";
+	  $data["javascript"][] = "<script src=\"".base_url()."javascript/jquery-ui.js\" type=\"text/javascript\"></script>";
       $data["javascript"][] = "<script src=\"".base_url()."javascript/meetupp.js\" type=\"text/javascript\"></script>";
       $data["javascript"][] = "<script src=\"".base_url()."javascript/OpenLayers.js\" type=\"text/javascript\"></script>";
       

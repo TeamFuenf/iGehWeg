@@ -1,18 +1,19 @@
 <?php
 class Friends_control extends CI_Controller {
 
+	var $userid;
+
+	function __construct() {
+		parent::__construct();
+		parent::is_logged_in();
+		$this->userid = $this->session->userdata('userid');
+	}
+
 	function index()
 	{
-		$current_user = "123";
-		
 		$this->load->model('friends/friends_model');
-		$current_user = $this->friends_model->get_user($current_user);
+		$current_user = $this->friends_model->get_user($this->userid);
 		
-		$this->session->set_userdata('current_user', $current_user);
-				
-		//$this->get_friends();
-		//$data["friends_main"] = $this->get_friends();
-				
 		$this->layout->view("friends/friends_view");
 	}
 	
@@ -22,9 +23,10 @@ class Friends_control extends CI_Controller {
 	function get_friends() 
 	{
 		$this->load->model('friends/friends_model');
+		$current_user = $this->friends_model->get_user($this->userid);
+		
 		//Hier werden die Freunde des aktuellen Users geholt
-		$current_user = $this->session->userdata('current_user');
-		$friends = $this->friends_model->get_friends($current_user->id);
+		$friends = $this->friends_model->get_friends($this->userid);
 		
 		$this->load->model('friends/friends_format_model');
 		//Hier werden die Daten formatiert
@@ -43,7 +45,7 @@ class Friends_control extends CI_Controller {
 		//Hier werden die id, name und picture des Freundes geholt
 		$details = $this->friends_model->get_user($detail_id);
 		//Hier werden die Gruppen des Freundes geholt
-		$groups = $this->friends_model->get_groups_with_friend("123", $detail_id);
+		$groups = $this->friends_model->get_groups_with_friend($this->userid, $detail_id);
 		
 		$this->load->model('friends/friends_format_model');
 		//Hier werden die Daten formatiert
@@ -58,8 +60,8 @@ class Friends_control extends CI_Controller {
 	function get_groups($friend_id) 
 	{
 		$this->load->model('friends/friends_model');
-		$groups_with_friend = $this->friends_model->get_groups_with_friend("123", $friend_id);
-		$groups_without_friend = $this->friends_model->get_groups_without_friend("123", $friend_id);
+		$groups_with_friend = $this->friends_model->get_groups_with_friend($this->userid, $friend_id);
+		$groups_without_friend = $this->friends_model->get_groups_without_friend($this->userid, $friend_id);
 		
 		$this->load->model('friends/friends_format_model');
 		//Hier werden die Daten formatiert
@@ -92,9 +94,8 @@ class Friends_control extends CI_Controller {
 	 */
 	function del_friend($friend_id) 
 	{
-		$current_user = $this->session->userdata('current_user');
 		$this->load->model('friends/friends_model');
-		$this->friends_model->delete_friend($friend_id, $current_user->id);
+		$this->friends_model->delete_friend($friend_id, $this->userid);
 	}
 	
 	/*
@@ -102,10 +103,8 @@ class Friends_control extends CI_Controller {
 	 */
 	function add_friends_main() 
 	{
-		$current_user = $this->session->userdata('current_user');
-		
 		$this->load->model('friends/friends_model');
-		$users = $this->friends_model->get_all_users_without_friends($current_user->id);
+		$users = $this->friends_model->get_all_users_without_friends($this->userid);
 		
 		$this->load->model('friends/friends_format_model');
 		//Hier werden die Daten formatiert
@@ -119,12 +118,10 @@ class Friends_control extends CI_Controller {
 	 */
 	function add_friend($friend_id) 
 	{
-		$current_user = $this->session->userdata('current_user');
-		
 		$this->load->model('friends/friends_model');
-		$this->friends_model->add_friend($friend_id, $current_user->id);
+		$this->friends_model->add_friend($friend_id, $this->userid);
 		
-		$users = $this->friends_model->get_all_users_without_friends($current_user->id);
+		$users = $this->friends_model->get_all_users_without_friends($this->userid);
 		
 		$this->load->model('friends/friends_format_model');
 		//Hier werden die Daten formatiert und zurückgegeben bei Klick auf "Benutzer hinzufügen"

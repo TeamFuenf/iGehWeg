@@ -88,6 +88,7 @@
             <li><?php echo $eventlink; ?></li>
             <li><?php echo $friendlink; ?></li>
             <li><?php echo $locationlink; ?></li>
+            <li><?php echo $logoutlink; ?></li>
           </ul>                
         </div>
       </div>
