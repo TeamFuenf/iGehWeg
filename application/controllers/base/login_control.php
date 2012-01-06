@@ -74,7 +74,11 @@ class Login_control extends CI_Controller {
   
   public function logout() {
         $this->CI =& get_instance();        
-
+		//Damit auch wirklich alles weg ist beim ausloggen :)
+		$this->session->set_userdata('is_logged_in', false);
+		$this->session->unset_userdata('is_logged_in');
+		$this->session->unset_userdata('username');
+		$this->session->unset_userdata('userid');
         //Destroy session
         $this->CI->session->sess_destroy();
 		
