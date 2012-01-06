@@ -4,6 +4,7 @@ class Map extends CI_Controller {
   public function __construct()
   {
     parent::__construct();
+	parent::is_logged_in();
     $this->load->model("map/Map_model");
     $this->load->model("map/Marker_model");
 	$this->load->model("friends/Friends_model");
