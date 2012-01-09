@@ -8,26 +8,25 @@ class Event extends CI_Controller
     parent::__construct();
     parent::is_logged_in();
     $this->load->model("event/Event_model");
+    $this->Event_model->cleanup();
   }
   
 // --------------------------------------------------------------------------------------------------------------------
 
   public function newevent()
   {
-    $this->Event_model->cleanup();
-    
-    $event->title = "";
+    $event->title = "<gib einen Eventtitel ein>";
     $event->begintime = time();
     $event->endtime = time();
     $event->location = 0;
     
+    // Prüfen ob ein Datum in der URL übergeben wurde
     if ($this->uri->segment(3))
     {
-      // Neue Events automatisch von 10-11 Uhr gesetzt
       $ts = $this->uri->segment(3);
-      $preselectedTime = mktime(10, 0, 0, date("n",$ts), date("j",$ts), date("Y",$ts));
+      $preselectedTime = mktime(date("H"), floor(date("i")/5)*5, 0, date("n",$ts), date("j",$ts), date("Y",$ts));
       $event->begintime = $preselectedTime;
-      $preselectedTime = mktime(11, 0, 0, date("n",$ts), date("j",$ts), date("Y",$ts));
+      $preselectedTime = mktime(date("H")+1, floor(date("i")/5)*5, 0, date("n",$ts), date("j",$ts), date("Y",$ts));
       $event->endtime = $preselectedTime;
     }
     
@@ -64,7 +63,7 @@ class Event extends CI_Controller
     $data["memberstatus"] = $memberstatus;
     $data["event"] = $this->Event_model->getEvent($eventid);
 
-      $this->layout->view("event/event", $data);
+    $this->layout->view("event/event", $data);
   }  
 
   public function showevent()
@@ -120,63 +119,5 @@ class Event extends CI_Controller
     
     echo "okay";
   }
-  
-/*
-  public function updateBasedata()
-  {
-    $data["id"] = $this->input->post("eventid");
-    $data["title"] = $this->input->post("title", true);
-    $data["location"] = $this->input->post("location", true);
-    
-    $data["from"] = mktime(
-      $this->input->post("from_hour", true), 
-      $this->input->post("from_minute", true), 
-      0, 
-      $this->input->post("from_month", true), 
-      $this->input->post("from_day", true), 
-      $this->input->post("from_year", true)
-    );
-    
-    $data["to"] = mktime(
-      $this->input->post("to_hour", true), 
-      $this->input->post("to_minute", true), 
-      0, 
-      $this->input->post("to_month", true), 
-      $this->input->post("to_day", true), 
-      $this->input->post("to_year", true)
-    );
-
-    $data["creator"] = $this->session->userdata("userid");
-    $this->Event_model->updateBasedata($data);
-    echo "okay";
-  }
-
-  public function updateMembers()
-  {
-    $data["eventid"] = $this->input->post("eventid");    
-    $data["memberid"] = $this->input->post("memberid");    
-    $data["status"] = $this->input->post("status");    
-    $this->Event_model->updateMembers($data);
-    echo "okay";
-  }
-
-  public function updateStatus()
-  {
-    $data["eventid"] = $this->uri->segment(4); 
-    $data["memberid"] = $this->session->userdata("userid");   
-    $data["status"] = $this->uri->segment(5);   
-    $this->Event_model->updateMembers($data);
-    echo "okay";
-  }
-
-  public function updateComment()
-  {
-    $data["eventid"] = $this->input->post("eventid");
-    $data["author"] = $this->session->userdata("userid");    
-    $data["comment"] = $this->input->post("comment");
-    $data["time"] = time();
-    $this->Event_model->updateComment($data);
-  }
-*/  
 }
 ?>
