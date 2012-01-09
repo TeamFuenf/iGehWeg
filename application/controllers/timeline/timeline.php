@@ -27,7 +27,7 @@ class Timeline extends CI_Controller
   {
     $events = $this->Event_model->getEventsForTimeline();
     $userid = $this->session->userdata("userid");
-  
+    
     $eventmembers = array();
     foreach ($events as $e)
     {

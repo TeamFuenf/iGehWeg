@@ -58,6 +58,9 @@ a
   border-top:1px solid #ccc;
   padding-left:50px;
   color:#ccc;
+  height:40px;
+  width:100px;
+  display:block;
 }
 
 .day:nth-child(even)
@@ -127,7 +130,7 @@ a
         $todaysEvents = array();
         foreach($events as $event)
         {
-          if ($event->day == date("j", $date))
+          if ($event->day == date("j", $date) && $event->month == date("n", $date))
           {
             $todaysEvents[] = $event;            
           }
@@ -142,7 +145,9 @@ a
           echo "<div class='day'>";          
         }
         
-        echo "<span class='date'>".date("d.m.Y", $date)."</span>";
+        $datelabel = "<span class='date'>".date("d.m.Y", $date)."</span>";
+        echo anchor("event/new/".$date , $datelabel);
+
                 
         foreach ($todaysEvents as $event)
         {
@@ -155,7 +160,15 @@ a
           echo "</div>";          
 
           echo "<div class='eventlabel' style='top:".$top."px; height:".$height."px'>";
-          echo anchor("event/edit/".$event->id, "<b>".$begin."-".$end."</b><br/>".$event->title);
+          
+          if ($event->creator == $userid)
+          {
+            echo anchor("event/edit/".$event->id, "<b>".$begin."-".$end."</b><br/>".$event->title);                        
+          }
+          else
+          {
+            echo anchor("event/".$event->id, "<b>".$begin."-".$end."</b><br/>".$event->title);            
+          }
           echo "</div>";          
 
           echo "<div class='eventmembers' style='top:".$top."px; height:".$height."px'>";

@@ -19,6 +19,20 @@ class Event_model extends CI_Model
     return $query->result();
   }
 
+  /**
+   * liefert alle Teilnehmer eines Events alphabetisch sortiert
+   */
+  public function getAllEventMembers($eventid)
+  {
+    $this->db->select("*");
+    $this->db->from("event_member");
+    $this->db->join("user", "event_member.memberid = user.id");
+    $this->db->where("event_member.eventid", $eventid);
+    $this->db->order_by("user.name", "asc");
+    $query = $this->db->get();
+    return $query->result();
+  }
+  
   public function getEventMembers()
   {
     $userid = $this->session->userdata("userid");

@@ -74,6 +74,12 @@ div#controls li img
 /*  width:100%;*/
 }
 
+/* Hardwareunterstützung auf iOS */
+img.olTileImage
+{
+  -webkit-transform: translate3d(0, 0, 0);
+} 
+
 /* --- Seiten ------------------------------------------------------------------------------------------------------ */
 
 div#window
