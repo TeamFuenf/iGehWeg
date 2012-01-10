@@ -31,7 +31,7 @@ class Timeline extends CI_Controller
     
     $eventmembers = array();
     $eventcreators = array();
-    
+
     foreach ($events as $e)
     {
       $creator = $this->Friends_model->get_user($e->creator);
