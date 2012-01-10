@@ -16,8 +16,9 @@ class Location extends CI_Controller {
 	$this->layout->view("map/map", $data);
   }
 
-	public function addLocation()
+	public function addLocation($name, $lon, $lat)
 	{
+		$this->db->
 		$this->load->view('map/newlocationview');
 	}
 }

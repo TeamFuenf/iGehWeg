@@ -35,20 +35,20 @@
         var toProj = new OpenLayers.Projection("EPSG:900913"); // to Spherical Mercator Projection
 				
 		// Icons
-        var size = new OpenLayers.Size(21,25);
-        var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
-        var icon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker.png',size,offset);
-
-        var locationIconSize = new OpenLayers.Size(44,44);
-        var locationOffset = new OpenLayers.Pixel(-(locationIconSize.w/2), -locationIconSize.h);
-        var locationIcon = new OpenLayers.Icon('<?php echo base_url("images/marker_location.png");; ?>',locationIconSize,locationOffset);
-
+        // var size = new OpenLayers.Size(21,25);
+        // var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
+        // var icon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker.png',size,offset);
+        
         var userIconSize = new OpenLayers.Size(44,44);
         var userIconOffset = new OpenLayers.Pixel(-(userIconSize.w/2), -userIconSize.h);
-
+        
+        var locationIconSize = new OpenLayers.Size(44,44);
+        var locationOffset = new OpenLayers.Pixel(-(locationIconSize.w/2), -locationIconSize.h);
+        var locationIcon = new OpenLayers.Icon('<?php echo base_url("images/marker_location.png"); ?>',locationIconSize,locationOffset);
+        
         var eventIconSize = new OpenLayers.Size(32,32);
         var eventIconOffset = new OpenLayers.Pixel(-(eventIconSize.w/2), -eventIconSize.h);
-        var eventIcon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker_event.png',eventIconSize,eventIconOffset);
+        var eventIcon = new OpenLayers.Icon('<?php echo base_url("images/marker_event.png"); ?>',eventIconSize,eventIconOffset);
 
 		// Bounds
         var bounds = new OpenLayers.Bounds();
@@ -115,6 +115,11 @@
         //map.addControl(new OpenLayers.Control.Attribution());
         
       };
+      
+      function addLocation ()
+      {
+      	
+      }
 
 </script>
 
@@ -124,26 +129,13 @@
   <ul id="pages">
     <li>
 		<div id="map-menu">
-			+Location
+			<a href="javascript:addLocation()">+Location</a>
+			
 		</div>
 		<div id="map"></div>
 		<script>
 		  init();
 		</script>
-    </li>
-    
-    <li>
-      <div>
-        <h1>Seite 2</h1>
-        Location Details
-      </div>
-    </li>
-    
-    <li>
-      <div>
-        <h1>Seite 3</h1>
-        neue Location hinzufügen
-      </div>
     </li>
   </ul>
 </div>
