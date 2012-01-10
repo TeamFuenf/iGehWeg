@@ -117,11 +117,11 @@ a
 
 .eventmembers img
 {
-  float:left;
   width:48px;
   height:48px;
   margin:10px;
   border-radius:5px;
+  vertical-align:middle;
 }
 
 </style>
@@ -159,7 +159,6 @@ a
         $datelabel = "<span class='date'>".date("d.m.Y", $date)."</span>";
         echo anchor("event/new/".$date , $datelabel);
 
-                
         foreach ($todaysEvents as $event)
         {
           $top = $event->offset1+20;
@@ -190,31 +189,33 @@ a
           echo "</div>";          
 
           echo "<div class='eventmembers' style='top:".$top."px; height:".$height."px'>";
-          foreach($eventmembers[$event->id] as $member)
-          {
-            if ($member->id == $userid)
+          echo img($eventcreators[$event->id]->picture)." + ";
+          // Alternativ:
+          //echo "Veranstalter: ".img($eventcreators[$event->id]->picture)."<br/>";
+          //echo count($eventmembers). " Teilnehmer:";
+          
+          if (count($eventmembers[$event->id]) < 2)
+          {              
+            foreach($eventmembers[$event->id] as $member)
             {
-              if ($member->status == "invited")
+              $style = ($member->status == "invited") ? "style='opacity:0.4;'" : "";
+              
+              if ($member->id == $userid)              
               {
-                echo "<img style='opacity:0.4;' src='".$member->picture."'>";                            
-              }              
-              else
-              {
-                echo "<img src='".$member->picture."'>";                            
-              }                
-            }
-            else
-            {
-              if ($member->status == "invited")
-              {
-                echo anchor("mail/".$member->id,"<img style='opacity:0.4;' src='".$member->picture."'>");                                
+                echo "<img ".$style." src='".$member->picture."'>";                            
               }
               else
               {
-                echo anchor("mail/".$member->id,"<img src='".$member->picture."'>");                
-              }              
+                echo anchor("mail/".$member->id,"<img ".$style." src='".$member->picture."'>");                                
+              }
             }
+          
           }
+          else
+          {
+            echo anchor("event/".$event->id, count($eventmembers). " Teilnehmer");
+          }
+          
           echo "</div>";          
         }
         

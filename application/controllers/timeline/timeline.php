@@ -6,8 +6,9 @@ class Timeline extends CI_Controller
   public function __construct()
   {
     parent::__construct();
-	parent::is_logged_in();  
+    parent::is_logged_in();  
     $this->load->model("event/Event_model");    
+    $this->load->model("friends/Friends_model");    
   }
 
   public function event()
@@ -29,8 +30,12 @@ class Timeline extends CI_Controller
     $userid = $this->session->userdata("userid");
     
     $eventmembers = array();
+    $eventcreators = array();
     foreach ($events as $e)
     {
+      $creator = $this->Friends_model->get_user($e->creator);
+      $eventcreators[$e->id] = $creator;
+      
       $members = $this->Event_model->getEventMembers($e->id);
       $eventmembers[$e->id] = $members;
     } 
@@ -38,6 +43,7 @@ class Timeline extends CI_Controller
     $data["userid"] = $userid;
     $data["events"] = $events;
     $data["eventmembers"] = $eventmembers;
+    $data["eventcreators"] = $eventcreators;    
     $this->layout->view("timeline/timeline", $data);  
   }
   

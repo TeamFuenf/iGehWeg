@@ -30,8 +30,7 @@ class Event_model extends CI_Model
     ORDER BY distance";
     $query = $this->db->query($sql);
     return $query->result();    
-  } 
-  
+  }  
   
   /**
    * Liefert alle möglichen Teilnehmer für ein Event = die Freundesliste eines Benutzers
