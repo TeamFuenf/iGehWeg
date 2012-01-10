@@ -20,7 +20,11 @@ class Friends_format_model extends CI_Model
 		
     	if(!is_null($friends)) {
 			foreach($friends as $item) {
-				$friends_list = $friends_list."<li class='friend_list_entry' id='".$item->id."'><img src='".$item->picture."'/>".$item->name."</li>";
+				$friends_list = $friends_list."<li class='friend_list_entry' id='".$item->id."'>
+				<img src='".$item->picture."'/>
+				".$item->name."
+				".anchor('/mail/'.$item->id, 'Text', array( 'class' => 'button', 'style' => 'float: right;'))."
+				</li>";
 			}
 		}
 		
@@ -46,13 +50,13 @@ class Friends_format_model extends CI_Model
     					.$current_user->name."
     				 </div>
     				 <div id='friends_add_button'>
-    				 	<a href='/friends/friends_control/add_friends_main'>+</a>
+    				 	".anchor('/friends/friends_control/add_friends_main', '+', 'style="text-decoration: none;"')."
     				 </div>
     				 <ul id='friends_friend_list'>"
     				 	.$friends_list."
     				 </ul>
     				 <div id='friends_groups'>
-    				 	<a href='/friends/groups_control'>groups</a>
+    				 	".anchor('/friends/groups_control', 'Gruppen', 'class="button"')."
     				 </div>";
 					
 		return $string.$string_script;
@@ -70,7 +74,7 @@ class Friends_format_model extends CI_Model
 		if($groups != null) 
 		{
 			foreach($groups as $item) {
-				$gruppen = $gruppen." <a class='group_links' href=''>".$item->name."</a>";	
+				$gruppen = $gruppen." <a class='group_links' href=''>".$item->name."</a>";
 			}
 		}
 		
@@ -121,7 +125,7 @@ class Friends_format_model extends CI_Model
 						</div>
 					</div>
 					<br/><br/>
-					<span id='delete_user'>DELETE</span>
+					<span id='delete_user'>DELETE</span> ".anchor('/mail/'.$details->id, 'Text', array( 'class' => 'button', 'style' => ''))."
 					<hr />
 					<span>Groups:</span><br/>
 					".$gruppen."
@@ -252,8 +256,7 @@ class Friends_format_model extends CI_Model
 							</script>";
 		
 		
-    	$string = 	"<a id='back_to_friends_button' href='/friends'>OK</a>
-    	<div id='add_info'></div>
+    	$string = 	"<div id='add_info'></div>
     	<ul id='users_list'>"
     				 	.$users_list."
     				 </ul>";

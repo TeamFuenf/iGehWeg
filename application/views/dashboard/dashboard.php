@@ -92,22 +92,6 @@
           </ul>                
         </div>
       </div>
-
-        <div class="contentbox">
-          <a href="javascript:page(1);">Login / Benutzer wechseln</a>
-        </div>
-
-    </li>
-    <li>
-      <div>
-        <h1>Seite 2</h1>
-        <?php echo $loginform; ?>        
-      </div>
-    </li>
-    <li>
-      <div>
-        <h1>Seite 3</h1>
-      </div>
     </li>
   </ul>
 </div>

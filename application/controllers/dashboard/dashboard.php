@@ -32,7 +32,7 @@ class Dashboard extends CI_Controller
     $data["locationlink"] = anchor("#", "Location bearbeiten");
     
     // Seite 2
-    $data["loginform"] = $this->Login_model->getUsers();
+    // $data["loginform"] = $this->Login_model->getUsers();
 	$data["logoutlink"] = anchor("/base/login_control/logout", "Logout");      
 
     $this->layout->view("dashboard/dashboard", $data);

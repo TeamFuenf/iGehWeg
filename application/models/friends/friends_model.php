@@ -54,6 +54,27 @@ class Friends_model extends CI_Model
 			return $data;
 		}
     }
+	
+	/**
+	 * Sucht Benutzer ohne die Freunde eines Users.
+	 * 
+	 * <- User id
+	 * -> Objekt mit id, name und picture
+	 */
+    function search_users_without_friends($user_id, $input) 
+    {      
+    	$query = $this->db->query("SELECT * FROM user WHERE user.id <> '".$user_id."' AND user.name LIKE '%".$input."%' AND user.id NOT IN (SELECT friendid FROM friend WHERE id = '".$user_id."');");
+		//$query = $this->db->query("SELECT * FROM user;");
+		if($query->num_rows() > 0) 
+		{
+			foreach($query->result() as $item) 
+			{
+				$data[] = $item;
+			}
+			
+			return $data;
+		}
+    }
 
 	/**
 	 * Holt alle Freunde eines Benutzeres.

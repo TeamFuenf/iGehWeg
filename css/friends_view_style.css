@@ -85,12 +85,6 @@ div#friends_groups {
 	margin: 20px 0px;
 }
 
-div#friends_groups>a{
-	padding: 10px 20px;
-	border: 1px dashed black;
-	background-color: #F0F0F0;
-}
-
 /*----- friend_detail -----*/
 
 span#delete_user {
