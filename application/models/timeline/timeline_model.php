@@ -11,11 +11,6 @@ class Timeline_model extends CI_Model
   
 // --------------------------------------------------------------------------------------------------------------------
 
-  public function createlink()
-  {
-    return anchor("event/new", "+");
-  }
-    
   public function getOwnEvents($userid)
   {
     $events = $this->Event_model->getOwnEvents($userid);    
@@ -28,7 +23,6 @@ class Timeline_model extends CI_Model
       {
         $button = "<button type='button' class='grey title'>".$event["title"]."</button>";
         $editbutton = "<button type='button' class='darkgrey edit'>bearbeiten</button>";
-//        $viewlink = anchor("event/".$event["id"], $button);   
         $viewlink = anchor("event/show/".$event["id"], $event["title"]);   
         $editlink = anchor("event/edit/".$event["id"], $editbutton);
         $buffer .= "<li>".$viewlink . nbs(5) . $editlink."</li>";
@@ -54,48 +48,9 @@ class Timeline_model extends CI_Model
     
     $buffer .= "<ul id='foreignevents'>";
     $buffer .= "</ul>";
-
-/*    
-    if (count($events) > 0)
-    {
-      $buffer .= "<ul id='foreignevents'>";
-      foreach($events as $event)
-      {
-        $userid = $this->session->userdata("userid");
-        $status = $this->Event_model->getMemberStatus($event["id"], $userid);
-        $viewlink = anchor("event/".$event["id"], $button);   
-        
-        $buffer .= "<li>";
-        $buffer .= $viewlink.nbs(5);
-
-        if ($status == "attending")
-        {
-          $caption = "absagen";
-        }
-        else
-        {
-          
-        }
-        else if ($status == "attending")
-        {
-          $caption = "teilnehmen";
-        }
-
-        $buffer .= "</li>";
-        
-        $actionbutton = "<button type='button' eventid='".$event["id"]."' memberid='".$userid."' status='".$status."' class='darkgrey action'>".$caption."</button>";                  
-        $button = "<button type='button' class='grey title'>".$event["title"]."</button>";
-//        $actionlink = anchor("event/edit/".$event["id"], $actionbutton);
-      }      
-      $buffer .= "</ul>";
-    }
-    else
-    {
-      $buffer .= "Du hast momentan keine ausstehenden Veranstaltungen.";  
-    }
- */
     return $buffer;
   }
+
 // --------------------------------------------------------------------------------------------------------------------
 
 }

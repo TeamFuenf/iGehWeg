@@ -8,6 +8,7 @@ class Event extends CI_Controller
     parent::__construct();
     parent::is_logged_in();
     $this->load->model("event/Event_model");
+    $this->load->model("friends/Friends_model");
   }
   
 // --------------------------------------------------------------------------------------------------------------------
@@ -71,6 +72,7 @@ class Event extends CI_Controller
   {
     $eventid = $this->uri->segment(2);    
     $event = $this->Event_model->getEvent($eventid);
+    $data["creator"] = $this->Friends_model->get_user($event->creator);
     $data["event"] = $event;
     $data["members"] = $this->Event_model->getAllEventMembers($eventid);
     $data["location"] = "TODO: Locationdetails...";

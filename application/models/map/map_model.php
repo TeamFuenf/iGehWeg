@@ -18,14 +18,12 @@ class Map_model extends CI_Model
   }
   
   function updateUserGeo($userid, $lon, $lat)
-    {
-        $data = array(
-               'lon' => $lon,
-               'lat' => $lat,
-               'last_update' => date('y-m-j h:i:s')
-            );
-		$this->db->where('id', $id);
-		$this->db->update('user', $data);
-    }
+  {
+    $data["lon"] = $lon;
+    $data["lat"] = $lat;
+    $data["last_update"] = date("y-m-j h:i:s");
+		$this->db->where("id", $userid);
+		$this->db->update("user", $data);
+  }
       
 }

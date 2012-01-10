@@ -58,10 +58,13 @@ h2
 
 #event_members ul
 {
+  margin:0px;
+  padding:0px;
   list-style-type:none;
 }
 
-#event_members li img
+#event_members li img,
+#event_creator img
 {
   color:#666;
   width:64px;
@@ -106,10 +109,6 @@ h2
               </td>              
             <tr><td colspan="2"><h2>Details</h2></td></tr>
             <tr>
-              <td>Ersteller</td>
-              <td><?php echo $event->creator; ?></td>
-            </tr>
-            <tr>
               <td>Location</td>
               <td><?php echo $location; ?></td>
             </tr>
@@ -122,6 +121,11 @@ h2
               <td><?php echo date("H:i j.n.Y", $event->endtime); ?></td>
             </tr>
           </table>
+        </div>
+
+        <h2>Veranstalter</h2>
+        <div id="event_creator">
+		<?php echo img($creator->picture).$creator->name; ?>               	
         </div>
 
         <h2>Teilnehmer</h2>

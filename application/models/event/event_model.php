@@ -133,10 +133,6 @@ WHERE id IN
 SELECT memberid
 FROM event_member
 WHERE eventid = '".$eventid."'
-
-UNION
-
-SELECT '".$userid."'
 )
 ";
     $query = $this->db->query($sql);

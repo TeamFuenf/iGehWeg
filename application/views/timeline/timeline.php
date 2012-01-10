@@ -106,11 +106,11 @@ a
 
 .eventmembers img
 {
-  float:left;
   width:48px;
   height:48px;
-  margin:10px;
+  margin:5px;
   border-radius:5px;
+  vertical-align: middle;
 }
 
 </style>
@@ -169,9 +169,15 @@ a
           {
             echo anchor("event/".$event->id, "<b>".$begin."-".$end."</b><br/>".$event->title);            
           }
+
           echo "</div>";          
 
-          echo "<div class='eventmembers' style='top:".$top."px; height:".$height."px'>";
+          echo "<div class='eventmembers' style='border:1px solid red;left:30px; top:".$top."px; height:".$height."px'>";
+          
+          echo "<div>Veranstalter:".img($eventcreators[$event->id]->picture)."</div>";
+          
+          echo count($eventmembers[$event->id])." Teilnehmer:";
+          
           foreach($eventmembers[$event->id] as $member)
           {
             if ($member->id == $userid)
@@ -183,6 +189,7 @@ a
               echo anchor("mail/".$member->id,"<img src='".$member->picture."'>");
             }
           }
+          
           echo "</div>";          
         }
         
