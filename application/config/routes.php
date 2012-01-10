@@ -78,5 +78,9 @@ $route["mail/inbox"] = "messaging/messaging/inbox";
 $route["mail/send"] = "messaging/messaging/send";
 $route["mail/(:any)"] = "messaging/messaging/show";
 
+
+// Location
+$route["location/add/(:any)"] = "location/add";
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
