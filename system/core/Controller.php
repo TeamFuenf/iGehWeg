@@ -51,6 +51,16 @@ class CI_Controller {
 		$this->load->set_base_classes()->ci_autoloader();
 		
 		log_message('debug', "Controller Class Initialized");
+		
+		
+	}
+	
+	function is_logged_in() {
+		$is_logged_in = $this->session->userdata('is_logged_in');
+		if(!isset($is_logged_in) || $is_logged_in != true) {
+			//$this->load->view("/base/error_page");
+			exit("<style>body { font-family: verdana; background-color: #DDDDDD; }</style>You are not allowed to see this very beautiful page!<br/> HAAAHAAA!<br/><br/> Please <a href='/base/login_control'>login</a>!");
+		}
 	}
 
 	public static function &get_instance()

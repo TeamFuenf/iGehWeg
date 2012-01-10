@@ -1,14 +1,8 @@
-<head>
-	<link rel="stylesheet" type="text/css" href="../css/groups_view_style.css">
-	
-	<script src="../javascript/jquery.js" ></script>
-	<script src="../javascript/jquery-ui.js" ></script>
-	
-	<script>
+<script>
 	
 		$(function() {
 			var windowwidth = $('#groups').width();
-			$('li').css('width', windowwidth);
+			$('#groups_slide_list>li').css('width', windowwidth);
 			var ulwidth = 4*windowwidth;
 			$('#groups_slide_list').css('width', ulwidth);
 			$.ajax({
@@ -20,10 +14,8 @@
 				});
 		});
 		
-	</script>
-</head>
-<body>
-	<div id="groups">
+</script>
+<div id="groups">
 		<ul id="groups_slide_list">
 			<!-- GROUPS MAIN -->
 			<li>
@@ -44,5 +36,4 @@
 				</div>
 			</li>
 		</ul>
-	</div>
-</body>
+</div>

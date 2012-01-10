@@ -5,7 +5,8 @@ class Dashboard extends CI_Controller
   
   public function __construct()
   {
-    parent::__construct();  
+    parent::__construct();
+	parent::is_logged_in(); 
     $this->load->model("base/Login_model");
     $this->load->model("friends/Friends_model");
     $this->load->model("messaging/Messaging_model");
@@ -16,11 +17,11 @@ class Dashboard extends CI_Controller
       
     $userid = $this->session->userdata("userid");
     // HACK: Provisorische Lösung
-    if ($userid == false)
+    /*if ($userid == false)
     {
       $this->session->set_userdata("userid", "123");
       $userid = 123;
-    }
+    }*/
     
     $data["user"] = $this->Friends_model->get_user($userid);
     
@@ -31,7 +32,8 @@ class Dashboard extends CI_Controller
     $data["locationlink"] = anchor("#", "Location bearbeiten");
     
     // Seite 2
-    $data["loginform"] = $this->Login_model->getUsers();      
+    $data["loginform"] = $this->Login_model->getUsers();
+	$data["logoutlink"] = anchor("/base/login_control/logout", "Logout");      
 
     $this->layout->view("dashboard/dashboard", $data);
   }

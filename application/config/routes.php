@@ -42,7 +42,7 @@
 $route['404_override'] = '';
 
 // Hauptseiten
-$route["default_controller"] = "dashboard/dashboard";
+$route["default_controller"] = "base/login_control";
 $route["friends"] = "friends/friends_control";
 
 // Map
@@ -53,13 +53,14 @@ $route["map/snippet/(:any)"] = "map/map/snippet";
 $route["timeline"] = "timeline/timeline";
 $route["event"] = "timeline/timeline/event";
 $route["event/new"] = "event/event/newevent";
+$route["event/new/(:any)"] = "event/event/newevent";
 $route["event/update/basedata"] = "event/event/updateBasedata";
 $route["event/update/location"] = "event/event/updateLocation";
 $route["event/update/member"] = "event/event/updateMember";
 $route["event/update/status/(:any)"] = "event/event/updateStatus";
 $route["event/update/comment"] = "event/event/updateComment";
 $route["event/edit/(:any)"] = "event/event/editevent";
-$route["event/show/(:any)"] = "event/event/editevent";
+$route["event/(:any)"] = "event/event/showevent";
 
 // übler hack aber geht grad nicht anders, da pfade in meetupp.js nicht von Coderigniter geparst werden
 $route["event/event/update/basedata"] = "event/event/updateBasedata";

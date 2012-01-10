@@ -59,20 +59,6 @@
 
     // Mit Seite 1 initialisieren
     page(0);
-   
-/*    
-    $("html").keyup(function(event)
-    {
-      if (event.which == 39)
-      {
-        pageNext();
-      }
-      if (event.which == 37)
-      {
-        pagePrev();
-      }
-    });
-*/
 
 });
     
@@ -167,7 +153,10 @@ $(document).ready(function()
       eventid: eventid,
       locationid: locationid
     });
+    
     pageNext();
+
+    $("#window").scrollTop(0);
   });
 
   /**
@@ -199,6 +188,12 @@ $(document).ready(function()
     });
   });
 
+  $("#eventbutton_members_prev").on("click", function()
+  {   
+    pagePrev();
+    $("#window").scrollTop($("ul #eventlocations > li.selected").offset().top - 100);
+  });
+  
   /**
    * Basisdaten updaten
    */
@@ -206,22 +201,39 @@ $(document).ready(function()
   {   
     var eventid = $("#eventid").attr("eventid");
     var title = $("#eventname").val();
-    var from_date = $("#eventfromdate").val();
-    var from_time = $("#eventfromtime").val();
-    var to_date = $("#eventtodate").val();
-    var to_time = $("#eventtotime").val();
-    
+
+    var from_hour = $("select#from_hour").val();
+    var from_minute = $("select#from_minute").val();
+    var from_day = $("select#from_day").val();
+    var from_month = $("select#from_month").val();
+    var from_year = $("select#from_year").val();
+    var to_hour = $("select#to_hour").val();
+    var to_minute = $("select#to_minute").val();
+    var to_day = $("select#to_day").val();
+    var to_month = $("select#to_month").val();
+    var to_year = $("select#to_year").val();
+        
     $.post("../event/update/basedata", 
     {
       eventid: eventid,
       title: title,
-      from_date: from_date,
-      from_time: from_time,
-      to_date: to_date,
-      to_time: to_time,
+      from_hour: from_hour,
+      from_minute: from_minute,
+      from_day: from_day,
+      from_month: from_month,
+      from_year: from_year,
+      to_hour: to_hour,
+      to_minute: to_minute,
+      to_day: to_day,
+      to_month: to_month,
+      to_year: to_year
     });
+    
     pageNext();
+ 
+    $("#window").scrollTop($("ul #eventlocations > li.selected").offset().top - 100);
   });
+
  
   /**
    * An Event teilnehmen

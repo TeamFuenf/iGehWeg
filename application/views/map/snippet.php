@@ -33,7 +33,7 @@
     map.setOptions({restrictedExtent: bounds});
                 
     // Layer
-    var meetuppMap = new OpenLayers.Layer.OSM("meetupp", "http://dl.dropbox.com/u/948390/Tiles/${z}/${x}/${y}.png");
+    var meetuppMap = new OpenLayers.Layer.OSM("meetupp", "http://images.rawsteel.de.s3.amazonaws.com/meetupp/tiles/${z}/${x}/${y}.png");
     var locations = new OpenLayers.Layer.Markers("Locations");
             
     // Locations

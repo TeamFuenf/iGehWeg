@@ -1,33 +1,14 @@
- <html>
-    <head>
-      <title>My Facebook Login Page</title>
-    </head>
-    <body>
-      <div id="fb-root"></div>
-      <script>
-        window.fbAsyncInit = function() {
-          FB.init({
-            appId      : '129139813867438',
-            status     : true, 
-            cookie     : true,
-            xfbml      : true,
-            oauth      : true,
-          });
-        };
-        
-        (function(d){
-        	console.log("function d");
-           var js, id = 'facebook-jssdk'; 
-           if (d.getElementById(id)) {return;}
-           js = d.createElement('script'); 
-           js.id = id; 
-           js.async = true;
-           js.src = "//connect.facebook.net/en_US/all.js";
-           d.getElementsByTagName('head')[0].appendChild(js);
-         }(document));
-         
-      </script>
-      <div class="fb-login-button">Login with Facebook</div>
-      <div id="permission"></div>
-    </body>
- </html>
+<div id="login_form">
+
+	<?php
+		echo form_open('/base/login_control/validate_credentials');
+		
+		echo form_input('username', 'Username'); // (Name, Value)
+		echo form_password('password', 'Password');
+		echo form_submit('submit', 'Login');
+		echo anchor('/base/login_control/fb_login', 'Login with Facebook'); //Das ist n Link
+		echo anchor('/base/login_control/signup', 'Create Account'); //Das ist n Link
+		echo anchor('/base/login_control/logout', 'Logout'); //Das ist n Link
+	?>
+	
+</div>

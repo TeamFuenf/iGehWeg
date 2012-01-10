@@ -5,7 +5,8 @@ class Timeline extends CI_Controller
   
   public function __construct()
   {
-    parent::__construct();  
+    parent::__construct();
+	parent::is_logged_in();  
     $this->load->model("event/Event_model");    
   }
 
@@ -26,7 +27,7 @@ class Timeline extends CI_Controller
   {
     $events = $this->Event_model->getEventsForTimeline();
     $userid = $this->session->userdata("userid");
-  
+    
     $eventmembers = array();
     foreach ($events as $e)
     {
