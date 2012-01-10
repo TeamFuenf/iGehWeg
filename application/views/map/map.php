@@ -76,7 +76,7 @@
         <?php echo $markerLocations; ?>
 
         // Friends
-        
+        <?php echo $markerFriends; ?>
 
         // Events
         <?php echo $markerEvents; ?>

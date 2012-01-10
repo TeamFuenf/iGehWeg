@@ -32,14 +32,14 @@ class Marker_model extends CI_Model
   public function createLocationMarker($lon, $lat, $id, $name)
   {
 	$marker = "";
-	$marker .= "var lonLatMarker".$id." = new OpenLayers.LonLat(".$lon.", ".$lat.").transform(fromProj,  toProj);";
-    $marker .= "var feature = new OpenLayers.Feature(locations, lonLatMarker".$id.");";
+	$marker .= "var lonLatMarker = new OpenLayers.LonLat(".$lon.", ".$lat.").transform(fromProj,  toProj);";
+    $marker .= "var feature = new OpenLayers.Feature(locations, lonLatMarker);";
     $marker .= "feature.closeBox = true;";
-    $marker .= "feature.popupClass = OpenLayers.Class(OpenLayers.Popup.AnchoredBubble, {minSize: new OpenLayers.Size(150, 90) } );";
-    $marker .= "feature.data.popupContentHTML = '".$id."';";
+    $marker .= "feature.popupClass = OpenLayers.Class(OpenLayers.Popup.AnchoredBubble, {minSize: new OpenLayers.Size(50, 50) } );";
+    $marker .= "feature.data.popupContentHTML = '".addslashes($name)."';";
     $marker .= "feature.data.overflow = 'hidden';";
 
-    $marker .= "var marker = new OpenLayers.Marker(lonLatMarker".$id.", locationIcon.clone());";
+    $marker .= "var marker = new OpenLayers.Marker(lonLatMarker, locationIcon.clone());";
     $marker .= "marker.feature = feature;";
 	$marker .= "var markerClick = function(evt) {";
     $marker .= "if (this.popup == null) {";
@@ -72,14 +72,14 @@ class Marker_model extends CI_Model
 		$lat = $friend->lat;
 		$picture = $friend->picture;
 		
-		$marker .= "var friendIcon".$id." = new OpenLayers.Icon('";
+		$marker .= "var friendIcon = new OpenLayers.Icon('";
 		$marker .= $picture;
 		$marker .= "', friendIconSize, friendIconOffset);";
 		$marker .= "\n";
-		$marker .= "var friend".$id." = new OpenLayers.Marker(new OpenLayers.LonLat(";
-		$marker .= $lon.", ".$lat.").transform(fromProj, toProj), friendIcon".$id.");";
+		$marker .= "var friend = new OpenLayers.Marker(new OpenLayers.LonLat(";
+		$marker .= $lon.", ".$lat.").transform(fromProj, toProj), friendIcon);";
 		$marker .= "\n";
-		$marker .= "friends.addMarker(friend".$id.");";
+		$marker .= "friends.addMarker(friend);";
 		$marker .= "\n";
 		
 		//noch ohne Sinn, wichtig für die Popups
