@@ -16,7 +16,7 @@ class Map extends CI_Controller {
   {
   	//$userid = $this->session->userdata("userid");
     // HACK: Provisorische Lösung
-    $userid = 125;
+    $userid = $this->session->userdata("userid");
 	
   	//$friends = $this->Friends_model->get_friends($this->session->userdata("userid"));
 	$friends = $this->Friends_model->get_friends($userid);
@@ -57,5 +57,11 @@ class Map extends CI_Controller {
 		$this->load->model('');
 		$this->load->view('');	
 	}
+	
+	public function showLocationDetails($locationID)
+	{
+		
+	}
+	
 }
 ?>

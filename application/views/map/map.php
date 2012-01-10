@@ -41,17 +41,14 @@
 
         var locationIconSize = new OpenLayers.Size(24,24);
         var locationOffset = new OpenLayers.Pixel(-(locationIconSize.w/2), -locationIconSize.h);
-        var locationicon = new OpenLayers.Icon('<?php echo base_url("images/marker_event.png");; ?>',locationIconSize,locationOffset);
+        var locationIcon = new OpenLayers.Icon('<?php echo base_url("images/marker.png");; ?>',locationIconSize,locationOffset);
 
         var friendIconSize = new OpenLayers.Size(44,44);
         var friendIconOffset = new OpenLayers.Pixel(-(friendIconSize.w/2), -friendIconSize.h);
-        //var friendIcon123 = new OpenLayers.Icon("../helper/images/user/marker/123", friendIconSize, friendIconOffset);
-        //var friendIcon124 = new OpenLayers.Icon("../helper/images/user/marker/124", friendIconSize, friendIconOffset);
-        //var friendIcon125 = new OpenLayers.Icon("../helper/images/user/marker/125", friendIconSize, friendIconOffset);
 
         var eventIconSize = new OpenLayers.Size(32,32);
         var eventIconOffset = new OpenLayers.Pixel(-(eventIconSize.w/2), -eventIconSize.h);
-        var eventIcon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker.png',eventIconSize,eventIconOffset);
+        var eventIcon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker_event.png',eventIconSize,eventIconOffset);
 
 		// Bounds
         var bounds = new OpenLayers.Bounds();
@@ -79,7 +76,7 @@
         <?php echo $markerLocations; ?>
 
         // Friends
-        <?php echo $markerFriends; ?>
+        
 
         // Events
         <?php echo $markerEvents; ?>
@@ -123,19 +120,22 @@
 <div id="window">
   <ul id="pages">
     <li>
-
+		<div id="map-menu">
+			+Location
+		</div>
 		<div id="map"></div>
 		<script>
 		  init();
 		</script>
-
     </li>
+    
     <li>
       <div>
         <h1>Seite 2</h1>
         Location Details
       </div>
     </li>
+    
     <li>
       <div>
         <h1>Seite 3</h1>

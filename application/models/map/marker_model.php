@@ -15,11 +15,46 @@ class Marker_model extends CI_Model
     $query = $this->db->get("location");
     foreach ($query->result() as $row)
     {
-      $markername = "location".$row->id;
-      $marker .= "var ".$markername." = new OpenLayers.Marker(new OpenLayers.LonLat(".$row->lon.", ".$row->lat.").transform(fromProj, toProj), locationicon.clone());";
-      $marker .= "locations.addMarker(".$markername.");";         
+      $lon = $row->lon;
+	  $lat = $row->lat;
+	  $id = $row->id;
+	  $name = $row->name;
+	  $bla = $this->createLocationMarker($lon, $lat, $id, $name);
+      $marker .= "".$bla."\n";
+      //$markername = "location".$row->id;
+      //$marker .= "var ".$markername." = new OpenLayers.Marker(new OpenLayers.LonLat(".$row->lon.", ".$row->lat.").transform(fromProj, toProj), locationIcon.clone());";
+      //$marker .= "locations.addMarker(".$markername.");";         
     }
 
+    return $marker;
+  }
+  
+  public function createLocationMarker($lon, $lat, $id, $name)
+  {
+	$marker = "";
+	$marker .= "var lonLatMarker".$id." = new OpenLayers.LonLat(".$lon.", ".$lat.").transform(fromProj,  toProj);";
+    $marker .= "var feature = new OpenLayers.Feature(locations, lonLatMarker".$id.");";
+    $marker .= "feature.closeBox = true;";
+    $marker .= "feature.popupClass = OpenLayers.Class(OpenLayers.Popup.AnchoredBubble, {minSize: new OpenLayers.Size(150, 90) } );";
+    $marker .= "feature.data.popupContentHTML = '".$id."';";
+    $marker .= "feature.data.overflow = 'hidden';";
+
+    $marker .= "var marker = new OpenLayers.Marker(lonLatMarker".$id.", locationIcon.clone());";
+    $marker .= "marker.feature = feature;";
+	$marker .= "var markerClick = function(evt) {";
+    $marker .= "if (this.popup == null) {";
+    $marker .= "        this.popup = this.createPopup(this.closeBox);";
+    $marker .= "        map.addPopup(this.popup);";
+    $marker .= "            this.popup.show();";
+    $marker .= "        } else {";
+    $marker .= "            this.popup.toggle();";
+    $marker .= "        }";
+    $marker .= "        OpenLayers.Event.stop(evt);";
+    $marker .= "};";
+    $marker .= "marker.events.register('mousedown', feature, markerClick);";
+
+    $marker .= "locations.addMarker(marker);";
+    
     return $marker;
   }
     
@@ -37,46 +72,20 @@ class Marker_model extends CI_Model
 		$lat = $friend->lat;
 		$picture = $friend->picture;
 		
-		$marker .= "var friendIcon" . $id. " = new OpenLayers.Icon('";
+		$marker .= "var friendIcon".$id." = new OpenLayers.Icon('";
 		$marker .= $picture;
 		$marker .= "', friendIconSize, friendIconOffset);";
 		$marker .= "\n";
-		$marker .= "var friend".$id." = new OpenLayers.Marker(new OpenLayers.LonLat(" .$lon.", ".$lat.").transform(fromProj, toProj), friendIcon".$id.");";
+		$marker .= "var friend".$id." = new OpenLayers.Marker(new OpenLayers.LonLat(";
+		$marker .= $lon.", ".$lat.").transform(fromProj, toProj), friendIcon".$id.");";
 		$marker .= "\n";
 		$marker .= "friends.addMarker(friend".$id.");";
 		$marker .= "\n";
 		
+		//noch ohne Sinn, wichtig für die Popups
 		$freunde .= $friend->last_update;
 		$freunde .= $friend->name;
 	}
-	
-
-	
-  	//$marker .= "";
-	
-    
-	/*
-    $marker .= "var friendIcon123 = new OpenLayers.Icon('../helper/images/user/marker/123', friendIconSize, friendIconOffset);";
-	$marker .= "\n";
-    $marker .= "var friend123 = new OpenLayers.Marker(new OpenLayers.LonLat(13.4454215, 48.5631164).transform(fromProj, toProj), friendIcon123);";
-	$marker .= "\n";
-    $marker .= "friends.addMarker(friend123);";
-	$marker .= "\n";
-
-	$marker .= "var friendIcon124 = new OpenLayers.Icon('../helper/images/user/marker/124', friendIconSize, friendIconOffset);";
-	$marker .= "\n";
-    $marker .= "var friend124 = new OpenLayers.Marker(new OpenLayers.LonLat(13.4632595, 48.5732856).transform(fromProj, toProj), friendIcon124);";
-    $marker .= "\n";
-    $marker .= "friends.addMarker(friend124);";
-	$marker .= "\n";
-	
-	$marker .= "var friendIcon125 = new OpenLayers.Icon('../helper/images/user/marker/125', friendIconSize, friendIconOffset);";
-	$marker .= "\n";
-    $marker .= "var friend125 = new OpenLayers.Marker(new OpenLayers.LonLat(13.4672211, 48.5744110).transform(fromProj, toProj), friendIcon125);";
-    $marker .= "\n";
-    $marker .= "friends.addMarker(friend125);";
-	$marker .= "\n";
-*/
     return $marker;
   }
 
