@@ -39,12 +39,12 @@
         var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
         var icon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker.png',size,offset);
 
-        var locationIconSize = new OpenLayers.Size(24,24);
+        var locationIconSize = new OpenLayers.Size(44,44);
         var locationOffset = new OpenLayers.Pixel(-(locationIconSize.w/2), -locationIconSize.h);
-        var locationIcon = new OpenLayers.Icon('<?php echo base_url("images/marker.png");; ?>',locationIconSize,locationOffset);
+        var locationIcon = new OpenLayers.Icon('<?php echo base_url("images/marker_location.png");; ?>',locationIconSize,locationOffset);
 
-        var friendIconSize = new OpenLayers.Size(44,44);
-        var friendIconOffset = new OpenLayers.Pixel(-(friendIconSize.w/2), -friendIconSize.h);
+        var userIconSize = new OpenLayers.Size(44,44);
+        var userIconOffset = new OpenLayers.Pixel(-(userIconSize.w/2), -userIconSize.h);
 
         var eventIconSize = new OpenLayers.Size(32,32);
         var eventIconOffset = new OpenLayers.Pixel(-(eventIconSize.w/2), -eventIconSize.h);
@@ -69,8 +69,11 @@
         var originalMap = new OpenLayers.Layer.OSM();
 
         var locations = new OpenLayers.Layer.Markers("Locations");
-        var friends = new OpenLayers.Layer.Markers("Friends");
+        var users = new OpenLayers.Layer.Markers("Users");
         var events = new OpenLayers.Layer.Markers("Events");
+
+        // User
+        <?php echo $markerUser; ?>
             
         // Locations
         <?php echo $markerLocations; ?>
@@ -89,7 +92,7 @@
         map.addLayer(meetuppMap);
         
         map.addLayer(locations);
-        map.addLayer(friends);
+        map.addLayer(users);
         map.addLayer(events);
         
         

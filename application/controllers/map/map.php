@@ -15,14 +15,12 @@ class Map extends CI_Controller {
   // Normale Kartenansicht
   function index()
   {
-  	//$userid = $this->session->userdata("userid");
-    // HACK: Provisorische Lösung
     $userid = $this->session->userdata("userid");
 	
-  	//$friends = $this->Friends_model->get_friends($this->session->userdata("userid"));
 	$friends = $this->Friends_model->get_friends($userid);
+	$data["markerUser"] = $this->Marker_model->getUserIcon($userid);
+	$data["markerFriends"] = $this->Marker_model->getFriendsIcons($friends);
 	$data["markerLocations"] = $this->Marker_model->getLocationsIcons();
-    $data["markerFriends"] = $this->Marker_model->getFriendsIcons($friends);
     $data["markerEvents"] = $this->Marker_model->getEventsIcons();
     
 	$this->layout->view("map/map", $data);
