@@ -16,8 +16,14 @@ class Map_model extends CI_Model
     $query = $this->db->get("location");
     return $query->row_array();
   }
+
+  public function getAllLocations()
+  {
+    $query = $this->db->get("location");
+    return $query->result();
+  }
   
-  function updateUserGeo($userid, $lon, $lat)
+  public function updateUserGeo($userid, $lon, $lat)
   {
     $data["lon"] = $lon;
     $data["lat"] = $lat;
@@ -25,5 +31,5 @@ class Map_model extends CI_Model
 		$this->db->where("id", $userid);
 		$this->db->update("user", $data);
   }
-      
+   
 }
