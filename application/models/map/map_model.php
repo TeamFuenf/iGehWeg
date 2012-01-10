@@ -22,7 +22,7 @@ class Map_model extends CI_Model
         $data = array(
                'lon' => $lon,
                'lat' => $lat,
-               'last_update' => date('j-m-y h-i-s')
+               'last_update' => date('y-m-j h:i:s')
             );
 		$this->db->where('id', $id);
 		$this->db->update('user', $data);

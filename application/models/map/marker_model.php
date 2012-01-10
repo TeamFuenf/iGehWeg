@@ -35,22 +35,10 @@ class Marker_model extends CI_Model
 		$picture = $friend->picture;
 		$name = $friend->name;
 		
-		// noch ohne sinn, noch wichtig für die eventuelle Anzeige
-		//$lastupdate.= $friend->last_update;
-		
+		// todo: 
+		// lang nicht aktuallisierte Benutzer nicht anzeigen, oder timestamp mit in die karte schreiben.
 		$marker .= $this->createUserIcon($name, $lon, $lat, $picture);
 		$marker .= "\n";
-		// $marker .= "var friendIcon = new OpenLayers.Icon('";
-		// $marker .= $picture;
-		// $marker .= "', friendIconSize, friendIconOffset);";
-		// $marker .= "\n";
-		// $marker .= "var friend = new OpenLayers.Marker(new OpenLayers.LonLat(";
-		// $marker .= $lon.", ".$lat.").transform(fromProj, toProj), friendIcon);";
-		// $marker .= "\n";
-		// $marker .= "friends.addMarker(friend);";
-		// $marker .= "\n";
-		
-		//noch ohne Sinn, wichtig für die Popups
 	}
     return $marker;
   }
