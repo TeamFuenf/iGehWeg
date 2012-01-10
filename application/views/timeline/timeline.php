@@ -94,6 +94,17 @@ a
   color:#999;
 }
 
+.owneventlabel
+{
+  position:absolute;
+  width:200px;
+  left:-200px;
+  display:block;
+  border-left:3px dotted #666;
+  padding-left:10px;
+  color:#999;
+}
+
 .eventmembers
 {
   position:absolute;
@@ -159,7 +170,14 @@ a
           echo "<div class='event' style='top:".$top."px; height:".$height."px'>";
           echo "</div>";          
 
-          echo "<div class='eventlabel' style='top:".$top."px; height:".$height."px'>";
+          if ($event->creator == $userid)
+          {
+            echo "<div class='owneventlabel' style='top:".$top."px; height:".$height."px'>";            
+          }
+          else
+          {
+            echo "<div class='eventlabel' style='top:".$top."px; height:".$height."px'>";            
+          }
           
           if ($event->creator == $userid)
           {
@@ -176,11 +194,25 @@ a
           {
             if ($member->id == $userid)
             {
-              echo "<img src='".$member->picture."'>";            
+              if ($member->status == "invited")
+              {
+                echo "<img style='opacity:0.4;' src='".$member->picture."'>";                            
+              }              
+              else
+              {
+                echo "<img src='".$member->picture."'>";                            
+              }                
             }
             else
             {
-              echo anchor("mail/".$member->id,"<img src='".$member->picture."'>");
+              if ($member->status == "invited")
+              {
+                echo anchor("mail/".$member->id,"<img style='opacity:0.4;' src='".$member->picture."'>");                                
+              }
+              else
+              {
+                echo anchor("mail/".$member->id,"<img src='".$member->picture."'>");                
+              }              
             }
           }
           echo "</div>";          

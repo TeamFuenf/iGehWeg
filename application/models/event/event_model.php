@@ -11,52 +11,111 @@ class Event_model extends CI_Model
   }
 
 // --------------------------------------------------------------------------------------------------------------------
-  
-  public function getEventLocations()
+
+  /**
+   * Liefert alle möglichen Orte für ein Event, wenn möglich nach Entfernung zum User sortiert
+   */
+  public function getPossibleLocations()
   {
-    $this->db->order_by("name", "asc");
-    $query = $this->db->get("location");
-    return $query->result();
+    $userid = $this->session->userdata("userid");
+    
+    // Abstandsberechnung mittels Phytagoras ausreichend genau da nur relativ kleine Distanzen
+    // 71.5 km = Abstand zwischen zwei Längengraden in Mitteleuropa
+    // 111.3 km = Abstand zwischen zwei Breitengraden in Mitteleuropa
+    $sql = "
+    SELECT location.*, 
+    ROUND(SQRT(POW(71.5 * (location.lon - user.lon),2) + POW(111.3 * (location.lat - user.lat),2)) * 1000) as distance
+    FROM user, location
+    WHERE user.id = ".$userid."
+    ORDER BY distance";
+    $query = $this->db->query($sql);
+    return $query->result();    
+  } 
+  
+  
+  /**
+   * Liefert alle möglichen Teilnehmer für ein Event = die Freundesliste eines Benutzers
+   * TODO: Von FriendModel holen
+   */
+  public function getPossibleMembers()
+  {
+    $userid = $this->session->userdata("userid");
+    $sql = "
+    SELECT *, 'null' as status
+    FROM friend, user
+    WHERE friend.friendid = user.id
+    AND friend.id = '".$userid."'
+    ORDER BY user.name ASC
+    ";
+    $query = $this->db->query($sql);
+    return $query->result();  
   }
 
   /**
-   * liefert alle Teilnehmer eines Events alphabetisch sortiert
+   * liefert alle Teilnehmer (zugesagt und noch mögliche Freunde) für ein Event
    */
   public function getAllEventMembers($eventid)
   {
+    $userid = $this->session->userdata("userid");
+    $sql = "
+    SELECT user.*, 'null' as status
+    FROM friend, user
+    WHERE friend.id = '".$userid."'
+    AND user.id = friend.friendid
+    AND friendid NOT IN
+    (
+        SELECT memberid
+        FROM event_member
+        WHERE eventid = '".$eventid."'
+    )
+    
+    UNION
+    
+    SELECT user.*, event_member.status
+    FROM event_member, user
+    WHERE event_member.memberid = user.id
+    AND eventid = '".$eventid."'
+    ORDER BY name ASC
+    ";
+        
+    $query = $this->db->query($sql);    
+    return $query->result();
+  }
+  
+  /**
+   * liefert alle Teilnehmer eines Events alphabetisch sortiert
+   */
+  public function getEventMembers($eventid)
+  {    
     $this->db->select("*");
     $this->db->from("event_member");
     $this->db->join("user", "event_member.memberid = user.id");
     $this->db->where("event_member.eventid", $eventid);
     $this->db->order_by("user.name", "asc");
-    $query = $this->db->get();
+    $query = $this->db->get();    
     return $query->result();
   }
-  
-  public function getEventMembers()
+
+// --------------------------------------------------------------------------------------------------------------------
+
+  public function deleteEvent($eventid)
   {
     $userid = $this->session->userdata("userid");
-
-    $this->db->where("id", $userid);
-    $query = $this->db->get("friend");
-    foreach ($query->result() as $row)
+    $event = $this->getEvent($eventid);
+    if ($userid == $event->creator)
     {
-      $list[] = $row->friendid;
+      $tables = array("event", "event_comment", "event_member");
+      $this->db->where("id", $event->id);
+      $this->db->delete("event"); 
+      return true;
     }
-    
-    $this->db->where_in("id", $list);
-    $this->db->order_by("name", "asc");
-    $query = $this->db->get("user");
-    return $query->result();
-  }
-
-  public function getMemberStatus($eventid)
-  {
-    $this->db->where("eventid", $eventid);
-    $query = $this->db->get("event_member");
-    return $query->result();
+    else
+    {
+      return false;
+    }
   }
   
+
 // --------------------------------------------------------------------------------------------------------------------
 
   public function getEvent($eventid)
@@ -90,33 +149,34 @@ class Event_model extends CI_Model
   public function getEventsForTimeline()
   {
     $userid = $this->session->userdata("userid");
-$sql = "
-SELECT *,
-FROM_UNIXTIME(begintime, '%e') as 'day', 
-FROM_UNIXTIME(begintime, '%c') as 'month', 
-FROM_UNIXTIME(begintime, '%Y') as 'year',
-FROM_UNIXTIME(begintime, '%H') as 'eventbegin',
-FROM_UNIXTIME(begintime, '%i') as 'eventend',
-FROM_UNIXTIME(begintime, '%H')*20+FROM_UNIXTIME(begintime, '%i') as 'offset1',
-FROM_UNIXTIME(endtime, '%H')*20+FROM_UNIXTIME(endtime, '%i') as 'offset2'
 
-FROM
-(
-SELECT *,
-'creator' as 'status'
-FROM event
-WHERE creator = '".$userid."'
-
-UNION
-
-SELECT event.*,
-'member' as 'status'
-FROM event, event_member
-WHERE event.id = event_member.eventid
-AND event_member.memberid = '".$userid."'
-) as events
-ORDER BY begintime, endtime DESC
-";
+    $sql = "
+    SELECT *,
+    FROM_UNIXTIME(begintime, '%e') as 'day', 
+    FROM_UNIXTIME(begintime, '%c') as 'month', 
+    FROM_UNIXTIME(begintime, '%Y') as 'year',
+    FROM_UNIXTIME(begintime, '%H') as 'eventbegin',
+    FROM_UNIXTIME(begintime, '%i') as 'eventend',
+    FROM_UNIXTIME(begintime, '%H')*20+FROM_UNIXTIME(begintime, '%i') as 'offset1',
+    FROM_UNIXTIME(endtime, '%H')*20+FROM_UNIXTIME(endtime, '%i') as 'offset2'
+    
+    FROM
+    (
+    SELECT *,
+    'creator' as 'status'
+    FROM event
+    WHERE creator = '".$userid."'
+    
+    UNION
+    
+    SELECT event.*,
+    'member' as 'status'
+    FROM event, event_member
+    WHERE event.id = event_member.eventid
+    AND event_member.memberid = '".$userid."'
+    ) as events
+    ORDER BY begintime, endtime DESC
+    ";
     
     $query = $this->db->query($sql);
     return $query->result();
@@ -126,19 +186,20 @@ ORDER BY begintime, endtime DESC
   { 
     $userid = $this->session->userdata("userid");
     $sql = "
-SELECT * 
-FROM user
-WHERE id IN
-(
-SELECT memberid
-FROM event_member
-WHERE eventid = '".$eventid."'
+    SELECT * 
+    FROM user
+    WHERE id IN
+    (
+    SELECT memberid
+    FROM event_member
+    WHERE eventid = '".$eventid."'
+    
+    UNION
+    
+    SELECT '".$userid."'
+    )
+    ";
 
-UNION
-
-SELECT '".$userid."'
-)
-";
     $query = $this->db->query($sql);
     return $query->result();
   }

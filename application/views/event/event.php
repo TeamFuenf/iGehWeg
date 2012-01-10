@@ -12,11 +12,18 @@
 
 h1
 {
-  width:40%;
   padding:10px;
   font-family: SegoeLight, verdana, helvetica, sans-serif;
   color:#666;
   font-size:40px;
+}
+
+h2
+{
+  padding:10px;
+  font-family: SegoeLight, verdana, helvetica, sans-serif;
+  color:#666;
+  font-size:20px;
 }
 
 ul#eventlocations
@@ -84,7 +91,7 @@ table#eventmembers
     
     <li>
       <div>
-        <h1><?php echo $title; ?></h1>
+        <h1>Event bearbeiten</h1>
 
         <style>
           .selection
@@ -123,9 +130,25 @@ table#eventmembers
             background-color:transparent;
           }
           
+          button.delete
+          {
+            background-color:red;
+            color:#fff;         
+          }
+          
+          a
+          {
+            text-decoration:none;
+          }
+          
         </style>
-        <?php
-        
+
+        <div class='selection'>
+        <b>Titel:</b>
+        <input id='eventname' name='eventname' value='<?php echo $event->title; ?>'/>
+        </div>
+
+        <?php        
           $from_hour = date("H", $event->begintime);
           $from_minute = date("i", $event->begintime);
           $from_day = date("j", $event->begintime);
@@ -137,189 +160,119 @@ table#eventmembers
           $to_month = date("n", $event->endtime);
           $to_year = date("Y", $event->endtime);          
         
-// --------------------------------------------------------------------------------------------------------------------
-                
           echo "<div class='selection'>";
-          echo "<b>Titel:</b>";
-          echo "<input id='eventname' name='eventname' value='". $event->title ."'/>";
-          echo "</div>";
-        
-// --------------------------------------------------------------------------------------------------------------------
-
-          echo "<div class='selection'>";
-          echo "<b>Von:</b>";
+          echo "<b>Von:</b>";          
           echo "<select id='from_hour'>";
-          for ($i=0; $i < 24; $i++)
-          {
-            if ($i == $from_hour)
-            {
-              printf("<option selected value='%d'>%1$02d</option>", $i);              
-            }
-            else
-            {
-              printf("<option value='%d'>%1$02d</option>", $i);
-            }
+          for ($i=0; $i < 24; $i++) {
+            ($i == $from_hour) ? printf("<option selected value='%d'>%1$02d</option>", $i) : printf("<option value='%d'>%1$02d</option>", $i);
           }
-          echo "</select>";
+          echo "</select>";          
           echo ":";
           echo "<select id='from_minute'>";
           for ($i=0; $i < 60; $i+=5)
           {
-            if ($i == $from_minute)
-            {
-              printf("<option selected value='%d'>%1$02d</option>", $i);              
-            }
-            else
-            {
-              printf("<option value='%d'>%1$02d</option>", $i);
-            }
+            ($i == $from_minute) ? printf("<option selected value='%d'>%1$02d</option>", $i) : printf("<option value='%d'>%1$02d</option>", $i);
           }
           echo "</select>";
           echo ", ";
           echo "<select id='from_day'>";
           for ($i=1; $i <= 31; $i++)
           {
-            if ($i == $from_day)
-            {
-              printf("<option selected value='%d'>%1$02d</option>", $i);              
-            }
-            else
-            {
-              printf("<option value='%d'>%1$02d</option>", $i);
-            }
+            ($i == $from_day) ? printf("<option selected value='%d'>%1$02d</option>", $i) : printf("<option value='%d'>%1$02d</option>", $i);
           }
           echo "</select>";
           echo ".";
           echo "<select id='from_month'>";
           for ($i=1; $i <= 12; $i++)
           {
-            if ($i == $from_month)
-            {
-              printf("<option selected value='%d'>%1$02d</option>", $i);              
-            }
-            else
-            {
-              printf("<option value='%d'>%1$02d</option>", $i);
-            }
+            ($i == $from_month) ? printf("<option selected value='%d'>%1$02d</option>", $i) : printf("<option value='%d'>%1$02d</option>", $i);
           }
           echo "</select>";
           echo ".";
           echo "<select id='from_year'>";
           for ($i=2012; $i < 2015; $i++)
           {
-            if ($i == $from_year)
-            {
-              printf("<option selected value='%d'>%1$02d</option>", $i);              
-            }
-            else
-            {
-              printf("<option value='%d'>%1$02d</option>", $i);
-            }
+            ($i == $from_year) ? printf("<option selected value='%d'>%1$04d</option>", $i) : printf("<option value='%d'>%1$04d</option>", $i);
           }
           echo "</select>";
           echo "</div>";
+
           
-// --------------------------------------------------------------------------------------------------------------------
 
           echo "<div class='selection'>";
           echo "<b>Bis:</b>";
           echo "<select id='to_hour'>";
           for ($i=0; $i < 24; $i++)
           {
-            if ($i == $to_hour)
-            {
-              printf("<option selected value='%d'>%1$02d</option>", $i);              
-            }
-            else
-            {
-              printf("<option value='%d'>%1$02d</option>", $i);
-            }
+            ($i == $to_hour) ? printf("<option selected value='%d'>%1$02d</option>", $i) : printf("<option value='%d'>%1$02d</option>", $i);
           }
           echo "</select>";
           echo ":";
           echo "<select id='to_minute'>";
           for ($i=0; $i < 60; $i+=5)
           {
-            if ($i == $to_minute)
-            {
-              printf("<option selected value='%d'>%1$02d</option>", $i);              
-            }
-            else
-            {
-              printf("<option value='%d'>%1$02d</option>", $i);
-            }
+            ($i == $to_minute) ? printf("<option selected value='%d'>%1$02d</option>", $i) : printf("<option value='%d'>%1$02d</option>", $i);
           }
           echo "</select>";
           echo ", ";
           echo "<select id='to_day'>";
           for ($i=1; $i <= 31; $i++)
           {
-            if ($i == $to_day)
-            {
-              printf("<option selected value='%d'>%1$02d</option>", $i);              
-            }
-            else
-            {
-              printf("<option value='%d'>%1$02d</option>", $i);
-            }
+            ($i == $to_day) ? printf("<option selected value='%d'>%1$02d</option>", $i) : printf("<option value='%d'>%1$02d</option>", $i);
           }
           echo "</select>";
           echo ".";
           echo "<select id='to_month'>";
           for ($i=1; $i <= 12; $i++)
           {
-            if ($i == $to_month)
-            {
-              printf("<option selected value='%d'>%1$02d</option>", $i);              
-            }
-            else
-            {
-              printf("<option value='%d'>%1$02d</option>", $i);
-            }
+            ($i == $to_month) ? printf("<option selected value='%d'>%1$02d</option>", $i) : printf("<option value='%d'>%1$02d</option>", $i);
           }
           echo "</select>";
           echo ".";
           echo "<select id='to_year'>";
           for ($i=2012; $i < 2015; $i++)
           {
-            if ($i == $to_year)
-            {
-              printf("<option selected value='%d'>%1$02d</option>", $i);              
-            }
-            else
-            {
-              printf("<option value='%d'>%1$02d</option>", $i);
-            }
+            ($i == $to_year) ? printf("<option selected value='%d'>%1$02d</option>", $i) : printf("<option value='%d'>%1$02d</option>", $i);
           }
           echo "</select>";
           echo "</div>";
         ?>
         
         <button class="button" id="eventbutton_basedata_next">weiter</button>
+        
+        <hr>
+        
+        <?php echo anchor("event/delete/".$eventid, "<button class='delete'>Event löschen</button>"); ?>
+
       </div>
     </li>
     
     <li>
       <div>
         <h2>Location</h2>
-<!--
-        <label for="eventlocationsearch">Location suchen</label><input id="eventlocationsearch" name="eventlocationsearch"/> oder auswählen
--->
+
+        <button>TODO: Alphabetisch</button>
+        <button>TODO: nach Entfernung</button>
+
         <ul id="eventlocations">            
         <?php
           foreach ($locations as $location)
-          {
+          {            
             if ($location->id == $event->location)
             {
-              echo "<li class='selected' locationid='".$location->id."'>";              
+              $selectedModifier = "class='selected'";
             }
             else
             {
-              echo "<li locationid='".$location->id."'>";              
+              $selectedModifier = "";              
             }
-            echo "<b>".$location->name."</b><br/>";
-            echo $location->street .", ".$location->city;
-            echo "</li>";
+
+            echo "
+            <li ".$selectedModifier." locationid='".$location->id."'>              
+            <b>".$location->name."</b> (ca. ".$location->distance." m)<br/>
+            ".$location->street."
+            </li>
+            ";
           }
         ?>
         </ul>
@@ -338,25 +291,23 @@ table#eventmembers
           foreach ($members as $member)
           {
             echo "<tr>";
-            echo "<td width='64'><img src='".$member->picture."'/></td>";              
+            echo "<td width='64'><img src='".$member->picture."'/></td>";
             echo "<td>".$member->name."</td>";  
                      
-            if (isset($memberstatus[$member->id]))
+            if ($member->status == "invited")
             {
-              if ($memberstatus[$member->id] == "invited")
-              {
-                echo "<td width='200' align='right'><button status='invited' memberid='".$member->id."'>Einladung gesendet</button></td>";                                          
-              }
-              else
-              if ($memberstatus[$member->id] == "attending")
-              {
-                echo "<td width='200' align='right'><button status='attending' memberid='".$member->id."'>nimmt Teil</button></td>";                                          
-              }
-            } 
+              echo "<td width='200' align='right'><button status='invited' memberid='".$member->id."'>Einladung gesendet</button></td>";                                          
+            }
+            else
+            if ($member->status == "attending")
+            {
+              echo "<td width='200' align='right'><button status='attending' memberid='".$member->id."'>nimmt Teil</button></td>";                                          
+            }
             else
             {
               echo "<td width='200' align='right'><button status='none' memberid='".$member->id."'>einladen</button></td>";
-            }    
+            }   
+
             echo "</tr>";
           }
         ?>

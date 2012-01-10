@@ -32,8 +32,8 @@ class Event extends CI_Controller
     
     $data["eventid"] = uniqid("event", true);
     $data["title"] = "Neues Event erstellen";
-    $data["locations"] = $this->Event_model->getEventLocations();
-    $data["members"] = $this->Event_model->getEventMembers();
+    $data["locations"] = $this->Event_model->getPossibleLocations();
+    $data["members"] = $this->Event_model->getPossibleMembers();
     $data["event"] = $event;
         
     $this->layout->view("event/event", $data);
@@ -41,26 +41,11 @@ class Event extends CI_Controller
 
   public function editevent()
   {
-    $this->Event_model->cleanup();
     $eventid = $this->uri->segment(3);
-    $memberstats = $this->Event_model->getMemberStatus($eventid);
-    if (!empty($memberstats))
-    {
-      foreach($memberstats as $stat)
-      {
-        $memberstatus[$stat->memberid] = $stat->status;  
-      }
-    }
-    else
-    {
-      $memberstatus = array();
-    }
-    
+
     $data["eventid"] = $eventid;
-    $data["title"] = "Event bearbeiten";
-    $data["locations"] = $this->Event_model->getEventLocations();
-    $data["members"] = $this->Event_model->getEventMembers();
-    $data["memberstatus"] = $memberstatus;
+    $data["locations"] = $this->Event_model->getPossibleLocations();
+    $data["members"] = $this->Event_model->getAllEventMembers($eventid);
     $data["event"] = $this->Event_model->getEvent($eventid);
 
     $this->layout->view("event/event", $data);
@@ -71,10 +56,23 @@ class Event extends CI_Controller
     $eventid = $this->uri->segment(2);    
     $event = $this->Event_model->getEvent($eventid);
     $data["event"] = $event;
-    $data["members"] = $this->Event_model->getAllEventMembers($eventid);
+    $data["members"] = $this->Event_model->getEventMembers($eventid);
     $data["location"] = "TODO: Locationdetails...";
     
     $this->layout->view("event/showevent", $data);
+  }
+  
+  public function deleteevent()
+  {
+    $eventid = $this->uri->segment(3);    
+    if ($this->Event_model->deleteEvent($eventid))
+    {
+      redirect("timeline");      
+    }
+    else
+    {
+      // TODO: Fehlermeldung: Löschen nicht erlaubt ?
+    }
   }
   
 // --------------------------------------------------------------------------------------------------------------------

@@ -31,7 +31,7 @@ class Timeline extends CI_Controller
     $eventmembers = array();
     foreach ($events as $e)
     {
-      $members = $this->Event_model->getMembersForEvent($e->id);
+      $members = $this->Event_model->getEventMembers($e->id);
       $eventmembers[$e->id] = $members;
     } 
    
