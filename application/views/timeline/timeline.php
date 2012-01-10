@@ -94,6 +94,17 @@ a
   color:#999;
 }
 
+.owneventlabel
+{
+  position:absolute;
+  width:200px;
+  left:-200px;
+  display:block;
+  border-left:3px dotted #666;
+  padding-left:10px;
+  color:#999;
+}
+
 .eventmembers
 {
   position:absolute;
@@ -110,7 +121,11 @@ a
   height:48px;
   margin:5px;
   border-radius:5px;
+<<<<<<< HEAD
   vertical-align: middle;
+=======
+  vertical-align:middle;
+>>>>>>> eventcleanup
 }
 
 </style>
@@ -148,7 +163,6 @@ a
         $datelabel = "<span class='date'>".date("d.m.Y", $date)."</span>";
         echo anchor("event/new/".$date , $datelabel);
 
-                
         foreach ($todaysEvents as $event)
         {
           $top = $event->offset1+20;
@@ -159,7 +173,14 @@ a
           echo "<div class='event' style='top:".$top."px; height:".$height."px'>";
           echo "</div>";          
 
-          echo "<div class='eventlabel' style='top:".$top."px; height:".$height."px'>";
+          if ($event->creator == $userid)
+          {
+            echo "<div class='owneventlabel' style='top:".$top."px; height:".$height."px'>";            
+          }
+          else
+          {
+            echo "<div class='eventlabel' style='top:".$top."px; height:".$height."px'>";            
+          }
           
           if ($event->creator == $userid)
           {
@@ -172,22 +193,32 @@ a
 
           echo "</div>";          
 
-          echo "<div class='eventmembers' style='border:1px solid red;left:30px; top:".$top."px; height:".$height."px'>";
+          echo "<div class='eventmembers' style='top:".$top."px; height:".$height."px'>";
+          echo img($eventcreators[$event->id]->picture)." + ";
+          // Alternativ:
+          //echo "Veranstalter: ".img($eventcreators[$event->id]->picture)."<br/>";
+          //echo count($eventmembers). " Teilnehmer:";
           
-          echo "<div>Veranstalter:".img($eventcreators[$event->id]->picture)."</div>";
+          if (count($eventmembers[$event->id]) < 2)
+          {              
+            foreach($eventmembers[$event->id] as $member)
+            {
+              $style = ($member->status == "invited") ? "style='opacity:0.4;'" : "";
+              
+              if ($member->id == $userid)              
+              {
+                echo "<img ".$style." src='".$member->picture."'>";                            
+              }
+              else
+              {
+                echo anchor("mail/".$member->id,"<img ".$style." src='".$member->picture."'>");                                
+              }
+            }
           
-          echo count($eventmembers[$event->id])." Teilnehmer:";
-          
-          foreach($eventmembers[$event->id] as $member)
+          }
+          else
           {
-            if ($member->id == $userid)
-            {
-              echo "<img src='".$member->picture."'>";            
-            }
-            else
-            {
-              echo anchor("mail/".$member->id,"<img src='".$member->picture."'>");
-            }
+            echo anchor("event/".$event->id, count($eventmembers). " Teilnehmer");
           }
           
           echo "</div>";          
