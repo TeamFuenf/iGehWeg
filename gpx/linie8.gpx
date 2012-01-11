@@ -1,0 +1,2240 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<gpx version="1.1" creator="JOSM GPX export" xmlns="http://www.topografix.com/GPX/1/1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+  <metadata>
+    <linie>Linie 8</linie>
+    <color>#f3aaac</color>
+  </metadata>
+  <wpt lat="48.5622697" lon="13.4091584">
+    <time>2011-09-10T11:10:46Z</time>
+    <name>Simmerlingweg</name>
+  </wpt>
+  <wpt lat="48.5759105" lon="13.4098708">
+    <time>2010-08-20T22:51:52Z</time>
+    <name>Hacklstein</name>
+  </wpt>
+  <wpt lat="48.5743898" lon="13.4460443">
+    <time>2010-08-20T22:51:45Z</time>
+    <name>Parkhaus Güterbahnhof</name>
+  </wpt>
+  <wpt lat="48.5624257" lon="13.4272228">
+    <time>2010-01-19T22:08:30Z</time>
+    <name>Schönleitnerweg</name>
+  </wpt>
+  <wpt lat="48.5622857" lon="13.4341261">
+    <time>2011-09-10T11:10:39Z</time>
+    <name>Graf-Salm-Straße</name>
+  </wpt>
+  <wpt lat="48.5842509" lon="13.3959996">
+    <time>2010-08-20T22:52:47Z</time>
+    <name>Heining</name>
+  </wpt>
+  <wpt lat="48.5740482" lon="13.4170093">
+    <time>2011-09-10T11:10:46Z</time>
+    <name>Steinbachmühle</name>
+  </wpt>
+  <wpt lat="48.5688686" lon="13.4537605">
+    <time>2011-01-10T22:00:20Z</time>
+    <name>Universität</name>
+  </wpt>
+  <wpt lat="48.5734185" lon="13.4212907">
+    <time>2011-09-10T11:10:46Z</time>
+    <name>Stelzhammerstraße</name>
+  </wpt>
+  <wpt lat="48.5602435" lon="13.4231624">
+    <time>2011-09-10T11:10:36Z</time>
+    <name>Breslauer Straße</name>
+  </wpt>
+  <wpt lat="48.5622704" lon="13.434041">
+    <time>2010-08-17T16:13:20Z</time>
+    <name>Graf-Salm-Straße</name>
+  </wpt>
+  <wpt lat="48.5739437" lon="13.4169483">
+    <time>2010-08-20T22:51:49Z</time>
+    <name>Steinbachmühle</name>
+  </wpt>
+  <wpt lat="48.5610984" lon="13.4143553">
+    <time>2011-09-10T11:10:47Z</time>
+    <name>Vornholz</name>
+  </wpt>
+  <wpt lat="48.561151" lon="13.4419943">
+    <time>2011-10-29T17:38:20Z</time>
+    <name>Apfelkoch</name>
+  </wpt>
+  <wpt lat="48.5625097" lon="13.427608">
+    <time>2011-09-10T11:10:45Z</time>
+    <name>Schönleitnerweg</name>
+  </wpt>
+  <wpt lat="48.5619683" lon="13.4114206">
+    <time>2010-08-23T00:21:26Z</time>
+    <name>Birkhamerstraße</name>
+  </wpt>
+  <wpt lat="48.5616573" lon="13.43682">
+    <time>2011-09-10T11:10:48Z</time>
+    <name>Weinleitenweg</name>
+  </wpt>
+  <wpt lat="48.5618855" lon="13.4113819">
+    <time>2011-09-10T11:10:36Z</time>
+    <name>Birkhamerstraße</name>
+  </wpt>
+  <wpt lat="48.5817793" lon="13.3714756">
+    <time>2010-08-20T22:51:47Z</time>
+    <name>Gionstraße</name>
+  </wpt>
+  <wpt lat="48.5616663" lon="13.4370953">
+    <time>2010-08-17T20:52:50Z</time>
+    <name>Weinleitenweg</name>
+  </wpt>
+  <wpt lat="48.5741035" lon="13.4170176">
+    <time>2010-08-20T22:51:54Z</time>
+    <name>Steinbachmühle</name>
+  </wpt>
+  <wpt lat="48.5767182" lon="13.4061317">
+    <time>2010-08-20T22:51:43Z</time>
+    <name>Kachlet</name>
+  </wpt>
+  <wpt lat="48.5894037" lon="13.3869668">
+    <time>2010-08-20T22:51:50Z</time>
+    <name>Winzerleite</name>
+  </wpt>
+  <wpt lat="48.5701989" lon="13.4576693">
+    <time>2011-01-11T01:27:16Z</time>
+    <name>Augustinergasse</name>
+  </wpt>
+  <wpt lat="48.5734712" lon="13.4213">
+    <time>2010-08-17T16:13:19Z</time>
+    <name>Stelzhammerstraße</name>
+  </wpt>
+  <wpt lat="48.5759831" lon="13.4099133">
+    <time>2011-09-10T11:10:39Z</time>
+    <name>Hacklstein</name>
+  </wpt>
+  <wpt lat="48.5800197" lon="13.3628033">
+    <time>2011-09-16T09:10:04Z</time>
+    <name>Königschalding</name>
+  </wpt>
+  <wpt lat="48.5648947" lon="13.4465403">
+    <time>2011-09-10T11:10:41Z</time>
+    <name>Klinikum</name>
+  </wpt>
+  <wpt lat="48.5833518" lon="13.3827971">
+    <time>2011-09-25T12:26:34Z</time>
+    <name>Pater-Rupert-Mayer-Straße</name>
+  </wpt>
+  <wpt lat="48.5615962" lon="13.4368016">
+    <time>2010-08-17T20:52:45Z</time>
+    <name>Weinleitenweg</name>
+  </wpt>
+  <wpt lat="48.5892684" lon="13.3880031">
+    <time>2011-09-10T11:10:48Z</time>
+    <name>Winzerleite</name>
+  </wpt>
+  <wpt lat="48.5604164" lon="13.4220149">
+    <time>2011-09-10T11:10:36Z</time>
+    <name>Breslauer Straße</name>
+  </wpt>
+  <wpt lat="48.583325" lon="13.3773881">
+    <time>2010-08-20T22:51:45Z</time>
+    <name>Hofmannsthalstraße</name>
+  </wpt>
+  <wpt lat="48.5769341" lon="13.4057198">
+    <time>2010-08-20T22:54:05Z</time>
+    <name>Kachlet</name>
+  </wpt>
+  <wpt lat="48.5610351" lon="13.4210148">
+    <time>2010-08-23T00:21:22Z</time>
+    <name>Breslauer Straße</name>
+  </wpt>
+  <wpt lat="48.5844231" lon="13.3886026">
+    <time>2010-08-20T23:27:04Z</time>
+    <name>Eich</name>
+  </wpt>
+  <wpt lat="48.5646033" lon="13.4462071">
+    <time>2011-09-10T11:10:41Z</time>
+    <name>Klinikum</name>
+  </wpt>
+  <wpt lat="48.5818069" lon="13.3713679">
+    <time>2010-08-17T23:26:58Z</time>
+    <name>Gionstraße</name>
+  </wpt>
+  <wpt lat="48.5823245" lon="13.3995854">
+    <time>2010-08-20T22:53:44Z</time>
+    <name>Passau</name>
+  </wpt>
+  <wpt lat="48.5620666" lon="13.4091585">
+    <time>2011-09-10T11:10:46Z</time>
+    <name>Simmerlingweg</name>
+  </wpt>
+  <wpt lat="48.5584994" lon="13.4111544">
+    <time>2011-09-10T11:10:41Z</time>
+    <name>Kohlbruck / Erlebnisbad</name>
+  </wpt>
+  <wpt lat="48.5616215" lon="13.4370576">
+    <time>2011-09-10T11:10:47Z</time>
+    <name>Weinleitenweg</name>
+  </wpt>
+  <wpt lat="48.5668942" lon="13.4492172">
+    <time>2011-09-10T11:10:49Z</time>
+    <name>Wörthstraße</name>
+  </wpt>
+  <wpt lat="48.5588666" lon="13.411366">
+    <time>2010-08-19T23:20:43Z</time>
+    <name>Kohlbruck / Erlebnisbad</name>
+  </wpt>
+  <wpt lat="48.5890301" lon="13.3858738">
+    <time>2010-08-20T22:54:37Z</time>
+    <name>Winzerleite</name>
+  </wpt>
+  <wpt lat="48.5843435" lon="13.3745187">
+    <time>2011-06-12T22:55:34Z</time>
+    <name>Dr.-Winkelhofer-Straße</name>
+  </wpt>
+  <wpt lat="48.5879851" lon="13.3832725">
+    <time>2010-08-20T22:51:50Z</time>
+    <name>Gustav-Haydn-Straße</name>
+  </wpt>
+  <wpt lat="48.5890423" lon="13.3858003">
+    <time>2010-08-20T22:51:42Z</time>
+    <name>Winzerleite</name>
+  </wpt>
+  <wpt lat="48.5815875" lon="13.371114">
+    <time>2010-08-20T22:51:51Z</time>
+    <name>Gionstraße</name>
+  </wpt>
+  <wpt lat="48.5610967" lon="13.4144052">
+    <time>2011-09-10T11:10:47Z</time>
+    <name>Vornholz</name>
+  </wpt>
+  <wpt lat="48.5849168" lon="13.3939113">
+    <time>2011-09-10T10:47:14Z</time>
+    <name>Raiffeisenstraße</name>
+  </wpt>
+  <wpt lat="48.58688" lon="13.3794715">
+    <time>2011-06-12T22:55:34Z</time>
+    <name>Oberöder Weg</name>
+  </wpt>
+  <wpt lat="48.5672415" lon="13.4500369">
+    <time>2010-12-19T19:17:01Z</time>
+    <name>Wörthstraße</name>
+  </wpt>
+  <wpt lat="48.5688016" lon="13.4535538">
+    <time>2011-01-10T22:00:25Z</time>
+    <name>Universität</name>
+  </wpt>
+  <wpt lat="48.5743992" lon="13.4515562">
+    <time>2011-10-15T12:25:59Z</time>
+    <name>10</name>
+  </wpt>
+  <wpt lat="48.5617319" lon="13.4118465">
+    <time>2010-08-23T00:21:24Z</time>
+    <name>Birkhamerstraße</name>
+  </wpt>
+  <wpt lat="48.5868281" lon="13.3797197">
+    <time>2011-06-12T22:55:34Z</time>
+    <name>Oberöder Weg</name>
+  </wpt>
+  <wpt lat="48.5758789" lon="13.4111236">
+    <time>2011-08-12T20:48:05Z</time>
+    <name>Hacklstein</name>
+  </wpt>
+  <wpt lat="48.5810973" lon="13.3696092">
+    <time>2010-08-20T22:51:51Z</time>
+    <name>Rittsteig</name>
+  </wpt>
+  <wpt lat="48.5840253" lon="13.3955964">
+    <time>2011-09-06T12:41:12Z</time>
+    <name>Heining</name>
+  </wpt>
+  <wpt lat="48.5804158" lon="13.3676407">
+    <time>2010-08-23T00:21:23Z</time>
+    <name>Rittsteig</name>
+  </wpt>
+  <wpt lat="48.5597685" lon="13.4111869">
+    <time>2011-01-05T10:55:44Z</time>
+    <name>Passau</name>
+  </wpt>
+  <wpt lat="48.5620681" lon="13.4091865">
+    <time>2010-08-23T00:21:21Z</time>
+    <name>Simmerlingweg</name>
+  </wpt>
+  <wpt lat="48.5767709" lon="13.4061584">
+    <time>2010-08-20T22:51:55Z</time>
+    <name>Kachlet</name>
+  </wpt>
+  <wpt lat="48.562382" lon="13.4272841">
+    <time>2011-09-10T11:10:45Z</time>
+    <name>Schönleitnerweg</name>
+  </wpt>
+  <wpt lat="48.5815128" lon="13.3711916">
+    <time>2010-08-20T22:52:11Z</time>
+    <name>Gionstraße</name>
+  </wpt>
+  <wpt lat="48.5810452" lon="13.3696857">
+    <time>2010-08-20T22:51:53Z</time>
+    <name>Rittsteig</name>
+  </wpt>
+  <wpt lat="48.5688795" lon="13.4537431">
+    <time>2011-09-10T11:10:47Z</time>
+    <name>Universität</name>
+  </wpt>
+  <wpt lat="48.5669244" lon="13.4491848">
+    <time>2010-12-19T19:16:55Z</time>
+    <name>Wörthstraße</name>
+  </wpt>
+  <wpt lat="48.5736269" lon="13.4288436">
+    <time>2009-07-19T14:51:36Z</time>
+    <name>Passau</name>
+  </wpt>
+  <wpt lat="48.5727595" lon="13.455825">
+    <time>2010-08-17T14:45:23Z</time>
+    <name>2 C</name>
+  </wpt>
+  <wpt lat="48.5585177" lon="13.4112499">
+    <time>2010-08-19T23:20:41Z</time>
+    <name>Kohlbruck / Erlebnisbad</name>
+  </wpt>
+  <wpt lat="48.5726272" lon="13.4558447">
+    <time>2010-08-18T16:25:35Z</time>
+    <name>3 B</name>
+  </wpt>
+  <wpt lat="48.5743367" lon="13.4504286">
+    <time>2011-10-15T12:25:58Z</time>
+    <name>Reisebüro Niedermayer</name>
+  </wpt>
+  <wpt lat="48.5769733" lon="13.4057764">
+    <time>2010-08-20T22:51:43Z</time>
+    <name>Kachlet</name>
+  </wpt>
+  <wpt lat="48.5868144" lon="13.3794402">
+    <time>2011-06-12T22:55:34Z</time>
+    <name>Oberöder Weg</name>
+  </wpt>
+  <wpt lat="48.562271" lon="13.4090979">
+    <time>2010-08-23T00:21:24Z</time>
+    <name>Simmerlingweg</name>
+  </wpt>
+  <wpt lat="48.5610524" lon="13.4210592">
+    <time>2011-09-10T11:10:36Z</time>
+    <name>Breslauer Straße</name>
+  </wpt>
+  <wpt lat="48.57006" lon="13.4574844">
+    <time>2011-01-11T01:27:19Z</time>
+    <name>Augustinergasse</name>
+  </wpt>
+  <wpt lat="48.5610638" lon="13.4143424">
+    <time>2010-08-23T00:21:22Z</time>
+    <name>Vornholz</name>
+  </wpt>
+  <wpt lat="48.5588542" lon="13.4114075">
+    <time>2011-09-10T11:10:41Z</time>
+    <name>Kohlbruck / Erlebnisbad</name>
+  </wpt>
+  <wpt lat="48.5740572" lon="13.4169788">
+    <time>2011-09-10T11:10:46Z</time>
+    <name>Steinbachmühle</name>
+  </wpt>
+  <wpt lat="48.5879462" lon="13.3832344">
+    <time>2010-08-20T22:51:55Z</time>
+    <name>Gustav-Haydn-Straße</name>
+  </wpt>
+  <wpt lat="48.5844709" lon="13.3941636">
+    <time>2011-09-10T10:47:13Z</time>
+    <name>Raiffeisenstraße</name>
+  </wpt>
+  <wpt lat="48.562601" lon="13.4341179">
+    <time>2011-09-10T11:10:39Z</time>
+    <name>Graf-Salm-Straße</name>
+  </wpt>
+  <wpt lat="48.5672557" lon="13.4500127">
+    <time>2011-09-10T11:10:49Z</time>
+    <name>Wörthstraße</name>
+  </wpt>
+  <wpt lat="48.561129" lon="13.4143716">
+    <time>2010-08-23T00:21:25Z</time>
+    <name>Vornholz</name>
+  </wpt>
+  <wpt lat="48.5701687" lon="13.4577071">
+    <time>2011-09-10T11:10:35Z</time>
+    <name>Augustinergasse</name>
+  </wpt>
+  <wpt lat="48.5845013" lon="13.3942555">
+    <time>2011-09-10T10:47:13Z</time>
+    <name>Raiffeisenstraße</name>
+  </wpt>
+  <wpt lat="48.5628985" lon="13.4175037">
+    <time>2011-09-10T11:10:42Z</time>
+    <name>Königsberger Straße</name>
+  </wpt>
+  <wpt lat="48.582204" lon="13.3717266">
+    <time>2010-08-20T22:51:45Z</time>
+    <name>Gionstraße</name>
+  </wpt>
+  <wpt lat="48.5624614" lon="13.4276726">
+    <time>2011-10-21T22:21:34Z</time>
+    <name>Schönleitnerweg</name>
+  </wpt>
+  <wpt lat="48.5842521" lon="13.3742495">
+    <time>2011-06-12T22:55:33Z</time>
+    <name>Dr.-Winkelhofer-Straße</name>
+  </wpt>
+  <wpt lat="48.5629065" lon="13.417486">
+    <time>2010-08-23T00:21:22Z</time>
+    <name>Königsberger Straße</name>
+  </wpt>
+  <wpt lat="48.5648503" lon="13.4466155">
+    <time>2010-08-17T16:13:02Z</time>
+    <name>Klinikum</name>
+  </wpt>
+  <wpt lat="48.5766744" lon="13.4064506">
+    <time>2010-08-20T22:52:08Z</time>
+    <name>Passau</name>
+  </wpt>
+  <wpt lat="48.5843292" lon="13.3742134">
+    <time>2010-08-21T23:01:29Z</time>
+    <name>Dr.-Winkelhofer-Straße</name>
+  </wpt>
+  <wpt lat="48.5733521" lon="13.4212867">
+    <time>2010-08-20T22:51:53Z</time>
+    <name>Stelzhammerstraße</name>
+  </wpt>
+  <wpt lat="48.5617679" lon="13.4118691">
+    <time>2011-09-10T11:10:35Z</time>
+    <name>Birkhamerstraße</name>
+  </wpt>
+  <wpt lat="48.5726526" lon="13.4559412">
+    <time>2010-08-17T14:45:22Z</time>
+    <name>2 B</name>
+  </wpt>
+  <wpt lat="48.5758154" lon="13.4110666">
+    <time>2011-09-10T11:10:39Z</time>
+    <name>Hacklstein</name>
+  </wpt>
+  <wpt lat="48.5894677" lon="13.3877124">
+    <time>2011-09-10T11:10:48Z</time>
+    <name>Winzerleite</name>
+  </wpt>
+  <wpt lat="48.5725255" lon="13.4560734">
+    <time>2010-08-17T14:45:21Z</time>
+    <name>2 A</name>
+  </wpt>
+  <wpt lat="48.5798698" lon="13.362825">
+    <time>2011-09-16T09:10:04Z</time>
+    <name>Königschalding</name>
+  </wpt>
+  <wpt lat="48.5727546" lon="13.4557153">
+    <time>2010-08-18T16:25:34Z</time>
+    <name>3 A</name>
+  </wpt>
+  <wpt lat="48.5842774" lon="13.3959408">
+    <time>2011-09-06T12:41:12Z</time>
+    <name>Heining</name>
+  </wpt>
+  <wpt lat="48.5833815" lon="13.3828075">
+    <time>2011-09-25T12:26:34Z</time>
+    <name>Pater-Rupert-Mayer-Straße</name>
+  </wpt>
+  <wpt lat="48.5629541" lon="13.4176457">
+    <time>2010-08-23T00:21:26Z</time>
+    <name>Königsberger Straße</name>
+  </wpt>
+  <wpt lat="48.5725073" lon="13.4559586">
+    <time>2010-08-18T16:25:44Z</time>
+    <name>3 C</name>
+  </wpt>
+  <wpt lat="48.5833769" lon="13.3772408">
+    <time>2011-10-11T17:52:33Z</time>
+    <name>Hofmannsthalstraße</name>
+  </wpt>
+  <wpt lat="48.5700808" lon="13.4574617">
+    <time>2011-09-10T11:10:35Z</time>
+    <name>Augustinergasse</name>
+  </wpt>
+  <wpt lat="48.5844861" lon="13.3885364">
+    <time>2011-09-10T11:10:38Z</time>
+    <name>Eich</name>
+  </wpt>
+  <wpt lat="48.5646213" lon="13.4461656">
+    <time>2010-08-17T16:13:20Z</time>
+    <name>Klinikum</name>
+  </wpt>
+  <wpt lat="48.5687816" lon="13.4535888">
+    <time>2011-09-10T11:10:47Z</time>
+    <name>Universität</name>
+  </wpt>
+  <wpt lat="48.574516" lon="13.4459912">
+    <time>2011-09-10T10:54:32Z</time>
+    <name>Parkhaus Güterbahnhof</name>
+  </wpt>
+  <wpt lat="48.5840573" lon="13.3955315">
+    <time>2010-08-19T08:39:51Z</time>
+    <name>Heining</name>
+  </wpt>
+  <wpt lat="48.5722459" lon="13.4560516">
+    <time>2010-08-17T14:45:24Z</time>
+    <name>4 A</name>
+  </wpt>
+  <wpt lat="48.5878453" lon="13.3841371">
+    <time>2010-08-20T22:51:47Z</time>
+    <name>Gustav-Haydn-Straße</name>
+  </wpt>
+  <wpt lat="48.5626465" lon="13.4341643">
+    <time>2010-08-17T16:13:03Z</time>
+    <name>Graf-Salm-Straße</name>
+  </wpt>
+  <wpt lat="48.5848867" lon="13.393825">
+    <time>2011-10-11T17:51:33Z</time>
+    <name>Raiffeisenstraße</name>
+  </wpt>
+  <wpt lat="48.5604464" lon="13.4220623">
+    <time>2010-08-23T00:21:23Z</time>
+    <name>Breslauer Straße</name>
+  </wpt>
+  <wpt lat="48.5629745" lon="13.4175965">
+    <time>2011-09-10T11:10:42Z</time>
+    <name>Königsberger Straße</name>
+  </wpt>
+  <wpt lat="48.5811538" lon="13.3695308">
+    <time>2010-08-20T22:51:43Z</time>
+    <name>Rittsteig</name>
+  </wpt>
+  <trk>    <trkseg>
+      <trkpt lat="48.5720703" lon="13.4560081">
+        <time>2008-02-13T15:18:10Z</time>
+      </trkpt>
+      <trkpt lat="48.572119" lon="13.4560126">
+        <time>2007-10-03T20:35:21Z</time>
+      </trkpt>
+      <trkpt lat="48.5721808" lon="13.4560191">
+        <time>2010-08-17T14:45:21Z</time>
+      </trkpt>
+      <trkpt lat="48.5722459" lon="13.4560516">
+        <time>2010-08-17T14:45:24Z</time>
+      </trkpt>
+      <trkpt lat="48.5723081" lon="13.4560883">
+        <time>2010-08-17T14:45:30Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Breslauer Straße</name>
+    <trkseg>
+      <trkpt lat="48.5631122" lon="13.4177665">
+        <time>2009-12-06T23:29:58Z</time>
+      </trkpt>
+      <trkpt lat="48.5627798" lon="13.4183952">
+        <time>2009-12-06T23:29:57Z</time>
+      </trkpt>
+      <trkpt lat="48.5626465" lon="13.418679">
+        <time>2008-09-13T17:57:26Z</time>
+      </trkpt>
+      <trkpt lat="48.5624025" lon="13.4191907">
+        <time>2009-12-06T23:29:58Z</time>
+      </trkpt>
+      <trkpt lat="48.5616375" lon="13.4202413">
+        <time>2009-12-06T23:29:58Z</time>
+      </trkpt>
+      <trkpt lat="48.561346" lon="13.4206553">
+        <time>2008-09-26T17:31:31Z</time>
+      </trkpt>
+      <trkpt lat="48.5610524" lon="13.4210592">
+        <time>2011-09-10T11:10:36Z</time>
+      </trkpt>
+      <trkpt lat="48.5608662" lon="13.4213157">
+        <time>2009-12-06T23:29:58Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Neuburger Straße</name>
+    <trkseg>
+      <trkpt lat="48.5637562" lon="13.4310164">
+        <time>2009-12-06T23:30:07Z</time>
+      </trkpt>
+      <trkpt lat="48.5633321" lon="13.4298603">
+        <time>2009-09-24T17:03:39Z</time>
+      </trkpt>
+      <trkpt lat="48.5631477" lon="13.4293574">
+        <time>2008-09-29T13:56:13Z</time>
+      </trkpt>
+      <trkpt lat="48.563112" lon="13.429262">
+        <time>2011-10-21T22:21:22Z</time>
+      </trkpt>
+      <trkpt lat="48.5630597" lon="13.4291226">
+        <time>2008-09-29T13:53:03Z</time>
+      </trkpt>
+      <trkpt lat="48.5630121" lon="13.4289977">
+        <time>2011-03-02T12:42:11Z</time>
+      </trkpt>
+      <trkpt lat="48.5629049" lon="13.4286855">
+        <time>2011-03-02T12:42:11Z</time>
+      </trkpt>
+      <trkpt lat="48.5625097" lon="13.427608">
+        <time>2011-09-10T11:10:45Z</time>
+      </trkpt>
+      <trkpt lat="48.5624521" lon="13.4274526">
+        <time>2011-10-21T22:21:38Z</time>
+      </trkpt>
+      <trkpt lat="48.5624078" lon="13.4273528">
+        <time>2009-12-06T23:30:02Z</time>
+      </trkpt>
+      <trkpt lat="48.562382" lon="13.4272841">
+        <time>2011-09-10T11:10:45Z</time>
+      </trkpt>
+      <trkpt lat="48.5621755" lon="13.4267221">
+        <time>2011-03-02T12:42:11Z</time>
+      </trkpt>
+      <trkpt lat="48.5620203" lon="13.4263218">
+        <time>2010-08-19T23:20:37Z</time>
+      </trkpt>
+      <trkpt lat="48.5618046" lon="13.4257883">
+        <time>2011-03-03T18:44:02Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Regensburger Straße</name>
+    <trkseg>
+      <trkpt lat="48.5746408" lon="13.4150521">
+        <time>2009-05-22T13:14:54Z</time>
+      </trkpt>
+      <trkpt lat="48.5753131" lon="13.4132795">
+        <time>2009-04-04T22:11:44Z</time>
+      </trkpt>
+      <trkpt lat="48.5757458" lon="13.4113772">
+        <time>2011-08-12T20:48:05Z</time>
+      </trkpt>
+      <trkpt lat="48.5758154" lon="13.4110666">
+        <time>2011-09-10T11:10:39Z</time>
+      </trkpt>
+      <trkpt lat="48.5759831" lon="13.4099133">
+        <time>2011-09-10T11:10:39Z</time>
+      </trkpt>
+      <trkpt lat="48.5761831" lon="13.4086624">
+        <time>2011-08-12T20:48:00Z</time>
+      </trkpt>
+      <trkpt lat="48.5764783" lon="13.4070131">
+        <time>2011-08-12T20:48:04Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Bahnhofstraße</name>
+    <trkseg>
+      <trkpt lat="48.5743567" lon="13.4506754">
+        <time>2011-10-15T12:26:00Z</time>
+      </trkpt>
+      <trkpt lat="48.5743525" lon="13.4506048">
+        <time>2011-10-15T12:26:01Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Fuchsbauerweg</name>
+    <trkseg>
+      <trkpt lat="48.5613704" lon="13.438146">
+        <time>2011-10-29T17:58:03Z</time>
+      </trkpt>
+      <trkpt lat="48.5614075" lon="13.4378004">
+        <time>2011-10-29T17:57:56Z</time>
+      </trkpt>
+      <trkpt lat="48.5615159" lon="13.4374241">
+        <time>2011-11-05T16:17:40Z</time>
+      </trkpt>
+      <trkpt lat="48.5616215" lon="13.4370576">
+        <time>2011-09-10T11:10:47Z</time>
+      </trkpt>
+      <trkpt lat="48.5616573" lon="13.43682">
+        <time>2011-09-10T11:10:48Z</time>
+      </trkpt>
+      <trkpt lat="48.5618898" lon="13.4357413">
+        <time>2011-09-25T10:22:52Z</time>
+      </trkpt>
+      <trkpt lat="48.5620218" lon="13.4346565">
+        <time>2011-09-25T10:23:06Z</time>
+      </trkpt>
+      <trkpt lat="48.5621186" lon="13.4340415">
+        <time>2010-12-17T13:19:14Z</time>
+      </trkpt>
+      <trkpt lat="48.5622857" lon="13.4341261">
+        <time>2011-09-10T11:10:39Z</time>
+      </trkpt>
+      <trkpt lat="48.5625385" lon="13.4341421">
+        <time>2010-08-17T16:12:56Z</time>
+      </trkpt>
+      <trkpt lat="48.562601" lon="13.4341179">
+        <time>2011-09-10T11:10:39Z</time>
+      </trkpt>
+      <trkpt lat="48.562712" lon="13.4340403">
+        <time>2009-12-06T23:30:07Z</time>
+      </trkpt>
+      <trkpt lat="48.563241" lon="13.4332055">
+        <time>2009-12-06T23:30:07Z</time>
+      </trkpt>
+      <trkpt lat="48.5638965" lon="13.4323548">
+        <time>2009-12-06T23:30:07Z</time>
+      </trkpt>
+      <trkpt lat="48.5640981" lon="13.4321699">
+        <time>2009-08-08T13:48:38Z</time>
+      </trkpt>
+      <trkpt lat="48.5641402" lon="13.4321312">
+        <time>2009-12-06T23:30:07Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <trkseg>
+      <trkpt lat="48.5729342" lon="13.4555386">
+        <time>2010-08-18T16:25:39Z</time>
+      </trkpt>
+      <trkpt lat="48.5729546" lon="13.4554486">
+        <time>2010-08-17T14:45:28Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Regensburger Straße</name>
+    <trkseg>
+      <trkpt lat="48.5766744" lon="13.4064506">
+        <time>2010-08-20T22:52:08Z</time>
+      </trkpt>
+      <trkpt lat="48.5767709" lon="13.4061584">
+        <time>2010-08-20T22:51:55Z</time>
+      </trkpt>
+      <trkpt lat="48.5769341" lon="13.4057198">
+        <time>2010-08-20T22:54:05Z</time>
+      </trkpt>
+      <trkpt lat="48.5771134" lon="13.4053553">
+        <time>2010-08-20T22:54:33Z</time>
+      </trkpt>
+      <trkpt lat="48.5771945" lon="13.4052363">
+        <time>2010-08-20T22:53:04Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Bahnhofstraße</name>
+    <trkseg>
+      <trkpt lat="48.5742917" lon="13.4547978">
+        <time>2011-01-23T23:58:38Z</time>
+      </trkpt>
+      <trkpt lat="48.5743231" lon="13.4543899">
+        <time>2011-01-23T23:58:39Z</time>
+      </trkpt>
+      <trkpt lat="48.5743875" lon="13.4536809">
+        <time>2011-02-14T12:52:21Z</time>
+      </trkpt>
+      <trkpt lat="48.5744025" lon="13.4532744">
+        <time>2011-01-23T23:58:40Z</time>
+      </trkpt>
+      <trkpt lat="48.5744151" lon="13.4528109">
+        <time>2011-01-23T23:58:39Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Hennebergerstraße</name>
+    <trkseg>
+      <trkpt lat="48.583576" lon="13.3945448">
+        <time>2009-09-03T13:11:23Z</time>
+      </trkpt>
+      <trkpt lat="48.5837706" lon="13.3945027">
+        <time>2009-09-03T13:11:23Z</time>
+      </trkpt>
+      <trkpt lat="48.584" lon="13.3944867">
+        <time>2011-09-17T12:38:54Z</time>
+      </trkpt>
+      <trkpt lat="48.5841485" lon="13.3946722">
+        <time>2011-09-14T23:36:04Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Regensburger Straße</name>
+    <trkseg>
+      <trkpt lat="48.5748147" lon="13.4472596">
+        <time>2009-05-22T13:14:51Z</time>
+      </trkpt>
+      <trkpt lat="48.5746469" lon="13.4461754">
+        <time>2009-05-22T13:14:51Z</time>
+      </trkpt>
+      <trkpt lat="48.573905" lon="13.4415123">
+        <time>2009-05-22T13:14:51Z</time>
+      </trkpt>
+      <trkpt lat="48.5738185" lon="13.4408053">
+        <time>2011-01-05T11:21:06Z</time>
+      </trkpt>
+      <trkpt lat="48.573525" lon="13.4383456">
+        <time>2009-05-22T13:14:51Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Kleiner Exerzierplatz</name>
+    <trkseg>
+      <trkpt lat="48.5720301" lon="13.4558897">
+        <time>2008-02-13T15:18:13Z</time>
+      </trkpt>
+      <trkpt lat="48.5720107" lon="13.4559007">
+        <time>2008-02-13T15:18:12Z</time>
+      </trkpt>
+      <trkpt lat="48.5719974" lon="13.4559276">
+        <time>2008-02-13T15:18:10Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Innstraße</name>
+    <trkseg>
+      <trkpt lat="48.5677506" lon="13.4512615">
+        <time>2011-01-10T21:15:39Z</time>
+      </trkpt>
+      <trkpt lat="48.5678574" lon="13.4517752">
+        <time>2011-01-10T21:15:35Z</time>
+      </trkpt>
+      <trkpt lat="48.5680218" lon="13.452262">
+        <time>2011-01-10T21:15:47Z</time>
+      </trkpt>
+      <trkpt lat="48.5681449" lon="13.4525241">
+        <time>2011-01-10T21:15:34Z</time>
+      </trkpt>
+      <trkpt lat="48.5682591" lon="13.452749">
+        <time>2011-01-10T22:00:15Z</time>
+      </trkpt>
+      <trkpt lat="48.568613" lon="13.4533258">
+        <time>2011-01-10T22:00:13Z</time>
+      </trkpt>
+      <trkpt lat="48.5686865" lon="13.4534457">
+        <time>2011-01-10T22:00:12Z</time>
+      </trkpt>
+      <trkpt lat="48.5687816" lon="13.4535888">
+        <time>2011-09-10T11:10:47Z</time>
+      </trkpt>
+      <trkpt lat="48.5688556" lon="13.4537018">
+        <time>2011-01-10T22:00:24Z</time>
+      </trkpt>
+      <trkpt lat="48.5688795" lon="13.4537431">
+        <time>2011-09-10T11:10:47Z</time>
+      </trkpt>
+      <trkpt lat="48.5688781" lon="13.4537549">
+        <time>2011-01-10T22:00:24Z</time>
+      </trkpt>
+      <trkpt lat="48.5689172" lon="13.4538332">
+        <time>2011-01-10T22:00:19Z</time>
+      </trkpt>
+      <trkpt lat="48.569136" lon="13.4543315">
+        <time>2007-10-05T22:41:17Z</time>
+      </trkpt>
+      <trkpt lat="48.5694687" lon="13.4551081">
+        <time>2011-01-10T22:00:20Z</time>
+      </trkpt>
+      <trkpt lat="48.5694946" lon="13.4551478">
+        <time>2008-04-23T18:46:03Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Hennebergerstraße</name>
+    <trkseg>
+      <trkpt lat="48.583576" lon="13.3945448">
+        <time>2009-09-03T13:11:23Z</time>
+      </trkpt>
+      <trkpt lat="48.5836226" lon="13.3948227">
+        <time>2009-09-03T13:11:22Z</time>
+      </trkpt>
+      <trkpt lat="48.5836517" lon="13.3949958">
+        <time>2009-09-03T13:18:12Z</time>
+      </trkpt>
+      <trkpt lat="48.5836744" lon="13.3950729">
+        <time>2011-09-06T12:36:13Z</time>
+      </trkpt>
+      <trkpt lat="48.5837049" lon="13.3951769">
+        <time>2009-02-24T19:15:16Z</time>
+      </trkpt>
+      <trkpt lat="48.5840253" lon="13.3955964">
+        <time>2011-09-06T12:41:12Z</time>
+      </trkpt>
+      <trkpt lat="48.5842108" lon="13.3958497">
+        <time>2010-08-20T22:51:54Z</time>
+      </trkpt>
+      <trkpt lat="48.5842774" lon="13.3959408">
+        <time>2011-09-06T12:41:12Z</time>
+      </trkpt>
+      <trkpt lat="48.584473" lon="13.396193">
+        <time>2010-08-20T12:52:13Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Regensburger Straße</name>
+    <trkseg>
+      <trkpt lat="48.5744145" lon="13.4157659">
+        <time>2009-05-22T13:14:54Z</time>
+      </trkpt>
+      <trkpt lat="48.5745503" lon="13.415342">
+        <time>2010-03-09T10:49:05Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Bahnhofstraße</name>
+    <trkseg>
+      <trkpt lat="48.5743801" lon="13.4511087">
+        <time>2011-10-15T12:26:00Z</time>
+      </trkpt>
+      <trkpt lat="48.5743567" lon="13.4506754">
+        <time>2011-10-15T12:26:00Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Regensburger Straße</name>
+    <trkseg>
+      <trkpt lat="48.5737022" lon="13.440614">
+        <time>2011-01-05T11:21:07Z</time>
+      </trkpt>
+      <trkpt lat="48.5738328" lon="13.4415673">
+        <time>2009-05-22T13:14:54Z</time>
+      </trkpt>
+      <trkpt lat="48.574516" lon="13.4459912">
+        <time>2011-09-10T10:54:32Z</time>
+      </trkpt>
+      <trkpt lat="48.5747006" lon="13.4473792">
+        <time>2008-05-02T18:29:07Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Carossastraße</name>
+    <trkseg>
+      <trkpt lat="48.5833116" lon="13.3822631">
+        <time>2011-09-25T12:26:39Z</time>
+      </trkpt>
+      <trkpt lat="48.583234" lon="13.3817605">
+        <time>2011-09-25T12:26:39Z</time>
+      </trkpt>
+      <trkpt lat="48.5832722" lon="13.3807478">
+        <time>2011-09-14T23:36:05Z</time>
+      </trkpt>
+      <trkpt lat="48.5833363" lon="13.3799755">
+        <time>2011-02-16T10:35:18Z</time>
+      </trkpt>
+      <trkpt lat="48.5834163" lon="13.3793615">
+        <time>2011-02-16T10:35:20Z</time>
+      </trkpt>
+      <trkpt lat="48.5834749" lon="13.3790597">
+        <time>2011-09-15T01:34:16Z</time>
+      </trkpt>
+      <trkpt lat="48.5835366" lon="13.3786586">
+        <time>2011-06-12T22:55:34Z</time>
+      </trkpt>
+      <trkpt lat="48.5835598" lon="13.3782318">
+        <time>2011-06-12T22:55:14Z</time>
+      </trkpt>
+      <trkpt lat="48.5835536" lon="13.3780825">
+        <time>2011-06-12T22:55:37Z</time>
+      </trkpt>
+      <trkpt lat="48.5835274" lon="13.3778959">
+        <time>2011-06-12T22:55:34Z</time>
+      </trkpt>
+      <trkpt lat="48.5833769" lon="13.3772408">
+        <time>2011-10-11T17:52:33Z</time>
+      </trkpt>
+      <trkpt lat="48.5832301" lon="13.3766617">
+        <time>2011-06-12T22:55:37Z</time>
+      </trkpt>
+      <trkpt lat="48.5831877" lon="13.3765353">
+        <time>2011-06-12T22:55:35Z</time>
+      </trkpt>
+      <trkpt lat="48.5830944" lon="13.3763203">
+        <time>2011-09-15T01:34:16Z</time>
+      </trkpt>
+      <trkpt lat="48.5828024" lon="13.3756272">
+        <time>2011-09-14T23:36:05Z</time>
+      </trkpt>
+      <trkpt lat="48.5826253" lon="13.3750376">
+        <time>2009-04-03T13:38:37Z</time>
+      </trkpt>
+      <trkpt lat="48.582223" lon="13.3738577">
+        <time>2011-09-14T23:36:06Z</time>
+      </trkpt>
+      <trkpt lat="48.5817845" lon="13.371822">
+        <time>2011-09-14T23:36:06Z</time>
+      </trkpt>
+      <trkpt lat="48.5816677" lon="13.3714092">
+        <time>2010-08-20T22:54:11Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Bahnhofstraße</name>
+    <trkseg>
+      <trkpt lat="48.5743525" lon="13.4506048">
+        <time>2011-10-15T12:26:01Z</time>
+      </trkpt>
+      <trkpt lat="48.5743367" lon="13.4504286">
+        <time>2011-10-15T12:25:58Z</time>
+      </trkpt>
+      <trkpt lat="48.5742968" lon="13.4496026">
+        <time>2011-10-15T12:24:31Z</time>
+      </trkpt>
+      <trkpt lat="48.5742818" lon="13.4494324">
+        <time>2011-10-15T12:26:01Z</time>
+      </trkpt>
+      <trkpt lat="48.5742693" lon="13.4492544">
+        <time>2011-10-15T12:26:00Z</time>
+      </trkpt>
+      <trkpt lat="48.5742356" lon="13.448805">
+        <time>2011-10-15T12:26:00Z</time>
+      </trkpt>
+      <trkpt lat="48.5742278" lon="13.4486364">
+        <time>2011-10-15T12:26:01Z</time>
+      </trkpt>
+      <trkpt lat="48.5742328" lon="13.448404">
+        <time>2011-10-15T12:24:30Z</time>
+      </trkpt>
+      <trkpt lat="48.5742806" lon="13.4481897">
+        <time>2011-10-15T12:26:01Z</time>
+      </trkpt>
+      <trkpt lat="48.5744588" lon="13.4477159">
+        <time>2011-10-15T12:26:01Z</time>
+      </trkpt>
+      <trkpt lat="48.5744903" lon="13.4476552">
+        <time>2011-10-15T12:24:32Z</time>
+      </trkpt>
+      <trkpt lat="48.5745201" lon="13.4476033">
+        <time>2011-10-15T12:24:32Z</time>
+      </trkpt>
+      <trkpt lat="48.5746425" lon="13.4474452">
+        <time>2011-10-15T12:26:01Z</time>
+      </trkpt>
+      <trkpt lat="48.5747006" lon="13.4473792">
+        <time>2008-05-02T18:29:07Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Innstraße</name>
+    <trkseg>
+      <trkpt lat="48.5608463" lon="13.4415427">
+        <time>2011-05-27T15:48:17Z</time>
+      </trkpt>
+      <trkpt lat="48.561019" lon="13.4417986">
+        <time>2011-10-29T17:38:19Z</time>
+      </trkpt>
+      <trkpt lat="48.5611075" lon="13.4419298">
+        <time>2011-10-29T17:38:20Z</time>
+      </trkpt>
+      <trkpt lat="48.561151" lon="13.4419943">
+        <time>2011-10-29T17:38:20Z</time>
+      </trkpt>
+      <trkpt lat="48.5614086" lon="13.4423759">
+        <time>2011-05-27T15:48:17Z</time>
+      </trkpt>
+      <trkpt lat="48.5617191" lon="13.4428821">
+        <time>2009-03-15T12:35:32Z</time>
+      </trkpt>
+      <trkpt lat="48.5626218" lon="13.4439744">
+        <time>2011-05-27T15:48:19Z</time>
+      </trkpt>
+      <trkpt lat="48.5629417" lon="13.4444332">
+        <time>2011-05-27T15:48:19Z</time>
+      </trkpt>
+      <trkpt lat="48.563155" lon="13.4447201">
+        <time>2011-05-27T15:48:18Z</time>
+      </trkpt>
+      <trkpt lat="48.5632194" lon="13.4448159">
+        <time>2011-05-27T15:48:17Z</time>
+      </trkpt>
+      <trkpt lat="48.5635674" lon="13.4451766">
+        <time>2011-05-27T15:48:17Z</time>
+      </trkpt>
+      <trkpt lat="48.5636889" lon="13.4452962">
+        <time>2011-05-27T15:48:19Z</time>
+      </trkpt>
+      <trkpt lat="48.5642608" lon="13.4458008">
+        <time>2009-03-15T12:35:33Z</time>
+      </trkpt>
+      <trkpt lat="48.5644403" lon="13.4460235">
+        <time>2009-03-15T12:35:33Z</time>
+      </trkpt>
+      <trkpt lat="48.5646033" lon="13.4462071">
+        <time>2011-09-10T11:10:41Z</time>
+      </trkpt>
+      <trkpt lat="48.5647778" lon="13.4464035">
+        <time>2009-09-24T17:03:39Z</time>
+      </trkpt>
+      <trkpt lat="48.5648947" lon="13.4465403">
+        <time>2011-09-10T11:10:41Z</time>
+      </trkpt>
+      <trkpt lat="48.5649946" lon="13.4466453">
+        <time>2010-11-12T17:23:16Z</time>
+      </trkpt>
+      <trkpt lat="48.5653317" lon="13.4470573">
+        <time>2010-12-12T13:49:52Z</time>
+      </trkpt>
+      <trkpt lat="48.5659082" lon="13.4476321">
+        <time>2011-09-20T17:49:48Z</time>
+      </trkpt>
+      <trkpt lat="48.5659966" lon="13.4477256">
+        <time>2011-09-20T17:49:48Z</time>
+      </trkpt>
+      <trkpt lat="48.5661067" lon="13.4478506">
+        <time>2011-09-20T17:49:48Z</time>
+      </trkpt>
+      <trkpt lat="48.5662095" lon="13.4479789">
+        <time>2011-09-20T17:49:48Z</time>
+      </trkpt>
+      <trkpt lat="48.5663165" lon="13.4481171">
+        <time>2011-09-20T17:49:35Z</time>
+      </trkpt>
+      <trkpt lat="48.5664088" lon="13.4482561">
+        <time>2011-09-20T17:49:48Z</time>
+      </trkpt>
+      <trkpt lat="48.566546" lon="13.4485159">
+        <time>2011-09-20T17:49:49Z</time>
+      </trkpt>
+      <trkpt lat="48.5666029" lon="13.448637">
+        <time>2011-09-20T17:49:48Z</time>
+      </trkpt>
+      <trkpt lat="48.5666764" lon="13.4487821">
+        <time>2011-09-20T17:49:49Z</time>
+      </trkpt>
+      <trkpt lat="48.566711" lon="13.4488494">
+        <time>2011-09-20T17:49:48Z</time>
+      </trkpt>
+      <trkpt lat="48.5668942" lon="13.4492172">
+        <time>2011-09-10T11:10:49Z</time>
+      </trkpt>
+      <trkpt lat="48.5670009" lon="13.4494458">
+        <time>2010-12-19T19:17:00Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Breslauer Straße</name>
+    <trkseg>
+      <trkpt lat="48.5608662" lon="13.4213157">
+        <time>2009-12-06T23:29:58Z</time>
+      </trkpt>
+      <trkpt lat="48.560714" lon="13.4215735">
+        <time>2008-09-23T13:04:36Z</time>
+      </trkpt>
+      <trkpt lat="48.5605066" lon="13.421874">
+        <time>2008-09-23T13:04:36Z</time>
+      </trkpt>
+      <trkpt lat="48.5604164" lon="13.4220149">
+        <time>2011-09-10T11:10:36Z</time>
+      </trkpt>
+      <trkpt lat="48.5602855" lon="13.4222172">
+        <time>2008-09-23T13:04:36Z</time>
+      </trkpt>
+      <trkpt lat="48.5602218" lon="13.4222983">
+        <time>2008-09-23T13:04:35Z</time>
+      </trkpt>
+      <trkpt lat="48.559949" lon="13.4227302">
+        <time>2009-12-06T23:29:58Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Carossastraße</name>
+    <trkseg>
+      <trkpt lat="48.5846392" lon="13.3918649">
+        <time>2009-09-03T13:11:24Z</time>
+      </trkpt>
+      <trkpt lat="48.5847755" lon="13.3913806">
+        <time>2011-09-14T23:36:05Z</time>
+      </trkpt>
+      <trkpt lat="48.5845719" lon="13.3908638">
+        <time>2011-09-14T23:36:05Z</time>
+      </trkpt>
+      <trkpt lat="48.5840708" lon="13.3900026">
+        <time>2011-09-14T23:36:05Z</time>
+      </trkpt>
+      <trkpt lat="48.5841178" lon="13.3895798">
+        <time>2011-09-14T23:36:05Z</time>
+      </trkpt>
+      <trkpt lat="48.5845563" lon="13.3890474">
+        <time>2011-09-14T23:36:05Z</time>
+      </trkpt>
+      <trkpt lat="48.5845774" lon="13.3888674">
+        <time>2011-09-15T01:34:17Z</time>
+      </trkpt>
+      <trkpt lat="48.5845563" lon="13.3887028">
+        <time>2011-09-14T23:36:05Z</time>
+      </trkpt>
+      <trkpt lat="48.5844861" lon="13.3885364">
+        <time>2011-09-10T11:10:38Z</time>
+      </trkpt>
+      <trkpt lat="48.5838359" lon="13.386996">
+        <time>2011-09-14T23:36:05Z</time>
+      </trkpt>
+      <trkpt lat="48.5837558" lon="13.3866929">
+        <time>2011-09-25T12:25:44Z</time>
+      </trkpt>
+      <trkpt lat="48.5835493" lon="13.3856936">
+        <time>2011-09-25T12:25:44Z</time>
+      </trkpt>
+      <trkpt lat="48.5835204" lon="13.3855116">
+        <time>2011-09-25T12:26:39Z</time>
+      </trkpt>
+      <trkpt lat="48.5835209" lon="13.385352">
+        <time>2011-09-25T12:26:39Z</time>
+      </trkpt>
+      <trkpt lat="48.5835813" lon="13.3847936">
+        <time>2011-09-25T12:26:39Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Neuburger Straße</name>
+    <trkseg>
+      <trkpt lat="48.5616539" lon="13.4254273">
+        <time>2011-03-03T18:44:02Z</time>
+      </trkpt>
+      <trkpt lat="48.5616014" lon="13.4252911">
+        <time>2011-03-03T19:52:14Z</time>
+      </trkpt>
+      <trkpt lat="48.5614409" lon="13.4248819">
+        <time>2011-03-03T18:43:52Z</time>
+      </trkpt>
+      <trkpt lat="48.5611809" lon="13.4243551">
+        <time>2011-03-03T18:43:47Z</time>
+      </trkpt>
+      <trkpt lat="48.5609397" lon="13.4239927">
+        <time>2011-03-03T18:43:59Z</time>
+      </trkpt>
+      <trkpt lat="48.5602435" lon="13.4231624">
+        <time>2011-09-10T11:10:36Z</time>
+      </trkpt>
+      <trkpt lat="48.5601223" lon="13.4229787">
+        <time>2008-09-29T11:36:53Z</time>
+      </trkpt>
+      <trkpt lat="48.559949" lon="13.4227302">
+        <time>2009-12-06T23:29:58Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Regensburger Straße</name>
+    <trkseg>
+      <trkpt lat="48.5733902" lon="13.4362888">
+        <time>2011-01-05T11:21:08Z</time>
+      </trkpt>
+      <trkpt lat="48.5734835" lon="13.4330321">
+        <time>2009-05-22T13:14:54Z</time>
+      </trkpt>
+      <trkpt lat="48.5736269" lon="13.4288436">
+        <time>2009-07-19T14:51:36Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Bussteig 2</name>
+    <trkseg>
+      <trkpt lat="48.5728279" lon="13.4557253">
+        <time>2010-08-17T14:45:24Z</time>
+      </trkpt>
+      <trkpt lat="48.5724159" lon="13.4561427">
+        <time>2010-08-17T14:45:21Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Regensburger Straße</name>
+    <trkseg>
+      <trkpt lat="48.5764783" lon="13.4070131">
+        <time>2011-08-12T20:48:04Z</time>
+      </trkpt>
+      <trkpt lat="48.5766744" lon="13.4064506">
+        <time>2010-08-20T22:52:08Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Messestraße</name>
+    <trkseg>
+      <trkpt lat="48.5588542" lon="13.4114075">
+        <time>2011-09-10T11:10:41Z</time>
+      </trkpt>
+      <trkpt lat="48.5589242" lon="13.4114667">
+        <time>2009-10-13T10:32:30Z</time>
+      </trkpt>
+      <trkpt lat="48.5593199" lon="13.4119671">
+        <time>2010-11-22T12:46:48Z</time>
+      </trkpt>
+      <trkpt lat="48.5594006" lon="13.4120691">
+        <time>2009-10-13T10:32:30Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Birkhamer Straße</name>
+    <trkseg>
+      <trkpt lat="48.5624391" lon="13.4091625">
+        <time>2010-08-23T00:22:08Z</time>
+      </trkpt>
+      <trkpt lat="48.5622697" lon="13.4091584">
+        <time>2011-09-10T11:10:46Z</time>
+      </trkpt>
+      <trkpt lat="48.5621447" lon="13.4091619">
+        <time>2008-08-27T16:00:02Z</time>
+      </trkpt>
+      <trkpt lat="48.5620666" lon="13.4091585">
+        <time>2011-09-10T11:10:46Z</time>
+      </trkpt>
+      <trkpt lat="48.5614909" lon="13.4091333">
+        <time>2008-08-27T16:00:02Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Pionierstraße</name>
+    <trkseg>
+      <trkpt lat="48.5604869" lon="13.4090491">
+        <time>2008-09-20T22:44:07Z</time>
+      </trkpt>
+      <trkpt lat="48.5606407" lon="13.4084634">
+        <time>2011-02-04T17:20:28Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Carossastraße</name>
+    <trkseg>
+      <trkpt lat="48.5807726" lon="13.3688962">
+        <time>2010-05-01T16:02:18Z</time>
+      </trkpt>
+      <trkpt lat="48.5802845" lon="13.3685259">
+        <time>2009-09-05T12:38:04Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <trkseg>
+      <trkpt lat="48.572344" lon="13.4561222">
+        <time>2010-08-18T16:25:39Z</time>
+      </trkpt>
+      <trkpt lat="48.5724127" lon="13.4561836">
+        <time>2010-01-26T20:59:39Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Heuwieserstraße</name>
+    <trkseg>
+      <trkpt lat="48.5742917" lon="13.4547978">
+        <time>2011-01-23T23:58:38Z</time>
+      </trkpt>
+      <trkpt lat="48.5742092" lon="13.454779">
+        <time>2011-01-23T23:58:37Z</time>
+      </trkpt>
+      <trkpt lat="48.5740233" lon="13.4547139">
+        <time>2010-12-18T21:40:33Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <trkseg>
+      <trkpt lat="48.5614909" lon="13.4091333">
+        <time>2008-08-27T16:00:02Z</time>
+      </trkpt>
+      <trkpt lat="48.5613358" lon="13.4089272">
+        <time>2011-02-04T17:20:24Z</time>
+      </trkpt>
+      <trkpt lat="48.5606407" lon="13.4084634">
+        <time>2011-02-04T17:20:28Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Regensburger Straße</name>
+    <trkseg>
+      <trkpt lat="48.5733902" lon="13.4362888">
+        <time>2011-01-05T11:21:08Z</time>
+      </trkpt>
+      <trkpt lat="48.573525" lon="13.4383456">
+        <time>2009-05-22T13:14:51Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Bussteig 3</name>
+    <trkseg>
+      <trkpt lat="48.5728225" lon="13.4556922">
+        <time>2010-08-17T14:45:29Z</time>
+      </trkpt>
+      <trkpt lat="48.5724029" lon="13.4561167">
+        <time>2010-08-17T14:45:52Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Regensburger Straße</name>
+    <trkseg>
+      <trkpt lat="48.573525" lon="13.4383456">
+        <time>2009-05-22T13:14:51Z</time>
+      </trkpt>
+      <trkpt lat="48.5737022" lon="13.440614">
+        <time>2011-01-05T11:21:07Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Gionstraße</name>
+    <trkseg>
+      <trkpt lat="48.5816677" lon="13.3714092">
+        <time>2010-08-20T22:54:11Z</time>
+      </trkpt>
+      <trkpt lat="48.5817793" lon="13.3714756">
+        <time>2010-08-20T22:51:47Z</time>
+      </trkpt>
+      <trkpt lat="48.582204" lon="13.3717266">
+        <time>2010-08-20T22:51:45Z</time>
+      </trkpt>
+      <trkpt lat="48.5822671" lon="13.3717661">
+        <time>2009-04-03T13:38:31Z</time>
+      </trkpt>
+      <trkpt lat="48.5830208" lon="13.3727819">
+        <time>2009-04-03T13:38:31Z</time>
+      </trkpt>
+      <trkpt lat="48.583947" lon="13.3738525">
+        <time>2009-04-03T13:38:32Z</time>
+      </trkpt>
+      <trkpt lat="48.5842521" lon="13.3742495">
+        <time>2011-06-12T22:55:33Z</time>
+      </trkpt>
+      <trkpt lat="48.5842943" lon="13.3742896">
+        <time>2011-06-12T22:55:36Z</time>
+      </trkpt>
+      <trkpt lat="48.5843435" lon="13.3745187">
+        <time>2011-06-12T22:55:34Z</time>
+      </trkpt>
+      <trkpt lat="48.5844935" lon="13.3750878">
+        <time>2011-06-12T22:55:14Z</time>
+      </trkpt>
+      <trkpt lat="48.5845923" lon="13.3752895">
+        <time>2011-06-12T22:55:36Z</time>
+      </trkpt>
+      <trkpt lat="48.5847197" lon="13.375451">
+        <time>2011-06-12T22:55:15Z</time>
+      </trkpt>
+      <trkpt lat="48.5855276" lon="13.3763399">
+        <time>2011-06-12T22:55:15Z</time>
+      </trkpt>
+      <trkpt lat="48.5856906" lon="13.3765416">
+        <time>2011-06-12T22:55:36Z</time>
+      </trkpt>
+      <trkpt lat="48.5858344" lon="13.3767462">
+        <time>2011-06-12T22:55:38Z</time>
+      </trkpt>
+      <trkpt lat="48.5860367" lon="13.3770727">
+        <time>2011-06-12T22:55:15Z</time>
+      </trkpt>
+      <trkpt lat="48.5862156" lon="13.3774058">
+        <time>2011-06-12T22:55:36Z</time>
+      </trkpt>
+      <trkpt lat="48.5863655" lon="13.3777514">
+        <time>2011-06-12T22:55:15Z</time>
+      </trkpt>
+      <trkpt lat="48.5864425" lon="13.3779872">
+        <time>2011-06-12T22:55:15Z</time>
+      </trkpt>
+      <trkpt lat="48.5865327" lon="13.3784245">
+        <time>2011-06-12T22:55:16Z</time>
+      </trkpt>
+      <trkpt lat="48.5865956" lon="13.3786296">
+        <time>2011-06-12T22:55:37Z</time>
+      </trkpt>
+      <trkpt lat="48.5866811" lon="13.3788335">
+        <time>2011-06-12T22:55:16Z</time>
+      </trkpt>
+      <trkpt lat="48.5867469" lon="13.3790664">
+        <time>2011-06-12T22:55:16Z</time>
+      </trkpt>
+      <trkpt lat="48.5867975" lon="13.3793373">
+        <time>2011-09-15T01:34:18Z</time>
+      </trkpt>
+      <trkpt lat="48.5868144" lon="13.3794402">
+        <time>2011-06-12T22:55:34Z</time>
+      </trkpt>
+      <trkpt lat="48.5868244" lon="13.3795811">
+        <time>2011-06-12T22:55:37Z</time>
+      </trkpt>
+      <trkpt lat="48.5868281" lon="13.3797197">
+        <time>2011-06-12T22:55:34Z</time>
+      </trkpt>
+      <trkpt lat="48.5868233" lon="13.3802715">
+        <time>2011-09-15T01:34:18Z</time>
+      </trkpt>
+      <trkpt lat="48.5868485" lon="13.3808056">
+        <time>2010-08-20T22:54:35Z</time>
+      </trkpt>
+      <trkpt lat="48.5868744" lon="13.3809292">
+        <time>2011-09-15T01:34:18Z</time>
+      </trkpt>
+      <trkpt lat="48.5870873" lon="13.3815807">
+        <time>2010-08-20T22:52:17Z</time>
+      </trkpt>
+      <trkpt lat="48.5875732" lon="13.382418">
+        <time>2010-08-20T22:54:10Z</time>
+      </trkpt>
+      <trkpt lat="48.5878791" lon="13.3829009">
+        <time>2010-08-20T22:54:38Z</time>
+      </trkpt>
+      <trkpt lat="48.5879698" lon="13.383092">
+        <time>2010-08-20T22:53:42Z</time>
+      </trkpt>
+      <trkpt lat="48.5879462" lon="13.3832344">
+        <time>2010-08-20T22:51:55Z</time>
+      </trkpt>
+      <trkpt lat="48.587812" lon="13.3837767">
+        <time>2010-08-14T15:10:34Z</time>
+      </trkpt>
+      <trkpt lat="48.5878057" lon="13.3839336">
+        <time>2011-09-15T01:34:19Z</time>
+      </trkpt>
+      <trkpt lat="48.5878453" lon="13.3841371">
+        <time>2010-08-20T22:51:47Z</time>
+      </trkpt>
+      <trkpt lat="48.5879147" lon="13.3842716">
+        <time>2010-08-20T22:54:06Z</time>
+      </trkpt>
+      <trkpt lat="48.5885868" lon="13.385218">
+        <time>2009-04-03T13:38:34Z</time>
+      </trkpt>
+      <trkpt lat="48.5886882" lon="13.3853854">
+        <time>2011-09-15T01:34:20Z</time>
+      </trkpt>
+      <trkpt lat="48.5890301" lon="13.3858738">
+        <time>2010-08-20T22:54:37Z</time>
+      </trkpt>
+      <trkpt lat="48.5891364" lon="13.3860417">
+        <time>2010-08-20T22:51:55Z</time>
+      </trkpt>
+      <trkpt lat="48.589364" lon="13.3868309">
+        <time>2010-08-20T22:54:34Z</time>
+      </trkpt>
+      <trkpt lat="48.5894037" lon="13.3869668">
+        <time>2010-08-20T22:51:50Z</time>
+      </trkpt>
+      <trkpt lat="48.5896245" lon="13.3874654">
+        <time>2010-08-20T22:53:24Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Vornholzstraße</name>
+    <trkseg>
+      <trkpt lat="48.5624391" lon="13.4091625">
+        <time>2010-08-23T00:22:08Z</time>
+      </trkpt>
+      <trkpt lat="48.5620259" lon="13.4100717">
+        <time>2010-08-23T00:21:46Z</time>
+      </trkpt>
+      <trkpt lat="48.5619428" lon="13.4106814">
+        <time>2010-08-23T00:21:26Z</time>
+      </trkpt>
+      <trkpt lat="48.5619132" lon="13.4111707">
+        <time>2010-08-23T00:22:03Z</time>
+      </trkpt>
+      <trkpt lat="48.5618855" lon="13.4113819">
+        <time>2011-09-10T11:10:36Z</time>
+      </trkpt>
+      <trkpt lat="48.5618428" lon="13.4115937">
+        <time>2010-08-23T00:21:27Z</time>
+      </trkpt>
+      <trkpt lat="48.5617679" lon="13.4118691">
+        <time>2011-09-10T11:10:35Z</time>
+      </trkpt>
+      <trkpt lat="48.5617319" lon="13.4120003">
+        <time>2010-08-23T00:21:35Z</time>
+      </trkpt>
+      <trkpt lat="48.5615482" lon="13.4127165">
+        <time>2010-08-23T00:21:40Z</time>
+      </trkpt>
+      <trkpt lat="48.5614644" lon="13.4130123">
+        <time>2010-08-23T00:21:27Z</time>
+      </trkpt>
+      <trkpt lat="48.5613511" lon="13.4132809">
+        <time>2009-12-06T23:29:56Z</time>
+      </trkpt>
+      <trkpt lat="48.5612177" lon="13.4135398">
+        <time>2010-08-23T00:21:21Z</time>
+      </trkpt>
+      <trkpt lat="48.5611344" lon="13.4137521">
+        <time>2010-08-23T00:21:35Z</time>
+      </trkpt>
+      <trkpt lat="48.5611103" lon="13.4138999">
+        <time>2011-07-23T14:22:51Z</time>
+      </trkpt>
+      <trkpt lat="48.5611011" lon="13.4140889">
+        <time>2011-07-23T14:22:51Z</time>
+      </trkpt>
+      <trkpt lat="48.5611011" lon="13.4142219">
+        <time>2011-07-23T14:22:51Z</time>
+      </trkpt>
+      <trkpt lat="48.5610984" lon="13.4143553">
+        <time>2011-09-10T11:10:47Z</time>
+      </trkpt>
+      <trkpt lat="48.5610967" lon="13.4144052">
+        <time>2011-09-10T11:10:47Z</time>
+      </trkpt>
+      <trkpt lat="48.5611124" lon="13.4145553">
+        <time>2011-07-23T14:35:59Z</time>
+      </trkpt>
+      <trkpt lat="48.5611606" lon="13.4147014">
+        <time>2011-07-23T14:22:50Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Regensburger Straße</name>
+    <trkseg>
+      <trkpt lat="48.5736269" lon="13.4288436">
+        <time>2009-07-19T14:51:36Z</time>
+      </trkpt>
+      <trkpt lat="48.5736678" lon="13.426295">
+        <time>2009-05-22T13:14:54Z</time>
+      </trkpt>
+      <trkpt lat="48.5734836" lon="13.423654">
+        <time>2009-05-22T13:14:54Z</time>
+      </trkpt>
+      <trkpt lat="48.5733674" lon="13.422022">
+        <time>2009-05-22T13:14:54Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <trkseg>
+      <trkpt lat="48.5723081" lon="13.4560883">
+        <time>2010-08-17T14:45:30Z</time>
+      </trkpt>
+      <trkpt lat="48.572344" lon="13.4561222">
+        <time>2010-08-18T16:25:39Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Königsberger Straße</name>
+    <trkseg>
+      <trkpt lat="48.5611606" lon="13.4147014">
+        <time>2011-07-23T14:22:50Z</time>
+      </trkpt>
+      <trkpt lat="48.5615302" lon="13.415384">
+        <time>2009-12-06T23:29:57Z</time>
+      </trkpt>
+      <trkpt lat="48.5619972" lon="13.4160627">
+        <time>2009-12-06T23:29:57Z</time>
+      </trkpt>
+      <trkpt lat="48.5623888" lon="13.4168258">
+        <time>2011-02-04T07:03:32Z</time>
+      </trkpt>
+      <trkpt lat="48.5624858" lon="13.4170148">
+        <time>2009-12-06T23:29:57Z</time>
+      </trkpt>
+      <trkpt lat="48.5626166" lon="13.4171749">
+        <time>2008-09-29T11:22:23Z</time>
+      </trkpt>
+      <trkpt lat="48.5627371" lon="13.4173078">
+        <time>2008-09-29T11:22:24Z</time>
+      </trkpt>
+      <trkpt lat="48.5628985" lon="13.4175037">
+        <time>2011-09-10T11:10:42Z</time>
+      </trkpt>
+      <trkpt lat="48.5629473" lon="13.4175629">
+        <time>2008-09-13T17:57:27Z</time>
+      </trkpt>
+      <trkpt lat="48.5629745" lon="13.4175965">
+        <time>2011-09-10T11:10:42Z</time>
+      </trkpt>
+      <trkpt lat="48.5631122" lon="13.4177665">
+        <time>2009-12-06T23:29:58Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Pionierstraße</name>
+    <trkseg>
+      <trkpt lat="48.5600982" lon="13.4102774">
+        <time>2011-01-05T10:55:40Z</time>
+      </trkpt>
+      <trkpt lat="48.5604869" lon="13.4090491">
+        <time>2008-09-20T22:44:07Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Alte Poststraße</name>
+    <trkseg>
+      <trkpt lat="48.5804386" lon="13.3673166">
+        <time>2011-09-16T09:10:05Z</time>
+      </trkpt>
+      <trkpt lat="48.5803881" lon="13.3669477">
+        <time>2011-09-16T09:09:43Z</time>
+      </trkpt>
+      <trkpt lat="48.5803506" lon="13.366528">
+        <time>2010-08-17T23:27:43Z</time>
+      </trkpt>
+      <trkpt lat="48.580356" lon="13.3657049">
+        <time>2011-09-16T09:09:43Z</time>
+      </trkpt>
+      <trkpt lat="48.580381" lon="13.3652197">
+        <time>2011-09-16T09:09:43Z</time>
+      </trkpt>
+      <trkpt lat="48.5803329" lon="13.364791">
+        <time>2011-09-16T09:09:43Z</time>
+      </trkpt>
+      <trkpt lat="48.5803186" lon="13.3646751">
+        <time>2011-09-16T09:09:43Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Neuburger Straße</name>
+    <trkseg>
+      <trkpt lat="48.5618046" lon="13.4257883">
+        <time>2011-03-03T18:44:02Z</time>
+      </trkpt>
+      <trkpt lat="48.5616895" lon="13.4255126">
+        <time>2011-03-03T19:52:14Z</time>
+      </trkpt>
+      <trkpt lat="48.5616539" lon="13.4254273">
+        <time>2011-03-03T18:44:02Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Regensburger Straße</name>
+    <trkseg>
+      <trkpt lat="48.5733674" lon="13.422022">
+        <time>2009-05-22T13:14:54Z</time>
+      </trkpt>
+      <trkpt lat="48.573381" lon="13.4217168">
+        <time>2009-05-22T13:14:54Z</time>
+      </trkpt>
+      <trkpt lat="48.573402" lon="13.4214779">
+        <time>2009-09-13T16:42:33Z</time>
+      </trkpt>
+      <trkpt lat="48.5734185" lon="13.4212907">
+        <time>2011-09-10T11:10:46Z</time>
+      </trkpt>
+      <trkpt lat="48.5734573" lon="13.4208504">
+        <time>2011-11-08T18:28:42Z</time>
+      </trkpt>
+      <trkpt lat="48.573655" lon="13.4186056">
+        <time>2009-05-22T13:14:54Z</time>
+      </trkpt>
+      <trkpt lat="48.5740044" lon="13.4171584">
+        <time>2009-05-22T13:14:54Z</time>
+      </trkpt>
+      <trkpt lat="48.5740482" lon="13.4170093">
+        <time>2011-09-10T11:10:46Z</time>
+      </trkpt>
+      <trkpt lat="48.5740572" lon="13.4169788">
+        <time>2011-09-10T11:10:46Z</time>
+      </trkpt>
+      <trkpt lat="48.574376" lon="13.4158934">
+        <time>2009-05-22T13:14:54Z</time>
+      </trkpt>
+      <trkpt lat="48.5744145" lon="13.4157659">
+        <time>2009-05-22T13:14:54Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <trkseg>
+      <trkpt lat="48.5729059" lon="13.455679">
+        <time>2010-08-17T14:45:51Z</time>
+      </trkpt>
+      <trkpt lat="48.5727595" lon="13.455825">
+        <time>2010-08-17T14:45:23Z</time>
+      </trkpt>
+      <trkpt lat="48.5726526" lon="13.4559412">
+        <time>2010-08-17T14:45:22Z</time>
+      </trkpt>
+      <trkpt lat="48.5725255" lon="13.4560734">
+        <time>2010-08-17T14:45:21Z</time>
+      </trkpt>
+      <trkpt lat="48.5724127" lon="13.4561836">
+        <time>2010-01-26T20:59:39Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Alte Poststraße</name>
+    <trkseg>
+      <trkpt lat="48.5803186" lon="13.3646751">
+        <time>2011-09-16T09:09:43Z</time>
+      </trkpt>
+      <trkpt lat="48.5799782" lon="13.3629202">
+        <time>2011-09-16T09:09:42Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Neuburger Straße</name>
+    <trkseg>
+      <trkpt lat="48.5641402" lon="13.4321312">
+        <time>2009-12-06T23:30:07Z</time>
+      </trkpt>
+      <trkpt lat="48.564091" lon="13.4319566">
+        <time>2009-12-06T23:30:07Z</time>
+      </trkpt>
+      <trkpt lat="48.5640515" lon="13.4318456">
+        <time>2009-08-08T13:48:38Z</time>
+      </trkpt>
+      <trkpt lat="48.5638977" lon="13.4314137">
+        <time>2010-12-17T17:13:24Z</time>
+      </trkpt>
+      <trkpt lat="48.5637562" lon="13.4310164">
+        <time>2009-12-06T23:30:07Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Heininger Straße</name>
+    <trkseg>
+      <trkpt lat="48.584473" lon="13.396193">
+        <time>2010-08-20T12:52:13Z</time>
+      </trkpt>
+      <trkpt lat="48.5839853" lon="13.3970621">
+        <time>2010-08-20T12:52:14Z</time>
+      </trkpt>
+      <trkpt lat="48.5833604" lon="13.3979831">
+        <time>2010-08-20T12:52:13Z</time>
+      </trkpt>
+      <trkpt lat="48.5823245" lon="13.3995854">
+        <time>2010-08-20T22:53:44Z</time>
+      </trkpt>
+      <trkpt lat="48.5823509" lon="13.4003209">
+        <time>2010-08-20T22:54:11Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Pionierstraße</name>
+    <trkseg>
+      <trkpt lat="48.5594006" lon="13.4120691">
+        <time>2009-10-13T10:32:30Z</time>
+      </trkpt>
+      <trkpt lat="48.5597685" lon="13.4111869">
+        <time>2011-01-05T10:55:44Z</time>
+      </trkpt>
+      <trkpt lat="48.5600982" lon="13.4102774">
+        <time>2011-01-05T10:55:40Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Hunostraße</name>
+    <trkseg>
+      <trkpt lat="48.5846392" lon="13.3918649">
+        <time>2009-09-03T13:11:24Z</time>
+      </trkpt>
+      <trkpt lat="48.5846732" lon="13.391908">
+        <time>2010-08-18T13:39:02Z</time>
+      </trkpt>
+      <trkpt lat="48.5848972" lon="13.392173">
+        <time>2011-09-17T12:38:56Z</time>
+      </trkpt>
+      <trkpt lat="48.5855686" lon="13.3930423">
+        <time>2011-09-14T23:36:04Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Augustinergasse</name>
+    <trkseg>
+      <trkpt lat="48.571327" lon="13.4573543">
+        <time>2011-01-11T01:27:15Z</time>
+      </trkpt>
+      <trkpt lat="48.5709208" lon="13.4577921">
+        <time>2011-01-11T01:27:16Z</time>
+      </trkpt>
+      <trkpt lat="48.570485" lon="13.4582919">
+        <time>2011-01-11T01:27:13Z</time>
+      </trkpt>
+      <trkpt lat="48.570427" lon="13.4583615">
+        <time>2011-01-11T01:27:19Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Fuchsbauerweg</name>
+    <trkseg>
+      <trkpt lat="48.5608463" lon="13.4415427">
+        <time>2011-05-27T15:48:17Z</time>
+      </trkpt>
+      <trkpt lat="48.5609112" lon="13.4414479">
+        <time>2011-05-27T15:48:19Z</time>
+      </trkpt>
+      <trkpt lat="48.5611111" lon="13.4411027">
+        <time>2009-12-06T23:30:10Z</time>
+      </trkpt>
+      <trkpt lat="48.5615448" lon="13.4404006">
+        <time>2009-12-06T23:30:10Z</time>
+      </trkpt>
+      <trkpt lat="48.5615788" lon="13.440041">
+        <time>2010-01-12T03:15:05Z</time>
+      </trkpt>
+      <trkpt lat="48.5616253" lon="13.4395499">
+        <time>2009-12-06T23:30:11Z</time>
+      </trkpt>
+      <trkpt lat="48.5614047" lon="13.4387109">
+        <time>2011-10-29T17:57:56Z</time>
+      </trkpt>
+      <trkpt lat="48.5613704" lon="13.438146">
+        <time>2011-10-29T17:58:03Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <trkseg>
+      <trkpt lat="48.572344" lon="13.4561222">
+        <time>2010-08-18T16:25:39Z</time>
+      </trkpt>
+      <trkpt lat="48.5725073" lon="13.4559586">
+        <time>2010-08-18T16:25:44Z</time>
+      </trkpt>
+      <trkpt lat="48.5726272" lon="13.4558447">
+        <time>2010-08-18T16:25:35Z</time>
+      </trkpt>
+      <trkpt lat="48.5727546" lon="13.4557153">
+        <time>2010-08-18T16:25:34Z</time>
+      </trkpt>
+      <trkpt lat="48.5729342" lon="13.4555386">
+        <time>2010-08-18T16:25:39Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Innstraße</name>
+    <trkseg>
+      <trkpt lat="48.5670009" lon="13.4494458">
+        <time>2010-12-19T19:17:00Z</time>
+      </trkpt>
+      <trkpt lat="48.5671721" lon="13.4498354">
+        <time>2010-12-19T19:16:43Z</time>
+      </trkpt>
+      <trkpt lat="48.5672557" lon="13.4500127">
+        <time>2011-09-10T11:10:49Z</time>
+      </trkpt>
+      <trkpt lat="48.5672696" lon="13.450042">
+        <time>2010-12-19T19:16:52Z</time>
+      </trkpt>
+      <trkpt lat="48.5673178" lon="13.4501512">
+        <time>2010-12-19T19:16:56Z</time>
+      </trkpt>
+      <trkpt lat="48.5675268" lon="13.4505944">
+        <time>2010-12-19T19:17:00Z</time>
+      </trkpt>
+      <trkpt lat="48.5675863" lon="13.4507431">
+        <time>2011-01-10T21:15:16Z</time>
+      </trkpt>
+      <trkpt lat="48.567692" lon="13.451052">
+        <time>2011-01-10T21:14:59Z</time>
+      </trkpt>
+      <trkpt lat="48.5677506" lon="13.4512615">
+        <time>2011-01-10T21:15:39Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Schaldinger Straße</name>
+    <trkseg>
+      <trkpt lat="48.5855686" lon="13.3930423">
+        <time>2011-09-14T23:36:04Z</time>
+      </trkpt>
+      <trkpt lat="48.5862539" lon="13.3923148">
+        <time>2010-08-20T22:51:54Z</time>
+      </trkpt>
+      <trkpt lat="48.5869353" lon="13.3914487">
+        <time>2010-08-20T22:51:55Z</time>
+      </trkpt>
+      <trkpt lat="48.5876231" lon="13.3904196">
+        <time>2010-08-20T22:53:03Z</time>
+      </trkpt>
+      <trkpt lat="48.5887528" lon="13.3887293">
+        <time>2010-08-20T22:52:47Z</time>
+      </trkpt>
+      <trkpt lat="48.5892684" lon="13.3880031">
+        <time>2011-09-10T11:10:48Z</time>
+      </trkpt>
+      <trkpt lat="48.5894677" lon="13.3877124">
+        <time>2011-09-10T11:10:48Z</time>
+      </trkpt>
+      <trkpt lat="48.5896245" lon="13.3874654">
+        <time>2010-08-20T22:53:24Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Kleiner Exerzierplatz</name>
+    <trkseg>
+      <trkpt lat="48.5719974" lon="13.4559276">
+        <time>2008-02-13T15:18:10Z</time>
+      </trkpt>
+      <trkpt lat="48.5717504" lon="13.4554876">
+        <time>2010-12-11T19:41:49Z</time>
+      </trkpt>
+      <trkpt lat="48.5716117" lon="13.455302">
+        <time>2010-12-11T19:41:48Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Bahnhofstraße</name>
+    <trkseg>
+      <trkpt lat="48.5744151" lon="13.4528109">
+        <time>2011-01-23T23:58:39Z</time>
+      </trkpt>
+      <trkpt lat="48.5743992" lon="13.4515562">
+        <time>2011-10-15T12:25:59Z</time>
+      </trkpt>
+      <trkpt lat="48.5743928" lon="13.4513645">
+        <time>2011-10-15T12:26:00Z</time>
+      </trkpt>
+      <trkpt lat="48.5743801" lon="13.4511087">
+        <time>2011-10-15T12:26:00Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Innstraße</name>
+    <trkseg>
+      <trkpt lat="48.5700413" lon="13.4573323">
+        <time>2011-01-11T01:27:19Z</time>
+      </trkpt>
+      <trkpt lat="48.5700808" lon="13.4574617">
+        <time>2011-09-10T11:10:35Z</time>
+      </trkpt>
+      <trkpt lat="48.5701687" lon="13.4577071">
+        <time>2011-09-10T11:10:35Z</time>
+      </trkpt>
+      <trkpt lat="48.5703555" lon="13.4581835">
+        <time>2011-01-11T01:27:16Z</time>
+      </trkpt>
+      <trkpt lat="48.570427" lon="13.4583615">
+        <time>2011-01-11T01:27:19Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Carossastraße</name>
+    <trkseg>
+      <trkpt lat="48.5833116" lon="13.3822631">
+        <time>2011-09-25T12:26:39Z</time>
+      </trkpt>
+      <trkpt lat="48.5833815" lon="13.3828075">
+        <time>2011-09-25T12:26:34Z</time>
+      </trkpt>
+      <trkpt lat="48.583566" lon="13.3843211">
+        <time>2011-09-25T12:26:41Z</time>
+      </trkpt>
+      <trkpt lat="48.5835813" lon="13.3847936">
+        <time>2011-09-25T12:26:39Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Kleiner Exerzierplatz</name>
+    <trkseg>
+      <trkpt lat="48.5719974" lon="13.4559276">
+        <time>2008-02-13T15:18:10Z</time>
+      </trkpt>
+      <trkpt lat="48.5719938" lon="13.4559599">
+        <time>2008-02-13T15:18:11Z</time>
+      </trkpt>
+      <trkpt lat="48.5719991" lon="13.4559877">
+        <time>2008-02-13T15:18:11Z</time>
+      </trkpt>
+      <trkpt lat="48.5720139" lon="13.4560128">
+        <time>2008-02-13T15:18:12Z</time>
+      </trkpt>
+      <trkpt lat="48.5720332" lon="13.4560243">
+        <time>2008-02-13T15:18:12Z</time>
+      </trkpt>
+      <trkpt lat="48.5720532" lon="13.4560222">
+        <time>2008-02-13T15:18:13Z</time>
+      </trkpt>
+      <trkpt lat="48.5720703" lon="13.4560081">
+        <time>2008-02-13T15:18:10Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Heuwieserstraße</name>
+    <trkseg>
+      <trkpt lat="48.5740233" lon="13.4547139">
+        <time>2010-12-18T21:40:33Z</time>
+      </trkpt>
+      <trkpt lat="48.5737667" lon="13.4546504">
+        <time>2011-11-09T13:27:55Z</time>
+      </trkpt>
+      <trkpt lat="48.5735859" lon="13.4547272">
+        <time>2010-12-18T21:40:32Z</time>
+      </trkpt>
+      <trkpt lat="48.5730091" lon="13.4553034">
+        <time>2010-01-26T20:59:46Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <trkseg>
+      <trkpt lat="48.5730091" lon="13.4553034">
+        <time>2010-01-26T20:59:46Z</time>
+      </trkpt>
+      <trkpt lat="48.5729546" lon="13.4554486">
+        <time>2010-08-17T14:45:28Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Kleiner Exerzierplatz</name>
+    <trkseg>
+      <trkpt lat="48.5716117" lon="13.455302">
+        <time>2010-12-11T19:41:48Z</time>
+      </trkpt>
+      <trkpt lat="48.5715622" lon="13.4553697">
+        <time>2010-12-11T19:41:48Z</time>
+      </trkpt>
+      <trkpt lat="48.571296" lon="13.4557076">
+        <time>2011-01-11T01:27:17Z</time>
+      </trkpt>
+      <trkpt lat="48.5710794" lon="13.4559994">
+        <time>2009-06-03T20:01:41Z</time>
+      </trkpt>
+      <trkpt lat="48.5709863" lon="13.4561717">
+        <time>2011-01-11T01:27:14Z</time>
+      </trkpt>
+      <trkpt lat="48.5709704" lon="13.4563143">
+        <time>2011-01-11T01:27:15Z</time>
+      </trkpt>
+      <trkpt lat="48.570995" lon="13.4565113">
+        <time>2011-01-11T01:27:15Z</time>
+      </trkpt>
+      <trkpt lat="48.5712897" lon="13.4571948">
+        <time>2011-01-11T01:27:17Z</time>
+      </trkpt>
+      <trkpt lat="48.571327" lon="13.4573543">
+        <time>2011-01-11T01:27:15Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Regensburger Straße</name>
+    <trkseg>
+      <trkpt lat="48.5745503" lon="13.415342">
+        <time>2010-03-09T10:49:05Z</time>
+      </trkpt>
+      <trkpt lat="48.5746408" lon="13.4150521">
+        <time>2009-05-22T13:14:54Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Innstraße</name>
+    <trkseg>
+      <trkpt lat="48.5694946" lon="13.4551478">
+        <time>2008-04-23T18:46:03Z</time>
+      </trkpt>
+      <trkpt lat="48.5696075" lon="13.4554917">
+        <time>2007-10-05T22:41:17Z</time>
+      </trkpt>
+      <trkpt lat="48.569695" lon="13.4557462">
+        <time>2011-01-11T01:27:15Z</time>
+      </trkpt>
+      <trkpt lat="48.5698337" lon="13.4563758">
+        <time>2011-01-11T01:27:19Z</time>
+      </trkpt>
+      <trkpt lat="48.5699557" lon="13.4570381">
+        <time>2011-01-11T01:27:13Z</time>
+      </trkpt>
+      <trkpt lat="48.5700413" lon="13.4573323">
+        <time>2011-01-11T01:27:19Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Regensburger Straße</name>
+    <trkseg>
+      <trkpt lat="48.5771945" lon="13.4052363">
+        <time>2010-08-20T22:53:04Z</time>
+      </trkpt>
+      <trkpt lat="48.5775198" lon="13.4047423">
+        <time>2010-08-20T22:52:51Z</time>
+      </trkpt>
+      <trkpt lat="48.577994" lon="13.4041848">
+        <time>2010-08-20T22:51:52Z</time>
+      </trkpt>
+      <trkpt lat="48.5785061" lon="13.4036797">
+        <time>2010-08-20T22:51:50Z</time>
+      </trkpt>
+      <trkpt lat="48.5790225" lon="13.4031878">
+        <time>2010-08-20T22:51:54Z</time>
+      </trkpt>
+      <trkpt lat="48.5795197" lon="13.4026804">
+        <time>2010-08-20T22:54:36Z</time>
+      </trkpt>
+      <trkpt lat="48.5803287" lon="13.401912">
+        <time>2010-08-20T22:51:56Z</time>
+      </trkpt>
+      <trkpt lat="48.5811692" lon="13.4012603">
+        <time>2009-04-04T22:11:44Z</time>
+      </trkpt>
+      <trkpt lat="48.5823509" lon="13.4003209">
+        <time>2010-08-20T22:54:11Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Alte Poststraße</name>
+    <trkseg>
+      <trkpt lat="48.5802845" lon="13.3685259">
+        <time>2009-09-05T12:38:04Z</time>
+      </trkpt>
+      <trkpt lat="48.5803721" lon="13.3680152">
+        <time>2011-09-16T09:09:43Z</time>
+      </trkpt>
+      <trkpt lat="48.5804158" lon="13.3676407">
+        <time>2010-08-23T00:21:23Z</time>
+      </trkpt>
+      <trkpt lat="48.5804386" lon="13.3673166">
+        <time>2011-09-16T09:10:05Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Messestraße</name>
+    <trkseg>
+      <trkpt lat="48.5584994" lon="13.4111544">
+        <time>2011-09-10T11:10:41Z</time>
+      </trkpt>
+      <trkpt lat="48.5586226" lon="13.4112115">
+        <time>2009-10-13T10:32:30Z</time>
+      </trkpt>
+      <trkpt lat="48.5587249" lon="13.4112981">
+        <time>2010-08-19T23:20:42Z</time>
+      </trkpt>
+      <trkpt lat="48.5588542" lon="13.4114075">
+        <time>2011-09-10T11:10:41Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Regensburger Straße</name>
+    <trkseg>
+      <trkpt lat="48.5747006" lon="13.4473792">
+        <time>2008-05-02T18:29:07Z</time>
+      </trkpt>
+      <trkpt lat="48.5748147" lon="13.4472596">
+        <time>2009-05-22T13:14:51Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Carossastraße</name>
+    <trkseg>
+      <trkpt lat="48.5816677" lon="13.3714092">
+        <time>2010-08-20T22:54:11Z</time>
+      </trkpt>
+      <trkpt lat="48.5815875" lon="13.371114">
+        <time>2010-08-20T22:51:51Z</time>
+      </trkpt>
+      <trkpt lat="48.5812991" lon="13.3700524">
+        <time>2011-09-14T23:36:06Z</time>
+      </trkpt>
+      <trkpt lat="48.5810973" lon="13.3696092">
+        <time>2010-08-20T22:51:51Z</time>
+      </trkpt>
+      <trkpt lat="48.5807726" lon="13.3688962">
+        <time>2010-05-01T16:02:18Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <trkseg>
+      <trkpt lat="48.5729059" lon="13.455679">
+        <time>2010-08-17T14:45:51Z</time>
+      </trkpt>
+      <trkpt lat="48.5729342" lon="13.4555386">
+        <time>2010-08-18T16:25:39Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Schaldinger Straße</name>
+    <trkseg>
+      <trkpt lat="48.5855686" lon="13.3930423">
+        <time>2011-09-14T23:36:04Z</time>
+      </trkpt>
+      <trkpt lat="48.5848867" lon="13.393825">
+        <time>2011-10-11T17:51:33Z</time>
+      </trkpt>
+      <trkpt lat="48.5847974" lon="13.3939274">
+        <time>2011-09-17T12:38:55Z</time>
+      </trkpt>
+      <trkpt lat="48.5845013" lon="13.3942555">
+        <time>2011-09-10T10:47:13Z</time>
+      </trkpt>
+      <trkpt lat="48.5841485" lon="13.3946722">
+        <time>2011-09-14T23:36:04Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>    <name>Kleiner Exerzierplatz</name>
+    <trkseg>
+      <trkpt lat="48.5720703" lon="13.4560081">
+        <time>2008-02-13T15:18:10Z</time>
+      </trkpt>
+      <trkpt lat="48.5720842" lon="13.4559765">
+        <time>2008-02-13T15:18:10Z</time>
+      </trkpt>
+      <trkpt lat="48.5720864" lon="13.4559522">
+        <time>2008-02-13T15:18:11Z</time>
+      </trkpt>
+      <trkpt lat="48.5720819" lon="13.4559245">
+        <time>2008-02-13T15:18:12Z</time>
+      </trkpt>
+      <trkpt lat="48.5720678" lon="13.4558988">
+        <time>2008-02-13T15:18:11Z</time>
+      </trkpt>
+      <trkpt lat="48.5720486" lon="13.455886">
+        <time>2008-02-13T15:18:11Z</time>
+      </trkpt>
+      <trkpt lat="48.5720301" lon="13.4558897">
+        <time>2008-02-13T15:18:13Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+</gpx>

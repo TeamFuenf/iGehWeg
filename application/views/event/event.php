@@ -145,7 +145,7 @@ table#eventmembers
 
         <div class='selection'>
         <b>Titel:</b>
-        <input id='eventname' name='eventname' value='<?php echo $event->title; ?>'/>
+        <input id='eventname' placeholder="(555) 555-5555" name='eventname' value='<?php echo $event->title; ?>'/>
         </div>
 
         <?php        

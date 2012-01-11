@@ -1,38 +1,9 @@
-<style>
-  div.olControlAttribution
-  {
-    display:none;
-  }
-
-  div.olMapViewport
-  {
-    z-index: 0;
-  }
-
-  div#map
-  {
-    width:400px
-    height:400px;
-    margin:0px;
-    padding:0px;
-  }
-  
-  div#popup
-  {
-    display:none;
-    width:500px;
-    background-color:#fff;
-    position:absolute;
-    z-index:999;
-    border-radius:5px;
-    padding:10px;
-    margin:0px;
-  }
-  
-</style>
-
-<script>
 var map, selectControl;
+        
+var markerStyle = new OpenLayers.StyleMap({
+  pointRadius: 15,
+  externalGraphic: "<?php echo base_url()."images/marker.png"; ?>"
+});
 
 var fromProj = new OpenLayers.Projection("EPSG:4326"); // WGS84
 var toProj = new OpenLayers.Projection("EPSG:900913"); // Spherical Mercator
@@ -49,11 +20,7 @@ function initMap()
   bounds.extend(new OpenLayers.LonLat(13.4993596,48.5855492));
   bounds.transform(fromProj, toProj);
 
-  map = new OpenLayers.Map("map", {
-    controls: [
-      new OpenLayers.Control.Navigation()
-    ]
-  });
+  map = new OpenLayers.Map("map");
   map.setOptions({restrictedExtent: bounds});
 
   var meetuppMap = new OpenLayers.Layer.OSM("meetupp", "http://images.rawsteel.de.s3.amazonaws.com/meetupp/tiles/${z}/${x}/${y}.png");
@@ -165,19 +132,19 @@ function initMap()
 // --- Eventhandlers ----------------------------------------------------------
   
   locations.events.on({
-    "featureselected": function(evt) {
-      openLocationPreviewPopup(evt);
+    "featureselected": function(event) {
+      openPreviewPopup(event.feature);
     },
-    "featureunselected": function(evt) {
+    "featureunselected": function(event) {
       closePreviewPopup();
     }
   });          
 
   friends.events.on({
-    "featureselected": function(evt) {
-      openFriendsPreviewPopup(evt);
+    "featureselected": function(event) {
+      openPreviewPopup(event.feature);
     },
-    "featureunselected": function(evt) {
+    "featureunselected": function(event) {
       closePreviewPopup();
     }
   });          
@@ -185,8 +152,8 @@ function initMap()
   loadGeoJSON(locationUrl, locations);
   loadGeoJSON(friendsUrl, friends);
 
-/*
   loadGPX("http://localhost/gpx/linie1.gpx", buslinien);
+/*
   loadGPX("http://localhost/gpx/linie2.gpx", buslinien);
   loadGPX("http://localhost/gpx/linie5.gpx", buslinien);
   loadGPX("http://localhost/gpx/linie6.gpx", buslinien);
@@ -226,54 +193,18 @@ function loadGeoJSON(url, layer)
   });
 }
 
-function openLocationPreviewPopup(evt)
+function openPreviewPopup(feature)
 {
-  var feature = evt.feature;
   var buffer = "";
   for (var i=0; i < feature.cluster.length; i++)
   {
     var locationName = feature.cluster[i].attributes.name;
     
-    buffer += "<a href='#'>" + locationName + "</a><br>";
+    buffer += locationName+"\n";
   }
-  $("#popup")
-    .html(buffer)
-    .show();
-}
-
-function openFriendsPreviewPopup(evt)
-{
-  console.log(evt.xy);
-  var feature = evt.feature;
-  var buffer = "";
-  for (var i=0; i < feature.cluster.length; i++)
-  {
-    var friendName = feature.cluster[i].attributes.name;
-    var friendPicture = feature.cluster[i].attributes.picture;    
-    buffer += "<img width='64px' height='64px' style='border-radius:10px' src='" + friendPicture + "'/>" + friendName+"<br>";
-  }
-  
-  var padding = 25;
-  $("#popup")
-    .html(buffer)
-    .show();
+  alert(buffer);
 }
 
 function closePreviewPopup()
 {
-  $("#popup").hide();
 }
-
-</script>
-
-<div id="window">
-  <ul id="pages">
-    <li>
-    <div id="popup">Popup</div>
-		<div id="map"></div>
-		<script>
-		  initMap();
-		</script>
-    </li>
-  </ul>
-</div>
