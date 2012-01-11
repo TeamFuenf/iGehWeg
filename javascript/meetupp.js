@@ -29,6 +29,7 @@
       page(activepage+1);
     }
   }
+  
 
   $(document).ready(function() {
     numpages = $("#pages > li").size();
@@ -117,7 +118,7 @@ $(document).ready(function() {
     });
   });
 
-  $(".deleteicon a").on("click", function(e) {
+  $(".deleteicon b").on("click", function(e) {
     e.preventDefault();
     
     var row = $(this).parents("tr");
@@ -194,6 +195,12 @@ $(document).ready(function()
     $("#window").scrollTop($("ul #eventlocations > li.selected").offset().top - 100);
   });
   
+  $("#eventbutton_location_prev").on("click", function()
+  {   
+    pagePrev();
+    $("#window").scrollTop(0);
+  });
+
   /**
    * Basisdaten updaten
    */

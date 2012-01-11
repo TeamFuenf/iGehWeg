@@ -58,7 +58,15 @@
     color:#666;
     text-decoration:none;
   }
-    
+   
+  ul img
+  {
+    width:64px;
+    height:64px;
+    border-radius:10px;
+    vertical-align:middle;
+  }
+   
 </style>
 
 <div id="window">
@@ -81,6 +89,21 @@
               echo anchor("mail/inbox", "Neue Nachrichten: ".count($newmessages));
             }
           ?>  
+        </div>
+        
+        <div class="contentbox">
+        <h2>Freunde in der Nähe:</h2>
+        <?php
+          echo "<ul>";
+          foreach ($knearestfriends as $friend)
+          {
+            if ($friend->distance < 5000)
+            {
+              echo "<li>".img($friend->picture)." ".$friend->name." (ca. ".$friend->distance."m)</li>";              
+            }
+          }
+          echo "<ul>";
+        ?>
         </div>
         
         <div class="contentbox">

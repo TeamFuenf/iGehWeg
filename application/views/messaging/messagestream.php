@@ -84,7 +84,8 @@ foreach($messages as $message)
 {
   $user = img("helper/images/user/plain/".$message->id);
   $time = date("j.", $message->time)." ".$month[date("n", $message->time)];
-  $deletelink = anchor("mail/delete/".$message->messageid, "&#10005;");
+//  $deletelink = anchor("mail/delete/".$message->messageid, "&#10005;");
+  $deletelink = "<b href=\"".site_url("mail/delete/".$message->messageid)."\">&#10005;</b>";
   
   echo "<tr>";
   if ($message->sender == $userid)

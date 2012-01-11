@@ -7,8 +7,29 @@ class Friends_model extends CI_Model
     {
         parent::__construct();
     }
+    
+    /**
+     * Liefert die k nähesten Freunde inkl der Distanz in Metern zurück
+     */
+    public function getKNearestFriends($k)
+    {
+      $userid = $this->session->userdata("userid");
+      $sql = "
+      SELECT user.*,
+      ROUND(SQRT(
+      POW(71.5 * (user.lon - (SELECT lon FROM user WHERE user.id = '".$userid."')),2) + 
+      POW(111.3 * (user.lat - (SELECT lat FROM user WHERE user.id = '".$userid."')),2)) * 1000) as distance
+      FROM user, friend
+      WHERE friend.id = '".$userid."'
+      AND friend.friendid = user.id
+      ORDER BY distance
+      LIMIT ".$k."
+      ";
+      $query = $this->db->query($sql);
+      return $query->result();
+    }
 
-	/**
+    	/**
 	 * Holt einen Benutzer.
 	 * 
 	 * <- $user_id

@@ -8,6 +8,7 @@ class Event_model extends CI_Model
     parent::__construct();
     $this->load->helper("form");
     $this->load->model("friends/Friends_model");
+    $this->load->model("messaging/Messaging_model");
   }
 
 // --------------------------------------------------------------------------------------------------------------------
@@ -237,7 +238,14 @@ class Event_model extends CI_Model
       $data["memberid"] = $memberid;
       $data["status"] = $status;
       $this->db->insert("event_member", $data);      
-    } 
+    }
+    
+    if ($status == "invited")
+    {
+      $event = $this->getEvent($eventid);
+      $msg = "<b>Automatische Nachricht:</b>\nDu wurdest zum Event \"".$event->title."\" eingeladen.";
+      $this->Messaging_model->send($memberid, $msg);
+    }
   }
 
   public function setBasedata($eventid, $title, $from, $to)
@@ -264,6 +272,76 @@ class Event_model extends CI_Model
     }
   }
 
+  public function checkPlausibility($from, $to)
+  {
+    $userid = $this->session->userdata("userid");
+    
+    // Sind die Zeitpunkte in der richtigen Reihenfolge ?
+    if ($to < $from)
+    {
+      return "Falsche Zeitreihenfolge";
+    }
+    
+    // Liegt das Event in der Vergangenheit ?
+    $now = time();
+    if ($to < $now || $from < $now)
+    {
+      return "Event in der Vergangenheit";
+    }
+    
+    // Schneiden die Zeiten ein anderes Event zu dem der User eingeladen ist ?
+    $sql = "
+    SELECT *
+    FROM event
+    WHERE creator = '".$userid."'
+    OR id IN (
+    SELECT eventid
+    FROM event_member
+    WHERE memberid = '".$userid."'
+    AND status <> 'invited'
+    )
+    ";
+    $query = $this->db->query($sql);
+    $attendingevents = $query->result();
+    
+    foreach ($attendingevents as $event)
+    {
+      if (($from <= $event->begintime && $to <= $event->endtime) || ($from >= $event->begintime && $to >= $event->endtime))
+      {
+          // Keine überschneidung
+      }
+      else
+      {
+        return "Event überschneidet sich mit vorhandenem Event"; 
+      }
+    }
+    return "okay";
+  }
+
+// --------------------------------------------------------------------------------------------------------------------
+
+  public function insertComment($eventid, $comment)
+  {
+    $data["eventid"] = $eventid;
+    $data["author"] = $this->session->userdata("userid");
+    $data["comment"] = $comment;
+    $data["time"] = time();
+    $this->db->insert("event_comment", $data);     
+  }
+  
+  public function getComments($eventid)
+  {
+    $sql = "
+    SELECT event_comment.*, user.name, user.picture
+    FROM event_comment, user 
+    WHERE event_comment.eventid = '".$eventid."'
+    AND event_comment.author = user.id
+    ORDER BY event_comment.time ASC
+    ";
+    $query = $this->db->query($sql);    
+    return $query->result();
+  }
+  
 // --------------------------------------------------------------------------------------------------------------------
 
   public function cleanup()
