@@ -18,6 +18,7 @@ var fromProj = new OpenLayers.Projection("EPSG:4326"); // WGS84
 var toProj = new OpenLayers.Projection("EPSG:900913"); // Spherical Mercator
 
 var locationUrl = "<?php echo site_url("map/map/getlocations"); ?>";
+var friendsUrl = "<?php echo site_url("map/map/getfriends"); ?>";
 
 function initMap()
 {                         
@@ -39,21 +40,19 @@ function initMap()
   map.setCenter(new OpenLayers.LonLat(13.46, 48.6).transform(fromProj, toProj), 15);
   map.pan(1,1);
 
-  var strategy = new OpenLayers.Strategy.Cluster();
+  var friendsStrategy = new OpenLayers.Strategy.Cluster();
+  friendsStrategy.distance = 50;
 
-  var style = new OpenLayers.Style({
+  var locationsStrategy = new OpenLayers.Strategy.Cluster();
+  locationsStrategy.distance = 30;
+  locationsStrategy.threshold = 1;
+
+  var locationStyle = new OpenLayers.Style({
     pointRadius: "${radius}",
-    fillColor: "#ffcc66",
-    fillOpacity: 0.8,
-    strokeColor: "#cc6633",
-    strokeWidth: "${width}",
-    strokeOpacity: 0.8,
-    externalGraphic: "<?php echo base_url()."images/marker.png"; ?>"
+    fillOpacity: 0.5,
+    externalGraphic: "<?php echo base_url()."images/marker_star.png"; ?>"
   }, {
     context: {
-      width: function(feature) {
-        return (feature.cluster) ? 2 : 1;
-      },
       radius: function(feature) {
         var pix = 10;
         if(feature.cluster) {
@@ -63,34 +62,47 @@ function initMap()
       }
     }
   });
-
-  strategy = new OpenLayers.Strategy.Cluster();
-
-  locations = new OpenLayers.Layer.Vector("Clusters", {
-    strategies: [strategy],
-    styleMap: new OpenLayers.StyleMap({
-      "default": style,
-      "select": {
-        fillColor: "#8aeeef",
-        strokeColor: "#32a8a9"
+  
+  var friendsStyle = new OpenLayers.Style({
+    pointRadius: "20",
+    fillColor: "#ffcc66",
+    externalGraphic: "${image}"
+  }, {
+    context: {
+      image: function(feature) {        
+        if (feature.cluster.length == 1)
+        {
+          var imgurl = feature.cluster[0].attributes.picture;
+        }
+        else
+        {
+          var imgurl = "<?php echo base_url()."images/marker_friends.png"; ?>";
+        }
+        return imgurl;
       }
-    })
+    }
+  });
+  
+  var locations = new OpenLayers.Layer.Vector("Locations", {
+    strategies: [locationsStrategy],
+    styleMap: locationStyle
   });                    
   
-  map.addLayer(locations);
-  
-  OpenLayers.loadURL(locationUrl, {}, null, function(r) {
-     var geojsonFormat = new OpenLayers.Format.GeoJSON({
-      "internalProjection": toProj,
-      "externalProjection": fromProj
-      });
-     var features = geojsonFormat.read(r.responseText);
-     locations.addFeatures(features);  
+  var friends = new OpenLayers.Layer.Vector("Friends", {
+    strategies: [friendsStrategy],
+    styleMap: friendsStyle
   });
+ 
+  map.addLayer(locations);
+  map.addLayer(friends);
+  
+  loadGeoJSON(locationUrl, locations);
+  loadGeoJSON(friendsUrl, friends);
 
   selectControl = new OpenLayers.Control.SelectFeature(
-    [locations], { clickout: true, toggle: false, multiple: false, hover: false}
+    [friends, locations], { clickout: true, toggle: false, multiple: false, hover: false}
   );
+  
   map.addControl(selectControl);
   selectControl.activate();
   
@@ -102,6 +114,28 @@ function initMap()
       closePreviewPopup();
     }
   });          
+
+  friends.events.on({
+    "featureselected": function(event) {
+      openPreviewPopup(event.feature);
+    },
+    "featureunselected": function(event) {
+      closePreviewPopup();
+    }
+  });          
+
+}
+
+function loadGeoJSON(url, layer)
+{
+  OpenLayers.loadURL(url, {}, null, function(r) {
+     var geojsonFormat = new OpenLayers.Format.GeoJSON({
+      "internalProjection": toProj,
+      "externalProjection": fromProj
+      });
+     var features = geojsonFormat.read(r.responseText);
+     layer.addFeatures(features);  
+  });
 }
 
 function openPreviewPopup(feature)
@@ -110,6 +144,7 @@ function openPreviewPopup(feature)
   for (var i=0; i < feature.cluster.length; i++)
   {
     var locationName = feature.cluster[i].attributes.name;
+    
     buffer += locationName+"\n";
   }
   alert(buffer);

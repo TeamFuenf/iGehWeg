@@ -4,10 +4,10 @@ class Map extends CI_Controller {
   public function __construct()
   {
     parent::__construct();
-	parent::is_logged_in();
+    parent::is_logged_in();
     $this->load->model("map/Map_model");
     $this->load->model("map/Marker_model");
-	$this->load->model("friends/Friends_model");
+    $this->load->model("friends/Friends_model");
   }
 
 // --------------------------------------------------------------------------------------------------------------------
@@ -31,6 +31,35 @@ class Map extends CI_Controller {
           "geometry": {
             "type": "Point",
             "coordinates": ['.$loc->lon.', '.$loc->lat.']
+          }
+        },
+      ';
+    }
+    echo "{}";
+    echo ']}';
+  }
+  
+  function getfriends()
+  {
+    $userid = $this->session->userdata("userid");
+    echo '{
+      "type": "FeatureCollection", 
+      "features": [
+    ';
+    $friends = $this->Friends_model->get_friends($userid);
+    foreach ($friends as $friend)
+    {
+      echo '
+        {
+          "type": "Feature",
+          "id": "'.$friend->id.'",
+          "properties": {
+            "name": "'.$friend->name.'",
+            "picture": "'.$friend->picture.'"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": ['.$friend->lon.', '.$friend->lat.']
           }
         },
       ';
