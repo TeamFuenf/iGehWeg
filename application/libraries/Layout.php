@@ -29,6 +29,11 @@ class Layout
       $data["control_friends"] = anchor("/friends", img("../images/control_friends.png"));
       $data["control_timeline"] = anchor("/timeline", img("../images/control_timeline.png"));
       
+	  $data["dashboard"] = anchor("/dashboard/dashboard", img("../images/dashboard.png"));
+      $data["map"] = anchor("/map", img("../images/map.png"));
+      $data["friends"] = anchor("/friends", img("../images/friends.png"));
+      $data["timeline"] = anchor("/timeline", img("../images/timeline.png"));
+	  
       $CI->load->view("base/header.php", $data);
       $CI->load->view($view, $vars);
       if ($controls)

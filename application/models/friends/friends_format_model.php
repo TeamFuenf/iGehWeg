@@ -50,7 +50,7 @@ class Friends_format_model extends CI_Model
     					.$current_user->name."
     				 </div>
     				 <div id='friends_add_button'>
-    				 	".anchor('/friends/friends_control/add_friends_main', '+', 'style="text-decoration: none;"')."
+    				 <a href='/friends/friends_control/add_friends_main'>+</a>
     				 </div>
     				 <ul id='friends_friend_list'>"
     				 	.$friends_list."

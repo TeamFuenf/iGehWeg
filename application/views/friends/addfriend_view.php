@@ -26,7 +26,7 @@
 <body>
 	<?php 
 		echo form_input('searchname', 'Type in name...', 'id="search_field"'); 
-		echo anchor('/friends', 'BACK TO FRIENDS', 'id="back_to_friends_button"');
+		//echo anchor('/friends', 'BACK TO FRIENDS', 'id="back_to_friends_button"');
 	?>
 	<div id="add_friend">
 		<?php echo $detail_string; ?>

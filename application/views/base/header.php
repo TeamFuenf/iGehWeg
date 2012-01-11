@@ -26,11 +26,25 @@
   </head>
 
   <script>
-  function BlockMove(event)
-  {
-    // Tell Safari not to move the window.
-    //event.preventDefault() ;
-  }
+	  $(function () {
+	  	$('a').on('click', function(event){
+	  		event.preventDefault();
+	  		var url = $(this).attr('href');
+	  		console.log(url);
+	  		$.ajax({
+	  			url: url,
+	  			success: function(data) {
+	  				$('body').html(data);
+	  			}
+	  		})
+	  	})
+	  });
+	  
+	  function BlockMove(event)
+	  {
+	    // Tell Safari not to move the window.
+	    //event.preventDefault() ;
+	  }
   </script>
 
   <body ontouchmove="BlockMove(event);">
