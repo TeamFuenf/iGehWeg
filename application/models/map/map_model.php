@@ -12,21 +12,18 @@ class Map_model extends CI_Model
 
   public function getuser($userid)
   {
-  	$marker = "";
+  $marker = "";
 	$this->db->select('name, picture, lon, lat');
 	$this->db->where('id', $userid);
 	$query = $this->db->get('user');
-	$result = $query->row();
-	return $result;
+	return $query->row();
   }
-
-
 
   public function getLocation($locationid)
   {
     $this->db->where("id", $locationid);
     $query = $this->db->get("location");
-    return $query->row_array();
+    return $query->row();
   }
 
   public function getAllLocations()

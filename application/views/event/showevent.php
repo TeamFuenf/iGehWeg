@@ -159,7 +159,11 @@ h2
               <td colspan="2">
                 <h1><?php echo $event->title; ?></h1>
               </td>
-              <td width="200" height="200" rowspan="5">
+              <td width="200" height="200" rowspan="5">               
+                <?php 
+                  $linkAtts["class"] = "external";
+                  echo anchor("event/ical/".$event->id, "iCal Download", $linkAtts);
+                ?>
                 <!--
                 <iframe src="../../map/snippet/10" width="250" height="250" frameborder="0">
                 </iframe>

@@ -9,6 +9,7 @@ class Event_model extends CI_Model
     $this->load->helper("form");
     $this->load->model("friends/Friends_model");
     $this->load->model("messaging/Messaging_model");
+    $this->load->model("map/Map_model");
   }
 
 // --------------------------------------------------------------------------------------------------------------------
@@ -340,6 +341,49 @@ class Event_model extends CI_Model
     ";
     $query = $this->db->query($sql);    
     return $query->result();
+  }
+
+// --------------------------------------------------------------------------------------------------------------------
+
+  public function generateICal($eventid)
+  {
+    $event = $this->getEvent($eventid);
+    $eventmembers = $this->getEventMembers($eventid);
+    $creator = $this->Friends_model->get_user($event->creator);
+    $location = $this->Map_model->getLocation($event->location);
+    
+    echo "BEGIN:VCALENDAR\n";
+    echo "VERSION:2.0\n";
+    echo "PRODID:PHP\n";
+    echo "METHOD:REQUEST\n";
+    echo "BEGIN:VEVENT\n";
+    echo "LOCATION:".$location->name."\n";
+    echo "DTSTART:".date("Ymd", $event->begintime).'T'.date("His", $event->begintime)."\n";
+    echo "DTEND:".date("Ymd", $event->endtime).'T'.date("His", $event->endtime)."\n";
+    echo "CREATOR:".$event->creator."\n";
+    echo "SUMMARY:".$event->title."\n";
+    echo "DESCRIPTION:Event von ".$creator->name.". Mehr Infos unter: ".site_url("event/".$event->id)."\n";
+    echo "UID:1\n";
+    echo "SEQUENCE:0\n";
+    echo "DTSTAMP:".date('Ymd').'T'.date('His')."\n";
+    echo "ATTENDEE;CN=".$creator->name.";CUTYPE=INDIVIDUAL;PARTSTAT=ACCEPTED;RSVP=FALSE:invalid:nomail\n";                
+    
+    foreach ($eventmembers as $member)
+    {
+      if ($member->status == "attending")
+      {
+        echo "ATTENDEE;CN=".$member->name.";CUTYPE=INDIVIDUAL;PARTSTAT=ACCEPTED;RSVP=FALSE:invalid:nomail\n";                
+      }
+      else
+      {
+        echo "ATTENDEE;CN=".$member->name.";CUTYPE=INDIVIDUAL;PARTSTAT=NEEDS-ACTION;RSVP=FALSE:invalid:nomail\n";        
+      }
+    }
+
+    echo "URL:".site_url("event/".$event->id)."\n";
+    echo "END:VEVENT\n";
+    echo "END:VCALENDAR\n"; 
+ 
   }
   
 // --------------------------------------------------------------------------------------------------------------------
