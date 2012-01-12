@@ -27,13 +27,12 @@ class Dashboard extends CI_Controller
     
     $data["newmessages"] = $this->Messaging_model->countUnreadMessages();
     
-    $data["eventlink"] = anchor("#", "Veranstaltung erstellen");
-    $data["friendlink"] = anchor("#", "Freunde und Gruppen verwalten");
-    $data["locationlink"] = anchor("#", "Location bearbeiten");
+    $data["eventlink"] = anchor("#", "<img src='../../images/event_new.png' /><div id='button_header'>Events<br><span class='additional_text'>Hier kannst du neue Events erstellen</span></div>", 'class="button_long blue"');
+    $data["locationlink"] = anchor("#", "<img src='../../images/location_edit.png' /><div id='button_header'>Locations<br><span class='additional_text'>Hier kannst du neue Locations hinzufügen</span></div>", 'class="button_long green"');
     
     // Seite 2
     // $data["loginform"] = $this->Login_model->getUsers();
-	$data["logoutlink"] = anchor("/base/login_control/logout", "Logout");      
+	$data["logoutlink"] = anchor("/base/login_control/logout", "<img src='../../images/logout.png' /><div id='button_header'>Logout<br><span class='additional_text'>Hier gehts wieder in die reale Welt</span></div>", 'class="button_long red"');      
 
     $this->layout->view("dashboard/dashboard", $data);
   }

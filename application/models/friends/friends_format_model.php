@@ -3,6 +3,18 @@
 class Friends_format_model extends CI_Model
 {
 
+	var $ajax_link = "$('a').on('click', function(event){
+					  		event.preventDefault();
+					  		var url = $(this).attr('href');
+					  		console.log(url);
+					  		$.ajax({
+					  			url: url,
+					  			success: function(data) {
+					  				$('body').html(data);
+					  			}
+					  		})
+					  	});";
+
     function __construct()
     {
         parent::__construct();
@@ -43,6 +55,7 @@ class Friends_format_model extends CI_Model
   								}
 							});
 						});
+						".$this->ajax_link."						
 						</script>";
 		
     	$string = 	"<div id='friends_current_user'>
@@ -116,6 +129,7 @@ class Friends_format_model extends CI_Model
 										}
 									});
 								});
+								".$this->ajax_link."
 							</script>";
 		
 		$string = "	<div id='current_detail'>
@@ -209,6 +223,7 @@ class Friends_format_model extends CI_Model
 										}
 									});
 								});
+								".$this->ajax_link."
 							</script>";
 		
 		$string = "	<h2>Add to group</h2><br/><br/>
@@ -253,6 +268,7 @@ class Friends_format_model extends CI_Model
 	  								}
 								});
 							});
+							".$this->ajax_link."
 							</script>";
 		
 		

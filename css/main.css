@@ -1,14 +1,21 @@
+@font-face {
+font-family: segoeui;
+src:url(segoeui.ttf);
+}
+
 /* --- Basic Layout ------------------------------------------------------------------------------------------------ */
 
 html
 {
-/*  background-color:#7facba; */
-/*  background-color:#ddd;*/
-  background-color: #dddbcd;
-  margin:0px;
+  background-color: #E4E3D9;
+  background-image: url('../../images/body_background.gif');
+  margin:0px auto;
   padding:0px;
-  overflow:hidden;
-  font-size:100%;
+  overflow: hidden;
+  font-size: 100%;
+  width: 640px;
+  height: 920px;
+  font-family: Arial !important;
 }
 
 body
@@ -16,91 +23,163 @@ body
   margin:0px;
   padding:0px;
   font-size:1em;
+  
 }
 
 div#content
 {
-  width:100%;
-  height:90%;
-  max-width:1024px;
-  margin:0px auto;
-/*  background-color:#8fbcca; */
-/*  background-color:#eee;*/
-  background-color: #dddbcd;
+  height: 790px;
+  margin: 0px auto;
+  z-index: 0;
 }
 
 div#controls
 {
-  position:absolute;
+  position: fixed;
   bottom:0px;
-  left:0px;
-  width:100%;
-  height: 70px;
+  margin: 0px auto;
+  width: 640px;
+  height: 127px;
   border-top: 1px solid #282521;
-/*  background-color:#555555;*/
-/*  background-color: #5A524B;*/
-  background-image: url('https://mybasis.com/img/m/headerBG.gif');
+  z-index: 1;
+  background-image: url('../../images/controls_background.png');
   text-align:center;
 }
 
 div#controls ul
 {
-  width:100%;
+  width: 640px;
   height:100%;
-  max-width:1024px;
   margin:0px auto;
   padding:0px;
-/*  background-color:#666666;*/
-/*  background-color: #5A524B;*/
-  background-image: url('https://mybasis.com/img/m/headerBG.gif');
   list-style-type:none
-}
-
-div#dropshadow_controls {
-	background: url("../../images/shadow8px.png") repeat-x scroll left top transparent;
-	margin-top: -6px;
-	height: 6px;
 }
 
 div#controls li
 {
   display:inline-block;
-  margin-top:10px;
-  margin-left: 2%;
-  margin-right: 2%;
-  
-/*
-  display:inline-block;
-  width:80px;
-  height:90%;
-  min-height:70px;
-  max-height:80px;
-  margin-left:4%;
-  margin-right:4%;
-  margin-top:20px;
-*/
+  margin-top: 10px;
+  margin-left: 17px;
+  margin-right: 17px;
 }
 
 div#controls li img
 {
-  border:0px;
-  width: 64px;
-  height: 64px;
-/*  width:100%;*/
+	margin: 0px;
+	padding: 0px;
+  	border:0px;
+  	width: 120px;
+  	height: 120px;
+}
+
+div#dropshadow_controls {
+	position: fixed;
+	bottom: 127px;
+	background: url("../../images/shadow8px.png") repeat-x scroll left top transparent;
+	height: 6px;
+	width: 640px;
 }
 
 /* Hardwareunterstützung auf iOS */
 img.olTileImage
 {
   -webkit-transform: translate3d(0, 0, 0);
-} 
+}
+
+/* --- Standardelemente -------------------------------------------------------------------------------------------- */
+
+div.userprofile {
+/*	background: url("../../images/userprofile_background.png") no-repeat scroll 0 100% #FEFDFC;*/
+	background-image: url('../../images/controls_background.png');
+/*	color: #534B43;*/
+	color: white;
+	padding: 15px;
+	font-size: 50px;
+/*	border-radius: 5px;*/
+}
+
+div.userprofile img {
+	width: 100px;
+	height: 100px;
+	border-radius: 5px;
+	vertical-align: top;
+}
+
+a.button_long {
+	text-decoration: none;
+	color: white;
+	background-color: #f78d02;
+	border-radius: 0px;
+	border: 1px solid #707070;
+	display: block;
+	margin: 0px;
+	padding: 25px;
+	text-align: left;
+	/*-moz-box-shadow:
+    0px 1px 1px rgba(000,000,000,0.1),
+    inset 0px 1px 1px rgba(255,255,255,1);
+	  -webkit-box-shadow:
+	    0px 1px 1px rgba(000,000,000,0.1),
+	    inset 0px 1px 1px rgba(255,255,255,1);*/
+}
+
+a.button_long.green {
+	background-color: #94bf3c;
+}
+
+a.button_long.blue {
+	background-color: #00a8c1;
+}
+
+a.button_long.red {
+	background-color: #f16437;
+}
+
+a.button_long img {
+	width: 60px;
+	height: 60px;
+	margin-right: 10px;
+	vertical-align: bottom;
+}
+
+a.button_long #new_messages {
+	color: black;
+	font-size: 22px;
+	border: 2px solid black;
+	display: inline-block;
+	background-color: #E12D2D;
+	width: 25px;
+	height: 25px;
+	border-radius: 20px;
+	margin-left: -70px;
+	margin-right: 40px;
+}
+
+/* --- Dashboard --------------------------------------------------------------------------------------------------- */
+
+div.contentbox {
+	margin: 0px;
+}
+
+div.contentbox > ul {
+  	list-style-type: none;
+  	padding: 0px;
+  	margin: 0px;
+}
+
+div#button_header {
+	display: inline-block;
+}
+
+span.additional_text {
+	font-size: 16px;
+}
 
 /* --- Seiten ------------------------------------------------------------------------------------------------------ */
 
 div#window
 {
-  width:100%;
-  height:100%;
+  width: 640px;
   overflow-x: hidden; 
   overflow-y: auto;
 }
@@ -127,30 +206,26 @@ div#scroll a
 
 ul#pages
 {
-  margin:0px;
-  padding:0px;
-  width:5000px;
-  height:100%;  
-  list-style-type:none; 
-  position:relative;
-  left:0px;
-  top:0px;
+  margin: 0px;
+  padding: 0px;
+  width: 5000px;
+  height: 100%;  
+  list-style-type: none; 
+  left: 0px;
+  top: 0px;
+  font-size: 30px;
+  font-weight: bold;
 }
 
-ul#pages > li
+ul#pages>li
 {
-  float:left;
-  margin:0px;
-  padding:0px;
-  display:inline-block;
-  width:100px;
-  height:100%;   
-}
-
-ul#pages > li > div
-{
-  font-family:sans-serif;
-  margin:15px;
+  float: left;
+  margin: 0px;
+  border-radius: 0px;
+  padding: 0px;
+  max-width: 640px;
+  height: 100%;
+  background-color: white; /* Farbe noch ändern */
 }
 
 /* --- Überschriften ----------------------------------------------------------------------------------------------- */
