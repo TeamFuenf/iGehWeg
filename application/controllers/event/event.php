@@ -12,16 +12,7 @@ class Event extends CI_Controller
     $this->Event_model->cleanup();
   }
   
-// --------------------------------------------------------------------------------------------------------------------
 
-  public function ical()
-  {
-    header("Content-Type: text/Calendar");
-    header("Content-Disposition: inline; filename=calendar.ics");      
-    $eventid = $this->uri->segment(3);
-    echo $this->Event_model->generateICal($eventid);  
-  }
-  
 // --------------------------------------------------------------------------------------------------------------------
 
   public function newevent()
