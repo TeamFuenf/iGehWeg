@@ -29,9 +29,49 @@
     margin:0px;
   }
   
+  div.newlocation-edit
+  {
+    display:none;
+  }
+  
 </style>
 
 <script>
+OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {
+    defaultHandlerOptions: {
+      'single': true,
+      'double': false,
+      'pixelTolerance': 0,
+      'stopSingle': false,
+      'stopDouble': false
+    },
+
+    initialize: function(options) {
+      this.handlerOptions = OpenLayers.Util.extend(
+        {}, this.defaultHandlerOptions
+      );
+      OpenLayers.Control.prototype.initialize.apply(
+        this, arguments
+      );
+      this.handler = new OpenLayers.Handler.Click(
+        this, {
+          'click': this.trigger
+        }, this.handlerOptions
+      );
+    },
+
+    trigger: function(e) {
+      var lonlat = map.getLonLatFromViewPortPx(e.xy);
+      
+      alert("LonLat für neue Location: lon: " + lonlat.lon + " , lat: " +
+      + lonlat.lat);
+      
+      
+      
+      
+    }
+    
+  });
 var map, selectControl;
 
 var fromProj = new OpenLayers.Projection("EPSG:4326"); // WGS84
@@ -39,6 +79,8 @@ var toProj = new OpenLayers.Projection("EPSG:900913"); // Spherical Mercator
 
 var locationUrl = "<?php echo site_url("map/map/getlocations"); ?>";
 var friendsUrl = "<?php echo site_url("map/map/getfriends"); ?>";
+
+var locations, friends, newlocation;
 
 function initMap()
 {                         
@@ -135,12 +177,12 @@ function initMap()
 
 // --- Layers -----------------------------------------------------------------
     
-  var locations = new OpenLayers.Layer.Vector("Locations", {
+  locations = new OpenLayers.Layer.Vector("Locations", {
     strategies: [locationsStrategy],
-    styleMap: locationStyle
-  });                    
+    styleMap: locationStyle,
+  });
   
-  var friends = new OpenLayers.Layer.Vector("Friends", {
+  friends = new OpenLayers.Layer.Vector("Friends", {
     strategies: [friendsStrategy],
     styleMap: friendsStyle
   });
@@ -149,10 +191,16 @@ function initMap()
  //   strategies: [buslinesStrategy],
     styleMap: buslinienStyle
   });
+  
+  newlocation = new OpenLayers.Layer.Vector("newLocation", {
+    visibility: false,
+    styleMap: locationStyle
+  });   
 
   map.addLayer(locations);
   map.addLayer(friends);
   map.addLayer(buslinien);
+  map.addLayer(newlocation);
 
 
   selectControl = new OpenLayers.Control.SelectFeature(
@@ -222,7 +270,7 @@ function loadGeoJSON(url, layer)
       "externalProjection": fromProj
       });
      var features = geojsonFormat.read(r.responseText);
-     layer.addFeatures(features);  
+     layer.addFeatures(features);
   });
 }
 
@@ -264,16 +312,58 @@ function closePreviewPopup()
   $("#popup").hide();
 }
 
+
+
+  
+  
+function newLocation()
+{
+  
+  locations.setVisibility(false);
+  friends.display(false);
+  newlocation.display(true);
+  $(".newlocation-edit").show();
+  $("#newlocation").hide()
+  
+  
+  
+  
+  var clickControl = new OpenLayers.Control.Click();
+  selectControl.deactivate();
+  map.addControl(clickControl);
+  clickControl.activate();
+}
+
+
+function cancel()
+{
+  locations.setVisibility(true);
+  friends.display(true);
+  newlocation.display(false);
+  $(".newlocation-edit").hide();
+  $("#newlocation").show()
+}
+
+function next()
+{
+  locations.setVisibility(true);
+  friends.display(true);
+  newlocation.display(false);
+  $(".newlocation-edit").hide();
+  $("#newlocation").show()
+}
+
 </script>
 
 <div id="window">
   <ul id="pages">
     <li>
-    <div id="popup">Popup</div>
-		<div id="map"></div>
-		<script>
-		  initMap();
-		</script>
+      <div id="newlocation"><button type="button" onclick="newLocation()">+ Location</button> </div>
+      <div class="newlocation-edit" id="edit-cancel"><button type="button" onclick="cancel()">Abbrechen</button> </div>
+      <div class="newlocation-edit" id="edit-next"><button type="button" onclick="next()">Weiter</button> </div>
+      <div id="popup">Popup</div>
+      <div id="map"></div>
+      <script>initMap();</script>
     </li>
   </ul>
 </div>

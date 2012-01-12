@@ -8,20 +8,7 @@ class Marker_model extends CI_Model
     parent::__construct();
   }
   
-  public function getUserIcon($userid)
-  {
-  	$marker = "";
-	$this->db->select('name, picture, lon, lat');
-	$this->db->where('id', $userid);
-	$query = $this->db->get('user');
-	$result = $query->row();
-	$lon = $result->lon;
-	$lat = $result->lat;
-	$picture = $result->picture;
-	$name = $result->name;
-	
-	return $this->createUserIcon($name, $lon, $lat, $picture);
-  }
+
   
   public function getFriendsIcons($friends)
   {

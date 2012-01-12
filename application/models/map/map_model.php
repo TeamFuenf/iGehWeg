@@ -10,6 +10,18 @@ class Map_model extends CI_Model
 
 // --------------------------------------------------------------------------------------------------------------------
 
+  public function getuser($userid)
+  {
+  	$marker = "";
+	$this->db->select('name, picture, lon, lat');
+	$this->db->where('id', $userid);
+	$query = $this->db->get('user');
+	$result = $query->row();
+	return $result;
+  }
+
+
+
   public function getLocation($locationid)
   {
     $this->db->where("id", $locationid);
