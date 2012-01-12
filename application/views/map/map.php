@@ -29,7 +29,7 @@
     margin:0px;
   }
   
-  div.newlocation-edit
+  button.button-map-location-edit
   {
     display:none;
   }
@@ -59,20 +59,19 @@ OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {
         }, this.handlerOptions
       );
     },
-
+    
     trigger: function(e) {
       var lonlat = map.getLonLatFromViewPortPx(e.xy);
-      
-      alert("LonLat für neue Location: lon: " + lonlat.lon + " , lat: " +
-      + lonlat.lat);
-      
-      
-      
-      
+      lonlat.transform(toProj, fromProj);
+      var newLocationUrl = "<?php echo site_url("location/location/getnewlocation/"); ?>/" + lonlat.lon + "/" + lonlat.lat;
+      newlocation.removeAllFeatures();
+      loadGeoJSON(newLocationUrl, newlocation);
+      newlocation.redraw();
     }
     
   });
-var map, selectControl;
+  
+var map, selectControl, clickControl;
 
 var fromProj = new OpenLayers.Projection("EPSG:4326"); // WGS84
 var toProj = new OpenLayers.Projection("EPSG:900913"); // Spherical Mercator
@@ -101,7 +100,7 @@ function initMap()
   var meetuppMap = new OpenLayers.Layer.OSM("meetupp", "http://images.rawsteel.de.s3.amazonaws.com/meetupp/tiles/${z}/${x}/${y}.png");
   meetuppMap.isBaseLayer = true;
   map.addLayer(meetuppMap);
-            
+  
   map.setCenter(new OpenLayers.LonLat(13.46, 48.6).transform(fromProj, toProj), 15);
   map.pan(1,1);
 
@@ -178,11 +177,13 @@ function initMap()
 // --- Layers -----------------------------------------------------------------
     
   locations = new OpenLayers.Layer.Vector("Locations", {
+    visibility: true,
     strategies: [locationsStrategy],
-    styleMap: locationStyle,
+    styleMap: locationStyle
   });
   
   friends = new OpenLayers.Layer.Vector("Friends", {
+    visibility: true,
     strategies: [friendsStrategy],
     styleMap: friendsStyle
   });
@@ -197,18 +198,24 @@ function initMap()
     styleMap: locationStyle
   });   
 
-  map.addLayer(locations);
   map.addLayer(friends);
+  map.addLayer(locations);
+
   map.addLayer(buslinien);
   map.addLayer(newlocation);
 
 
   selectControl = new OpenLayers.Control.SelectFeature(
-    [friends, locations], { clickout: true, toggle: false, multiple: false, hover: false}
+    [friends, locations, newlocation], { clickout: true, toggle: false, multiple: false, hover: false}
   );
   
   map.addControl(selectControl);
   selectControl.activate();
+  
+  clickControl = new OpenLayers.Control.Click();
+  map.addControl(clickControl);
+  clickControl.deactivate();
+  
     
 // --- Eventhandlers ----------------------------------------------------------
   
@@ -316,41 +323,36 @@ function closePreviewPopup()
 
   
   
-function newLocation()
+function addNewLocation()
 {
-  
   locations.setVisibility(false);
-  friends.display(false);
-  newlocation.display(true);
-  $(".newlocation-edit").show();
-  $("#newlocation").hide()
-  
-  
-  
-  
-  var clickControl = new OpenLayers.Control.Click();
+  friends.setVisibility(false);
+  newlocation.setVisibility(true);
+  $(".button-map-location-edit").show();
+  $("#button-location-add").hide();
   selectControl.deactivate();
-  map.addControl(clickControl);
   clickControl.activate();
 }
-
 
 function cancel()
 {
   locations.setVisibility(true);
-  friends.display(true);
-  newlocation.display(false);
-  $(".newlocation-edit").hide();
-  $("#newlocation").show()
+  friends.setVisibility(true);
+  newlocation.setVisibility(false);
+  $(".button-map-location-edit").hide();
+  $("#button-location-add").show();
+  clickControl.deactivate();
+  selectControl.activate();
 }
 
 function next()
 {
+  //redirect zu location/addNewLocationForm oder so
   locations.setVisibility(true);
   friends.display(true);
   newlocation.display(false);
-  $(".newlocation-edit").hide();
-  $("#newlocation").show()
+  $(".button-map-location-edit").hide();
+  $("#button-location-add").show();
 }
 
 </script>
@@ -358,12 +360,16 @@ function next()
 <div id="window">
   <ul id="pages">
     <li>
-      <div id="newlocation"><button type="button" onclick="newLocation()">+ Location</button> </div>
-      <div class="newlocation-edit" id="edit-cancel"><button type="button" onclick="cancel()">Abbrechen</button> </div>
-      <div class="newlocation-edit" id="edit-next"><button type="button" onclick="next()">Weiter</button> </div>
       <div id="popup">Popup</div>
-      <div id="map"></div>
+      <div id="map">
+        <button id="button-location-add" type="button" onclick="addNewLocation()">+ Location</button>
+        <button id="button-location-edit-cancel" class="button-map-location-edit" type="button" onclick="cancel()">Abbrechen</button>
+        <button id="button-location-edit-next" class="button-map-location-edit" type="button" onclick="next()">Weiter</button>
+      </div>
       <script>initMap();</script>
+    </li>
+    <li>
+      
     </li>
   </ul>
 </div>

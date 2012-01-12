@@ -147,11 +147,5 @@ class Map extends CI_Controller {
 ';
   }
   
-  
-  public function addLocation()
-  {
-    $this->load->view('map/newlocationview');
-  }
-
 }
 ?>
