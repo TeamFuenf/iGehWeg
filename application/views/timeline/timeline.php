@@ -182,15 +182,7 @@ a
             echo "<div class='eventlabel' style='top:".$top."px; height:".$height."px'>";            
           }
           
-          if ($event->creator == $userid)
-          {
-            echo anchor("event/edit/".$event->id, "<b>".$begin."-".$end."</b><br/>".$event->title);                        
-          }
-          else
-          {
-            echo anchor("event/".$event->id, "<b>".$begin."-".$end."</b><br/>".$event->title);            
-          }
-
+          echo anchor("event/".$event->id, "<b>".$begin."-".$end."</b><br/>".$event->title);            
           echo "</div>";          
 
           echo "<div class='eventmembers' style='top:".$top."px; height:".$height."px'>";
@@ -199,7 +191,7 @@ a
           //echo "Veranstalter: ".img($eventcreators[$event->id]->picture)."<br/>";
           //echo count($eventmembers). " Teilnehmer:";
           
-          if (count($eventmembers[$event->id]) < 2)
+          if (count($eventmembers[$event->id]) < 4)
           {              
             foreach($eventmembers[$event->id] as $member)
             {
@@ -218,7 +210,7 @@ a
           }
           else
           {
-            echo anchor("event/".$event->id, count($eventmembers). " Teilnehmer");
+            echo anchor("event/".$event->id, (count($eventmembers)-1). " Teilnehmer");
           }
           
           echo "</div>";          

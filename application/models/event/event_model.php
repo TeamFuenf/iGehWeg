@@ -8,6 +8,8 @@ class Event_model extends CI_Model
     parent::__construct();
     $this->load->helper("form");
     $this->load->model("friends/Friends_model");
+    $this->load->model("messaging/Messaging_model");
+    $this->load->model("map/Map_model");
   }
 
 // --------------------------------------------------------------------------------------------------------------------
@@ -237,7 +239,14 @@ class Event_model extends CI_Model
       $data["memberid"] = $memberid;
       $data["status"] = $status;
       $this->db->insert("event_member", $data);      
-    } 
+    }
+    
+    if ($status == "invited")
+    {
+      $event = $this->getEvent($eventid);
+      $msg = "<b>Automatische Nachricht:</b>\nDu wurdest zum Event \"".$event->title."\" eingeladen.";
+      $this->Messaging_model->send($memberid, $msg);
+    }
   }
 
   public function setBasedata($eventid, $title, $from, $to)
@@ -264,6 +273,119 @@ class Event_model extends CI_Model
     }
   }
 
+  public function checkPlausibility($from, $to)
+  {
+    $userid = $this->session->userdata("userid");
+    
+    // Sind die Zeitpunkte in der richtigen Reihenfolge ?
+    if ($to < $from)
+    {
+      return "Falsche Zeitreihenfolge";
+    }
+    
+    // Liegt das Event in der Vergangenheit ?
+    $now = time();
+    if ($to < $now || $from < $now)
+    {
+      return "Event in der Vergangenheit";
+    }
+    
+    // Schneiden die Zeiten ein anderes Event zu dem der User eingeladen ist ?
+    $sql = "
+    SELECT *
+    FROM event
+    WHERE creator = '".$userid."'
+    OR id IN (
+    SELECT eventid
+    FROM event_member
+    WHERE memberid = '".$userid."'
+    AND status <> 'invited'
+    )
+    ";
+    $query = $this->db->query($sql);
+    $attendingevents = $query->result();
+    
+    foreach ($attendingevents as $event)
+    {
+      if (($from <= $event->begintime && $to <= $event->endtime) || ($from >= $event->begintime && $to >= $event->endtime))
+      {
+          // Keine überschneidung
+      }
+      else
+      {
+        return "Event überschneidet sich mit vorhandenem Event"; 
+      }
+    }
+    return "okay";
+  }
+
+// --------------------------------------------------------------------------------------------------------------------
+
+  public function insertComment($eventid, $comment)
+  {
+    $data["eventid"] = $eventid;
+    $data["author"] = $this->session->userdata("userid");
+    $data["comment"] = $comment;
+    $data["time"] = time();
+    $this->db->insert("event_comment", $data);     
+  }
+  
+  public function getComments($eventid)
+  {
+    $sql = "
+    SELECT event_comment.*, user.name, user.picture
+    FROM event_comment, user 
+    WHERE event_comment.eventid = '".$eventid."'
+    AND event_comment.author = user.id
+    ORDER BY event_comment.time ASC
+    ";
+    $query = $this->db->query($sql);    
+    return $query->result();
+  }
+
+// --------------------------------------------------------------------------------------------------------------------
+
+  public function generateICal($eventid)
+  {
+    $event = $this->getEvent($eventid);
+    $eventmembers = $this->getEventMembers($eventid);
+    $creator = $this->Friends_model->get_user($event->creator);
+    $location = $this->Map_model->getLocation($event->location);
+    
+    echo "BEGIN:VCALENDAR\n";
+    echo "VERSION:2.0\n";
+    echo "PRODID:PHP\n";
+    echo "METHOD:REQUEST\n";
+    echo "BEGIN:VEVENT\n";
+    echo "LOCATION:".$location->name."\n";
+    echo "DTSTART:".date("Ymd", $event->begintime).'T'.date("His", $event->begintime)."\n";
+    echo "DTEND:".date("Ymd", $event->endtime).'T'.date("His", $event->endtime)."\n";
+    echo "CREATOR:".$event->creator."\n";
+    echo "SUMMARY:".$event->title."\n";
+    echo "DESCRIPTION:Event von ".$creator->name.". Mehr Infos unter: ".site_url("event/".$event->id)."\n";
+    echo "UID:1\n";
+    echo "SEQUENCE:0\n";
+    echo "DTSTAMP:".date('Ymd').'T'.date('His')."\n";
+    echo "ATTENDEE;CN=".$creator->name.";CUTYPE=INDIVIDUAL;PARTSTAT=ACCEPTED;RSVP=FALSE:invalid:nomail\n";                
+    
+    foreach ($eventmembers as $member)
+    {
+      if ($member->status == "attending")
+      {
+        echo "ATTENDEE;CN=".$member->name.";CUTYPE=INDIVIDUAL;PARTSTAT=ACCEPTED;RSVP=FALSE:invalid:nomail\n";                
+      }
+      else
+      {
+        echo "ATTENDEE;CN=".$member->name.";CUTYPE=INDIVIDUAL;PARTSTAT=NEEDS-ACTION;RSVP=FALSE:invalid:nomail\n";        
+      }
+    }
+
+    echo "URL:".site_url("event/".$event->id)."\n";
+    echo "END:VEVENT\n";
+    echo "END:VCALENDAR\n"; 
+ 
+  }
+  
 // --------------------------------------------------------------------------------------------------------------------
 
   public function cleanup()

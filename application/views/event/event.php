@@ -28,7 +28,7 @@ h2
 
 ul#eventlocations
 {
-  width:97%;
+  width:90%;
   margin:0px auto;
   padding:0px;
   list-style-type:none;
@@ -53,7 +53,7 @@ ul#eventlocations
   font-size:1.5em;
 }
 
-table#eventmembers 
+table#eventmembers
 {
   width:97%;
   margin:0px auto;
@@ -145,7 +145,7 @@ table#eventmembers
 
         <div class='selection'>
         <b>Titel:</b>
-        <input id='eventname' name='eventname' value='<?php echo $event->title; ?>'/>
+        <input id='eventname' placeholder="<gib einen Eventtitel ein>" name='eventname' value='<?php echo $event->title; ?>'/>
         </div>
 
         <?php        
@@ -240,9 +240,13 @@ table#eventmembers
         
         <button class="button" id="eventbutton_basedata_next">weiter</button>
         
-        <hr>
-        
-        <?php echo anchor("event/delete/".$eventid, "<button class='delete'>Event löschen</button>"); ?>
+        <?php 
+          if (!isset($event->new))
+          {
+            echo "<hr>";
+            echo anchor("event/delete/".$eventid, "<button class='delete'>Event löschen</button>");             
+          }
+        ?>
 
       </div>
     </li>
@@ -250,10 +254,12 @@ table#eventmembers
     <li>
       <div>
         <h2>Location</h2>
-
+        <button class="button" id="eventbutton_location_prev">zurück</button>
+        <hr/>
         <button>TODO: Alphabetisch</button>
         <button>TODO: nach Entfernung</button>
-
+        <hr/>
+            
         <ul id="eventlocations">            
         <?php
           foreach ($locations as $location)
@@ -276,9 +282,7 @@ table#eventmembers
           }
         ?>
         </ul>
-<!--
-        oder <a href="#">Neue Location anlegen</a>
--->
+
         <br/>
       </div>
     </li>                 
@@ -314,17 +318,8 @@ table#eventmembers
         </table>
         <br/>
         <button class="button" id="eventbutton_members_prev">zurück</button>
-        <button class="button" id="eventbutton_members_next">weiter</button>
       </div>
     </li> 
-          
-    <li>
-      <div>
-        <h2>Kommentare</h2>
-        <button class="button" id="eventbutton_comment_prev">zurück</button>
-        <button class="button" id="eventbutton_comment_next">zurück</button>
-      </div>
-    </li>         
 
   </ul>
 </div>

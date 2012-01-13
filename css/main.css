@@ -1,6 +1,6 @@
 @font-face {
 font-family: segoeui;
-src:url(segoeui.ttf);
+src:url(segoeuil.ttf);
 }
 
 /* --- Basic Layout ------------------------------------------------------------------------------------------------ */
@@ -15,7 +15,7 @@ html
   font-size: 100%;
   width: 640px;
   height: 920px;
-  font-family: Arial !important;
+  font-family: segoeui !important;
 }
 
 body
@@ -99,8 +99,8 @@ div.userprofile {
 }
 
 div.userprofile img {
-	width: 100px;
-	height: 100px;
+	width: 70px;
+	height: 70px;
 	border-radius: 5px;
 	vertical-align: top;
 }
@@ -108,7 +108,7 @@ div.userprofile img {
 a.button_long {
 	text-decoration: none;
 	color: white;
-	background-color: #f78d02;
+	background-color: #be7844;
 	border-radius: 0px;
 	border: 1px solid #707070;
 	display: block;
@@ -124,15 +124,18 @@ a.button_long {
 }
 
 a.button_long.green {
-	background-color: #94bf3c;
+/*	background-color: #94bf3c;*/
+	background-color: #8cb192;
 }
 
 a.button_long.blue {
-	background-color: #00a8c1;
+/*	background-color: #00a8c1;*/
+	background-color: #75a6a3;
 }
 
 a.button_long.red {
-	background-color: #f16437;
+/*	background-color: #f16437;*/
+	background-color: #c8c8c8:
 }
 
 a.button_long img {
@@ -155,7 +158,75 @@ a.button_long #new_messages {
 	margin-right: 40px;
 }
 
+/* --- Login ------------------------------------------------------------------------------------------------------- */
+
+div#login_form, div#signup_form {
+	margin: 0px 10px;
+	padding-top: 10px;
+}
+
+div#login_header, div#signup_header {
+	color: #b3aa9a;
+	text-align: center;
+	font-size: 40px;
+	margin: 0px 0px 20px 0px;
+}
+
+div#login_header p, div#signup_header p {
+	margin: 0px;
+	padding: 0px;
+}
+
+p#login_logo {
+	font-size: 70px;
+	font-weight: bold;
+	margin: 0px;
+	padding: 0px;
+}
+
+input[type=text], input[type=password] {
+	background: none repeat scroll 0 0 transparent;
+	display: block;
+	margin: 5px 0px;
+	width: 100%;
+	border: 1px solid #b3aa9a;
+	border-radius: 3px;
+	font-size: 50px;
+	font-family: segoeui;
+	height: 100px;
+	padding: 5px;
+}
+
+input[type=submit], #login_form>form>a, #signup_form>form>a {
+	background-color: #b3aa9a;
+/*    border: 1px solid #AFAFAF;*/
+	border: none;
+    border-radius: 4px 4px 4px 4px;
+/*    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 1px 1px #FFFFFF inset;*/
+    color: white;
+    font-size: 50px;
+    font-family: segoeui;
+    width: 100%;
+    padding: 25px 0px;
+   	margin: 10px 0px; 
+    display: block;
+    text-align: center;
+    text-decoration: none;
+}
+
 /* --- Dashboard --------------------------------------------------------------------------------------------------- */
+
+li#friend_info {
+	background-color: #c8c6b9;
+	background-image: url("../../circle_background.png");
+	color: white;
+	padding: 20px;
+}
+
+li#friend_info img {
+	width: 40px;
+	height: 40px;
+}
 
 div.contentbox {
 	margin: 0px;
@@ -173,6 +244,32 @@ div#button_header {
 
 span.additional_text {
 	font-size: 16px;
+}
+
+div#logout_button {
+	float: right;
+	background-image: url('../../images/controls_background.png');
+	border-radius: 0px 0px 5px 5px;
+	margin-right: 10px;
+	text-align: center;
+}
+
+div#logout_button a {
+	text-decoration: none;
+}
+
+div#logout_button img {
+	width: 70px;
+	height: 70px;
+	margin: 10px 10px 2px 10px;
+}
+
+div#logout_button p {
+	margin: 0px 0px 2px 0px;
+	padding: 0px;
+	font-size: 18px;
+	text-decoration: none;
+	color: white;
 }
 
 /* --- Seiten ------------------------------------------------------------------------------------------------------ */

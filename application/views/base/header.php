@@ -27,7 +27,7 @@
 
   <script>
 	  $(function () {
-	  	$('a').on('click', function(event){
+	  	$("a:not(.external)").on('click', function(event){
 	  		event.preventDefault();
 	  		var url = $(this).attr('href');
 	  		console.log(url);

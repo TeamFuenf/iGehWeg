@@ -12,11 +12,13 @@ class Event extends CI_Controller
     $this->Event_model->cleanup();
   }
   
+
 // --------------------------------------------------------------------------------------------------------------------
 
   public function newevent()
   {
-    $event->title = "<gib einen Eventtitel ein>";
+    $event->new = true;
+    $event->title = "";
     $event->begintime = time();
     $event->endtime = time();
     $event->location = 0;
@@ -54,13 +56,15 @@ class Event extends CI_Controller
 
   public function showevent()
   {
+    $userid = $this->session->userdata("userid");
     $eventid = $this->uri->segment(2);    
     $event = $this->Event_model->getEvent($eventid);
+    $data["user"] = $this->Friends_model->get_user($userid);
     $data["creator"] = $this->Friends_model->get_user($event->creator);
     $data["event"] = $event;
     $data["members"] = $this->Event_model->getEventMembers($eventid);
     $data["location"] = "TODO: Locationdetails...";
-    
+    $data["comments"] = $this->Event_model->getComments($eventid);
     $this->layout->view("event/showevent", $data);
   }
   
@@ -75,6 +79,16 @@ class Event extends CI_Controller
     {
       // TODO: Fehlermeldung: Löschen nicht erlaubt ?
     }
+  }
+  
+// --------------------------------------------------------------------------------------------------------------------
+
+  public function insertComment()
+  {
+    $eventid = $this->input->post("eventid", true);
+    $comment = $this->input->post("comment", true);
+
+    $this->Event_model->insertComment($eventid, $comment);
   }
   
 // --------------------------------------------------------------------------------------------------------------------

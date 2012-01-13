@@ -9,6 +9,8 @@ class Geo extends CI_Controller
     $this->load->model("map/Map_model");
   }
 
+// --------------------------------------------------------------------------------------------------------------------
+  
   public function update()
   {
     $userid = $this->session->userdata("userid");

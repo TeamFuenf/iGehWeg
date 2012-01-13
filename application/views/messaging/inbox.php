@@ -65,10 +65,8 @@ td:not(:first-child)
             $messagepreview = "<b>".$messagepreview."</b>";  
           }
           
-          $messagelink = $message->userid;
+          $messagelink = site_url("mail/".$message->userid);
           $time = date("j.", $message->time)." ".$month[date("n", $message->time)];
-
-
           
           echo "<tr>";
           echo "<td><a href='".$messagelink."'>".img("helper/images/user/plain/".$message->userid)."</td>";

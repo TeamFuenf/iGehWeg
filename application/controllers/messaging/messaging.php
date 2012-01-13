@@ -15,16 +15,10 @@ class Messaging extends CI_Controller
   
 // --------------------------------------------------------------------------------------------------------------------
 
-/*
-  public function showMessage()
+  public function notification()
   {
-    $messageid = $this->uri->segment(3);
-    $msg = $this->Messaging_model->getMessage($messageid);
-    $msg->from = $this->Friends_model->get_user($msg->from);
-    $msg->time = date($this->dateformat, $msg->time);
-    print_r($msg);    
+    $this->layout->view("messaging/test");        
   }
-*/
 
   public function hide()
   {
