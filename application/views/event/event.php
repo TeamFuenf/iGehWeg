@@ -237,6 +237,8 @@ table#eventmembers
           echo "</select>";
           echo "</div>";
         ?>
+
+        <div id="checkresult" class="notice"></div>
         
         <button class="button" id="eventbutton_basedata_next">weiter</button>
         

@@ -168,12 +168,12 @@ function initMap()
   }, {
     context: {
       linecolor: function(feature)
-      {        
-        return "#ff0000";
+      {      
+        return feature.attributes.lineColor;
       },
       pointcolor: function(feature)
       {
-        return "#ff0000";
+        return feature.attributes.lineColor;
       }
     }
   });
@@ -247,12 +247,13 @@ function initMap()
   loadGeoJSON(locationUrl, locations);
   loadGeoJSON(friendsUrl, friends);
 
-/*
   loadGPX("http://localhost/gpx/linie1.gpx", buslinien);
   loadGPX("http://localhost/gpx/linie2.gpx", buslinien);
   loadGPX("http://localhost/gpx/linie5.gpx", buslinien);
   loadGPX("http://localhost/gpx/linie6.gpx", buslinien);
-*/
+  loadGPX("http://localhost/gpx/linie7.gpx", buslinien);
+  loadGPX("http://localhost/gpx/linie8.gpx", buslinien);
+  loadGPX("http://localhost/gpx/linie9.gpx", buslinien);
 }
 
 function loadGPX(url, layer)
@@ -272,6 +273,12 @@ function loadGPX(url, layer)
 
     var features = gpxFormat.read(r.responseText);
     
+    for (var i=0; i < features.length; i++)
+    {
+      features[i].attributes.lineName = lineName;
+      features[i].attributes.lineColor = lineColor;
+    }
+
     layer.addFeatures(features);  
   });
 }

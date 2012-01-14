@@ -9,6 +9,8 @@
   <wpt lat="48.5602435" lon="13.4231624">
     <time>2011-09-10T11:10:36Z</time>
     <name>Breslauer Straße</name>
+    <linie>Linie 1</linie>
+    <color>#e6252c</color>
   </wpt>
   <wpt lat="48.5625097" lon="13.427608">
     <time>2011-09-10T11:10:45Z</time>
@@ -222,7 +224,8 @@
     <time>2011-11-15T14:37:51Z</time>
     <name>Englmeierstraße</name>
   </wpt>
-  <trk>    <name>Obernzeller Straße</name>
+  <trk>    
+    <name>Obernzeller Straße</name>
     <trkseg>
       <trkpt lat="48.5763187" lon="13.4743951">
         <time>2011-05-13T08:56:19Z</time>
@@ -250,7 +253,8 @@
       </trkpt>
     </trkseg>
   </trk>
-  <trk>    <name>Neuburger Straße</name>
+  <trk>    
+    <name>Neuburger Straße</name>
     <trkseg>
       <trkpt lat="48.5637562" lon="13.4310164">
         <time>2009-12-06T23:30:07Z</time>

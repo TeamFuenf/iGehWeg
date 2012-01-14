@@ -62,6 +62,7 @@ $route["event/update/comment"] = "event/event/insertComment";
 $route["event/edit/(:any)"] = "event/event/editevent";
 $route["event/delete/(:any)"] = "event/event/deleteevent";
 $route["event/ical/(:any)"] = "helper/external/ical";
+$route["event/check"] = "event/event/checkPlausibility";
 $route["event/(:any)"] = "event/event/showevent";
 
 // übler hack aber geht grad nicht anders, da pfade in meetupp.js nicht von Coderigniter geparst werden

@@ -83,6 +83,16 @@ class Event extends CI_Controller
   
 // --------------------------------------------------------------------------------------------------------------------
 
+  public function checkPlausibility()
+  {
+    $from = $this->input->post("from", true);
+    $to = $this->input->post("to", true);    
+    $result = $this->Event_model->checkPlausibility($from, $to);
+    echo $result;
+  }
+
+// --------------------------------------------------------------------------------------------------------------------
+
   public function insertComment()
   {
     $eventid = $this->input->post("eventid", true);
@@ -129,9 +139,12 @@ class Event extends CI_Controller
     $from = mktime($from_hour, $from_minute, 0, $from_month, $from_day, $from_year);
     $to = mktime($to_hour, $to_minute, 0, $to_month, $to_day, $to_year);
   
-    $this->Event_model->setBasedata($eventid, $title, $from, $to);
-    
-    echo "okay";
+    $result = $this->Event_model->checkPlausibility($from, $to);  
+    if ($result == "okay")
+    {
+      $this->Event_model->setBasedata($eventid, $title, $from, $to);      
+    }
+    echo $result;
   }
 }
 ?>

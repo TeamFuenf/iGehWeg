@@ -307,7 +307,9 @@ class Event_model extends CI_Model
     
     foreach ($attendingevents as $event)
     {
-      if (($from <= $event->begintime && $to <= $event->endtime) || ($from >= $event->begintime && $to >= $event->endtime))
+      if (
+        ($from <= $event->begintime && $to <= $event->endtime) || ($from >= $event->begintime && $to >= $event->endtime)
+      )
       {
           // Keine überschneidung
       }
