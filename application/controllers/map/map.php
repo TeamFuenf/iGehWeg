@@ -112,40 +112,40 @@ class Map extends CI_Controller {
   }
   
   
-  function test()
-  {
-    echo '
-{
-  "type": "FeatureCollection", 
-  "features": [
-  {
-    "type": "Feature",
-    "id": "Aran",
-    "properties": {
-      "name": "Aran",
-      "typ": "location"
-    },
-    "geometry": {
-      "type": "Point",
-      "coordinates": [13.455559015274048, 48.57214772552424]
-    }
-  },
-  {
-    "type": "Feature",
-    "id": "Aquarium",
-    "properties": {
-      "name": "Aquarium",
-      "typ": "location"
-    },
-    "geometry": {
-      "type": "Point",
-      "coordinates": [13.46351444721222, 48.57376876026612]
-    }
-  }
-  ]
-}
-';
-  }
+  // function test()
+  // {
+    // echo '
+// {
+  // "type": "FeatureCollection", 
+  // "features": [
+  // {
+    // "type": "Feature",
+    // "id": "Aran",
+    // "properties": {
+      // "name": "Aran",
+      // "typ": "location"
+    // },
+    // "geometry": {
+      // "type": "Point",
+      // "coordinates": [13.455559015274048, 48.57214772552424]
+    // }
+  // },
+  // {
+    // "type": "Feature",
+    // "id": "Aquarium",
+    // "properties": {
+      // "name": "Aquarium",
+      // "typ": "location"
+    // },
+    // "geometry": {
+      // "type": "Point",
+      // "coordinates": [13.46351444721222, 48.57376876026612]
+    // }
+  // }
+  // ]
+// }
+// ';
+  // }
   
 }
 ?>

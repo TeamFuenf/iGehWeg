@@ -20,5 +20,12 @@ class Location_model extends CI_Model
     $this->db->set('city', $city);
     $this->db->insert('location');
   }
+  
+  
+  public function deleteLocation($locid)
+  {
+    $this->db->where('id', $locid);
+    $this->db->delete('location'); 
+  }
       
 }

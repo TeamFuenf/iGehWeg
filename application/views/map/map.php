@@ -29,7 +29,7 @@
     margin:0px;
   }
   
-  button.button-map-location-edit
+  button.button-location-new
   {
     display:none;
   }
@@ -37,6 +37,10 @@
 </style>
 
 <script>
+
+
+
+
 OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {
     defaultHandlerOptions: {
       'single': true,
@@ -198,10 +202,13 @@ function initMap()
     styleMap: locationStyle
   });   
 
-  map.addLayer(friends);
-  map.addLayer(locations);
+  
 
   map.addLayer(buslinien);
+  
+  map.addLayer(locations);
+  // locations muss als erstes auf die map, sonst überlagern die Sterne die Benutzerbilder
+  map.addLayer(friends);
   map.addLayer(newlocation);
 
 
@@ -296,6 +303,7 @@ function openLocationPreviewPopup(evt)
     .show();
 }
 
+
 function openFriendsPreviewPopup(evt)
 {
   console.log(evt.xy);
@@ -307,20 +315,17 @@ function openFriendsPreviewPopup(evt)
     var friendPicture = feature.cluster[i].attributes.picture;    
     buffer += "<img width='64px' height='64px' style='border-radius:10px' src='" + friendPicture + "'/>" + friendName+"<br>";
   }
-  
   var padding = 25;
   $("#popup")
     .html(buffer)
     .show();
 }
 
+
 function closePreviewPopup()
 {
   $("#popup").hide();
 }
-
-
-
   
   
 function addNewLocation()
@@ -328,31 +333,35 @@ function addNewLocation()
   locations.setVisibility(false);
   friends.setVisibility(false);
   newlocation.setVisibility(true);
-  $(".button-map-location-edit").show();
-  $("#button-location-add").hide();
+  $(".button-location-new").show();
+  $("#button-location-new").hide();
   selectControl.deactivate();
   clickControl.activate();
 }
+
 
 function cancel()
 {
   locations.setVisibility(true);
   friends.setVisibility(true);
   newlocation.setVisibility(false);
-  $(".button-map-location-edit").hide();
-  $("#button-location-add").show();
+  newlocation.removeAllFeatures();
+  $(".button-location-new").hide();
+  $("#button-location-new").show();
   clickControl.deactivate();
   selectControl.activate();
 }
 
+
 function next()
 {
   //redirect zu location/addNewLocationForm oder so
-  locations.setVisibility(true);
-  friends.display(true);
-  newlocation.display(false);
-  $(".button-map-location-edit").hide();
-  $("#button-location-add").show();
+  //locations.setVisibility(true);
+  //friends.display(true);
+  //newlocation.display(false);
+  //$(".button-map-location-edit").hide();
+  //$("#button-location-new").show();
+  page(1);
 }
 
 </script>
@@ -362,14 +371,25 @@ function next()
     <li>
       <div id="popup">Popup</div>
       <div id="map">
-        <button id="button-location-add" type="button" onclick="addNewLocation()">+ Location</button>
-        <button id="button-location-edit-cancel" class="button-map-location-edit" type="button" onclick="cancel()">Abbrechen</button>
-        <button id="button-location-edit-next" class="button-map-location-edit" type="button" onclick="next()">Weiter</button>
+        <button id="button-location-new" type="button" onclick="addNewLocation()">+ Location</button>
+        <button id="button-location-new-cancel" class="button-location-new" type="button" onclick="cancel()">Abbrechen</button>
+        <button id="button-location-new-next" class="button-location-new" type="button" onclick="page(1)">Weiter</button>
       </div>
       <script>initMap();</script>
     </li>
     <li>
-      
+      <div>
+      <button id="button-location-add-back" class="button-location-add" type="button" onclick="back()">Zurück</button>
+      <button id="button-location-add-cancel" class="button-location-add" type="button" onclick="cancel()">Abbrechen</button>
+      <button id="button-location-add-save" class="button-location-add" type="button" onclick="addLocation()">Fertig</button>
+      <?php echo site_url("location/location/getnewlocationform/"); ?>
+      </div>
+    </li>
+    <li>
+      <div>
+      <button id="button-location-edit-back" class="button-map-location-edit" type="button" onclick="back()">Zurück</button>
+      <?php echo site_url("location/location/geteditlocationform/"); ?>
+      </div>
     </li>
   </ul>
 </div>

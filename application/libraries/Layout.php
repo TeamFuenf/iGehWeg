@@ -15,12 +15,11 @@ class Layout
       $data["css"][] = link_tag("../css/normalize.css");
       $data["css"][] = link_tag("../css/main.css");
       $data["css"][] = link_tag("../css/timeline.css");
-	  $data["css"][] = link_tag("../css/friends_view_style.css");
-	  $data["css"][] = link_tag("../css/groups_view_style.css");
-	  $data["css"][] = link_tag("../css/login_style.css");
+      $data["css"][] = link_tag("../css/friends_view_style.css");
+      $data["css"][] = link_tag("../css/groups_view_style.css");
       
       $data["javascript"][] = "<script src=\"".base_url()."javascript/jquery.js\" type=\"text/javascript\"></script>";
-	  $data["javascript"][] = "<script src=\"".base_url()."javascript/jquery-ui.js\" type=\"text/javascript\"></script>";
+      $data["javascript"][] = "<script src=\"".base_url()."javascript/jquery-ui.js\" type=\"text/javascript\"></script>";
       $data["javascript"][] = "<script src=\"".base_url()."javascript/meetupp.js\" type=\"text/javascript\"></script>";
       $data["javascript"][] = "<script src=\"".base_url()."javascript/OpenLayers.js\" type=\"text/javascript\"></script>";
       
@@ -29,7 +28,7 @@ class Layout
       $data["control_friends"] = anchor("/friends", img("../images/control_friends.png"));
       $data["control_timeline"] = anchor("/timeline", img("../images/control_timeline.png"));
       
-	  $data["dashboard"] = anchor("/dashboard/dashboard", img("../images/dashboard.png"));
+      $data["dashboard"] = anchor("/dashboard/dashboard", img("../images/dashboard.png"));
       $data["map"] = anchor("/map", img("../images/map.png"));
       $data["friends"] = anchor("/friends", img("../images/friends.png"));
       $data["timeline"] = anchor("/timeline", img("../images/timeline.png"));
