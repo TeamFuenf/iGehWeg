@@ -276,8 +276,9 @@ div#logout_button p {
 
 div#window
 {
-  width: 640px;
-  overflow-x: hidden; 
+  width:100%;
+  height:100%;
+  overflow-x: hidden;
   overflow-y: auto;
 }
 
@@ -287,7 +288,7 @@ div#scroll
   height:25px;
   position:absolute;
   bottom:0px;
-  z-index:999;  
+  z-index:999;
   text-align:center;
   line-height:25px;
   font-size:25px;
@@ -298,18 +299,19 @@ div#scroll
 div#scroll a
 {
   color:#ffffff;
-  text-decoration:none;  
+  text-decoration:none;
 }
 
 ul#pages
 {
-  margin: 0px;
-  padding: 0px;
-  width: 5000px;
-  height: 100%;  
-  list-style-type: none; 
-  left: 0px;
-  top: 0px;
+  margin:0px;
+  padding:0px;
+  width:5000px;
+  height:100%;
+  list-style-type:none;
+  position:relative;
+  left:0px;
+  top:0px;
   font-size: 30px;
   font-weight: bold;
 }
@@ -322,7 +324,6 @@ ul#pages>li
   padding: 0px;
   max-width: 640px;
   height: 100%;
-  background-color: white; /* Farbe noch ändern */
 }
 
 /* --- Überschriften ----------------------------------------------------------------------------------------------- */
