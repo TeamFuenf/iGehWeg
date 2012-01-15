@@ -63,9 +63,10 @@ $route["event/edit/(:any)"] = "event/event/editevent";
 $route["event/delete/(:any)"] = "event/event/deleteevent";
 $route["event/ical/(:any)"] = "helper/external/ical";
 $route["event/check"] = "event/event/checkPlausibility";
+$route["event/show/(:any)"] = "helper/external/showevent";
 $route["event/(:any)"] = "event/event/showevent";
 
-// übler hack aber geht grad nicht anders, da pfade in meetupp.js nicht von Coderigniter geparst werden
+// übler workaround aber geht nicht anders, da pfade in meetupp.js nicht von Coderigniter geparst werden
 $route["event/event/update/basedata"] = "event/event/updateBasedata";
 $route["event/event/update/location"] = "event/event/updateLocation";
 $route["event/event/update/member"] = "event/event/updateMember";
@@ -73,7 +74,6 @@ $route["event/event/update/status/(:any)"] = "event/event/updateStatus";
 $route["event/event/update/comment"] = "event/event/updateComment";
 // ---
 
-$route["event/show/(:any)"] = "event/event/index";
 
 // Nachrichtensystem
 $route["mail/delete/(:any)"] = "messaging/messaging/hide";

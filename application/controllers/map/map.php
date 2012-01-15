@@ -8,6 +8,8 @@ class Map extends CI_Controller {
     $this->load->model("map/Map_model");
     // $this->load->model("map/Marker_model");
     $this->load->model("friends/Friends_model");
+    $this->load->model("event/Event_model");
+    $this->load->model("location/Location_model");
   }
   
   
@@ -40,7 +42,10 @@ class Map extends CI_Controller {
   
 // --------------------------------------------------------------------------------------------------------------------
 
-  function getlocations()
+  /**
+   * Liefert alle eingetragenen Locations im GeoJSON Format zur Anzeige in der Kartenansicht
+   */
+  public function getlocations()
   {
     echo '{
       "type": "FeatureCollection", 
@@ -67,7 +72,10 @@ class Map extends CI_Controller {
     echo ']}';
   }
   
-  function getfriends()
+  /**
+   * Liefert alle Freunde des Nutzers inkl. Position im GeoJSON Format zur Anzeige in der Kartenansicht
+   */
+  public function getfriends()
   {
     $userid = $this->session->userdata("userid");
     echo '{
@@ -83,7 +91,8 @@ class Map extends CI_Controller {
           "id": "'.$friend->id.'",
           "properties": {
             "name": "'.$friend->name.'",
-            "picture": "'.$friend->picture.'"
+            "picture": "'.$friend->picture.'",
+            "id": "'.$friend->id.'"
           },
           "geometry": {
             "type": "Point",
@@ -111,41 +120,42 @@ class Map extends CI_Controller {
     echo ']}';
   }
   
-  
-  function test()
+  /**
+   * Liefert alle Events inkl Positionen an denen der eingelogte Benutzer teilnimmt im GeoJSON Format zur Anzeige in der Kartenansicht
+   */
+  public function getevents()
   {
-    echo '
-{
-  "type": "FeatureCollection", 
-  "features": [
-  {
-    "type": "Feature",
-    "id": "Aran",
-    "properties": {
-      "name": "Aran",
-      "typ": "location"
-    },
-    "geometry": {
-      "type": "Point",
-      "coordinates": [13.455559015274048, 48.57214772552424]
+    $userid = $this->session->userdata("userid");
+    $events = $this->Event_model->getEventsForUser($userid);
+    
+    echo '{
+      "type": "FeatureCollection", 
+      "features": [
+    ';
+    foreach ($events as $event)
+    {
+//      $location = $this->Location_model->getLocation($event->location);
+      $location->lon = "0";
+      $location->lat = "0";
+            
+      echo '
+        {
+          "type": "Feature",
+          "id": "'.$event->id.'",
+          "properties": {
+            "title": "'.$event->title.'",
+            "eventid": "'.$event->id.'"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": ['.$location->lon.', '.$location->lat.']
+          }
+        },
+      ';
     }
-  },
-  {
-    "type": "Feature",
-    "id": "Aquarium",
-    "properties": {
-      "name": "Aquarium",
-      "typ": "location"
-    },
-    "geometry": {
-      "type": "Point",
-      "coordinates": [13.46351444721222, 48.57376876026612]
-    }
+    echo "{}";
+    echo ']}';
   }
-  ]
-}
-';
-  }
-  
+ 
 }
 ?>

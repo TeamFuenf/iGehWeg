@@ -237,7 +237,10 @@ table#eventmembers
           echo "</select>";
           echo "</div>";
         ?>
-
+<!--
+        <input name="publicevent" id="publicevent" type="checkbox">
+        <label for="publicevent">Öffentliches Event</label>
+-->
         <div id="checkresult" class="notice"></div>
         
         <button class="button" id="eventbutton_basedata_next">weiter</button>
@@ -258,8 +261,45 @@ table#eventmembers
         <h2>Location</h2>
         <button class="button" id="eventbutton_location_prev">zurück</button>
         <hr/>
-        <button>TODO: Alphabetisch</button>
-        <button>TODO: nach Entfernung</button>
+        
+        <script>
+          $(function() {
+          
+            $("#location_order_az").on("click", function() {
+              var list = $("ul#eventlocations");
+              var listLi = $("li", list);
+              listLi.sort(function(a, b)
+              {
+                var keyA = $(a).attr("name");
+                var keyB = $(b).attr("name");
+                return (keyA > keyB) ? 1 : 0;
+              });
+              
+              $.each(listLi, function(index, row)
+              {
+                list.append(row);
+              });
+            });
+
+            $("#location_order_distance").on("click", function() {
+              var list = $("ul#eventlocations");
+              var listLi = $("li", list);
+              listLi.sort(function(a, b)
+              {
+                var keyA = parseInt($(a).attr("distance"));
+                var keyB = parseInt($(b).attr("distance"));
+                return (keyA > keyB) ? 1 : 0;
+              });
+              $.each(listLi, function(index, row)
+              {
+                list.append(row);
+              });
+            });
+          
+          });
+        </script>
+        <button id="location_order_az">Alphabetisch</button>
+        <button id="location_order_distance">nach Entfernung</button>
         <hr/>
             
         <ul id="eventlocations">            
@@ -276,7 +316,7 @@ table#eventmembers
             }
 
             echo "
-            <li ".$selectedModifier." locationid='".$location->id."'>              
+            <li ".$selectedModifier." distance='".$location->distance."' name='".$location->name."' locationid='".$location->id."'>              
             <b>".$location->name."</b> (ca. ".$location->distance." m)<br/>
             ".$location->street."
             </li>

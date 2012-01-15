@@ -9,6 +9,7 @@ class Event extends CI_Controller
     parent::is_logged_in();
     $this->load->model("event/Event_model");
     $this->load->model("friends/Friends_model");
+//    $this->load->model("map/Location_model");    
     $this->Event_model->cleanup();
   }
   
@@ -19,17 +20,19 @@ class Event extends CI_Controller
   {
     $event->new = true;
     $event->title = "";
-    $event->begintime = time();
-    $event->endtime = time();
+    $preselectedTime = mktime(date("H"), (floor(date("i")/5)+1)*5, 0, date("n"), date("j"), date("Y"));
+    $event->begintime = $preselectedTime;
+    $preselectedTime = mktime(date("H")+1, (floor(date("i")/5)+1)*5, 0, date("n"), date("j"), date("Y"));
+    $event->endtime = $preselectedTime;
     $event->location = 0;
-    
+
     // Prüfen ob ein Datum in der URL übergeben wurde
     if ($this->uri->segment(3))
     {
       $ts = $this->uri->segment(3);
-      $preselectedTime = mktime(date("H"), floor(date("i")/5)*5, 0, date("n",$ts), date("j",$ts), date("Y",$ts));
+      $preselectedTime = mktime(date("H"), floor(date("i")/5)*5+1, 0, date("n",$ts), date("j",$ts), date("Y",$ts));
       $event->begintime = $preselectedTime;
-      $preselectedTime = mktime(date("H")+1, floor(date("i")/5)*5, 0, date("n",$ts), date("j",$ts), date("Y",$ts));
+      $preselectedTime = mktime(date("H")+1, floor(date("i")/5)*5+1, 0, date("n",$ts), date("j",$ts), date("Y",$ts));
       $event->endtime = $preselectedTime;
     }
     
@@ -63,7 +66,7 @@ class Event extends CI_Controller
     $data["creator"] = $this->Friends_model->get_user($event->creator);
     $data["event"] = $event;
     $data["members"] = $this->Event_model->getEventMembers($eventid);
-    $data["location"] = "TODO: Locationdetails...";
+    $data["location"] = "TODO: location";
     $data["comments"] = $this->Event_model->getComments($eventid);
     $this->layout->view("event/showevent", $data);
   }
@@ -116,8 +119,17 @@ class Event extends CI_Controller
     $eventid = $this->input->post("eventid", true);
     $memberid = $this->input->post("memberid", true);    
     $status = $this->input->post("status", true);    
-    $this->Event_model->setStatus($eventid, $memberid, $status);
-    echo "okay";  
+    
+    $event = $this->Event_model->getEvent($eventid);
+    $from = $event->begintime;
+    $to = $event->endtime;
+
+      $result = $this->Event_model->checkAttendance($from, $to);
+      if ($result == "okay")
+      {
+        $this->Event_model->setStatus($eventid, $memberid, $status);
+      }
+      echo $result;
   }
   
   public function updateBasedata()

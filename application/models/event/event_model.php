@@ -28,7 +28,7 @@ class Event_model extends CI_Model
     SELECT location.*, 
     ROUND(SQRT(POW(71.5 * (location.lon - user.lon),2) + POW(111.3 * (location.lat - user.lat),2)) * 1000) as distance
     FROM user, location
-    WHERE user.id = ".$userid."
+    WHERE user.id = '".$userid."'
     ORDER BY distance";
     $query = $this->db->query($sql);
     return $query->result();    
@@ -126,6 +126,22 @@ class Event_model extends CI_Model
     return $query->row();
   }
 
+  public function getEventsForUser($userid)
+  {
+    $sql = "
+    SELECT *
+    FROM event
+    WHERE creator = '".$userid."'
+    OR id IN 
+    (
+    SELECT eventid
+    FROM event_member
+    WHERE memberid = '".$userid."'
+    )";
+    $query = $this->db->query($sql);
+    return $query->result();    
+  }
+  
   public function getOwnEvents()
   {
     $userid = $this->session->userdata("userid");
@@ -273,6 +289,7 @@ class Event_model extends CI_Model
     }
   }
 
+
   public function checkPlausibility($from, $to)
   {
     $userid = $this->session->userdata("userid");
@@ -299,7 +316,6 @@ class Event_model extends CI_Model
     SELECT eventid
     FROM event_member
     WHERE memberid = '".$userid."'
-    AND status <> 'invited'
     )
     ";
     $query = $this->db->query($sql);
@@ -315,7 +331,42 @@ class Event_model extends CI_Model
       }
       else
       {
-        return "Event überschneidet sich mit vorhandenem Event"; 
+        return "Event überschneidet sich mit dem vorhandenem Event ".$event->title; 
+      }
+    }
+    return "okay";
+  }
+
+  public function checkAttendance($from, $to)
+  {
+    $userid = $this->session->userdata("userid");
+    
+    // Schneiden die Zeiten ein anderes Event zu dem der User eingeladen ist ?
+    $sql = "
+    SELECT *
+    FROM event
+    WHERE creator = '".$userid."'
+    OR id IN (
+    SELECT eventid
+    FROM event_member
+    WHERE memberid = '".$userid."'
+    AND status <> 'invited'
+    )
+    ";
+    $query = $this->db->query($sql);
+    $attendingevents = $query->result();
+    
+    foreach ($attendingevents as $event)
+    {
+      if (
+        ($from <= $event->begintime && $to <= $event->endtime) || ($from >= $event->begintime && $to > $event->endtime)
+      )
+      {
+          // Keine überschneidung
+      }
+      else
+      {
+        return "Event überschneidet sich mit dem vorhandenen Event ".$event->title; 
       }
     }
     return "okay";

@@ -22,7 +22,7 @@ class Marker_model extends CI_Model
 		$picture = $friend->picture;
 		$name = $friend->name;
 		
-		// todo: 
+		// TODO: 
 		// lang nicht aktuallisierte Benutzer nicht anzeigen, oder timestamp mit in die karte schreiben.
 		$marker .= $this->createUserIcon($name, $lon, $lat, $picture);
 		$marker .= "\n";
