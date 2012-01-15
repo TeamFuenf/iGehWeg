@@ -302,8 +302,9 @@ function openLocationPreviewPopup(evt)
   for (var i=0; i < feature.cluster.length; i++)
   {
     var locationName = feature.cluster[i].attributes.name;
+    var locationId = feature.cluster[i].attributes.id;
     
-    buffer += "<a href='#'>" + locationName + "</a><br>";
+    buffer += "<a href='<?php echo base_url("location/") ?>" + locationId + "'>" + locationName + "</a><br>";
   }
   $("#popup")
     .html(buffer)
