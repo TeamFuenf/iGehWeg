@@ -223,7 +223,7 @@ function initMap()
     "default" : new OpenLayers.Style({
       pointRadius: "${radius}",
       fillOpacity: 0.5,
-      externalGraphic: "<?php echo base_url()."images/marker_event.png"; ?>"
+      externalGraphic: "<?php echo base_url()."images/marker_clock.png"; ?>"
     }, {
       context: {
         radius: function(feature) {
@@ -287,7 +287,7 @@ function initMap()
 // --- Layers -----------------------------------------------------------------
     
   locations = new OpenLayers.Layer.Vector("Locations", {
-    visibility: true,
+    visibility: false,
     strategies: [locationsStrategy],
     styleMap: locationStyle
   });
@@ -331,6 +331,7 @@ function initMap()
       friends, 
       locations, 
       newlocation, 
+      events,
       buslinien[0],
       buslinien[1],
       buslinien[2],
@@ -462,15 +463,15 @@ function openLocationPopup(evt)
         var locationName = feature.cluster[i].attributes.name;
         var locationId = feature.cluster[i].attributes.id;    
         buffer += "<a href='<?php echo base_url("location/") ?>/" + locationId + "'>" + locationName + "</a><br>";
-//        buffer += "<li><a href='#'>" + locationName + "</a></li>";
       }
       buffer += "</ul>";
     }
   }
   else
   {
-    var locationId = feature.cluster[i].attributes.id;    
-    buffer += "<a href='<?php echo base_url("location/") ?>" + locationId + "'>" + locationName + "</a><br>";
+    var locationName = feature.cluster[0].attributes.name;
+    var locationId = feature.cluster[0].attributes.id;        
+    buffer += "<a href='<?php echo base_url("location/") ?>/" + locationId + "'>" + locationName + "</a><br>";
   }
   
   $("#popup")
@@ -524,7 +525,7 @@ function openEventsPopup(evt)
   if (numEvents > 1)
   {
     buffer = "<p>mehrere Events:</p>";
-    if (numFriends > 5)
+    if (numEvents > 5)
     {
       buffer = "<p>Mehr als 5 Events an dieser Position gefunden. Zoome näher heran um mehr Informationen zu erhalten.</p>";
     }
@@ -543,11 +544,10 @@ function openEventsPopup(evt)
   }
   else
   {
-    var friendName = feature.cluster[0].attributes.name;
-    var friendPicture = feature.cluster[0].attributes.picture;
-    var friendId = feature.cluster[0].attributes.id;        
-    var link = "<?php echo site_url("mail");?>/" + friendId;
-    buffer = "<ul><li><a href='" + link + "'><img width='64px' height='64px' style='border-radius:10px' src='" + friendPicture + "'/>" + friendName+"</a></li></ul>";
+    var eventId = feature.cluster[0].attributes.eventid;
+    var eventTitle = feature.cluster[0].attributes.title;
+    var eventLink = "<?php echo site_url("event"); ?>/" + eventId;
+    buffer = "<li><a href='" + eventLink + "'>" + eventTitle + "</a></li>";
   }
 
   $("#popup")
@@ -593,7 +593,7 @@ function layermenu()
   buffer = "" +
   "Basislayer:<br/>" +
   "<input type='checkbox' name='chkfriends' id='chkfriends' onclick='toggleLayer(friends)' checked='checked'><label for='chkfriends'>Freunde</label><br/>" + 
-  "<input type='checkbox' name='chklocations' id='chklocations' onclick='toggleLayer(locations)' checked='checked'><label for='chklocations'>Locations</label><br/>" +
+  "<input type='checkbox' name='chklocations' id='chklocations' onclick='toggleLayer(locations)'><label for='chklocations'>Locations</label><br/>" +
   "<input type='checkbox' name='chkevents' id='chkevents' onclick='toggleLayer(events)' checked='checked'><label for='chkevents'>Events</label><br/>" +
   "<hr/>" +
   "Buslinien:<br/>" +

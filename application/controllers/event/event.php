@@ -9,7 +9,7 @@ class Event extends CI_Controller
     parent::is_logged_in();
     $this->load->model("event/Event_model");
     $this->load->model("friends/Friends_model");
-    $this->load->model("location/location_model");    
+    $this->load->model("location/Location_model");    
     $this->Event_model->cleanup();
   }
 

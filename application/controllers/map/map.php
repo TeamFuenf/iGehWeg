@@ -9,7 +9,7 @@ class Map extends CI_Controller {
     // $this->load->model("map/Marker_model");
     $this->load->model("friends/Friends_model");
     $this->load->model("event/Event_model");
-    $this->load->model("location/Location_model");
+    $this->load->model("location/location_model");
   }
   
   
@@ -135,9 +135,9 @@ class Map extends CI_Controller {
     ';
     foreach ($events as $event)
     {
-
-      $location = $this->Location_model->getLocation($event->location);
-            
+      $location = $this->location_model->getLocation($event->location);
+      if (!is_array($location))
+      {
       echo '
         {
           "type": "Feature",
@@ -152,6 +152,24 @@ class Map extends CI_Controller {
           }
         },
       ';
+      }
+      
+/*
+      echo '
+        {
+          "type": "Feature",
+          "id": "'.$event->id.'",
+          "properties": {
+            "title": "'.$event->title.'",
+            "eventid": "'.$event->id.'"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": ['.$location->lon.', '.$location->lat.']
+          }
+        },
+      ';
+*/      
     }
     echo "{}";
     echo ']}';

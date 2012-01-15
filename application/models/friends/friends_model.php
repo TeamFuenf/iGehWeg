@@ -10,6 +10,7 @@ class Friends_model extends CI_Model
     
     /**
      * Liefert die k nähesten Freunde inkl der Distanz in Metern zurück
+     * 71.5 bzw. 111.3 = Länge bzw. Breite eines Längen- bzw. Breitengerades)
      */
     public function getKNearestFriends($k)
     {

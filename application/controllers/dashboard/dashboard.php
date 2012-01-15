@@ -18,9 +18,10 @@ class Dashboard extends CI_Controller
     $userid = $this->session->userdata("userid");
     
     $data["user"] = $this->Friends_model->get_user($userid);
+    $data["friends"] = $this->Friends_model->get_friends($userid);
     
     $data["newmessages"] = $this->Messaging_model->countUnreadMessages();
-    $data["knearestfriends"] = $this->Friends_model->getKNearestFriends(5);
+   // $data["knearestfriends"] = $this->Friends_model->getKNearestFriends(5);
     
     $data["eventlink"] = anchor("#", "<img src='../../images/event_new.png' /><div id='button_header'>Events<br><span class='additional_text'>Hier kannst du neue Events erstellen</span></div>", 'class="button_long blue"');
     $data["locationlink"] = anchor("#", "<img src='../../images/location_edit.png' /><div id='button_header'>Locations<br><span class='additional_text'>Hier kannst du neue Locations hinzufügen</span></div>", 'class="button_long green"');

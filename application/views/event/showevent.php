@@ -183,7 +183,7 @@ h2
             <tr><td colspan="2"><h2>Details</h2></td></tr>
             <tr>
               <td>Location</td>
-              <td><?php echo $location; ?></td>
+              <td><?php echo $location->name; ?></td>
             </tr>
             <tr>
               <td>Von</td>
