@@ -1,3 +1,8 @@
+<style>
+  
+</style>
+<script src="../javascript/jquery.js"></script>
+
 <div id="window">
   <ul id="pages">
     <li>

@@ -672,7 +672,6 @@ $("button#button-location-new-next").on("click", function() {
         <button id="button-location-new" type="button" onclick="addNewLocation()">+ Location</button>
         <button id="button-location-new-cancel" class="button-location-new" type="button" onclick="cancel()">Abbrechen</button>
         <button id="button-location-new-next" class="button-location-new" type="button">Weiter</button>
-        <a class="button internal" id="22" href="javascript:pageNext()">weiterlink</a>
       </div>
       <script>initMap();</script>
     </li>
