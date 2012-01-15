@@ -107,9 +107,30 @@ class Location extends CI_Controller {
     // javascript funktion muss die view selbstständig aktuallisieren, also ohne weiteren datenbankaufruf
   }
   
-  function deletelocation($locid)
+  public function deletelocation($locid)
   {
     $this->Location_model->deleteLocation($locid);
+  }
+  
+  
+  public function getLocation()
+  {
+    if ($this->uri->segment(2))
+    {
+      $locid = $this->uri->segment(2);
+      $data['location'] = $this->Location_model->getLocation($locid);
+      
+      // $data["eventid"] = uniqid("event", true);
+      // $data["title"] = "Neues Event erstellen";
+      // $data["locations"] = $this->Event_model->getPossibleLocations();
+      // $data["members"] = $this->Event_model->getPossibleMembers();
+      // $data["event"] = $event;
+      
+      // $name = $location->name;
+      // $type = $location->type;
+      $this->layout->view("location/location", $data);
+    }
+    
   }
 
 }

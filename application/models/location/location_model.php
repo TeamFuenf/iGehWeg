@@ -27,5 +27,38 @@ class Location_model extends CI_Model
     $this->db->where('id', $locid);
     $this->db->delete('location'); 
   }
-      
+  
+  
+  public function getLocation($locid)
+  {
+    //$this->db->select('name', 'type', 'street', 'city', 'internet', 'email');
+    $this->db->where('id', $locid);
+    $query = $this->db->get('location');
+    return $query->row();
+  }
+  
+  
+  public function getLocationComments($locid)
+  {
+    $this->db->select();
+    $this->db->where('locationid', $locid);
+    $query = $this->db->get('location_comment');
+  }
+  
+  
+  public function getLocationInfo($locid)
+  {
+    $this->db->select();
+    $this->db->where('locationid', $locid);
+    $query = $this->db->get('location_info');
+  }
+  
+  
+  public function getLocationRating($locid)
+  {
+    $this->db->select();
+    $this->db->where('locationid', $locid);
+    $query = $this->db->get('location_rating');
+  }
+  
 }

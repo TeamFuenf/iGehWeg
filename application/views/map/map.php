@@ -368,8 +368,13 @@ function next()
   //newlocation.display(false);
   //$(".button-map-location-edit").hide();
   //$("#button-location-new").show();
-  page(1);
+  pageNext();
 }
+
+$("button#button-location-new-next").on("click", function() {
+  // mach was
+  pageNext();
+});
 
 </script>
 
@@ -377,26 +382,26 @@ function next()
   <ul id="pages">
     <li>
       <div id="popup">Popup</div>
+      
       <div id="map">
         <button id="button-location-new" type="button" onclick="addNewLocation()">+ Location</button>
         <button id="button-location-new-cancel" class="button-location-new" type="button" onclick="cancel()">Abbrechen</button>
-        <button id="button-location-new-next" class="button-location-new" type="button" onclick="page(1)">Weiter</button>
+        <button id="button-location-new-next" class="button-location-new" type="button">Weiter</button>
+        <a class="button internal" id="22" href="javascript:pageNext()">weiterlink</a>
       </div>
       <script>initMap();</script>
     </li>
     <li>
-      <div>
+<!--  neue Location anlegen      -->
       <button id="button-location-add-back" class="button-location-add" type="button" onclick="back()">Zurück</button>
       <button id="button-location-add-cancel" class="button-location-add" type="button" onclick="cancel()">Abbrechen</button>
       <button id="button-location-add-save" class="button-location-add" type="button" onclick="addLocation()">Fertig</button>
       <?php echo site_url("location/location/getnewlocationform/"); ?>
-      </div>
     </li>
     <li>
-      <div>
+<!--  bestehende Location bearbieten/löschen      -->
       <button id="button-location-edit-back" class="button-map-location-edit" type="button" onclick="back()">Zurück</button>
       <?php echo site_url("location/location/geteditlocationform/"); ?>
-      </div>
     </li>
   </ul>
 </div>

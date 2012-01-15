@@ -84,6 +84,7 @@ $route["mail/(:any)"] = "messaging/messaging/show";
 
 // Location
 $route["location/add/(:any)"] = "location/add";
+$route["location/(:any)"] = "location/location/getLocation";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
