@@ -41,7 +41,19 @@ class Layout
       }
       $CI->load->view("base/footer.php");
     }
-  
+
+    function viewexternal($view, $vars = array())
+    {
+      $CI =& get_instance();
+      
+      $data["css"][] = link_tag("../css/normalize.css");
+      $data["css"][] = link_tag("../css/external.css");
+    
+      $CI->load->view("base/headerexternal.php", $data);
+      $CI->load->view($view, $vars);
+      $CI->load->view("base/footerexternal.php");
+    }
+ 
 }
 
 ?>

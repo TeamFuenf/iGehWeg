@@ -121,11 +121,7 @@ a
   height:48px;
   margin:5px;
   border-radius:5px;
-<<<<<<< HEAD
-  vertical-align: middle;
-=======
   vertical-align:middle;
->>>>>>> eventcleanup
 }
 
 </style>
@@ -137,6 +133,7 @@ a
         <h1>Timeline</h1>
       <?php
       echo anchor("event","<button>zu den Events</button>");
+      echo anchor("event/new","<button>Neues Event</button>");
       
       $showDaysInAdvance = 14;
       for ($i=0; $i <= $showDaysInAdvance; $i++)

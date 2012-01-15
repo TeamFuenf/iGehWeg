@@ -261,15 +261,19 @@ $(document).ready(function()
     var memberid = $("div#userid").attr("userid");
     var button_accept = $(this);
     var button_decline = $(this).siblings("button.declineevent");
-    button_accept.remove();
-    button_decline.html("nicht mehr teilnehmen");
+    //button_accept.remove();
+    //button_decline.html("nicht mehr teilnehmen");
 
     $.post("../event/update/member", 
     {
       eventid: eventid,
       memberid: memberid,
       status: "attending"
-    });
+    }, 
+    function(data) {
+      console.log(data);
+    });        
+
   });
   
   /**
