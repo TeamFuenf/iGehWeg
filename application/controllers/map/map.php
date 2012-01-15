@@ -59,7 +59,8 @@ class Map extends CI_Controller {
           "type": "Feature",
           "id": "'.$loc->id.'",
           "properties": {
-            "name": "'.$loc->name.'"
+            "name": "'.$loc->name.'",
+            "id": "'.$loc->id.'"
           },
           "geometry": {
             "type": "Point",

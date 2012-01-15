@@ -461,7 +461,7 @@ function openLocationPopup(evt)
       {
         var locationName = feature.cluster[i].attributes.name;
         var locationId = feature.cluster[i].attributes.id;    
-        buffer += "<a href='<?php echo base_url("location/") ?>" + locationId + "'>" + locationName + "</a><br>";
+        buffer += "<a href='<?php echo base_url("location/") ?>/" + locationId + "'>" + locationName + "</a><br>";
 //        buffer += "<li><a href='#'>" + locationName + "</a></li>";
       }
       buffer += "</ul>";
