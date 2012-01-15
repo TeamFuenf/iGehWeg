@@ -156,6 +156,6 @@ class Map extends CI_Controller {
     echo "{}";
     echo ']}';
   }
- 
+
 }
 ?>

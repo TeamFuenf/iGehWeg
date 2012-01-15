@@ -81,7 +81,7 @@
     z-index:990;
   }
   
-  button.button-map-location-edit
+  button.button-location-new
   {
     display:none;
   }
@@ -317,15 +317,13 @@ function initMap()
     styleMap: locationStyle
   });   
 
-  map.addLayer(friends);
-  map.addLayer(locations);
-  map.addLayer(events);
-
   for (var i=0; i < buslinien.length; i++)
   {
     map.addLayer(buslinien[i]);
   }
-  
+  map.addLayer(friends);
+  map.addLayer(locations);
+  map.addLayer(events);
   map.addLayer(newlocation);
 
   selectControl = new OpenLayers.Control.SelectFeature(
@@ -612,6 +610,11 @@ function layermenu()
     .show();
 }
 
+function closePreviewPopup()
+{
+  $("#popup").hide();
+}
+
 // --- Location -----------------------------------------------------------------------------------
   
 function addNewLocation()
@@ -619,32 +622,41 @@ function addNewLocation()
   locations.setVisibility(false);
   friends.setVisibility(false);
   newlocation.setVisibility(true);
-  $(".button-map-location-edit").show();
-  $("#button-location-add").hide();
+  $(".button-location-new").show();
+  $("#button-location-new").hide();
   selectControl.deactivate();
   clickControl.activate();
 }
+
 
 function cancel()
 {
   locations.setVisibility(true);
   friends.setVisibility(true);
   newlocation.setVisibility(false);
-  $(".button-map-location-edit").hide();
-  $("#button-location-add").show();
+  newlocation.removeAllFeatures();
+  $(".button-location-new").hide();
+  $("#button-location-new").show();
   clickControl.deactivate();
   selectControl.activate();
 }
 
+
 function next()
 {
   //redirect zu location/addNewLocationForm oder so
-  locations.setVisibility(true);
-  friends.display(true);
-  newlocation.display(false);
-  $(".button-map-location-edit").hide();
-  $("#button-location-add").show();
+  //locations.setVisibility(true);
+  //friends.display(true);
+  //newlocation.display(false);
+  //$(".button-map-location-edit").hide();
+  //$("#button-location-new").show();
+  pageNext();
 }
+
+$("button#button-location-new-next").on("click", function() {
+  // mach was
+  pageNext();
+});
 
 </script>
 
@@ -652,16 +664,27 @@ function next()
   <ul id="pages">
     <li>
       <div id="popup">Popup</div>
+      
       <div id="map">
-        <button id="button-location-add" type="button" onclick="addNewLocation()">+ Location</button>
         <button id="layerswitcher" type="button" onclick="layermenu()">Layer</button>
-        <button id="button-location-edit-cancel" class="button-map-location-edit" type="button" onclick="cancel()">Abbrechen</button>
-        <button id="button-location-edit-next" class="button-map-location-edit" type="button" onclick="next()">Weiter</button>
+        <button id="button-location-new" type="button" onclick="addNewLocation()">+ Location</button>
+        <button id="button-location-new-cancel" class="button-location-new" type="button" onclick="cancel()">Abbrechen</button>
+        <button id="button-location-new-next" class="button-location-new" type="button">Weiter</button>
+        <a class="button internal" id="22" href="javascript:pageNext()">weiterlink</a>
       </div>
       <script>initMap();</script>
     </li>
     <li>
-      
+<!--  neue Location anlegen      -->
+      <button id="button-location-add-back" class="button-location-add" type="button" onclick="back()">Zurück</button>
+      <button id="button-location-add-cancel" class="button-location-add" type="button" onclick="cancel()">Abbrechen</button>
+      <button id="button-location-add-save" class="button-location-add" type="button" onclick="addLocation()">Fertig</button>
+      <?php echo site_url("location/location/getnewlocationform/"); ?>
+    </li>
+    <li>
+<!--  bestehende Location bearbieten/löschen      -->
+      <button id="button-location-edit-back" class="button-map-location-edit" type="button" onclick="back()">Zurück</button>
+      <?php echo site_url("location/location/geteditlocationform/"); ?>
     </li>
   </ul>
 </div>
