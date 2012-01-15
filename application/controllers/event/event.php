@@ -9,10 +9,9 @@ class Event extends CI_Controller
     parent::is_logged_in();
     $this->load->model("event/Event_model");
     $this->load->model("friends/Friends_model");
-//    $this->load->model("map/Location_model");    
+    $this->load->model("location/location_model");    
     $this->Event_model->cleanup();
   }
-  
 
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -66,7 +65,7 @@ class Event extends CI_Controller
     $data["creator"] = $this->Friends_model->get_user($event->creator);
     $data["event"] = $event;
     $data["members"] = $this->Event_model->getEventMembers($eventid);
-    $data["location"] = "TODO: location";
+    $data["location"] = $this->Location_model->getLocation($event->location);
     $data["comments"] = $this->Event_model->getComments($eventid);
     $this->layout->view("event/showevent", $data);
   }
@@ -74,14 +73,8 @@ class Event extends CI_Controller
   public function deleteevent()
   {
     $eventid = $this->uri->segment(3);    
-    if ($this->Event_model->deleteEvent($eventid))
-    {
-      redirect("timeline");      
-    }
-    else
-    {
-      // TODO: Fehlermeldung: Löschen nicht erlaubt ?
-    }
+    $this->Event_model->deleteEvent($eventid);
+    redirect("timeline");      
   }
   
 // --------------------------------------------------------------------------------------------------------------------

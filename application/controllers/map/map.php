@@ -134,9 +134,8 @@ class Map extends CI_Controller {
     ';
     foreach ($events as $event)
     {
-//      $location = $this->Location_model->getLocation($event->location);
-      $location->lon = "0";
-      $location->lat = "0";
+
+      $location = $this->Location_model->getLocation($event->location);
             
       echo '
         {

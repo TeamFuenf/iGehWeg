@@ -36,7 +36,6 @@ class Event_model extends CI_Model
   
   /**
    * Liefert alle möglichen Teilnehmer für ein Event = die Freundesliste eines Benutzers
-   * TODO: Von FriendModel holen
    */
   public function getPossibleMembers()
   {
@@ -115,7 +114,6 @@ class Event_model extends CI_Model
       return false;
     }
   }
-  
 
 // --------------------------------------------------------------------------------------------------------------------
 

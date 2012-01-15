@@ -27,8 +27,12 @@ class Location extends CI_Controller {
     redirect('/map', 'refresh');
   }
   
-  public function getnewlocation($lon, $lat)
+  public function getnewlocation()
   {
+    if ($this->uri->segment(5))
+    {
+      $lon = $this->uri->segment(4);
+      $lat = $this->uri->segment(5);
     echo '{
       "type": "FeatureCollection", 
       "features": [
@@ -45,6 +49,7 @@ class Location extends CI_Controller {
         },
       {}
     ]}';
+    }
   }
   
   

@@ -460,15 +460,17 @@ function openLocationPopup(evt)
       for (var i=0; i < feature.cluster.length; i++)
       {
         var locationName = feature.cluster[i].attributes.name;
-        
-        buffer += "<li><a href='#'>" + locationName + "</a></li>";
+        var locationId = feature.cluster[i].attributes.id;    
+        buffer += "<a href='<?php echo base_url("location/") ?>" + locationId + "'>" + locationName + "</a><br>";
+//        buffer += "<li><a href='#'>" + locationName + "</a></li>";
       }
       buffer += "</ul>";
     }
   }
   else
   {
-    buffer = "<ul><li><a href='#'>" + locationName + "</a></li></ul>";
+    var locationId = feature.cluster[i].attributes.id;    
+    buffer += "<a href='<?php echo base_url("location/") ?>" + locationId + "'>" + locationName + "</a><br>";
   }
   
   $("#popup")
