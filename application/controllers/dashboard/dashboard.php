@@ -19,9 +19,13 @@ class Dashboard extends CI_Controller
     $data["user"] = $this->Friends_model->get_user($userid);
     $data["friends"] = $this->Friends_model->get_friends($userid);
     $data["newmessages"] = $this->Messaging_model->countUnreadMessages();
-    $data["eventlink"] = anchor("#", "<img src='../../images/event_new.png' /><div id='button_header'>Events<br><span class='additional_text'>Hier kannst du neue Events erstellen</span></div>");
-    $data["locationlink"] = anchor("#", "<img src='../../images/location_edit.png' /><div id='button_header'>Locations<br><span class='additional_text'>Hier kannst du neue Locations hinzufügen</span></div>");
-    $data["logoutlink"] = anchor("/base/login_control/logout", "<div id='logout_button'><img src='../../images/logout.png' /><p>Logout</p></div>");      
+
+   // $data["knearestfriends"] = $this->Friends_model->getKNearestFriends(5);
+    
+    $data["eventlink"] = anchor("#", "<img src='../../images/event_new.png' /><div id='button_header'>Events<br><span class='additional_text'>Hier kannst du neue Events erstellen</span></div>", array( 'class' => 'list_entry'));
+    $data["locationlink"] = anchor("#", "<img src='../../images/location_edit.png' /><div id='button_header'>Locations<br><span class='additional_text'>Hier kannst du neue Locations hinzufügen</span></div>", array( 'class' => 'list_entry'));
+
+	$data["logoutlink"] = anchor("/base/login_control/logout", "<div id='logout_button'><img src='../../images/logout.png' /><p>Logout</p></div>");      
 
     $this->layout->view("dashboard/dashboard", $data);
   }

@@ -741,6 +741,7 @@ function addLocation()
         lon: newlocationlonlat.lon,
         lat: newlocationlonlat.lat
     });
+    $.get("<?php echo site_url('map'); ?>");
   }
   
 }
@@ -773,11 +774,6 @@ function getLocationDetails(id)
     <li>
 <!--  bestehende Location bearbieten/löschen      -->
       <div id='locationdetails'></div>
-
-      
-      <div id='location-comments'>
-        // ToDo: Hier stehen Kommentare.
-      </div>
     </li>
   </ul>
 </div>

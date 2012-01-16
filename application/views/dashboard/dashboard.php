@@ -7,13 +7,11 @@
         </div>
         
         <?php echo $logoutlink; ?>
-		
-        <div class="contentbox">
-        	<ul>
-			       <li id="friend_circles">
-              <?php 
+
+		<div id="friend_info">
+			  <?php 
                 $width = 640;
-                $height= 250; 
+                $height= 303; 
                 $radius1 = $height/2-1;
                 $radius2 = $height/2 * 0.66;
                 $radius3 = $height/2 * 0.33;
@@ -25,12 +23,13 @@
                 
               ?>			        
               <canvas id="nearestfriendsCanvas" width="640" height="<? echo $height;?>"></canvas>
+
               <script>
               var canvas = document.getElementById("nearestfriendsCanvas").getContext("2d");
               
               // Kreis
               canvas.lineWidth = 3;
-              canvas.strokeStyle = "#9e9a93";
+              canvas.strokeStyle = "#5A524B";
               canvas.beginPath();
               canvas.arc(<? echo $width/2;?>, <? echo $height/2;?>, <? echo $radius1; ?>, 0, Math.PI*2, true);
               canvas.closePath();
@@ -82,17 +81,20 @@
               canvas.stroke();
               canvas.fill();                              
               </script>			   
-            </li>
-        		<li>
+            </div>
+		
+        <div class="contentbox">
+        	<ul>
+        		<li class="button_long">
 			      	<?php
 			        	if (empty($newmessages) || count($newmessages) < 1)
 			            {
-			              echo anchor("mail/inbox", "<img src='../../images/new_message.png' /><div id='button_header'>Nachrichten<br><span class='additional_text'>Du hast keine neuen Nachrichten</span></div>");
+			              echo anchor("mail/inbox", "<img src='../../images/new_message.png' /><div id='button_header'>Nachrichten<br><span class='additional_text'>Du hast keine neuen Nachrichten</span></div>", array( 'class' => 'list_entry'));
 			            }
 			            else
 			            {
 			              // echo anchor("mail/inbox", "<img src='../../images/new_message.png' /><span id='new_messages'>&nbsp;".count($newmessages)."</span><div id='button_header'>Nachrichten<br><span class='additional_text'>Du hast ".count($newmessages)." neue Nachricht(en)</span></div>", 'class="button_long"');
-						  echo anchor("mail/inbox", "<img src='../../images/new_message.png' /><div id='button_header'>Nachrichten<br><span class='additional_text'>Du hast ".count($newmessages)." neue Nachricht(en)</span></div>");
+						  echo anchor("mail/inbox", "<img src='../../images/new_message.png' /><div id='button_header'>Nachrichten<br><span class='additional_text'>Du hast ".count($newmessages)." neue Nachricht(en)</span></div>", array( 'class' => 'list_entry'));
 			            }
 					?>		
 				</li>

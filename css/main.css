@@ -131,7 +131,7 @@ li.button_long {
 	border: 1px solid #707070;
 	display: block;
 	margin: 0px;
-	padding: 25px;
+/*	padding: 25px;*/
 	text-align: left;
 }
 
@@ -204,17 +204,19 @@ a.button_long #new_messages {
 	padding: 0px;
 }
 
-.button_message_small {
-	background: #5A524B;
-	opacity: 0.5;
-	border: 1px solid #5A524B;
-	margin: 0px;
-	padding: 0px 25px !important;
+.list_entry {
+	width: 74%;
+	display: inline-block;
+	padding: 25px 0px 25px 25px;
+/*	border: 1px solid black;*/
 }
 
-.button_message_small img {
-	opacity: 1;
-	height: 67px;
+.button_small {
+	float: right;
+	width: 20%;
+	background-color: blue;
+	padding: 25px 0px;
+	text-align: center;
 }
 
 /* --- Login ------------------------------------------------------------------------------------------------------- */
@@ -275,16 +277,17 @@ input[type=submit], #login_form>form>a, #signup_form>form>a {
 
 /* --- Dashboard --------------------------------------------------------------------------------------------------- */
 
-li#friend_info {
-	background-color: #c8c6b9;
-	background-image: url("../../images/circle_background.png");
+div#friend_info {
+/*	background-color: #c8c6b9;*/
+	background-image: url("../../images/back_test.png");
 	color: white;
-	padding: 20px;
+	padding: 0px;
+	margin: 0px;
 }
 
-li#friend_info img {
-	width: 40px;
-	height: 40px;
+canvas#nearestfriendsCanvas {
+	margin-top: -90px;
+	margin-bottom: 30px;
 }
 
 div#button_header {
@@ -331,10 +334,6 @@ div#friends_groups_button {
 	float: left;
 }
 
-li.friend_list_entry {
-	cursor: pointer;
-}
-
 div#friend_details {
 	color: #5A524B;
 	font-size: 50px;
@@ -351,13 +350,35 @@ div#friend_detail_image img {
 	border-radius: 5px;
 }
 
-div.button_side {
+.button_side {
 	margin: 0px 5px !important;
 }
 
 /* --- Gruppen ----------------------------------------------------------------------------------------------------- */
 
+.delete_group {
+	float: right;
+	background: #AE1515;
+	padding: 4px;
+	color: white;
+	border-radius: 4px;
+}
 
+/*--------GROUP MEMBERS------------*/
+
+ul.list {
+	margin: 0px;
+	padding: 0px;
+}
+
+ul.list>li {
+	clear: both;
+	cursor: pointer;
+	font-size: 1em;
+	padding: 10px;
+	border-bottom: 1px solid #CCCCCC;
+	list-style: none;
+}
 
 /* --- Seiten ------------------------------------------------------------------------------------------------------ */
 

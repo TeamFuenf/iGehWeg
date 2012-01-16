@@ -27,7 +27,6 @@ class Location extends CI_Controller {
     $email = $this->input->post("email", true);
     $type = $this->input->post("type", true);
     $this->Location_model->addLocation($name, $lon, $lat, $street, $city, $type, $internet, $email);
-    redirect('map/map');
   }
   
   public function getnewlocation()
@@ -41,9 +40,9 @@ class Location extends CI_Controller {
       "features": [
         {
           "type": "Feature",
-          "id": "0815",
+          "id": "tempId",
           "properties": {
-            "name": "Neue Location"
+            "name": "tempLocation"
           },
           "geometry": {
             "type": "Point",
@@ -55,17 +54,6 @@ class Location extends CI_Controller {
     }
   }
   
-  
-  /*
-   * localhost/location/id -> location_detail.php layout->view
-   * localhost/map -> 2. seite -> location_mapdetail.php load->view
-   * localhost/location/edit/id -> location_edit.php
-   * 
-   * 
-   * $.post(2. url, function(data) {
-   *   $("#detailview").html(data);
-   * });
-   */
   
   public function deletelocation($locid)
   {
@@ -93,7 +81,7 @@ class Location extends CI_Controller {
     }
   }
   
-  public function edit()
+  public function editLocation()
   {
     if ($this->uri->segment(3))
     {
@@ -107,18 +95,18 @@ class Location extends CI_Controller {
   
   public function updateLocation()
   {
-    if ($this->uri->segment(3))
-    {
-      $locid = $this->uri->segment(3);
-      $name = $this->input->post("name", true);
-      $street = $this->input->post("street", true);
-      $city = $this->input->post("city", true);
-      $internet = $this->input->post("internet", true);
-      $email = $this->input->post("email", true);
-      $type = $this->input->post("type", true);
-      $this->Location_model->updateLocation($locid, $name, $street, $city, $type, $internet, $email);
-    }
-    redirect('map');
+    // if ($this->uri->segment(3))
+    // {
+      // $locid = $this->uri->segment(3);
+      // $name = $this->input->post("name", true);
+      // $street = $this->input->post("street", true);
+      // $city = $this->input->post("city", true);
+      // $internet = $this->input->post("internet", true);
+      // $email = $this->input->post("email", true);
+      // $type = $this->input->post("type", true);
+      // $this->Location_model->updateLocation($locid, $name, $street, $city, $type, $internet, $email);
+    // }
+    redirect('map/map/index');
   }
 
 }
