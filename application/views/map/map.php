@@ -73,6 +73,22 @@
     vertical-align:middle;
   }
 
+  div#popup li.layer
+  {
+    padding:5px;
+    border:0px;
+  }
+
+  div#popup li.layer[status=on]
+  {
+    color:#666;
+  }
+
+  div#popup li.layer[status=off]
+  {
+    color:#ddd;
+  }
+  
   button#button-location-add
   {
     position:absolute;
@@ -108,7 +124,7 @@ var friendsUrl = "<?php echo site_url("map/map/getfriends"); ?>";
 var eventsUrl = "<?php echo site_url("map/map/getevents"); ?>";
 
 var locations, friends, events, newlocation, newlocationlonlat;
-var buslinien = new Array();
+var buslinie1, buslinie2, buslinie5, buslinie6, buslinie7, buslinie8, buslinie9;
 
 OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {
     defaultHandlerOptions: {
@@ -304,23 +320,26 @@ function initMap()
     styleMap: eventsStyle
   });
   
-  buslinien[0] = new OpenLayers.Layer.Vector("Buslinien", { strategies: [buslinesStrategy], styleMap: buslinienStyle });
-  buslinien[1] = new OpenLayers.Layer.Vector("Buslinien", { strategies: [buslinesStrategy], styleMap: buslinienStyle });
-  buslinien[2] = new OpenLayers.Layer.Vector("Buslinien", { strategies: [buslinesStrategy], styleMap: buslinienStyle });
-  buslinien[3] = new OpenLayers.Layer.Vector("Buslinien", { strategies: [buslinesStrategy], styleMap: buslinienStyle });
-  buslinien[4] = new OpenLayers.Layer.Vector("Buslinien", { strategies: [buslinesStrategy], styleMap: buslinienStyle });
-  buslinien[5] = new OpenLayers.Layer.Vector("Buslinien", { strategies: [buslinesStrategy], styleMap: buslinienStyle });
-  buslinien[6] = new OpenLayers.Layer.Vector("Buslinien", { strategies: [buslinesStrategy], styleMap: buslinienStyle });
+  buslinie1 = new OpenLayers.Layer.Vector("Linie 1", { strategies: [buslinesStrategy], styleMap: buslinienStyle });
+  buslinie2 = new OpenLayers.Layer.Vector("Linie 2", { strategies: [buslinesStrategy], styleMap: buslinienStyle });
+  buslinie5 = new OpenLayers.Layer.Vector("Linie 5", { strategies: [buslinesStrategy], styleMap: buslinienStyle });
+  buslinie6 = new OpenLayers.Layer.Vector("Linie 6", { strategies: [buslinesStrategy], styleMap: buslinienStyle });
+  buslinie7 = new OpenLayers.Layer.Vector("Linie 7", { strategies: [buslinesStrategy], styleMap: buslinienStyle });
+  buslinie8 = new OpenLayers.Layer.Vector("Linie 8", { strategies: [buslinesStrategy], styleMap: buslinienStyle });
+  buslinie9 = new OpenLayers.Layer.Vector("Linie 9", { strategies: [buslinesStrategy], styleMap: buslinienStyle });
   
   newlocation = new OpenLayers.Layer.Vector("newLocation", {
     visibility: false,
     styleMap: locationStyle
   });   
 
-  for (var i=0; i < buslinien.length; i++)
-  {
-    map.addLayer(buslinien[i]);
-  }
+  map.addLayer(buslinie1);
+  map.addLayer(buslinie2);
+  map.addLayer(buslinie5);
+  map.addLayer(buslinie6);
+  map.addLayer(buslinie7);
+  map.addLayer(buslinie8);
+  map.addLayer(buslinie9);  
   map.addLayer(friends);
   map.addLayer(locations);
   map.addLayer(events);
@@ -332,13 +351,13 @@ function initMap()
       locations, 
       newlocation, 
       events,
-      buslinien[0],
-      buslinien[1],
-      buslinien[2],
-      buslinien[3],
-      buslinien[4],
-      buslinien[5],
-      buslinien[6]
+      buslinie1,
+      buslinie2,
+      buslinie5,
+      buslinie6,
+      buslinie7,
+      buslinie8,
+      buslinie9
     ], { clickout: true, toggle: false, multiple: false, hover: false}
   );
   
@@ -378,29 +397,25 @@ function initMap()
     }
   });  
   
-  for (var i=0; i < buslinien.length; i++)
-  {
-    buslinien[i].events.on({
-      "featureselected": function(evt) {
-        openBuslinienPopup(evt);
-      },
-      "featureunselected": function(evt) {
-        closePopup();
-      }
-    });
-  }
+  buslinie1.events.on({"featureselected": function(evt) { openBuslinienPopup(evt); }, "featureunselected": function(evt) { closePopup(); }});
+  buslinie2.events.on({"featureselected": function(evt) { openBuslinienPopup(evt); }, "featureunselected": function(evt) { closePopup(); }});
+  buslinie5.events.on({"featureselected": function(evt) { openBuslinienPopup(evt); }, "featureunselected": function(evt) { closePopup(); }});
+  buslinie6.events.on({"featureselected": function(evt) { openBuslinienPopup(evt); }, "featureunselected": function(evt) { closePopup(); }});
+  buslinie7.events.on({"featureselected": function(evt) { openBuslinienPopup(evt); }, "featureunselected": function(evt) { closePopup(); }});
+  buslinie8.events.on({"featureselected": function(evt) { openBuslinienPopup(evt); }, "featureunselected": function(evt) { closePopup(); }});
+  buslinie9.events.on({"featureselected": function(evt) { openBuslinienPopup(evt); }, "featureunselected": function(evt) { closePopup(); }});
     
   loadGeoJSON(locationUrl, locations);
   loadGeoJSON(friendsUrl, friends);
   loadGeoJSON(eventsUrl, events);
 
-  loadGPX("http://localhost/gpx/linie1.gpx", buslinien[0]);
-  loadGPX("http://localhost/gpx/linie2.gpx", buslinien[1]);
-  loadGPX("http://localhost/gpx/linie5.gpx", buslinien[2]);
-  loadGPX("http://localhost/gpx/linie6.gpx", buslinien[3]);
-  loadGPX("http://localhost/gpx/linie7.gpx", buslinien[4]);
-  loadGPX("http://localhost/gpx/linie8.gpx", buslinien[5]);
-  loadGPX("http://localhost/gpx/linie9.gpx", buslinien[6]);
+  loadGPX("http://localhost/gpx/linie1.gpx", buslinie1);
+  loadGPX("http://localhost/gpx/linie2.gpx", buslinie2);
+  loadGPX("http://localhost/gpx/linie5.gpx", buslinie5);
+  loadGPX("http://localhost/gpx/linie6.gpx", buslinie6);
+  loadGPX("http://localhost/gpx/linie7.gpx", buslinie7);
+  loadGPX("http://localhost/gpx/linie8.gpx", buslinie8);
+  loadGPX("http://localhost/gpx/linie9.gpx", buslinie9);
 }
     
 function loadGPX(url, layer)
@@ -497,8 +512,10 @@ function openFriendsPopup(evt)
       for (var i=0; i < numFriends; i++)
       {
         var friendName = feature.cluster[i].attributes.name;
-        var friendPicture = feature.cluster[i].attributes.picture;    
-        buffer += "<li><img width='64px' height='64px' style='border-radius:10px' src='" + friendPicture + "'/>" + friendName+"</li>";
+        var friendPicture = feature.cluster[i].attributes.picture;
+        var friendId = feature.cluster[i].attributes.id;        
+        var link = "<?php echo site_url("mail");?>/" + friendId;
+        buffer += "<li><a href='" + link + "'><img width='64px' height='64px' style='border-radius:10px' src='" + friendPicture + "'/>" + friendName+"</a></li>";
       }
       buffer += "</ul>";
     }
@@ -575,35 +592,27 @@ function closePopup()
 
 // --- Layerswitcher -----------------------------------------------------------------
 
-function toggleLayer(layer)
-{
-  if (layer.getVisibility())
-  {
-    layer.setVisibility(false);
-  }
-  else
-  {
-    layer.setVisibility(true);
-  }
-}
-
 function layermenu()
 {
   var buffer = "";  
   buffer = "" +
-  "Basislayer:<br/>" +
-  "<input type='checkbox' name='chkfriends' id='chkfriends' onclick='toggleLayer(friends)' checked='checked'><label for='chkfriends'>Freunde</label><br/>" + 
-  "<input type='checkbox' name='chklocations' id='chklocations' onclick='toggleLayer(locations)'><label for='chklocations'>Locations</label><br/>" +
-  "<input type='checkbox' name='chkevents' id='chkevents' onclick='toggleLayer(events)' checked='checked'><label for='chkevents'>Events</label><br/>" +
+  "Basislayer:" +
+  "<ul>" +
+  "<li class='layer' layer='friends' status='on'>Freunde</li>" +
+  "<li class='layer' layer='events' status='on'>Events</li>" +
+  "<li class='layer' layer='locations' status='off'>Locations</li>" +
+  "</ul>" +  
   "<hr/>" +
-  "Buslinien:<br/>" +
-  "<input type='checkbox' name='chkbus0' id='chkbus0' onclick='toggleLayer(buslinien[0])'><label for='chkbus0'>Linie 1</label><br/>" +
-  "<input type='checkbox' name='chkbus1' id='chkbus1' onclick='toggleLayer(buslinien[1])'><label for='chkbus1'>Linie 2</label><br/>" +
-  "<input type='checkbox' name='chkbus2' id='chkbus2' onclick='toggleLayer(buslinien[2])'><label for='chkbus2'>Linie 5</label><br/>" +
-  "<input type='checkbox' name='chkbus3' id='chkbus3' onclick='toggleLayer(buslinien[3])'><label for='chkbus3'>Linie 6</label><br/>" +
-  "<input type='checkbox' name='chkbus4' id='chkbus4' onclick='toggleLayer(buslinien[4])'><label for='chkbus4'>Linie 7</label><br/>" +
-  "<input type='checkbox' name='chkbus5' id='chkbus5' onclick='toggleLayer(buslinien[5])'><label for='chkbus5'>Linie 8</label><br/>" +
-  "<input type='checkbox' name='chkbus6' id='chkbus6' onclick='toggleLayer(buslinien[6])'><label for='chkbus6'>Linie 9</label><br/>" +
+  "Buslinien:" +
+  "<ul>" +
+  "<li class='layer' layer='buslinie1' status='off'>Linie 1</li>" +
+  "<li class='layer' layer='buslinie2' status='off'>Linie 2</li>" +
+  "<li class='layer' layer='buslinie5' status='off'>Linie 5</li>" +  
+  "<li class='layer' layer='buslinie5' status='off'>Linie 6</li>" +  
+  "<li class='layer' layer='buslinie5' status='off'>Linie 7</li>" +  
+  "<li class='layer' layer='buslinie5' status='off'>Linie 8</li>" +  
+  "<li class='layer' layer='buslinie5' status='off'>Linie 9</li>" +  
+  "</ul>" +  
   "<hr/>" +
   "<a href='javascript:closePopup()'>close</a>";
 
@@ -612,10 +621,21 @@ function layermenu()
     .show();
 }
 
-function closePreviewPopup()
-{
-  $("#popup").hide();
-}
+$("body").on("click", "li.layer", function(event) {
+  var layername = $(this).attr("layer");
+  var status = $(this).attr("status");
+  
+  if (status == "off")
+  {
+    window[layername].setVisibility(true);
+    $(this).attr("status", "on");
+  }
+  else
+  {
+    window[layername].setVisibility(false);
+    $(this).attr("status", "off");
+  }
+});
 
 // --- Location -----------------------------------------------------------------------------------
   
