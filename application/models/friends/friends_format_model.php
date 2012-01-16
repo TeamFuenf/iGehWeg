@@ -29,48 +29,62 @@ class Friends_format_model extends CI_Model
     function format_friend_main($current_user, $friends) 
     {
     	$friends_list = "";
+		$count = 0;
 		
     	if(!is_null($friends)) {
 			foreach($friends as $item) {
-				$friends_list = $friends_list."<li class='friend_list_entry' id='".$item->id."'>
+				if($count % 2 == 0) {
+					$color_class = "green";
+				} else {
+					$color_class = "blue";
+				}
+				$friends_list = $friends_list."<li class='friend_list_entry button_long ".$color_class."' id='".$item->id."'>
 				<img src='".$item->picture."'/>
 				".$item->name."
-				".anchor('/mail/'.$item->id, 'Text', array( 'class' => 'button', 'style' => 'float: right;'))."
-				</li>";
+				".anchor('/mail/'.$item->id, '<img src="../../images/message.png" />', array( 'class' => 'button_normal button_message_small', 'style' => 'float: right;'))."
+				></li>";
+				$count++;
 			}
 		}
 		
 		$string_script = " <script>
 						$('.friend_list_entry').on('click', function() {
 							var detail_id = $(this).attr('id');
-							var windowwidth = $('#friends').width();
+							var windowwidth = $('#window').width();
 							var offset = -1*windowwidth;
+							console.log(offset);
 							$.ajax({
 								url: '/friends/friends_control/get_detail/' + detail_id,
 								success: function(data)
 								{
-									$('#friends_slide_list').animate({left : offset+'px'}, 1000);
+									console.log('geht schon');
+									$('#pages').animate({left : offset+'px'}, 1000);
 									$('#friend_detail').html(data);
-									$('#friends').animate({ scrollTop: 0 }, 0)
+									$('#window').animate({ scrollTop: 0 }, 0)
   								}
 							});
 						});
 						".$this->ajax_link."						
 						</script>";
-		
-    	$string = 	"<div id='friends_current_user'>
-    					<img class='big_user_image' src='".$current_user->picture."' />"
-    					.$current_user->name."
+		/*
+		  <div id='friends_current_user'>
+    	     <img class='big_user_image' src='".$current_user->picture."' />"
+    		 .$current_user->name."
+    	  </div>
+		  */
+    	$string = 	"<div class='button_side'>
+    				<div id='friends_add_button'>
+    				 	<a href='/friends/friends_control/add_friends_main' class='button_normal'>+</a>
     				 </div>
-    				 <div id='friends_add_button'>
-    				 <a href='/friends/friends_control/add_friends_main'>+</a>
+    				 <div id='friends_groups_button'>
+    				 	".anchor('/friends/groups_control', 'Gruppen', 'class="button_normal"')."
     				 </div>
-    				 <ul id='friends_friend_list'>"
+    				 </div>
+    				 <br />
+    				<div class='contentbox contentbox_friends'>
+    				 <ul>"
     				 	.$friends_list."
-    				 </ul>
-    				 <div id='friends_groups'>
-    				 	".anchor('/friends/groups_control', 'Gruppen', 'class="button"')."
-    				 </div>";
+    				 </ul></div>";
 					
 		return $string.$string_script;
     }
@@ -87,26 +101,26 @@ class Friends_format_model extends CI_Model
 		if($groups != null) 
 		{
 			foreach($groups as $item) {
-				$gruppen = $gruppen." <a class='group_links' href=''>".$item->name."</a>";
+				$gruppen = $gruppen." <a class='group_links button_normal red' href=''>".$item->name."</a>";
 			}
 		}
 		
 		$script_string = "	<script>
 								$('#back_button').on('click', function(){
-									$('#friends_slide_list').animate({left : '0px'}, 1000);
-									$('#friends').animate({ scrollTop: 0 }, 0)
+									$('#pages').animate({left : '0px'}, 1000);
+									$('#window').animate({ scrollTop: 0 }, 0)
 								});
 								$('#add_to_button').on('click', function() {
 									var detail_id = '".$details->id."';
-									var windowwidth = $('#friends').width();
+									var windowwidth = $('#window').width();
 									var offset = -2*windowwidth;
 									$.ajax({
 										url: '/friends/friends_control/get_groups/' + detail_id,
 										success: function(data)
 										{
 												$('#add_to_group').html(data);
-												$('#friends_slide_list').animate({left : offset+'px'}, 1000);
-												$('#friends').animate({ scrollTop: 0 }, 0)
+												$('#pages').animate({left : offset+'px'}, 1000);
+												$('#window').animate({ scrollTop: 0 }, 0)
   										}
 									});
 								});
@@ -122,8 +136,8 @@ class Friends_format_model extends CI_Model
 													success: function(data)
 													{
 															$('#friends_main').html(data);
-															$('#friends_slide_list').animate({left : '0px'}, 1000);
-															$('#friends').animate({ scrollTop: 0 }, 0)
+															$('#pages').animate({left : '0px'}, 1000);
+															$('#window').animate({ scrollTop: 0 }, 0)
 			  										}
 												});
 										}
@@ -132,20 +146,25 @@ class Friends_format_model extends CI_Model
 								".$this->ajax_link."
 							</script>";
 		
-		$string = "	<div id='current_detail'>
-						<div class='imgbox' id='detail_image'>
+		$string = "	<div id='friend_details'>
+						<div id='friend_detail_image'>
 							<img class='big_user_image' src='".$details->picture."' />
 							".$details->name."
 						</div>
 					</div>
-					<br/><br/>
-					<span id='delete_user'>DELETE</span> ".anchor('/mail/'.$details->id, 'Text', array( 'class' => 'button', 'style' => ''))."
 					<hr />
-					<span>Groups:</span><br/>
+					<div class='button_side'>
+					<span id='delete_user' class='button_normal'>Löschen</span> ".anchor('/mail/'.$details->id, '<img src="../../images/message.png" />', array( 'class' => 'button_normal', 'style' => ''))."
+					</div>
+					<hr />
+					<span>Gruppen:</span><br/>
+					<div class='button_side'>
 					".$gruppen."
-					<span id='add_to_button'>ADD GROUPS</span>
+					<span id='add_to_button' class='button_normal'>+</span>
+					</div>
 					<hr />
-					<span id='back_button'>OK</span>";
+					<div class='button_side'>
+					<span id='back_button' class='button_normal'>zurück</span></div>";
 		
 		return $script_string.$string;
 	}
@@ -162,7 +181,7 @@ class Friends_format_model extends CI_Model
 		if($groups_with_friend != null) 
 		{
 			foreach($groups_with_friend as $item) {
-				$groups_with = $groups_with." <span class='group_with_links del_group' id='".$item->id."' href=''>".$item->name."</span>";	
+				$groups_with = $groups_with." <span class='button_normal red del_group' id='".$item->id."' href=''>".$item->name."</span>";	
 			}
 		}
 		
@@ -170,22 +189,22 @@ class Friends_format_model extends CI_Model
 		if($groups_without_friend != null) 
 		{
 			foreach($groups_without_friend as $item) {
-				$groups_without = $groups_without." <span class='group_without_links add_group' id='".$item->id."'>".$item->name."</span>";	
+				$groups_without = $groups_without." <span class='button_normal blue add_group' id='".$item->id."'>".$item->name."</span>";	
 			}
 		}
 		
 		$script_string = "	<script>
 								$('#to_details_button').on('click', function() {
 									var detail_id = '".$friend_id."';
-									var windowwidth = $('#friends').width();
+									var windowwidth = $('#window').width();
 									var offset = -1*windowwidth;
 									$.ajax({
 										url: '/friends/friends_control/get_detail/' + detail_id,
 										success: function(data)
 										{
-											$('#friends_slide_list').animate({left : offset+'px'}, 1000);
+											$('#pages').animate({left : offset+'px'}, 1000);
 											$('#friend_detail').html(data);
-											$('#friends').animate({ scrollTop: 0 }, 0)
+											$('#window').animate({ scrollTop: 0 }, 0)
   										}
 								});
 								});
@@ -226,13 +245,15 @@ class Friends_format_model extends CI_Model
 								".$this->ajax_link."
 							</script>";
 		
-		$string = "	<h2>Add to group</h2><br/><br/>
-					".$groups_without."
+		$string = "	<span class='group_list'>Gruppen ohne Benutzer:</span><br/>
+					<div class='button_side'>".$groups_without."</div>
 					<hr />
-					<span>Groups:</span><br/>
-					".$groups_with."
+					<span class='group_list'>Gruppen mit Benutzer:</span><br/>
+					<div class='button_side'>".$groups_with."</div>
 					<hr />
-					<span id='to_details_button'>OK</span>";
+					<div class='button_side'>
+					<span id='to_details_button' class='button_normal'>zurück</span>
+					</div>";
 		
 		return $script_string.$string;
     }

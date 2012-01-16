@@ -74,21 +74,21 @@
 						}
 			   		</script>
 			   </li>
-        		<li>
+        		<li class="button_long red">
 			      	<?php
 			        	if (empty($newmessages) || count($newmessages) < 1)
 			            {
-			              echo anchor("mail/inbox", "<img src='../../images/message.png' /><div id='button_header'>Nachrichten<br><span class='additional_text'>Du hast keine neuen Nachrichten</span></div>", 'class="button_long"');
+			              echo anchor("mail/inbox", "<img src='../../images/new_message.png' /><div id='button_header'>Nachrichten<br><span class='additional_text'>Du hast keine neuen Nachrichten</span></div>");
 			            }
 			            else
 			            {
 			              // echo anchor("mail/inbox", "<img src='../../images/new_message.png' /><span id='new_messages'>&nbsp;".count($newmessages)."</span><div id='button_header'>Nachrichten<br><span class='additional_text'>Du hast ".count($newmessages)." neue Nachricht(en)</span></div>", 'class="button_long"');
-						  echo anchor("mail/inbox", "<img src='../../images/new_message.png' /><div id='button_header'>Nachrichten<br><span class='additional_text'>Du hast ".count($newmessages)." neue Nachricht(en)</span></div>", 'class="button_long"');
+						  echo anchor("mail/inbox", "<img src='../../images/new_message.png' /><div id='button_header'>Nachrichten<br><span class='additional_text'>Du hast ".count($newmessages)." neue Nachricht(en)</span></div>");
 			            }
 					?>		
 				</li>
-				<li><?php echo $eventlink; ?></li>
-				<li><?php echo $locationlink; ?></li>
+				<li class="button_long blue"><?php echo $eventlink; ?></li>
+				<li class="button_long green"><?php echo $locationlink; ?></li>
 			</ul>                
         </div>
     </li>

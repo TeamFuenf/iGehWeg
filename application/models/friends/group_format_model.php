@@ -17,25 +17,33 @@ class Group_format_model extends CI_Model
     function format_group_main($groups) 
     {
     	$format_groups = "";
+		$count = 0;
+		
 		if($groups != null) 
 		{
 			foreach($groups as $item) {
-				$format_groups = $format_groups." <li class='list_li'><span class='groups' id='".$item->id."'>".$item->name."</span><span class='delete_group' id='".$item->id."'>löschen</span></li>";	
+				if($count % 2 == 0) {
+					$color_class = "green";
+				} else {
+					$color_class = "blue";
+				}
+				$format_groups = $format_groups." <li class='list_li button_long ".$color_class."'><span class='groups' id='".$item->id."'>".$item->name."</span><span class='delete_group' id='".$item->id."'>löschen</span></li>";
+				$count++;
 			}
 		}
 		
 		$script_string = "	<script>
 								$('.groups').on('click', function() {
 									var detail_id = $(this).attr('id');
-									var windowwidth = $('#groups').width();
+									var windowwidth = $('#window').width();
 									var offset = -1*windowwidth;
 									$.ajax({
 										url: '/friends/groups_control/get_group_members/' + detail_id,
 										success: function(data)
 										{
-											$('#groups_slide_list').animate({left : offset+'px'}, 1000);
+											$('#pages').animate({left : offset+'px'}, 1000);
 											$('#group_members').html(data);
-											$('#groups').animate({ scrollTop: 0 }, 0);
+											$('#window').animate({ scrollTop: 0 }, 0);
   										}
 									});
 								});
@@ -64,21 +72,20 @@ class Group_format_model extends CI_Model
 								});
 							</script>";
 		
-		$string = "<span>Groups:</span>
-					<br/><br/>
-					<ul id='groups_list'>
+		$string = "<h1>Gruppen:</h1>
+					<br/>
+					<div class='contentbox contentbox_friends'>
+    				 <ul>
 					".$format_groups."
 					</ul>
+					</div>
 					<br/>
 					<hr/>
-					<span>NEW GROUP:</span><br/>
+					<span>Neue Gruppe:</span><br/>
 					<form>
 						<input type='text' id='group_name' />
-						<input type='button' value='OK' id='add_group' class='button'/>
-					</form>
-					<br/>
-					<br/>
-					<a href='/friends/friends_control' class='button'>BACK TO FRIENDS</a>";
+						<input type='button' value='OK' id='add_group' class='button_normal'/>
+					</form>";
 		
 		return $script_string.$string;
     }
@@ -106,22 +113,21 @@ class Group_format_model extends CI_Model
 										url: '/friends/groups_control/get_groups/',
 										success: function(data)
 										{
-											$('#groups_slide_list').animate({left: '0px'}, 1000);
+											$('#pages').animate({left: '0px'}, 1000);
 											$('#groups_main').html(data);
-											$('#groups').animate({ scrollTop: 0 }, 0);
+											$('#window').animate({ scrollTop: 0 }, 0);
   										}
 									});
 								});
 							</script>";
 		
-		$string = "<span id='new_group'>+</span>
-					<span>Members:</span>
+		$string = "<h1>Mitglieder:</h1>
 					<br/><br/>
 					<ul id='members_list' class='list'>
 					".$format_members."
 					</ul>
 					<br/>
-					<span id='back_to_groups' class='button'>OK</span>";
+					<span id='back_to_groups' class='button_normal'>zurück</span>";
 		
 		return $script_string.$string;
     }
