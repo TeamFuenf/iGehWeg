@@ -7,15 +7,14 @@ src:url(segoeuil.ttf);
 
 html
 {
-  background-color: #E4E3D9;
-  background-image: url('../../images/body_background.gif');
-  margin:0px auto;
-  padding:0px;
-  overflow: hidden;
-  font-size: 100%;
-  width: 640px;
-  height: 920px;
-  font-family: segoeui !important;
+	background-color: #c8c6b9;
+	margin:0px auto;
+	padding:0px;
+	overflow: hidden;
+	font-size: 100%;
+	width: 640px;
+	height: 920px;
+	font-family: segoeui !important;
 }
 
 body
@@ -24,6 +23,13 @@ body
   padding:0px;
   font-size:1em;
   
+}
+
+h1 {
+	font-size: 50px;
+	margin: 0px;
+	padding: 0px;
+	color: #5A524B;
 }
 
 div#content
@@ -89,23 +95,35 @@ img.olTileImage
 /* --- Standardelemente -------------------------------------------------------------------------------------------- */
 
 div.userprofile {
-/*	background: url("../../images/userprofile_background.png") no-repeat scroll 0 100% #FEFDFC;*/
 	background-image: url('../../images/controls_background.png');
-/*	color: #534B43;*/
 	color: white;
 	padding: 15px;
 	font-size: 50px;
-/*	border-radius: 5px;*/
 }
 
 div.userprofile img {
 	width: 70px;
 	height: 70px;
-	border-radius: 5px;
+	border-radius: 4px;
 	vertical-align: top;
 }
 
-a.button_long {
+div.contentbox {
+	margin: 0px;
+}
+
+div.contentbox_friends {
+	clear: both;
+	margin: 0px;
+}
+
+div.contentbox > ul {
+  	list-style-type: none;
+  	padding: 0px;
+  	margin: 0px;
+}
+
+li.button_long {
 	text-decoration: none;
 	color: white;
 	background-color: #be7844;
@@ -115,36 +133,33 @@ a.button_long {
 	margin: 0px;
 	padding: 25px;
 	text-align: left;
-	/*-moz-box-shadow:
-    0px 1px 1px rgba(000,000,000,0.1),
-    inset 0px 1px 1px rgba(255,255,255,1);
-	  -webkit-box-shadow:
-	    0px 1px 1px rgba(000,000,000,0.1),
-	    inset 0px 1px 1px rgba(255,255,255,1);*/
 }
 
-a.button_long.green {
-/*	background-color: #94bf3c;*/
+li.button_long a {
+	text-decoration: none;
+	color: white;
+}
+
+li.button_long.green {
 	background-color: #8cb192;
 }
 
-a.button_long.blue {
-/*	background-color: #00a8c1;*/
+li.button_long.blue {
 	background-color: #75a6a3;
 }
 
-a.button_long.red {
-/*	background-color: #f16437;*/
-	background-color: #c8c8c8:
+li.button_long.red {
+	background-color: #be7844:
 }
 
-a.button_long img {
+li.button_long img {
 	width: 60px;
 	height: 60px;
 	margin-right: 10px;
 	vertical-align: bottom;
+	border-radius: 4px;
 }
-
+/*
 a.button_long #new_messages {
 	color: black;
 	font-size: 22px;
@@ -156,6 +171,50 @@ a.button_long #new_messages {
 	border-radius: 20px;
 	margin-left: -70px;
 	margin-right: 40px;
+}*/
+
+.button_normal {
+	background-color: #928875;
+	border: none;
+    border-radius: 4px;
+  /*color: white; */ /* Schriftfarbe der Buttons in weiß besser???  */
+	color: #5A524B;
+    font-size: 50px;
+    font-family: segoeui;
+    font-weight: bold;
+    padding: 25px 25px;
+   	margin: 10px 0px; 
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+}
+
+.button_normal.blue {
+	background-color: #75a6a3 !important;	
+}
+
+.button_normal.red {
+	background-color: #be7844 !important;	
+}
+
+.button_normal img {
+	height: 67px;
+	margin: 0px;
+	padding: 0px;
+}
+
+.button_message_small {
+	background: #5A524B;
+	opacity: 0.5;
+	border: 1px solid #5A524B;
+	margin: 0px;
+	padding: 0px 25px !important;
+}
+
+.button_message_small img {
+	opacity: 1;
+	height: 67px;
 }
 
 /* --- Login ------------------------------------------------------------------------------------------------------- */
@@ -163,10 +222,10 @@ a.button_long #new_messages {
 div#login_form, div#signup_form {
 	margin: 0px 10px;
 	padding-top: 10px;
+	color: #5A524B;
 }
 
 div#login_header, div#signup_header {
-	color: #b3aa9a;
 	text-align: center;
 	font-size: 40px;
 	margin: 0px 0px 20px 0px;
@@ -189,7 +248,7 @@ input[type=text], input[type=password] {
 	display: block;
 	margin: 5px 0px;
 	width: 100%;
-	border: 1px solid #b3aa9a;
+	border: 1px solid #928875;
 	border-radius: 3px;
 	font-size: 50px;
 	font-family: segoeui;
@@ -198,14 +257,14 @@ input[type=text], input[type=password] {
 }
 
 input[type=submit], #login_form>form>a, #signup_form>form>a {
-	background-color: #b3aa9a;
-/*    border: 1px solid #AFAFAF;*/
+	background-color: #928875;
 	border: none;
     border-radius: 4px 4px 4px 4px;
-/*    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 1px 1px #FFFFFF inset;*/
-    color: white;
+  /*color: white; */ /* Schriftfarbe der Buttons in weiß besser???  */
+	color: #5A524B;
     font-size: 50px;
     font-family: segoeui;
+    font-weight: bold;
     width: 100%;
     padding: 25px 0px;
    	margin: 10px 0px; 
@@ -218,7 +277,7 @@ input[type=submit], #login_form>form>a, #signup_form>form>a {
 
 li#friend_info {
 	background-color: #c8c6b9;
-	background-image: url("../../circle_background.png");
+	background-image: url("../../images/circle_background.png");
 	color: white;
 	padding: 20px;
 }
@@ -226,16 +285,6 @@ li#friend_info {
 li#friend_info img {
 	width: 40px;
 	height: 40px;
-}
-
-div.contentbox {
-	margin: 0px;
-}
-
-div.contentbox > ul {
-  	list-style-type: none;
-  	padding: 0px;
-  	margin: 0px;
 }
 
 div#button_header {
@@ -271,6 +320,44 @@ div#logout_button p {
 	text-decoration: none;
 	color: white;
 }
+
+/* --- Friends ------------------------------------------------------------------------------------------------------ */
+
+div#friends_add_button {
+	float: right;
+}
+
+div#friends_groups_button {
+	float: left;
+}
+
+li.friend_list_entry {
+	cursor: pointer;
+}
+
+div#friend_details {
+	color: #5A524B;
+	font-size: 50px;
+}
+
+div#friend_detail_image {
+	margin: 5px;
+}
+
+div#friend_detail_image img {
+	width: 70px;
+	height: 70px;
+	vertical-align: top; 
+	border-radius: 5px;
+}
+
+div.button_side {
+	margin: 0px 5px !important;
+}
+
+/* --- Gruppen ----------------------------------------------------------------------------------------------------- */
+
+
 
 /* --- Seiten ------------------------------------------------------------------------------------------------------ */
 
@@ -314,6 +401,7 @@ ul#pages
   top:0px;
   font-size: 30px;
   font-weight: bold;
+  position: relative; /* weil sonst die friends seite nicht geht*/
 }
 
 ul#pages>li
@@ -343,7 +431,7 @@ ul#pages>li
 
 /* http://css3button.net/13291 */
 
-button
+/*button
 {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
@@ -383,5 +471,5 @@ button.darkgrey
 {
   color: #ffffff;
   background-color:#666666;
-}
+}*/
 

@@ -1,10 +1,10 @@
 <script>
 	
 		$(function() {
-			var windowwidth = $('#groups').width();
-			$('#groups_slide_list>li').css('width', windowwidth);
+			var windowwidth = $('#window').width();
+			$('#pages>li').css('width', windowwidth);
 			var ulwidth = 4*windowwidth;
-			$('#groups_slide_list').css('width', ulwidth);
+			$('#pages').css('width', ulwidth);
 			$.ajax({
 					url: "/friends/groups_control/get_groups/",
 					success: function(data)
@@ -15,8 +15,8 @@
 		});
 		
 </script>
-<div id="groups">
-		<ul id="groups_slide_list">
+<div id="window">
+		<ul id="pages">
 			<!-- GROUPS MAIN -->
 			<li>
 				<div id="groups_main">

@@ -60,18 +60,6 @@ ul#groups_list>li {
     text-decoration: none;
 }
 
-#back_button {
-	background-color: #E9E9E9;
-    border: 1px solid #AFAFAF;
-    border-radius: 4px 4px 4px 4px;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 1px 1px #FFFFFF inset;
-    color: #606060;
-    font-family: Arial,Helvetica,sans-serif;
-    font-size: 16px;
-    padding: 5px 8px;
-    cursor: pointer;
-    text-decoration: none;
-}
 
 .groups {
 	width: 100%;
