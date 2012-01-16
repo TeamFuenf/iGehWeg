@@ -9,11 +9,21 @@ class Login_control extends CI_Controller {
 
   public function index()
   {
-  	$is_logged_in = $this->session->userdata('is_logged_in');
-	if($is_logged_in == true) {
-		redirect("/dashboard/dashboard");
-  	} else {
-  		$this->layout->view("/base/login");
+    $is_logged_in = $this->session->userdata("is_logged_in");
+    if($is_logged_in == true)
+    {
+      if ($this->session->userdata("lastpage"))
+      {
+        redirect($this->session->userdata("lastpage"));                
+      }
+      else
+      {
+        redirect("/dashboard/dashboard");        
+      }
+  	}
+  	else
+  	{
+      $this->layout->view("/base/login");
   	}
   }
   

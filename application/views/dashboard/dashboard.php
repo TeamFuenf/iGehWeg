@@ -9,61 +9,64 @@
         <?php echo $logoutlink; ?>
 
 		<div id="friend_info">
-<!--               <canvas id="nearestfriendsCanvas" width="640" height="640"></canvas> -->
-              <canvas id="nearestfriendsCanvas" width="640" height="303"></canvas>
+			  <?php 
+                $width = 640;
+                $height= 303; 
+                $radius1 = $height/2-1;
+                $radius2 = $height/2 * 0.66;
+                $radius3 = $height/2 * 0.33;
+                $maxdist = 750; // Maximale dargestellte Entfernung in Metern
+                
+                $pxdist = $height/2;
+                $scalefactor = 1000.0;
+                $usedcoords[][] = array();
+                
+              ?>			        
+              <canvas id="nearestfriendsCanvas" width="640" height="<? echo $height;?>"></canvas>
+
               <script>
               var canvas = document.getElementById("nearestfriendsCanvas").getContext("2d");
               
               // Kreis
               canvas.lineWidth = 3;
-              // canvas.strokeStyle = "#9e9a93";
               canvas.strokeStyle = "#5A524B";
               canvas.beginPath();
-              // canvas.arc(320, 320, 250, 0, Math.PI*2, true);
-              canvas.arc(320, 150, 125, 0, Math.PI*2, true);
+              canvas.arc(<? echo $width/2;?>, <? echo $height/2;?>, <? echo $radius1; ?>, 0, Math.PI*2, true);
               canvas.closePath();
               canvas.stroke();
               canvas.beginPath();
-              // canvas.arc(320, 320, 150, 0, Math.PI*2, true);
-              canvas.arc(320, 150, 75, 0, Math.PI*2, true);
+              canvas.arc(<? echo $width/2;?>, <? echo $height/2;?>, <? echo $radius2; ?>, 0, Math.PI*2, true);
               canvas.closePath();
               canvas.stroke();
               canvas.beginPath();
-              // canvas.arc(320, 320, 50, 0, Math.PI*2, true);
-              canvas.arc(320, 150, 25, 0, Math.PI*2, true);
+              canvas.arc(<? echo $width/2;?>, <? echo $height/2;?>, <? echo $radius3; ?>, 0, Math.PI*2, true);
               canvas.closePath();
               canvas.stroke();
 
               // User zeichnen
-              <?php
-              // $maxdist = 750;
-              $maxdist = 750;
-              $pxdist = 250;
-              $scalefactor = 1000.0;
+              <?php              
               
               foreach ($friends as $friend)
               {
                 $dx = floor($scalefactor * (71.5 * ($friend->lon - $user->lon))) * $pxdist / $maxdist;
                 $dy = -floor($scalefactor * (111.3 * ($friend->lat - $user->lat))) * $pxdist / $maxdist;
                 $dist = floor((sqrt(pow(71.5 * ($friend->lon - $user->lon),2) + pow(111.3 * ($friend->lat - $user->lat),2))) * 1000);
-                if ($dx != 0 && $dy != 0 && abs($dx) < $maxdist && abs($dy) < $maxdist)  
-                {
+                if ($dx != 0 && $dy != 0 && abs($dx) < $maxdist && abs($dy) < $maxdist && !isset($usedcoords[$dx][$dy]))  
+                {                  
                   echo "                                      
-                    canvas.font = '20px Segoe, Arial';
+                    canvas.font = '15px Segoe, Arial';
                     canvas.lineWidth = 5;
                     canvas.strokeStyle = '#585049';
                     canvas.fillStyle = '#669933';
                     canvas.beginPath();
-                    // canvas.arc(320+".$dx.", 320+".$dy.", 15, 0, Math.PI*2, true);
-                    canvas.arc(320+".$dx.", 150+".$dy.", 15, 0, Math.PI*2, true);
+                    canvas.arc(".($width/2 + $dx).", ".($height/2 + $dy).", 7, 0, Math.PI*2, true);
                     canvas.closePath();
                     canvas.stroke();
                     canvas.fill();                              
                     canvas.fillStyle = '#585049';
-                    // canvas.fillText('".$friend->name.": ".$dist."m', 340+".$dx.", 325+".$dy.");
-                    canvas.fillText('".$friend->name.": ".$dist."m', 340+".$dx.", 155+".$dy.");
+                    canvas.fillText('".$friend->name.": ".$dist."m', ".($width/2 + $dx + 20).", ".($height/2 + $dy + 5).");
                   ";
-//                  echo "console.log('".$friend->name.":".$dx."/".$dy."');";
+                  $usedcoords[$dx][$dy] = $friend->name;
                 }
               }            
               ?>              
@@ -73,8 +76,7 @@
               canvas.strokeStyle = "#585049";
               canvas.fillStyle = "#585049";
               canvas.beginPath();
-              // canvas.arc(320, 320, 5, 0, Math.PI*2, true);
-              canvas.arc(320, 150, 5, 0, Math.PI*2, true);
+              canvas.arc(<? echo $width/2;?>, <? echo $height/2;?>, 4, 0, Math.PI*2, true);
               canvas.closePath();
               canvas.stroke();
               canvas.fill();                              

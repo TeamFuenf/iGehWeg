@@ -34,7 +34,6 @@ class Location_model extends CI_Model
   
   public function getLocation($locid)
   {
-    //$this->db->select('name', 'type', 'street', 'city', 'internet', 'email');
     $this->db->where('id', $locid);
     $query = $this->db->get('location');
     return $query->row();
@@ -62,6 +61,20 @@ class Location_model extends CI_Model
     $this->db->select();
     $this->db->where('locationid', $locid);
     $query = $this->db->get('location_rating');
+  }
+  
+  public function updateLocation($id, $name, $street, $city, $type, $internet, $email)
+  {
+    $data = array(
+      'name' => $name,
+      'street' => $street,
+      'city' => $city,
+      'type' => $type,
+      'internet' => $internet,
+      'email' => $email
+    );
+    $this->db->where('id', $id);
+    $this->db->update('location', $data);
   }
   
 }

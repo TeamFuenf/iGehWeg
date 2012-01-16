@@ -34,6 +34,15 @@ div
   font-family:Segoe UI;
 }
 
+hr.todayruler
+{
+  position:relative;
+  width:200px;
+  margin:0px auto;
+  border-top:1px solid #fff;
+  z-index:999;
+}
+
 .day
 {
   box-shadow:inset 2px 0px 8px #ccc;
@@ -41,7 +50,7 @@ div
   left:45%;
   color:#999;
   width:25px;
-  min-height:50px
+  height:48px;
 }
 
 a
@@ -150,11 +159,29 @@ a
 
         if (count($todaysEvents) > 0)
         {
-          echo "<div class='day' style='height:480px'>";
+          if ($i == 0)
+          {
+            $hourOffset = date("G") * 20;
+            echo "<hr class='todayruler' style='top:".$hourOffset."px;'/>";
+            echo "<div class='day today' style='height:480px'>";            
+          }
+          else
+          {
+            echo "<div class='day' style='height:480px'>";           
+          }
         }
         else
         {
-          echo "<div class='day'>";          
+          if ($i == 0)
+          {
+            $hourOffset = date("G") * 2;
+            echo "<hr class='todayruler' style='top:".$hourOffset."px;'/>";
+            echo "<div class='day today'>";          
+          }
+          else
+          {
+            echo "<div class='day'>";                      
+          }
         }
         
         $datelabel = "<span class='date'>".date("d.m.Y", $date)."</span>";

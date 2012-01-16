@@ -4,6 +4,26 @@
     display:none;
   }
 
+  .olControlScaleLine
+  {
+    width:100px;
+    position:relative;
+    bottom:0px;
+    left:540px;
+    padding: 4px;
+  }
+
+  div.olControlScaleLineTop
+  {
+    color:#000;
+    font-size:20px;
+  }
+
+  div.olControlScaleLineBottom
+  {
+    display:none;
+  }
+      
   div.olMapViewport
   {
     z-index: 0;
@@ -73,6 +93,22 @@
     vertical-align:middle;
   }
 
+  div#popup li.layer
+  {
+    padding:5px;
+    border:0px;
+  }
+
+  div#popup li.layer[show=true]
+  {
+    color:#666;
+  }
+
+  div#popup li.layer[show=false]
+  {
+    color:#ddd;
+  }
+  
   button#button-location-add
   {
     position:absolute;
@@ -108,7 +144,7 @@ var friendsUrl = "<?php echo site_url("map/map/getfriends"); ?>";
 var eventsUrl = "<?php echo site_url("map/map/getevents"); ?>";
 
 var locations, friends, events, newlocation, newlocationlonlat;
-var buslinien = new Array();
+var buslinie1, buslinie2, buslinie5, buslinie6, buslinie7, buslinie8, buslinie9;
 
 OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {
     defaultHandlerOptions: {
@@ -154,9 +190,13 @@ function initMap()
   bounds.extend(new OpenLayers.LonLat(13.4993596,48.5855492));
   bounds.transform(fromProj, toProj);
 
+  scale = new OpenLayers.Control.ScaleLine();
+  scale.geodesic = true;
+
   map = new OpenLayers.Map("map", {
     controls: [
-      new OpenLayers.Control.Navigation()
+      new OpenLayers.Control.Navigation(),
+      scale
     ]
   });
   map.setOptions({restrictedExtent: bounds});
@@ -287,40 +327,43 @@ function initMap()
 // --- Layers -----------------------------------------------------------------
     
   locations = new OpenLayers.Layer.Vector("Locations", {
-    visibility: false,
+    visibility: <? echo $layer["locations"];?>,
     strategies: [locationsStrategy],
     styleMap: locationStyle
   });
   
   friends = new OpenLayers.Layer.Vector("Friends", {
-    visibility: true,
+    visibility: <? echo $layer["friends"];?>,
     strategies: [friendsStrategy],
     styleMap: friendsStyle
   });
 
   events = new OpenLayers.Layer.Vector("Events", {
-    visibility: true,
+    visibility: <? echo $layer["events"];?>,
     strategies: [eventsStrategy],
     styleMap: eventsStyle
   });
   
-  buslinien[0] = new OpenLayers.Layer.Vector("Buslinien", { strategies: [buslinesStrategy], styleMap: buslinienStyle });
-  buslinien[1] = new OpenLayers.Layer.Vector("Buslinien", { strategies: [buslinesStrategy], styleMap: buslinienStyle });
-  buslinien[2] = new OpenLayers.Layer.Vector("Buslinien", { strategies: [buslinesStrategy], styleMap: buslinienStyle });
-  buslinien[3] = new OpenLayers.Layer.Vector("Buslinien", { strategies: [buslinesStrategy], styleMap: buslinienStyle });
-  buslinien[4] = new OpenLayers.Layer.Vector("Buslinien", { strategies: [buslinesStrategy], styleMap: buslinienStyle });
-  buslinien[5] = new OpenLayers.Layer.Vector("Buslinien", { strategies: [buslinesStrategy], styleMap: buslinienStyle });
-  buslinien[6] = new OpenLayers.Layer.Vector("Buslinien", { strategies: [buslinesStrategy], styleMap: buslinienStyle });
+  buslinie1 = new OpenLayers.Layer.Vector("Linie 1", { visibility: <?php echo $layer["buslinie1"]; ?>, strategies: [buslinesStrategy], styleMap: buslinienStyle });
+  buslinie2 = new OpenLayers.Layer.Vector("Linie 2", { visibility: <?php echo $layer["buslinie2"]; ?>, strategies: [buslinesStrategy], styleMap: buslinienStyle });
+  buslinie5 = new OpenLayers.Layer.Vector("Linie 5", { visibility: <?php echo $layer["buslinie5"]; ?>, strategies: [buslinesStrategy], styleMap: buslinienStyle });
+  buslinie6 = new OpenLayers.Layer.Vector("Linie 6", { visibility: <?php echo $layer["buslinie6"]; ?>, strategies: [buslinesStrategy], styleMap: buslinienStyle });
+  buslinie7 = new OpenLayers.Layer.Vector("Linie 7", { visibility: <?php echo $layer["buslinie7"]; ?>, strategies: [buslinesStrategy], styleMap: buslinienStyle });
+  buslinie8 = new OpenLayers.Layer.Vector("Linie 8", { visibility: <?php echo $layer["buslinie8"]; ?>, strategies: [buslinesStrategy], styleMap: buslinienStyle });
+  buslinie9 = new OpenLayers.Layer.Vector("Linie 9", { visibility: <?php echo $layer["buslinie9"]; ?>, strategies: [buslinesStrategy], styleMap: buslinienStyle });
   
   newlocation = new OpenLayers.Layer.Vector("newLocation", {
     visibility: false,
     styleMap: locationStyle
   });   
 
-  for (var i=0; i < buslinien.length; i++)
-  {
-    map.addLayer(buslinien[i]);
-  }
+  map.addLayer(buslinie1);
+  map.addLayer(buslinie2);
+  map.addLayer(buslinie5);
+  map.addLayer(buslinie6);
+  map.addLayer(buslinie7);
+  map.addLayer(buslinie8);
+  map.addLayer(buslinie9);  
   map.addLayer(friends);
   map.addLayer(locations);
   map.addLayer(events);
@@ -332,13 +375,13 @@ function initMap()
       locations, 
       newlocation, 
       events,
-      buslinien[0],
-      buslinien[1],
-      buslinien[2],
-      buslinien[3],
-      buslinien[4],
-      buslinien[5],
-      buslinien[6]
+      buslinie1,
+      buslinie2,
+      buslinie5,
+      buslinie6,
+      buslinie7,
+      buslinie8,
+      buslinie9
     ], { clickout: true, toggle: false, multiple: false, hover: false}
   );
   
@@ -349,6 +392,7 @@ function initMap()
   map.addControl(clickControl);
   clickControl.deactivate();
   
+        
 // --- Eventhandlers ----------------------------------------------------------
   
   locations.events.on({
@@ -378,29 +422,25 @@ function initMap()
     }
   });  
   
-  for (var i=0; i < buslinien.length; i++)
-  {
-    buslinien[i].events.on({
-      "featureselected": function(evt) {
-        openBuslinienPopup(evt);
-      },
-      "featureunselected": function(evt) {
-        closePopup();
-      }
-    });
-  }
+  buslinie1.events.on({"featureselected": function(evt) { openBuslinienPopup(evt); }, "featureunselected": function(evt) { closePopup(); }});
+  buslinie2.events.on({"featureselected": function(evt) { openBuslinienPopup(evt); }, "featureunselected": function(evt) { closePopup(); }});
+  buslinie5.events.on({"featureselected": function(evt) { openBuslinienPopup(evt); }, "featureunselected": function(evt) { closePopup(); }});
+  buslinie6.events.on({"featureselected": function(evt) { openBuslinienPopup(evt); }, "featureunselected": function(evt) { closePopup(); }});
+  buslinie7.events.on({"featureselected": function(evt) { openBuslinienPopup(evt); }, "featureunselected": function(evt) { closePopup(); }});
+  buslinie8.events.on({"featureselected": function(evt) { openBuslinienPopup(evt); }, "featureunselected": function(evt) { closePopup(); }});
+  buslinie9.events.on({"featureselected": function(evt) { openBuslinienPopup(evt); }, "featureunselected": function(evt) { closePopup(); }});
     
   loadGeoJSON(locationUrl, locations);
   loadGeoJSON(friendsUrl, friends);
   loadGeoJSON(eventsUrl, events);
 
-  loadGPX("http://localhost/gpx/linie1.gpx", buslinien[0]);
-  loadGPX("http://localhost/gpx/linie2.gpx", buslinien[1]);
-  loadGPX("http://localhost/gpx/linie5.gpx", buslinien[2]);
-  loadGPX("http://localhost/gpx/linie6.gpx", buslinien[3]);
-  loadGPX("http://localhost/gpx/linie7.gpx", buslinien[4]);
-  loadGPX("http://localhost/gpx/linie8.gpx", buslinien[5]);
-  loadGPX("http://localhost/gpx/linie9.gpx", buslinien[6]);
+  loadGPX("<?php echo site_url("gpx/linie1.gpx");?>", buslinie1);
+  loadGPX("<?php echo site_url("gpx/linie2.gpx");?>", buslinie2);
+  loadGPX("<?php echo site_url("gpx/linie5.gpx");?>", buslinie5);
+  loadGPX("<?php echo site_url("gpx/linie6.gpx");?>", buslinie6);
+  loadGPX("<?php echo site_url("gpx/linie7.gpx");?>", buslinie7);
+  loadGPX("<?php echo site_url("gpx/linie8.gpx");?>", buslinie8);
+  loadGPX("<?php echo site_url("gpx/linie9.gpx");?>", buslinie9);
 }
     
 function loadGPX(url, layer)
@@ -427,7 +467,7 @@ function loadGPX(url, layer)
     }
 
     layer.addFeatures(features);
-    layer.setVisibility(false);
+//    layer.setVisibility(false);
   });
 }
 
@@ -451,7 +491,7 @@ function openLocationPopup(evt)
   if (numLocations > 1)
   {
     buffer = "<p>mehrere Locations:</p>";
-    if (numLocations > 5)
+    if (numLocations > 5 && map.getZoom() != 18)
     {
       buffer = "<p>Mehr als 5 Locations an dieser Position gefunden. Zoome näher heran um mehr Informationen zu erhalten.</p>";
     }
@@ -461,8 +501,8 @@ function openLocationPopup(evt)
       for (var i=0; i < feature.cluster.length; i++)
       {
         var locationName = feature.cluster[i].attributes.name;
-        var locationId = feature.cluster[i].attributes.id;    
-        buffer += "<a href='<?php echo base_url("location/") ?>/" + locationId + "'>" + locationName + "</a><br>";
+        var locationId = feature.cluster[i].attributes.id;
+        buffer += "<a href='javascript:getLocationDetails(" + locationId + ")'>" + locationName + "</a><br>";
       }
       buffer += "</ul>";
     }
@@ -470,8 +510,8 @@ function openLocationPopup(evt)
   else
   {
     var locationName = feature.cluster[0].attributes.name;
-    var locationId = feature.cluster[0].attributes.id;        
-    buffer += "<a href='<?php echo base_url("location/") ?>/" + locationId + "'>" + locationName + "</a><br>";
+    var locationId = feature.cluster[0].attributes.id;
+    buffer += "<a href='javascript:getLocationDetails(" + locationId + ")'>" + locationName + "</a><br>";
   }
   
   $("#popup")
@@ -487,7 +527,7 @@ function openFriendsPopup(evt)
   if (numFriends > 1)
   {
     buffer = "<p>mehrere Freunde:</p>";
-    if (numFriends > 5)
+    if (numFriends > 5 && map.getZoom() != 18)
     {
       buffer = "<p>Mehr als 5 Freunde an dieser Position gefunden. Zoome näher heran um mehr Informationen zu erhalten.</p>";
     }
@@ -497,8 +537,10 @@ function openFriendsPopup(evt)
       for (var i=0; i < numFriends; i++)
       {
         var friendName = feature.cluster[i].attributes.name;
-        var friendPicture = feature.cluster[i].attributes.picture;    
-        buffer += "<li><img width='64px' height='64px' style='border-radius:10px' src='" + friendPicture + "'/>" + friendName+"</li>";
+        var friendPicture = feature.cluster[i].attributes.picture;
+        var friendId = feature.cluster[i].attributes.id;        
+        var link = "<?php echo site_url("mail");?>/" + friendId;
+        buffer += "<li><a href='" + link + "'><img width='64px' height='64px' style='border-radius:10px' src='" + friendPicture + "'/>" + friendName+"</a></li>";
       }
       buffer += "</ul>";
     }
@@ -575,35 +617,27 @@ function closePopup()
 
 // --- Layerswitcher -----------------------------------------------------------------
 
-function toggleLayer(layer)
-{
-  if (layer.getVisibility())
-  {
-    layer.setVisibility(false);
-  }
-  else
-  {
-    layer.setVisibility(true);
-  }
-}
-
 function layermenu()
 {
   var buffer = "";  
   buffer = "" +
-  "Basislayer:<br/>" +
-  "<input type='checkbox' name='chkfriends' id='chkfriends' onclick='toggleLayer(friends)' checked='checked'><label for='chkfriends'>Freunde</label><br/>" + 
-  "<input type='checkbox' name='chklocations' id='chklocations' onclick='toggleLayer(locations)'><label for='chklocations'>Locations</label><br/>" +
-  "<input type='checkbox' name='chkevents' id='chkevents' onclick='toggleLayer(events)' checked='checked'><label for='chkevents'>Events</label><br/>" +
+  "Basislayer:" +
+  "<ul>" +
+  "<li class='layer' layer='friends' show='<?php echo $layer["friends"]; ?>'>Freunde</li>" +
+  "<li class='layer' layer='events' show='<?php echo $layer["events"]; ?>'>Events</li>" +
+  "<li class='layer' layer='locations' show='<?php echo $layer["locations"]; ?>'>Locations</li>" +
+  "</ul>" +  
   "<hr/>" +
-  "Buslinien:<br/>" +
-  "<input type='checkbox' name='chkbus0' id='chkbus0' onclick='toggleLayer(buslinien[0])'><label for='chkbus0'>Linie 1</label><br/>" +
-  "<input type='checkbox' name='chkbus1' id='chkbus1' onclick='toggleLayer(buslinien[1])'><label for='chkbus1'>Linie 2</label><br/>" +
-  "<input type='checkbox' name='chkbus2' id='chkbus2' onclick='toggleLayer(buslinien[2])'><label for='chkbus2'>Linie 5</label><br/>" +
-  "<input type='checkbox' name='chkbus3' id='chkbus3' onclick='toggleLayer(buslinien[3])'><label for='chkbus3'>Linie 6</label><br/>" +
-  "<input type='checkbox' name='chkbus4' id='chkbus4' onclick='toggleLayer(buslinien[4])'><label for='chkbus4'>Linie 7</label><br/>" +
-  "<input type='checkbox' name='chkbus5' id='chkbus5' onclick='toggleLayer(buslinien[5])'><label for='chkbus5'>Linie 8</label><br/>" +
-  "<input type='checkbox' name='chkbus6' id='chkbus6' onclick='toggleLayer(buslinien[6])'><label for='chkbus6'>Linie 9</label><br/>" +
+  "Buslinien:" +
+  "<ul>" +
+  "<li class='layer' layer='buslinie1' show='<?php echo $layer["buslinie1"]; ?>'>Linie 1</li>" +
+  "<li class='layer' layer='buslinie2' show='<?php echo $layer["buslinie2"]; ?>'>Linie 2</li>" +
+  "<li class='layer' layer='buslinie5' show='<?php echo $layer["buslinie5"]; ?>'>Linie 5</li>" +  
+  "<li class='layer' layer='buslinie5' show='<?php echo $layer["buslinie6"]; ?>'>Linie 6</li>" +  
+  "<li class='layer' layer='buslinie5' show='<?php echo $layer["buslinie7"]; ?>'>Linie 7</li>" +  
+  "<li class='layer' layer='buslinie5' show='<?php echo $layer["buslinie8"]; ?>'>Linie 8</li>" +  
+  "<li class='layer' layer='buslinie5' show='<?php echo $layer["buslinie9"]; ?>'>Linie 9</li>" +  
+  "</ul>" +  
   "<hr/>" +
   "<a href='javascript:closePopup()'>close</a>";
 
@@ -612,10 +646,23 @@ function layermenu()
     .show();
 }
 
-function closePreviewPopup()
-{
-  $("#popup").hide();
-}
+$("body").on("click", "li.layer", function(event) {
+  var layername = $(this).attr("layer");
+  var show = $(this).attr("show");
+  
+  if (show == "true")
+  {
+    window[layername].setVisibility(false);
+    $(this).attr("show", "false");
+    $.post("<?php echo site_url("/map/map/saveLayerVisibility");?>", {layer: layername, visibility: false});
+  }
+  else
+  {
+    window[layername].setVisibility(true);
+    $(this).attr("show", "true");    
+    $.post("<?php echo site_url("/map/map/saveLayerVisibility");?>", {layer: layername, visibility: true});
+  }
+});
 
 // --- Location -----------------------------------------------------------------------------------
   
@@ -694,22 +741,19 @@ function addLocation()
         lon: newlocationlonlat.lon,
         lat: newlocationlonlat.lat
     });
-    
-    locationUrl = "<?php echo site_url("map/map/getlocations"); ?>";
-    locations.removeAllFeatures();
-    loadGeoJSON(locationUrl, locations);
-    locations.redraw();
-    locations.setVisibility(true);
-    friends.setVisibility(true);
-    newlocation.setVisibility(false);
-    newlocation.removeAllFeatures();
-    $("#button-location-new").show();
-    clickControl.deactivate();
-    selectControl.activate();
-    closePopup();
   }
   
 }
+
+function getLocationDetails(id)
+{
+  $.post("<?php echo site_url("map/location"); ?>/" + id, function(data) {
+    $("#locationdetails").html(data);
+  });
+  pageNext();
+}
+
+
 
 </script>
 
@@ -728,8 +772,77 @@ function addLocation()
     </li>
     <li>
 <!--  bestehende Location bearbieten/löschen      -->
-      <button id='button-location-edit-back' class='button-map-location-edit' type='button' onclick='back()'>Zurück</button>
-      <?php echo site_url('location/location/geteditlocationform/'); ?>
+      <div id='locationdetails'></div>
+
+      
+      <div id='location-comments'>
+        // ToDo: Hier stehen Kommentare.
+      </div>
     </li>
   </ul>
 </div>
+
+<script>
+
+var track = new Array();
+loadTrack("<?php echo site_url("gpx/linie1.gpx");?>");
+
+function loadTrack(url)
+{
+  OpenLayers.loadURL(url, {}, null, function(r) {
+    var gpxFormat = new OpenLayers.Format.GPX({
+      "extractWaypoints": false,
+      "extractTracks": true,
+      "extractRoutes": true,
+      "extractAttributes": true,
+      "internalProjection": toProj,
+      "externalProjection": fromProj
+    });
+
+    var features = gpxFormat.read(r.responseText);    
+    var collection = new OpenLayers.Geometry.Collection();
+    
+    for (var i=0; i < features.length; i++)
+    {
+      collection.components.push(features[i].geometry); 
+      track[i+1] = features[i].geometry.getGeodesicLength(toProj);
+    }
+    console.log(Math.floor(collection.getGeodesicLength(toProj)) + "m in " + features.length + " Segmenten");    
+
+    getPoint(track, collection, 0.5);
+  });
+}
+
+function getPoint(track, collection, percent)
+{
+  var tmpLen = 0;
+  var totalLen = collection.getGeodesicLength(toProj);
+  var target = totalLen * percent;  
+  var segments;
+  
+  // richtiges Segment für Detailberechnung finden
+  for (var i=1; i <= collection.components.length; i++)
+  {
+    if (tmpLen + collection.components[i].getGeodesicLength(toProj) <= target)
+    {
+      tmpLen += collection.components[i].getGeodesicLength(toProj);
+    }
+    else
+    {
+      segments = i;
+      break;
+    }
+  }
+  
+  var rest = target - tmpLen;
+  console.log("Noch " + Math.floor(rest) + "m in " + collection.components[segments].components.length + " Segmenten zu berechnen");
+  
+  for (var i=0; i < collection.components[segments].components.length; i++)
+  {
+    var s = collection.components[segments].components[i];
+    console.log(s);
+  }
+
+}
+
+</script>
