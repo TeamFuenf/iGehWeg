@@ -81,7 +81,7 @@
     z-index:990;
   }
   
-  button.button-location-new
+  button#button-location-new-cancel, button#button-location-new-next, div#popupErrorMsg
   {
     display:none;
   }
@@ -107,7 +107,7 @@ var locationUrl = "<?php echo site_url("map/map/getlocations"); ?>";
 var friendsUrl = "<?php echo site_url("map/map/getfriends"); ?>";
 var eventsUrl = "<?php echo site_url("map/map/getevents"); ?>";
 
-var locations, friends, events, newlocation;
+var locations, friends, events, newlocation, newlocationlonlat;
 var buslinien = new Array();
 
 OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {
@@ -134,9 +134,9 @@ OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {
     },
     
     trigger: function(e) {
-      var lonlat = map.getLonLatFromViewPortPx(e.xy);
-      lonlat.transform(toProj, fromProj);
-      var newLocationUrl = "<?php echo site_url("location/location/getnewlocation/"); ?>/" + lonlat.lon + "/" + lonlat.lat;
+      newlocationlonlat = map.getLonLatFromViewPortPx(e.xy);
+      newlocationlonlat.transform(toProj, fromProj);
+      var newLocationUrl = "<?php echo site_url("location/getnewlocation/"); ?>/" + newlocationlonlat.lon + "/" + newlocationlonlat.lat;
       newlocation.removeAllFeatures();
       loadGeoJSON(newLocationUrl, newlocation);
       newlocation.redraw();
@@ -624,7 +624,8 @@ function addNewLocation()
   locations.setVisibility(false);
   friends.setVisibility(false);
   newlocation.setVisibility(true);
-  $(".button-location-new").show();
+  $("#button-location-new-cancel").show();
+  $("#button-location-new-next").show();
   $("#button-location-new").hide();
   selectControl.deactivate();
   clickControl.activate();
@@ -637,55 +638,98 @@ function cancel()
   friends.setVisibility(true);
   newlocation.setVisibility(false);
   newlocation.removeAllFeatures();
-  $(".button-location-new").hide();
+  $("#button-location-new-cancel").hide();
+  $("#button-location-new-next").hide();
   $("#button-location-new").show();
   clickControl.deactivate();
   selectControl.activate();
+  closePopup();
 }
 
 
 function next()
 {
-  //redirect zu location/addNewLocationForm oder so
-  //locations.setVisibility(true);
-  //friends.display(true);
-  //newlocation.display(false);
-  //$(".button-map-location-edit").hide();
-  //$("#button-location-new").show();
-  pageNext();
+  var buffer = "";  
+  buffer = "" +
+  "<button id='button-location-add-back' class='buttons-location-add' type='button' onclick='closePopup()'>Zurück</button>" +
+  "<button id='button-location-add-cancel' class='buttons-location-add' type='button' onclick='cancel()'>Abbrechen</button>" +
+  "<button id='button-location-add-save' class='buttons-location-add' type='button' onclick='addLocation()'>Fertig</button>" +
+  "<br/>" +
+  "Daten der neuen Location:<br/>" +
+  "<input type='text' name='newlocname' id='newlocname' placeholder='Name'><br/>" + 
+  "<input type='text' name='newlocstreet' id='newlocstreet' placeholder='Straße'><br/>" +
+  "<input type='text' name='newloccity' id='newloccity' placeholder='Stadt'><br/>" +
+  "<input type='text' name='newloctype' id='newloctype' placeholder='Typ'><br/>" +
+  "<input type='url' name='newlocinternet' id='newlocinternet' placeholder='Homepage'><br/>" +
+  "<input type='email' name='newlocemail' id='newlocemail' placeholder='E-Mailadresse'><br/>" +
+  "<div id='popupErrorMsg'>Bitte mindestens den Namen angeben.</div>";
+  
+  $(".buttons-location-new")
+  .hide();
+  
+  $("#popup")
+  .html(buffer)
+  .show();
 }
 
-$("button#button-location-new-next").on("click", function() {
-  // mach was
-  pageNext();
-});
+function addLocation()
+{
+  var newlocname = document.getElementById('newlocname').value;
+  var newlocstreet = document.getElementById('newlocstreet').value;
+  var newloccity = document.getElementById('newloccity').value;
+  var newloctype = document.getElementById('newloctype').value;
+  var newlocinternet = document.getElementById('newlocinternet').value;
+  var newlocemail = document.getElementById('newlocemail').value;
+  
+  if (newlocname == "") {
+    $("#popupErrorMsg").show();
+  } else {
+    $.post("<?php echo site_url('location/add'); ?>" , {
+        name: newlocname,
+        street: newlocstreet,
+        city: newloccity,
+        type: newloctype,
+        internet: newlocinternet,
+        email: newlocemail,
+        lon: newlocationlonlat.lon,
+        lat: newlocationlonlat.lat
+    });
+    
+    locationUrl = "<?php echo site_url("map/map/getlocations"); ?>";
+    locations.removeAllFeatures();
+    loadGeoJSON(locationUrl, locations);
+    locations.redraw();
+    locations.setVisibility(true);
+    friends.setVisibility(true);
+    newlocation.setVisibility(false);
+    newlocation.removeAllFeatures();
+    $("#button-location-new").show();
+    clickControl.deactivate();
+    selectControl.activate();
+    closePopup();
+  }
+  
+}
 
 </script>
 
-<div id="window">
-  <ul id="pages">
+<div id='window'>
+  <ul id='pages'>
     <li>
-      <div id="popup">Popup</div>
+      <div id='popup'>Popup</div>
       
-      <div id="map">
-        <button id="layerswitcher" type="button" onclick="layermenu()">Layer</button>
-        <button id="button-location-new" type="button" onclick="addNewLocation()">+ Location</button>
-        <button id="button-location-new-cancel" class="button-location-new" type="button" onclick="cancel()">Abbrechen</button>
-        <button id="button-location-new-next" class="button-location-new" type="button">Weiter</button>
+      <div id='map'>
+        <button id='layerswitcher' type='button' onclick='layermenu()'>Layer</button>
+        <button id='button-location-new' class='buttons-location-new' type='button' onclick='addNewLocation()'>+ Location</button>
+        <button id='button-location-new-cancel' class='buttons-location-new' type='button' onclick='cancel()'>Abbrechen</button>
+        <button id='button-location-new-next' class='buttons-location-new' type='button' onclick='next()'>Weiter</button>
       </div>
       <script>initMap();</script>
     </li>
     <li>
-<!--  neue Location anlegen      -->
-      <button id="button-location-add-back" class="button-location-add" type="button" onclick="back()">Zurück</button>
-      <button id="button-location-add-cancel" class="button-location-add" type="button" onclick="cancel()">Abbrechen</button>
-      <button id="button-location-add-save" class="button-location-add" type="button" onclick="addLocation()">Fertig</button>
-      <?php echo site_url("location/location/getnewlocationform/"); ?>
-    </li>
-    <li>
 <!--  bestehende Location bearbieten/löschen      -->
-      <button id="button-location-edit-back" class="button-map-location-edit" type="button" onclick="back()">Zurück</button>
-      <?php echo site_url("location/location/geteditlocationform/"); ?>
+      <button id='button-location-edit-back' class='button-map-location-edit' type='button' onclick='back()'>Zurück</button>
+      <?php echo site_url('location/location/geteditlocationform/'); ?>
     </li>
   </ul>
 </div>

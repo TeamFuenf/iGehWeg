@@ -21,18 +21,24 @@ class Location extends CI_Controller {
     $name = $this->input->post("name", true);
     $lon = $this->input->post("lon", true);
     $lat = $this->input->post("lat", true);
-    $adress = $this->input->post("adress", true);
+    $street = $this->input->post("steet", true);
     $city = $this->input->post("city", true);
-    $this->Location_model->addLocation($name, $lon, $lat, $adress, $city);
+    $internet = $this->input->post("internet", true);
+    $email = $this->input->post("email", true);
+    $type = $this->input->post("type", true);
+    echo $name;
+    echo $lon;
+    echo $lat;
+    $this->Location_model->addLocation($name, $lon, $lat, $street, $city, $type, $internet, $email);
     redirect('/map', 'refresh');
   }
   
   public function getnewlocation()
   {
-    if ($this->uri->segment(5))
+    if ($this->uri->segment(4))
     {
-      $lon = $this->uri->segment(4);
-      $lat = $this->uri->segment(5);
+      $lon = $this->uri->segment(3);
+      $lat = $this->uri->segment(4);
     echo '{
       "type": "FeatureCollection", 
       "features": [
@@ -124,7 +130,7 @@ class Location extends CI_Controller {
     {
       $locid = $this->uri->segment(2);
       $data['location'] = $this->Location_model->getLocation($locid);
-      $this->layout->view("location/location", $data);
+      $this->layout->view("location/location_details", $data);
     }
     else
       {
