@@ -4,6 +4,26 @@
     display:none;
   }
 
+  .olControlScaleLine
+  {
+    width:100px;
+    position:relative;
+    bottom:0px;
+    left:540px;
+    padding: 4px;
+  }
+
+  div.olControlScaleLineTop
+  {
+    color:#000;
+    font-size:20px;
+  }
+
+  div.olControlScaleLineBottom
+  {
+    display:none;
+  }
+      
   div.olMapViewport
   {
     z-index: 0;
@@ -79,12 +99,12 @@
     border:0px;
   }
 
-  div#popup li.layer[status=on]
+  div#popup li.layer[show=true]
   {
     color:#666;
   }
 
-  div#popup li.layer[status=off]
+  div#popup li.layer[show=false]
   {
     color:#ddd;
   }
@@ -170,9 +190,13 @@ function initMap()
   bounds.extend(new OpenLayers.LonLat(13.4993596,48.5855492));
   bounds.transform(fromProj, toProj);
 
+  scale = new OpenLayers.Control.ScaleLine();
+  scale.geodesic = true;
+
   map = new OpenLayers.Map("map", {
     controls: [
-      new OpenLayers.Control.Navigation()
+      new OpenLayers.Control.Navigation(),
+      scale
     ]
   });
   map.setOptions({restrictedExtent: bounds});
@@ -303,30 +327,30 @@ function initMap()
 // --- Layers -----------------------------------------------------------------
     
   locations = new OpenLayers.Layer.Vector("Locations", {
-    visibility: false,
+    visibility: <? echo $layer["locations"];?>,
     strategies: [locationsStrategy],
     styleMap: locationStyle
   });
   
   friends = new OpenLayers.Layer.Vector("Friends", {
-    visibility: true,
+    visibility: <? echo $layer["friends"];?>,
     strategies: [friendsStrategy],
     styleMap: friendsStyle
   });
 
   events = new OpenLayers.Layer.Vector("Events", {
-    visibility: true,
+    visibility: <? echo $layer["events"];?>,
     strategies: [eventsStrategy],
     styleMap: eventsStyle
   });
   
-  buslinie1 = new OpenLayers.Layer.Vector("Linie 1", { strategies: [buslinesStrategy], styleMap: buslinienStyle });
-  buslinie2 = new OpenLayers.Layer.Vector("Linie 2", { strategies: [buslinesStrategy], styleMap: buslinienStyle });
-  buslinie5 = new OpenLayers.Layer.Vector("Linie 5", { strategies: [buslinesStrategy], styleMap: buslinienStyle });
-  buslinie6 = new OpenLayers.Layer.Vector("Linie 6", { strategies: [buslinesStrategy], styleMap: buslinienStyle });
-  buslinie7 = new OpenLayers.Layer.Vector("Linie 7", { strategies: [buslinesStrategy], styleMap: buslinienStyle });
-  buslinie8 = new OpenLayers.Layer.Vector("Linie 8", { strategies: [buslinesStrategy], styleMap: buslinienStyle });
-  buslinie9 = new OpenLayers.Layer.Vector("Linie 9", { strategies: [buslinesStrategy], styleMap: buslinienStyle });
+  buslinie1 = new OpenLayers.Layer.Vector("Linie 1", { visibility: <?php echo $layer["buslinie1"]; ?>, strategies: [buslinesStrategy], styleMap: buslinienStyle });
+  buslinie2 = new OpenLayers.Layer.Vector("Linie 2", { visibility: <?php echo $layer["buslinie2"]; ?>, strategies: [buslinesStrategy], styleMap: buslinienStyle });
+  buslinie5 = new OpenLayers.Layer.Vector("Linie 5", { visibility: <?php echo $layer["buslinie5"]; ?>, strategies: [buslinesStrategy], styleMap: buslinienStyle });
+  buslinie6 = new OpenLayers.Layer.Vector("Linie 6", { visibility: <?php echo $layer["buslinie6"]; ?>, strategies: [buslinesStrategy], styleMap: buslinienStyle });
+  buslinie7 = new OpenLayers.Layer.Vector("Linie 7", { visibility: <?php echo $layer["buslinie7"]; ?>, strategies: [buslinesStrategy], styleMap: buslinienStyle });
+  buslinie8 = new OpenLayers.Layer.Vector("Linie 8", { visibility: <?php echo $layer["buslinie8"]; ?>, strategies: [buslinesStrategy], styleMap: buslinienStyle });
+  buslinie9 = new OpenLayers.Layer.Vector("Linie 9", { visibility: <?php echo $layer["buslinie9"]; ?>, strategies: [buslinesStrategy], styleMap: buslinienStyle });
   
   newlocation = new OpenLayers.Layer.Vector("newLocation", {
     visibility: false,
@@ -368,6 +392,7 @@ function initMap()
   map.addControl(clickControl);
   clickControl.deactivate();
   
+        
 // --- Eventhandlers ----------------------------------------------------------
   
   locations.events.on({
@@ -409,13 +434,13 @@ function initMap()
   loadGeoJSON(friendsUrl, friends);
   loadGeoJSON(eventsUrl, events);
 
-  loadGPX("http://localhost/gpx/linie1.gpx", buslinie1);
-  loadGPX("http://localhost/gpx/linie2.gpx", buslinie2);
-  loadGPX("http://localhost/gpx/linie5.gpx", buslinie5);
-  loadGPX("http://localhost/gpx/linie6.gpx", buslinie6);
-  loadGPX("http://localhost/gpx/linie7.gpx", buslinie7);
-  loadGPX("http://localhost/gpx/linie8.gpx", buslinie8);
-  loadGPX("http://localhost/gpx/linie9.gpx", buslinie9);
+  loadGPX("<?php echo site_url("gpx/linie1.gpx");?>", buslinie1);
+  loadGPX("<?php echo site_url("gpx/linie2.gpx");?>", buslinie2);
+  loadGPX("<?php echo site_url("gpx/linie5.gpx");?>", buslinie5);
+  loadGPX("<?php echo site_url("gpx/linie6.gpx");?>", buslinie6);
+  loadGPX("<?php echo site_url("gpx/linie7.gpx");?>", buslinie7);
+  loadGPX("<?php echo site_url("gpx/linie8.gpx");?>", buslinie8);
+  loadGPX("<?php echo site_url("gpx/linie9.gpx");?>", buslinie9);
 }
     
 function loadGPX(url, layer)
@@ -442,7 +467,7 @@ function loadGPX(url, layer)
     }
 
     layer.addFeatures(features);
-    layer.setVisibility(false);
+//    layer.setVisibility(false);
   });
 }
 
@@ -598,20 +623,20 @@ function layermenu()
   buffer = "" +
   "Basislayer:" +
   "<ul>" +
-  "<li class='layer' layer='friends' status='on'>Freunde</li>" +
-  "<li class='layer' layer='events' status='on'>Events</li>" +
-  "<li class='layer' layer='locations' status='off'>Locations</li>" +
+  "<li class='layer' layer='friends' show='<?php echo $layer["friends"]; ?>'>Freunde</li>" +
+  "<li class='layer' layer='events' show='<?php echo $layer["events"]; ?>'>Events</li>" +
+  "<li class='layer' layer='locations' show='<?php echo $layer["locations"]; ?>'>Locations</li>" +
   "</ul>" +  
   "<hr/>" +
   "Buslinien:" +
   "<ul>" +
-  "<li class='layer' layer='buslinie1' status='off'>Linie 1</li>" +
-  "<li class='layer' layer='buslinie2' status='off'>Linie 2</li>" +
-  "<li class='layer' layer='buslinie5' status='off'>Linie 5</li>" +  
-  "<li class='layer' layer='buslinie5' status='off'>Linie 6</li>" +  
-  "<li class='layer' layer='buslinie5' status='off'>Linie 7</li>" +  
-  "<li class='layer' layer='buslinie5' status='off'>Linie 8</li>" +  
-  "<li class='layer' layer='buslinie5' status='off'>Linie 9</li>" +  
+  "<li class='layer' layer='buslinie1' show='<?php echo $layer["buslinie1"]; ?>'>Linie 1</li>" +
+  "<li class='layer' layer='buslinie2' show='<?php echo $layer["buslinie2"]; ?>'>Linie 2</li>" +
+  "<li class='layer' layer='buslinie5' show='<?php echo $layer["buslinie5"]; ?>'>Linie 5</li>" +  
+  "<li class='layer' layer='buslinie5' show='<?php echo $layer["buslinie6"]; ?>'>Linie 6</li>" +  
+  "<li class='layer' layer='buslinie5' show='<?php echo $layer["buslinie7"]; ?>'>Linie 7</li>" +  
+  "<li class='layer' layer='buslinie5' show='<?php echo $layer["buslinie8"]; ?>'>Linie 8</li>" +  
+  "<li class='layer' layer='buslinie5' show='<?php echo $layer["buslinie9"]; ?>'>Linie 9</li>" +  
   "</ul>" +  
   "<hr/>" +
   "<a href='javascript:closePopup()'>close</a>";
@@ -623,17 +648,19 @@ function layermenu()
 
 $("body").on("click", "li.layer", function(event) {
   var layername = $(this).attr("layer");
-  var status = $(this).attr("status");
+  var show = $(this).attr("show");
   
-  if (status == "off")
+  if (show == "true")
   {
-    window[layername].setVisibility(true);
-    $(this).attr("status", "on");
+    window[layername].setVisibility(false);
+    $(this).attr("show", "false");
+    $.post("<?php echo site_url("/map/map/saveLayerVisibility");?>", {layer: layername, visibility: false});
   }
   else
   {
-    window[layername].setVisibility(false);
-    $(this).attr("status", "off");
+    window[layername].setVisibility(true);
+    $(this).attr("show", "true");    
+    $.post("<?php echo site_url("/map/map/saveLayerVisibility");?>", {layer: layername, visibility: true});
   }
 });
 
@@ -753,3 +780,68 @@ function addLocation()
     </li>
   </ul>
 </div>
+
+<script>
+
+var track = new Array();
+loadTrack("<?php echo site_url("gpx/linie1.gpx");?>");
+
+function loadTrack(url)
+{
+  OpenLayers.loadURL(url, {}, null, function(r) {
+    var gpxFormat = new OpenLayers.Format.GPX({
+      "extractWaypoints": false,
+      "extractTracks": true,
+      "extractRoutes": true,
+      "extractAttributes": true,
+      "internalProjection": toProj,
+      "externalProjection": fromProj
+    });
+
+    var features = gpxFormat.read(r.responseText);    
+    var collection = new OpenLayers.Geometry.Collection();
+    
+    for (var i=0; i < features.length; i++)
+    {
+      collection.components.push(features[i].geometry); 
+      track[i+1] = features[i].geometry.getGeodesicLength(toProj);
+    }
+    console.log(Math.floor(collection.getGeodesicLength(toProj)) + "m in " + features.length + " Segmenten");    
+
+    getPoint(track, collection, 0.5);
+  });
+}
+
+function getPoint(track, collection, percent)
+{
+  var tmpLen = 0;
+  var totalLen = collection.getGeodesicLength(toProj);
+  var target = totalLen * percent;  
+  var segments;
+  
+  // richtiges Segment für Detailberechnung finden
+  for (var i=1; i <= collection.components.length; i++)
+  {
+    if (tmpLen + collection.components[i].getGeodesicLength(toProj) <= target)
+    {
+      tmpLen += collection.components[i].getGeodesicLength(toProj);
+    }
+    else
+    {
+      segments = i;
+      break;
+    }
+  }
+  
+  var rest = target - tmpLen;
+  console.log("Noch " + Math.floor(rest) + "m in " + collection.components[segments].components.length + " Segmenten zu berechnen");
+  
+  for (var i=0; i < collection.components[segments].components.length; i++)
+  {
+    var s = collection.components[segments].components[i];
+    console.log(s);
+  }
+
+}
+
+</script>
