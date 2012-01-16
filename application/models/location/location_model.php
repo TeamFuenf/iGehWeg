@@ -10,7 +10,7 @@ class Location_model extends CI_Model
 
 // --------------------------------------------------------------------------------------------------------------------
 
-  public function addLocation($name, $lon, $lat, $street, $city)
+  public function addLocation($name, $lon, $lat, $street, $city, $type, $internet, $email)
   {
     $this->db->set('id', uniqid('location', true));
     $this->db->set('name', $name);
@@ -18,6 +18,9 @@ class Location_model extends CI_Model
     $this->db->set('lat', $lat);
     $this->db->set('street', $street);
     $this->db->set('city', $city);
+    $this->db->set('type', $type);
+    $this->db->set('internet', $internet);
+    $this->db->set('email', $email);
     $this->db->insert('location');
   }
   
