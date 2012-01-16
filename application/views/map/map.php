@@ -451,7 +451,7 @@ function openLocationPopup(evt)
   if (numLocations > 1)
   {
     buffer = "<p>mehrere Locations:</p>";
-    if (numLocations > 5)
+    if (numLocations > 5 && map.getZoom() != 18)
     {
       buffer = "<p>Mehr als 5 Locations an dieser Position gefunden. Zoome näher heran um mehr Informationen zu erhalten.</p>";
     }
@@ -461,8 +461,8 @@ function openLocationPopup(evt)
       for (var i=0; i < feature.cluster.length; i++)
       {
         var locationName = feature.cluster[i].attributes.name;
-        var locationId = feature.cluster[i].attributes.id;    
-        buffer += "<a href='<?php echo base_url("location/") ?>/" + locationId + "'>" + locationName + "</a><br>";
+        var locationId = feature.cluster[i].attributes.id;
+        buffer += "<a href='javascript:getLocationDetails(" + locationId + ")'>" + locationName + "</a><br>";
       }
       buffer += "</ul>";
     }
@@ -470,8 +470,8 @@ function openLocationPopup(evt)
   else
   {
     var locationName = feature.cluster[0].attributes.name;
-    var locationId = feature.cluster[0].attributes.id;        
-    buffer += "<a href='<?php echo base_url("location/") ?>/" + locationId + "'>" + locationName + "</a><br>";
+    var locationId = feature.cluster[0].attributes.id;
+    buffer += "<a href='javascript:getLocationDetails(" + locationId + ")'>" + locationName + "</a><br>";
   }
   
   $("#popup")
@@ -487,7 +487,7 @@ function openFriendsPopup(evt)
   if (numFriends > 1)
   {
     buffer = "<p>mehrere Freunde:</p>";
-    if (numFriends > 5)
+    if (numFriends > 5 && map.getZoom() != 18)
     {
       buffer = "<p>Mehr als 5 Freunde an dieser Position gefunden. Zoome näher heran um mehr Informationen zu erhalten.</p>";
     }
@@ -694,22 +694,19 @@ function addLocation()
         lon: newlocationlonlat.lon,
         lat: newlocationlonlat.lat
     });
-    
-    locationUrl = "<?php echo site_url("map/map/getlocations"); ?>";
-    locations.removeAllFeatures();
-    loadGeoJSON(locationUrl, locations);
-    locations.redraw();
-    locations.setVisibility(true);
-    friends.setVisibility(true);
-    newlocation.setVisibility(false);
-    newlocation.removeAllFeatures();
-    $("#button-location-new").show();
-    clickControl.deactivate();
-    selectControl.activate();
-    closePopup();
   }
   
 }
+
+function getLocationDetails(id)
+{
+  $.post("<?php echo site_url("map/location"); ?>/" + id, function(data) {
+    $("#locationdetails").html(data);
+  });
+  pageNext();
+}
+
+
 
 </script>
 
@@ -728,8 +725,12 @@ function addLocation()
     </li>
     <li>
 <!--  bestehende Location bearbieten/löschen      -->
-      <button id='button-location-edit-back' class='button-map-location-edit' type='button' onclick='back()'>Zurück</button>
-      <?php echo site_url('location/location/geteditlocationform/'); ?>
+      <div id='locationdetails'></div>
+
+      
+      <div id='location-comments'>
+        // ToDo: Hier stehen Kommentare.
+      </div>
     </li>
   </ul>
 </div>

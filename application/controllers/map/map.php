@@ -24,7 +24,7 @@ class Map extends CI_Controller {
 	// $data["markerLocations"] = $this->Marker_model->getLocationsIcons();
     // $data["markerEvents"] = $this->Marker_model->getEventsIcons();
     
-	$this->layout->view("map/map");
+	   $this->layout->view("map/map");
   }
   
   

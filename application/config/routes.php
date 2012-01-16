@@ -47,6 +47,7 @@ $route["friends"] = "friends/friends_control";
 
 // Map
 $route["map"] = "map/map";
+$route["map/location/(:any)"] = "location/location/getLocationForMap";
 $route["map/snippet/(:any)"] = "map/map/snippet";
 
 // Events & Timeline
@@ -85,6 +86,9 @@ $route["mail/(:any)"] = "messaging/messaging/show";
 // Location
 $route["location/add"] = "location/location/add";
 $route["location/getnewlocation/(:any)"] = "location/location/getnewlocation";
+$route["location/getLocationDetails"] = "location/location/getLocationDetails";
+$route["location/edit/(:any)"] = "location/location/edit";
+$route["location/update/(:any)"] = "location/location/updateLocation";
 $route["location/(:any)"] = "location/location/getLocation";
 
 /* End of file routes.php */
