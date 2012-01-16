@@ -633,10 +633,10 @@ function layermenu()
   "<li class='layer' layer='buslinie1' show='<?php echo $layer["buslinie1"]; ?>'>Linie 1</li>" +
   "<li class='layer' layer='buslinie2' show='<?php echo $layer["buslinie2"]; ?>'>Linie 2</li>" +
   "<li class='layer' layer='buslinie5' show='<?php echo $layer["buslinie5"]; ?>'>Linie 5</li>" +  
-  "<li class='layer' layer='buslinie5' show='<?php echo $layer["buslinie6"]; ?>'>Linie 6</li>" +  
-  "<li class='layer' layer='buslinie5' show='<?php echo $layer["buslinie7"]; ?>'>Linie 7</li>" +  
-  "<li class='layer' layer='buslinie5' show='<?php echo $layer["buslinie8"]; ?>'>Linie 8</li>" +  
-  "<li class='layer' layer='buslinie5' show='<?php echo $layer["buslinie9"]; ?>'>Linie 9</li>" +  
+  "<li class='layer' layer='buslinie6' show='<?php echo $layer["buslinie6"]; ?>'>Linie 6</li>" +  
+  "<li class='layer' layer='buslinie7' show='<?php echo $layer["buslinie7"]; ?>'>Linie 7</li>" +  
+  "<li class='layer' layer='buslinie8' show='<?php echo $layer["buslinie8"]; ?>'>Linie 8</li>" +  
+  "<li class='layer' layer='buslinie9' show='<?php echo $layer["buslinie9"]; ?>'>Linie 9</li>" +  
   "</ul>" +  
   "<hr/>" +
   "<a href='javascript:closePopup()'>close</a>";
