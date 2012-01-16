@@ -12,8 +12,8 @@ class Location extends CI_Controller {
 
   // Normale Kartenansicht
   function index()
-  {    
-	$this->layout->view("map/map", $data);
+  {
+    $this->layout->view("map/map", $data);
   }
 
   public function add()
@@ -21,16 +21,13 @@ class Location extends CI_Controller {
     $name = $this->input->post("name", true);
     $lon = $this->input->post("lon", true);
     $lat = $this->input->post("lat", true);
-    $street = $this->input->post("steet", true);
+    $street = $this->input->post("street", true);
     $city = $this->input->post("city", true);
     $internet = $this->input->post("internet", true);
     $email = $this->input->post("email", true);
     $type = $this->input->post("type", true);
-    echo $name;
-    echo $lon;
-    echo $lat;
     $this->Location_model->addLocation($name, $lon, $lat, $street, $city, $type, $internet, $email);
-    redirect('/map', 'refresh');
+    redirect('map/map');
   }
   
   public function getnewlocation()
@@ -59,64 +56,16 @@ class Location extends CI_Controller {
   }
   
   
-  
-  public function getnewlocationform()
-  {
-    $this->load->helper('form');
-    
-    echo form_open('/base/login_control/validate_credentials');
-    echo form_input('newlocname', '', 'placeholder="Name"');
-    echo form_input('newlocaddress', '', 'placeholder="Adresse"');
-    echo form_input('newloccity', '', 'placeholder="Stadt"');
-    $js = 'onClick="some_function()"';
-    echo form_button('submit', 'Fertig', $js);    
-    echo form_close();
-    
-// Would produce:
-
-// <input type="text" name="username" id="username" value="johndoe" maxlength="100" size="50" style="width:50%" />
-    
-  }
-  
-  public function geteditlocationform($locid)
-  {
-    // model aufrufen und daten aus db lesen,
-
-    $query = $this->db->get_where('location', array('id' => $locid));
-    
-    
-    //hier daten eintragen
-    $locname = "name";
-    $loctype = "type";
-    $locstreet = "street";
-    $loccity = "city";
-    $locinternet = "www.internet.de";
-    $locemail = "e@mail.com";
-    
-    echo form_open('/uri/fehlt/noch');
-    echo form_input('locname', $locname);
-    echo form_input('locstreet', $locstreet);
-    echo form_input('loccity', $loccity);
-    echo form_input('locinternet', $locinternet);
-    echo form_input('locemail', $locemail);
-    $js1 = 'onClick="some_function()"';
-    echo form_button('submit', 'Fertig', $js1);
-    $js2 = 'onClick="some_function()"';
-    echo form_button('delete', 'Löschen', $js2);
-    echo form_close();
-    
-  }
-  
-  public function saveeditlocation($locid, $locattr, $locvalue)
-  {
-    // ans model übergeben und in die datenbank speichern.
-    $data = array(
-               $locattr => $locvalue
-            );
-    $this->db->where('id', $locid);
-    $this->db->update('location', $data);
-    // javascript funktion muss die view selbstständig aktuallisieren, also ohne weiteren datenbankaufruf
-  }
+  /*
+   * localhost/location/id -> location_detail.php layout->view
+   * localhost/map -> 2. seite -> location_mapdetail.php load->view
+   * localhost/location/edit/id -> location_edit.php
+   * 
+   * 
+   * $.post(2. url, function(data) {
+   *   $("#detailview").html(data);
+   * });
+   */
   
   public function deletelocation($locid)
   {
@@ -132,10 +81,44 @@ class Location extends CI_Controller {
       $data['location'] = $this->Location_model->getLocation($locid);
       $this->layout->view("location/location_details", $data);
     }
-    else
-      {
-        
-      }
+  }
+  
+  public function getLocationForMap()
+  {
+    if ($this->uri->segment(3))
+    {
+      $locid = $this->uri->segment(3);
+      $data['location'] = $this->Location_model->getLocation($locid);
+      $this->load->view('map/map_locationdetail', $data);
+    }
+  }
+  
+  public function edit()
+  {
+    if ($this->uri->segment(3))
+    {
+      $locid = $this->uri->segment(3);
+      $data['location'] = $this->Location_model->getLocation($locid);
+      $this->layout->view("location/location_edit", $data);
+    }
+  }
+
+
+  
+  public function updateLocation()
+  {
+    if ($this->uri->segment(3))
+    {
+      $locid = $this->uri->segment(3);
+      $name = $this->input->post("name", true);
+      $street = $this->input->post("street", true);
+      $city = $this->input->post("city", true);
+      $internet = $this->input->post("internet", true);
+      $email = $this->input->post("email", true);
+      $type = $this->input->post("type", true);
+      $this->Location_model->updateLocation($locid, $name, $street, $city, $type, $internet, $email);
+    }
+    redirect('map');
   }
 
 }
