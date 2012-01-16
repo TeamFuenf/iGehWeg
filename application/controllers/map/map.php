@@ -6,7 +6,6 @@ class Map extends CI_Controller {
     parent::__construct();
     parent::is_logged_in();
     $this->load->model("map/Map_model");
-    // $this->load->model("map/Marker_model");
     $this->load->model("friends/Friends_model");
     $this->load->model("event/Event_model");
     $this->load->model("location/location_model");
@@ -14,22 +13,29 @@ class Map extends CI_Controller {
   
   
   // Normale Kartenansicht
-  function index()
+  public function index()
   {
-    $userid = $this->session->userdata("userid");
-	
-	// $friends = $this->Friends_model->get_friends($userid);
-	// $data["markerUser"] = $this->Marker_model->getUserIcon($userid);
-	// $data["markerFriends"] = $this->Marker_model->getFriendsIcons($friends);
-	// $data["markerLocations"] = $this->Marker_model->getLocationsIcons();
-    // $data["markerEvents"] = $this->Marker_model->getEventsIcons();
-    
-	   $this->layout->view("map/map");
+    $data["layer"]["locations"] = $this->getLayerVisibility("locations");
+    $data["layer"]["friends"] = $this->getLayerVisibility("friends");
+    $data["layer"]["events"] = $this->getLayerVisibility("events");
+    $data["layer"]["buslinie1"] = $this->getLayerVisibility("buslinie1");
+    $data["layer"]["buslinie2"] = $this->getLayerVisibility("buslinie2");
+    $data["layer"]["buslinie5"] = $this->getLayerVisibility("buslinie5");
+    $data["layer"]["buslinie6"] = $this->getLayerVisibility("buslinie6");
+    $data["layer"]["buslinie7"] = $this->getLayerVisibility("buslinie7");
+    $data["layer"]["buslinie8"] = $this->getLayerVisibility("buslinie8");
+    $data["layer"]["buslinie9"] = $this->getLayerVisibility("buslinie9");    
+    $this->layout->view("map/map", $data);
+  }  
+  
+  public function sess()
+  {
+    echo "<pre>";
+    print_r($this->session->all_userdata());    
   }
   
-  
   // Kleine Karte mit Vorschau für eine Location
-  function snippet()
+  public function snippet()
   {
     $locationid = $this->uri->segment(3);
     $location = $this->Map_model->getLocation($locationid);
@@ -39,6 +45,33 @@ class Map extends CI_Controller {
     $this->load->view("map/snippet", $data);    
   }
   
+// --------------------------------------------------------------------------------------------------------------------
+
+  public function saveLayerVisibility()
+  {
+    $layer = $this->input->post("layer", true);
+    $visibility = $this->input->post("visibility", true);  
+    $this->session->set_userdata("layer_".$layer, $visibility);
+    echo $layer." -> ".$visibility;
+  }
+
+  public function loadLayerVisibility()
+  {
+    $layer = $this->input->post("layer", true);
+    return $this->getLayerVisibility($layer);
+  }
+  
+  private function getLayerVisibility($layer)
+  {
+    if ($this->session->userdata("layer_".$layer))
+    {
+      return $this->session->userdata("layer_".$layer);
+    }
+    else
+    {
+      return "false";      
+    }    
+  }
   
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -153,23 +186,6 @@ class Map extends CI_Controller {
         },
       ';
       }
-      
-/*
-      echo '
-        {
-          "type": "Feature",
-          "id": "'.$event->id.'",
-          "properties": {
-            "title": "'.$event->title.'",
-            "eventid": "'.$event->id.'"
-          },
-          "geometry": {
-            "type": "Point",
-            "coordinates": ['.$location->lon.', '.$location->lat.']
-          }
-        },
-      ';
-*/      
     }
     echo "{}";
     echo ']}';

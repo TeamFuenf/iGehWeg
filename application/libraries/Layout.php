@@ -11,6 +11,8 @@ class Layout
     function view($view, $vars = array(), $controls = true)
     {
       $CI =& get_instance();
+        
+      $CI->session->unset_userdata("lastpage");
       
       $data["css"][] = link_tag("../css/normalize.css");
       $data["css"][] = link_tag("../css/main.css");
@@ -22,11 +24,6 @@ class Layout
       $data["javascript"][] = "<script src=\"".base_url()."javascript/jquery-ui.js\" type=\"text/javascript\"></script>";
       $data["javascript"][] = "<script src=\"".base_url()."javascript/meetupp.js\" type=\"text/javascript\"></script>";
       $data["javascript"][] = "<script src=\"".base_url()."javascript/OpenLayers.js\" type=\"text/javascript\"></script>";
-      
-      $data["control_dashboard"] = anchor("/dashboard/dashboard", img("../images/control_dashboard.png"));
-      $data["control_map"] = anchor("/map", img("../images/control_map.png"));
-      $data["control_friends"] = anchor("/friends", img("../images/control_friends.png"));
-      $data["control_timeline"] = anchor("/timeline", img("../images/control_timeline.png"));
       
       $data["dashboard"] = anchor("/dashboard/dashboard", img("../images/dashboard.png"));
       $data["map"] = anchor("/map", img("../images/map.png"));

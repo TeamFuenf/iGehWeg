@@ -57,7 +57,7 @@ class Event extends CI_Controller
   }  
 
   public function showevent()
-  {
+  {    
     $userid = $this->session->userdata("userid");
     $eventid = $this->uri->segment(2);    
     $event = $this->Event_model->getEvent($eventid);
@@ -68,6 +68,8 @@ class Event extends CI_Controller
     $data["location"] = $this->Location_model->getLocation($event->location);
     $data["comments"] = $this->Event_model->getComments($eventid);
     $this->layout->view("event/showevent", $data);
+
+    $this->session->set_userdata("lastpage", site_url("event/".$eventid));
   }
   
   public function deleteevent()
