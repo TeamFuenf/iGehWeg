@@ -8,35 +8,108 @@
   {
     z-index: 0;
   }
-
+  
   div#map
   {
-    width:400px
-    height:400px;
-    margin:0px;
-    padding:0px;
+    width:640px;
   }
   
   div#popup
   {
     display:none;
-    width:500px;
+    width:540px;
     background-color:#fff;
     position:absolute;
+    left:50px;
+    top:50px;
     z-index:999;
     border-radius:5px;
-    padding:10px;
+    padding:0px;
     margin:0px;
+    overflow:hidden;
+  
+    -webkit-box-shadow: 25px 5px 300px 5px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 25px 5px 300px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 25px 5px 300px 5px rgba(0, 0, 0, 0.5); 
   }
   
-  button.button-map-location-edit
+  div#popup p
+  {
+    padding:10px;
+  }
+  
+  div#popup ul
+  {
+    margin:0px;
+    padding:0px;
+    list-style-type:none;
+  }
+  
+  div#popup input
+  {
+    width:40px;
+    height:40px;
+  }
+  
+  div#popup li
+  {
+    padding:20px;
+  }
+  
+  div#popup li:not(:last-child)
+  {
+    border-bottom:1px solid #999;
+  }
+  
+  div#popup a
+  {
+    text-decoration:none;
+    color:#999;
+  }
+  
+  div#popup li img
+  {
+    padding-right:20px;
+    vertical-align:middle;
+  }
+
+  button#button-location-add
+  {
+    position:absolute;
+    top:10px;
+    left:10px;
+    z-index:990;
+  }
+  
+  button.button-location-new
   {
     display:none;
+  }
+
+  button#layerswitcher
+  {
+    position:absolute;
+    top:650px;
+    left:10px;
+    z-index:990;
   }
   
 </style>
 
 <script>
+  
+var map, selectControl, clickControl;
+
+var fromProj = new OpenLayers.Projection("EPSG:4326"); // WGS84
+var toProj = new OpenLayers.Projection("EPSG:900913"); // Spherical Mercator
+
+var locationUrl = "<?php echo site_url("map/map/getlocations"); ?>";
+var friendsUrl = "<?php echo site_url("map/map/getfriends"); ?>";
+var eventsUrl = "<?php echo site_url("map/map/getevents"); ?>";
+
+var locations, friends, events, newlocation;
+var buslinien = new Array();
+
 OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {
     defaultHandlerOptions: {
       'single': true,
@@ -70,16 +143,7 @@ OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {
     }
     
   });
-  
-var map, selectControl, clickControl;
 
-var fromProj = new OpenLayers.Projection("EPSG:4326"); // WGS84
-var toProj = new OpenLayers.Projection("EPSG:900913"); // Spherical Mercator
-
-var locationUrl = "<?php echo site_url("map/map/getlocations"); ?>";
-var friendsUrl = "<?php echo site_url("map/map/getfriends"); ?>";
-
-var locations, friends, newlocation;
 
 function initMap()
 {                         
@@ -97,12 +161,25 @@ function initMap()
   });
   map.setOptions({restrictedExtent: bounds});
 
-  var meetuppMap = new OpenLayers.Layer.OSM("meetupp", "http://images.rawsteel.de.s3.amazonaws.com/meetupp/tiles/${z}/${x}/${y}.png");
+  var meetuppMap = new OpenLayers.Layer.OSM("meetupp", "http://images.rawsteel.de.s3.amazonaws.com/meetupp/tiles2/${z}/${x}/${y}.png");
   meetuppMap.isBaseLayer = true;
   map.addLayer(meetuppMap);
   
-  map.setCenter(new OpenLayers.LonLat(13.46, 48.6).transform(fromProj, toProj), 15);
-  map.pan(1,1);
+  var userLon = 13.46;
+  var userLat = 48.6;
+  
+  if (navigator.geolocation)
+  {
+    navigator.geolocation.getCurrentPosition(
+      function(position)
+      {      
+        userLon = position.coords.longitude;
+        userLat = position.coords.latitude;        
+      }
+    );
+  }
+
+  map.setCenter(new OpenLayers.LonLat(userLon, userLat).transform(fromProj, toProj), 15);
 
 // --- Cluster Strategys ------------------------------------------------------
 
@@ -113,26 +190,54 @@ function initMap()
   locationsStrategy.distance = 45;
   locationsStrategy.threshold = 1;
 
+  var eventsStrategy = new OpenLayers.Strategy.Cluster();
+  eventsStrategy.distance = 45;
+  eventsStrategy.threshold = 1;
+
   var buslinesStrategy = new OpenLayers.Strategy.Cluster();
-  locationsStrategy.distance = 25;
-  locationsStrategy.threshold = 1;
 
 // --- Styles -----------------------------------------------------------------
 
-  var locationStyle = new OpenLayers.Style({
-    pointRadius: "${radius}",
-    fillOpacity: 0.5,
-    externalGraphic: "<?php echo base_url()."images/marker_star.png"; ?>"
-  }, {
-    context: {
-      radius: function(feature) {
-        var pix = 15;
-        if(feature.cluster) {
-          pix = Math.min(feature.attributes.count, 7) + 15;
+  var locationStyle = new OpenLayers.StyleMap({
+    "default" : new OpenLayers.Style({
+      pointRadius: "${radius}",
+      fillOpacity: 0.5,
+      externalGraphic: "<?php echo base_url()."images/marker_star.png"; ?>"
+    }, {
+      context: {
+        radius: function(feature) {
+          var pix = 15;
+          if(feature.cluster) {
+            pix = Math.min(feature.attributes.count, 7) + 15;
+          }
+          return pix;
         }
-        return pix;
       }
-    }
+    }),
+    "selected" : new OpenLayers.Style({
+      pointRadius: "25"
+    })
+  });
+  
+  var eventsStyle = new OpenLayers.StyleMap({
+    "default" : new OpenLayers.Style({
+      pointRadius: "${radius}",
+      fillOpacity: 0.5,
+      externalGraphic: "<?php echo base_url()."images/marker_clock.png"; ?>"
+    }, {
+      context: {
+        radius: function(feature) {
+          var pix = 15;
+          if(feature.cluster) {
+            pix = Math.min(feature.attributes.count, 7) + 15;
+          }
+          return pix;
+        }
+      }
+    }),
+    "selected" : new OpenLayers.Style({
+      pointRadius: "25"
+    })
   });
   
   var friendsStyle = new OpenLayers.Style({
@@ -155,29 +260,34 @@ function initMap()
     }
   });
 
-  var buslinienStyle = new OpenLayers.Style({
-    pointRadius: "5",
-    fillOpacity: "0.5",    
-    fillColor: "${pointcolor}",
-    strokeOpacity: "0.5",
-    strokeColor: "${linecolor}"
-  }, {
-    context: {
-      linecolor: function(feature)
-      {        
-        return "#ff0000";
-      },
-      pointcolor: function(feature)
-      {
-        return "#ff0000";
+  var buslinienStyle = new OpenLayers.StyleMap({
+    "default": new OpenLayers.Style({
+      pointRadius: "5",
+      fillOpacity: "0.5",    
+      fillColor: "${pointcolor}",
+      strokeOpacity: "0.5",
+      strokeColor: "${linecolor}"
+    }, {
+      context: {
+        linecolor: function(feature)
+        {      
+          return feature.attributes.lineColor;
+        },
+        pointcolor: function(feature)
+        {
+          return feature.attributes.lineColor;
+        }
       }
-    }
+    }),
+    "select": new OpenLayers.Style({
+      pointRadius: "15"
+    })
   });
 
 // --- Layers -----------------------------------------------------------------
     
   locations = new OpenLayers.Layer.Vector("Locations", {
-    visibility: true,
+    visibility: false,
     strategies: [locationsStrategy],
     styleMap: locationStyle
   });
@@ -187,26 +297,49 @@ function initMap()
     strategies: [friendsStrategy],
     styleMap: friendsStyle
   });
- 
-  var buslinien = new OpenLayers.Layer.Vector("Buslinien", {
- //   strategies: [buslinesStrategy],
-    styleMap: buslinienStyle
+
+  events = new OpenLayers.Layer.Vector("Events", {
+    visibility: true,
+    strategies: [eventsStrategy],
+    styleMap: eventsStyle
   });
+  
+  buslinien[0] = new OpenLayers.Layer.Vector("Buslinien", { strategies: [buslinesStrategy], styleMap: buslinienStyle });
+  buslinien[1] = new OpenLayers.Layer.Vector("Buslinien", { strategies: [buslinesStrategy], styleMap: buslinienStyle });
+  buslinien[2] = new OpenLayers.Layer.Vector("Buslinien", { strategies: [buslinesStrategy], styleMap: buslinienStyle });
+  buslinien[3] = new OpenLayers.Layer.Vector("Buslinien", { strategies: [buslinesStrategy], styleMap: buslinienStyle });
+  buslinien[4] = new OpenLayers.Layer.Vector("Buslinien", { strategies: [buslinesStrategy], styleMap: buslinienStyle });
+  buslinien[5] = new OpenLayers.Layer.Vector("Buslinien", { strategies: [buslinesStrategy], styleMap: buslinienStyle });
+  buslinien[6] = new OpenLayers.Layer.Vector("Buslinien", { strategies: [buslinesStrategy], styleMap: buslinienStyle });
   
   newlocation = new OpenLayers.Layer.Vector("newLocation", {
     visibility: false,
     styleMap: locationStyle
   });   
 
+  for (var i=0; i < buslinien.length; i++)
+  {
+    map.addLayer(buslinien[i]);
+  }
   map.addLayer(friends);
   map.addLayer(locations);
-
-  map.addLayer(buslinien);
+  map.addLayer(events);
   map.addLayer(newlocation);
 
-
   selectControl = new OpenLayers.Control.SelectFeature(
-    [friends, locations, newlocation], { clickout: true, toggle: false, multiple: false, hover: false}
+    [
+      friends, 
+      locations, 
+      newlocation, 
+      events,
+      buslinien[0],
+      buslinien[1],
+      buslinien[2],
+      buslinien[3],
+      buslinien[4],
+      buslinien[5],
+      buslinien[6]
+    ], { clickout: true, toggle: false, multiple: false, hover: false}
   );
   
   map.addControl(selectControl);
@@ -216,38 +349,60 @@ function initMap()
   map.addControl(clickControl);
   clickControl.deactivate();
   
-    
 // --- Eventhandlers ----------------------------------------------------------
   
   locations.events.on({
     "featureselected": function(evt) {
-      openLocationPreviewPopup(evt);
+      openLocationPopup(evt);
     },
     "featureunselected": function(evt) {
-      closePreviewPopup();
+      closePopup();
     }
   });          
 
   friends.events.on({
     "featureselected": function(evt) {
-      openFriendsPreviewPopup(evt);
+      openFriendsPopup(evt);
     },
     "featureunselected": function(evt) {
-      closePreviewPopup();
+      closePopup();
     }
   });          
 
+  events.events.on({
+    "featureselected": function(evt) {
+      openEventsPopup(evt);
+    },
+    "featureunselected": function(evt) {
+      closePopup();
+    }
+  });  
+  
+  for (var i=0; i < buslinien.length; i++)
+  {
+    buslinien[i].events.on({
+      "featureselected": function(evt) {
+        openBuslinienPopup(evt);
+      },
+      "featureunselected": function(evt) {
+        closePopup();
+      }
+    });
+  }
+    
   loadGeoJSON(locationUrl, locations);
   loadGeoJSON(friendsUrl, friends);
+  loadGeoJSON(eventsUrl, events);
 
-/*
-  loadGPX("http://localhost/gpx/linie1.gpx", buslinien);
-  loadGPX("http://localhost/gpx/linie2.gpx", buslinien);
-  loadGPX("http://localhost/gpx/linie5.gpx", buslinien);
-  loadGPX("http://localhost/gpx/linie6.gpx", buslinien);
-*/
+  loadGPX("http://localhost/gpx/linie1.gpx", buslinien[0]);
+  loadGPX("http://localhost/gpx/linie2.gpx", buslinien[1]);
+  loadGPX("http://localhost/gpx/linie5.gpx", buslinien[2]);
+  loadGPX("http://localhost/gpx/linie6.gpx", buslinien[3]);
+  loadGPX("http://localhost/gpx/linie7.gpx", buslinien[4]);
+  loadGPX("http://localhost/gpx/linie8.gpx", buslinien[5]);
+  loadGPX("http://localhost/gpx/linie9.gpx", buslinien[6]);
 }
-
+    
 function loadGPX(url, layer)
 {
   OpenLayers.loadURL(url, {}, null, function(r) {
@@ -265,7 +420,14 @@ function loadGPX(url, layer)
 
     var features = gpxFormat.read(r.responseText);
     
-    layer.addFeatures(features);  
+    for (var i=0; i < features.length; i++)
+    {
+      features[i].attributes.lineName = lineName;
+      features[i].attributes.lineColor = lineColor;
+    }
+
+    layer.addFeatures(features);
+    layer.setVisibility(false);
   });
 }
 
@@ -281,34 +443,170 @@ function loadGeoJSON(url, layer)
   });
 }
 
-function openLocationPreviewPopup(evt)
+function openLocationPopup(evt)
 {
   var feature = evt.feature;
   var buffer = "";
-  for (var i=0; i < feature.cluster.length; i++)
+  var numLocations = feature.cluster.length;
+  if (numLocations > 1)
   {
-    var locationName = feature.cluster[i].attributes.name;
-    
-    buffer += "<a href='#'>" + locationName + "</a><br>";
+    buffer = "<p>mehrere Locations:</p>";
+    if (numLocations > 5)
+    {
+      buffer = "<p>Mehr als 5 Locations an dieser Position gefunden. Zoome näher heran um mehr Informationen zu erhalten.</p>";
+    }
+    else
+    {
+      buffer += "<ul>";
+      for (var i=0; i < feature.cluster.length; i++)
+      {
+        var locationName = feature.cluster[i].attributes.name;
+        var locationId = feature.cluster[i].attributes.id;    
+        buffer += "<a href='<?php echo base_url("location/") ?>/" + locationId + "'>" + locationName + "</a><br>";
+      }
+      buffer += "</ul>";
+    }
   }
+  else
+  {
+    var locationName = feature.cluster[0].attributes.name;
+    var locationId = feature.cluster[0].attributes.id;        
+    buffer += "<a href='<?php echo base_url("location/") ?>/" + locationId + "'>" + locationName + "</a><br>";
+  }
+  
   $("#popup")
     .html(buffer)
     .show();
 }
 
-function openFriendsPreviewPopup(evt)
+function openFriendsPopup(evt)
 {
-  console.log(evt.xy);
   var feature = evt.feature;
   var buffer = "";
-  for (var i=0; i < feature.cluster.length; i++)
+  var numFriends = feature.cluster.length;
+  if (numFriends > 1)
   {
-    var friendName = feature.cluster[i].attributes.name;
-    var friendPicture = feature.cluster[i].attributes.picture;    
-    buffer += "<img width='64px' height='64px' style='border-radius:10px' src='" + friendPicture + "'/>" + friendName+"<br>";
+    buffer = "<p>mehrere Freunde:</p>";
+    if (numFriends > 5)
+    {
+      buffer = "<p>Mehr als 5 Freunde an dieser Position gefunden. Zoome näher heran um mehr Informationen zu erhalten.</p>";
+    }
+    else
+    {
+      buffer += "<ul>";
+      for (var i=0; i < numFriends; i++)
+      {
+        var friendName = feature.cluster[i].attributes.name;
+        var friendPicture = feature.cluster[i].attributes.picture;    
+        buffer += "<li><img width='64px' height='64px' style='border-radius:10px' src='" + friendPicture + "'/>" + friendName+"</li>";
+      }
+      buffer += "</ul>";
+    }
   }
-  
-  var padding = 25;
+  else
+  {
+    var friendName = feature.cluster[0].attributes.name;
+    var friendPicture = feature.cluster[0].attributes.picture;
+    var friendId = feature.cluster[0].attributes.id;        
+    var link = "<?php echo site_url("mail");?>/" + friendId;
+    buffer = "<ul><li><a href='" + link + "'><img width='64px' height='64px' style='border-radius:10px' src='" + friendPicture + "'/>" + friendName+"</a></li></ul>";
+  }
+
+  $("#popup")
+    .html(buffer)
+    .show();
+}
+
+function openEventsPopup(evt)
+{
+  var feature = evt.feature;
+  var buffer = "";
+  var numEvents = feature.cluster.length;
+  if (numEvents > 1)
+  {
+    buffer = "<p>mehrere Events:</p>";
+    if (numEvents > 5)
+    {
+      buffer = "<p>Mehr als 5 Events an dieser Position gefunden. Zoome näher heran um mehr Informationen zu erhalten.</p>";
+    }
+    else
+    {
+      buffer += "<ul>";
+      for (var i=0; i < numEvents; i++)
+      {
+        var eventId = feature.cluster[i].attributes.eventid;
+        var eventTitle = feature.cluster[i].attributes.title;
+        var eventLink = "<?php echo site_url("event"); ?>/" + eventId;
+        buffer += "<li><a href='" + eventLink + "'>" + eventTitle + "</a></li>";
+      }
+      buffer += "</ul>";
+    }
+  }
+  else
+  {
+    var eventId = feature.cluster[0].attributes.eventid;
+    var eventTitle = feature.cluster[0].attributes.title;
+    var eventLink = "<?php echo site_url("event"); ?>/" + eventId;
+    buffer = "<li><a href='" + eventLink + "'>" + eventTitle + "</a></li>";
+  }
+
+  $("#popup")
+    .html(buffer)
+    .show();
+}
+
+function openBuslinienPopup(evt)
+{
+  var linie = evt.feature.attributes.lineName;
+  var color = evt.feature.attributes.lineColor;
+  var name = evt.feature.attributes.name;
+
+  var buffer = "<p>Bushaltestelle:<br> " + linie + "&nbsp;<span style='color:" + color + "'>&#9679;</span><br><b>" + name + "</b></p>";
+
+  $("#popup")
+    .html(buffer)
+    .show();
+}
+
+function closePopup()
+{
+  $("#popup").hide();
+}
+
+// --- Layerswitcher -----------------------------------------------------------------
+
+function toggleLayer(layer)
+{
+  if (layer.getVisibility())
+  {
+    layer.setVisibility(false);
+  }
+  else
+  {
+    layer.setVisibility(true);
+  }
+}
+
+function layermenu()
+{
+  var buffer = "";  
+  buffer = "" +
+  "Basislayer:<br/>" +
+  "<input type='checkbox' name='chkfriends' id='chkfriends' onclick='toggleLayer(friends)' checked='checked'><label for='chkfriends'>Freunde</label><br/>" + 
+  "<input type='checkbox' name='chklocations' id='chklocations' onclick='toggleLayer(locations)'><label for='chklocations'>Locations</label><br/>" +
+  "<input type='checkbox' name='chkevents' id='chkevents' onclick='toggleLayer(events)' checked='checked'><label for='chkevents'>Events</label><br/>" +
+  "<hr/>" +
+  "Buslinien:<br/>" +
+  "<input type='checkbox' name='chkbus0' id='chkbus0' onclick='toggleLayer(buslinien[0])'><label for='chkbus0'>Linie 1</label><br/>" +
+  "<input type='checkbox' name='chkbus1' id='chkbus1' onclick='toggleLayer(buslinien[1])'><label for='chkbus1'>Linie 2</label><br/>" +
+  "<input type='checkbox' name='chkbus2' id='chkbus2' onclick='toggleLayer(buslinien[2])'><label for='chkbus2'>Linie 5</label><br/>" +
+  "<input type='checkbox' name='chkbus3' id='chkbus3' onclick='toggleLayer(buslinien[3])'><label for='chkbus3'>Linie 6</label><br/>" +
+  "<input type='checkbox' name='chkbus4' id='chkbus4' onclick='toggleLayer(buslinien[4])'><label for='chkbus4'>Linie 7</label><br/>" +
+  "<input type='checkbox' name='chkbus5' id='chkbus5' onclick='toggleLayer(buslinien[5])'><label for='chkbus5'>Linie 8</label><br/>" +
+  "<input type='checkbox' name='chkbus6' id='chkbus6' onclick='toggleLayer(buslinien[6])'><label for='chkbus6'>Linie 9</label><br/>" +
+  "<hr/>" +
+  "<a href='javascript:closePopup()'>close</a>";
+
   $("#popup")
     .html(buffer)
     .show();
@@ -319,41 +617,48 @@ function closePreviewPopup()
   $("#popup").hide();
 }
 
-
-
-  
+// --- Location -----------------------------------------------------------------------------------
   
 function addNewLocation()
 {
   locations.setVisibility(false);
   friends.setVisibility(false);
   newlocation.setVisibility(true);
-  $(".button-map-location-edit").show();
-  $("#button-location-add").hide();
+  $(".button-location-new").show();
+  $("#button-location-new").hide();
   selectControl.deactivate();
   clickControl.activate();
 }
+
 
 function cancel()
 {
   locations.setVisibility(true);
   friends.setVisibility(true);
   newlocation.setVisibility(false);
-  $(".button-map-location-edit").hide();
-  $("#button-location-add").show();
+  newlocation.removeAllFeatures();
+  $(".button-location-new").hide();
+  $("#button-location-new").show();
   clickControl.deactivate();
   selectControl.activate();
 }
 
+
 function next()
 {
   //redirect zu location/addNewLocationForm oder so
-  locations.setVisibility(true);
-  friends.display(true);
-  newlocation.display(false);
-  $(".button-map-location-edit").hide();
-  $("#button-location-add").show();
+  //locations.setVisibility(true);
+  //friends.display(true);
+  //newlocation.display(false);
+  //$(".button-map-location-edit").hide();
+  //$("#button-location-new").show();
+  pageNext();
 }
+
+$("button#button-location-new-next").on("click", function() {
+  // mach was
+  pageNext();
+});
 
 </script>
 
@@ -361,15 +666,26 @@ function next()
   <ul id="pages">
     <li>
       <div id="popup">Popup</div>
+      
       <div id="map">
-        <button id="button-location-add" type="button" onclick="addNewLocation()">+ Location</button>
-        <button id="button-location-edit-cancel" class="button-map-location-edit" type="button" onclick="cancel()">Abbrechen</button>
-        <button id="button-location-edit-next" class="button-map-location-edit" type="button" onclick="next()">Weiter</button>
+        <button id="layerswitcher" type="button" onclick="layermenu()">Layer</button>
+        <button id="button-location-new" type="button" onclick="addNewLocation()">+ Location</button>
+        <button id="button-location-new-cancel" class="button-location-new" type="button" onclick="cancel()">Abbrechen</button>
+        <button id="button-location-new-next" class="button-location-new" type="button">Weiter</button>
       </div>
       <script>initMap();</script>
     </li>
     <li>
-      
+<!--  neue Location anlegen      -->
+      <button id="button-location-add-back" class="button-location-add" type="button" onclick="back()">Zurück</button>
+      <button id="button-location-add-cancel" class="button-location-add" type="button" onclick="cancel()">Abbrechen</button>
+      <button id="button-location-add-save" class="button-location-add" type="button" onclick="addLocation()">Fertig</button>
+      <?php echo site_url("location/location/getnewlocationform/"); ?>
+    </li>
+    <li>
+<!--  bestehende Location bearbieten/löschen      -->
+      <button id="button-location-edit-back" class="button-map-location-edit" type="button" onclick="back()">Zurück</button>
+      <?php echo site_url("location/location/geteditlocationform/"); ?>
     </li>
   </ul>
 </div>

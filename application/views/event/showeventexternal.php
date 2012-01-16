@@ -1,35 +1,3 @@
-<script>
-$(document).ready(function()
-{
-
-  $("button[name=send_comment]").on("click", function()
-  {
-    var comment = $("textarea").val();
-    if (comment != "")
-    {
-      $.post("<?php echo site_url("event/update/comment"); ?>", {
-        eventid: "<?php echo $event->id; ?>",
-        comment: comment
-      }, 
-      function(data) 
-      {
-        comment = comment.replace(/\n/g, '<br />');
-        comment = comment.replace(/\r/g, '<br />');        
-        $("ul#comments").append(
-          "<li>"+
-          "<div class=\"sender\"><?php echo "<img class='userimage' src='".$user->picture."'>".$user->name; ?></div>"+
-          "<div class=\"comment\">" + comment + "</div>"+
-          "<div style=\"clear:both\"></div>"+
-          "</li>"
-        );
-
-        $("textarea").val("");
-      });
-    }    
-  });
-});
-
-</script>
 <style>
 
 @font-face
@@ -144,14 +112,9 @@ h2
   <ul id="pages">
     <li>
       <div>
-        
-        <?php
-          if ($event->creator == $user->id)
-          {
-            $linkAttributes["class"] = "button";
-            echo anchor("event/edit/".$event->id, "Event bearbeiten", $linkAttributes);
-          }
-        ?>
+        <div class="notice">
+          Du siehst eine Zusammenfassung eines geplanten Events. Um Teilzunehmen oder um eigene Events zu planen <?php echo anchor("/","melde dich jetzt an"); ?>!
+        </div>
         
         <div id="event_basedata">
           <table border="0" width="90%">
@@ -162,18 +125,16 @@ h2
               <td width="200" height="200" rowspan="5">               
                 <?php 
                   $linkAtts["class"] = "external button";                 
-                  $link = site_url("event/show/".$event->id);
+                  $link = site_url("event/".$event->id);
                   $twittermsg = urlencode("Ich nehme an ".$event->title." teil: ".$link);
                   $mailmsg = urlencode(
                     $event->title."\n".
                     "Am:".date("j.m.Y", $event->begintime)."\n".
-                    "Von:".date("H:i:s", $event->begintime)."-".date("H:i:s", $event->endtime)."\n".
-                    $link
+                    "Von:".date("H:i:s", $event->begintime)."-".date("H:i:s", $event->endtime)
                   );
                   echo anchor("event/ical/".$event->id, "iCal Download", $linkAtts)."<br/><br/>";
                   echo anchor("http://twitter.com/?status=".$twittermsg, "Twitter", $linkAtts)."<br/><br/>";
-                  echo mailto("?subject=".$event->title."&body=".$mailmsg, "E-Mail", $linkAtts)."<br/><br/>";
-                  echo anchor("event/show/".$event->id, "Öffentlicher Link", $linkAtts)."<br/><br/>";
+                  echo mailto("?subject=".$event->title."&body=".$mailmsg, "E-Mail", $linkAtts);
                 ?>
                 <!--
                 <iframe src="../../map/snippet/10" width="250" height="250" frameborder="0">
@@ -183,7 +144,7 @@ h2
             <tr><td colspan="2"><h2>Details</h2></td></tr>
             <tr>
               <td>Location</td>
-              <td><?php echo $location->name; ?></td>
+              <td><?php echo $location; ?></td>
             </tr>
             <tr>
               <td>Von</td>
@@ -202,7 +163,6 @@ h2
         </div>
 
         <h2>Teilnehmer</h2>
-        <div id="userid" style="display:none;" userid="<?php echo $user->id ?>"></div>
         <div id="event_members">
           <ul>          
           <?php
@@ -217,16 +177,6 @@ h2
               echo "<li>";            
             }
             echo img($member->picture).$member->name;
-
-            // Teilnehmer in der Nähe ?
-            // member lon/lat für Distanz ?
-            // member lastupdate für letzte Position
-            // Distanz nur anzeigen wenn Event x Minuten vorher ?
-  
-            if ($member->id == $user->id && ($member->status == "invited"))
-            {
-              echo "<button class='acceptevent' eventid='".$event->id."'>Teilnehmen</button>";
-            }
             echo "</li>";
           }
           ?>
@@ -248,19 +198,6 @@ h2
               ";              
             }            
             ?>
-          </ul>
-          <ul>
-            <li>
-              <div class="sender">
-              <?php 
-                echo "<img class='userimage' src='".$user->picture."'>".$user->name;
-              ?></div>
-              <div class="comment">
-                <textarea></textarea><br/>
-                <button name="send_comment">absenden</button>
-              </div>
-              <div style="clear:both"></div>              
-            </li>
           </ul>
         </div>
         

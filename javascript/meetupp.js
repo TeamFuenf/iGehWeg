@@ -39,7 +39,7 @@
     $("#pages > li").width(windowwidth + "px"); 
     $("#pages").width(numpages*windowwidth+100 + "px"); 
   
-    // Scolleiste einblenden
+    // Scrolleiste einblenden
     if (numpages > 1)
     {
       var scrollbuttons = "";
@@ -47,11 +47,11 @@
       {
         if (activepage == i)
         {
-          scrollbuttons += "<span><a href='javascript:page("+i+")'>&#9676;</a></span>";
+          scrollbuttons += "<span><a class='internal' href='javascript:page("+i+")'>&#9676;</a></span>";
         }
         else
         {
-          scrollbuttons += "<span><a href='javascript:page("+i+")'>&#9675;</a></span>";
+          scrollbuttons += "<span><a class='internal' href='javascript:page("+i+")'>&#9675;</a></span>";
         }        
       }      
       $("#window").append("<div id=\"scroll\">" + scrollbuttons + "</div>");
@@ -234,11 +234,21 @@ $(document).ready(function()
       to_day: to_day,
       to_month: to_month,
       to_year: to_year
+    }, function(data) {
+      if (data == "okay")
+      {
+        pageNext();     
+        if ($("ul #eventlocations > li.selected").offset() != null)
+        {
+          $("#window").scrollTop($("ul #eventlocations > li.selected").offset().top - 100);      
+        }
+      }
+      else
+      {
+        $("#checkresult").html(data); 
+      }
+      console.log(data);  
     });
-    
-    pageNext();
- 
-    $("#window").scrollTop($("ul #eventlocations > li.selected").offset().top - 100);
   });
 
  
@@ -251,15 +261,19 @@ $(document).ready(function()
     var memberid = $("div#userid").attr("userid");
     var button_accept = $(this);
     var button_decline = $(this).siblings("button.declineevent");
-    button_accept.remove();
-    button_decline.html("nicht mehr teilnehmen");
+    //button_accept.remove();
+    //button_decline.html("nicht mehr teilnehmen");
 
     $.post("../event/update/member", 
     {
       eventid: eventid,
       memberid: memberid,
       status: "attending"
-    });
+    }, 
+    function(data) {
+      console.log(data);
+    });        
+
   });
   
   /**

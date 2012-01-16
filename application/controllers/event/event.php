@@ -9,9 +9,9 @@ class Event extends CI_Controller
     parent::is_logged_in();
     $this->load->model("event/Event_model");
     $this->load->model("friends/Friends_model");
+    $this->load->model("location/Location_model");    
     $this->Event_model->cleanup();
   }
-  
 
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -19,17 +19,19 @@ class Event extends CI_Controller
   {
     $event->new = true;
     $event->title = "";
-    $event->begintime = time();
-    $event->endtime = time();
+    $preselectedTime = mktime(date("H"), (floor(date("i")/5)+1)*5, 0, date("n"), date("j"), date("Y"));
+    $event->begintime = $preselectedTime;
+    $preselectedTime = mktime(date("H")+1, (floor(date("i")/5)+1)*5, 0, date("n"), date("j"), date("Y"));
+    $event->endtime = $preselectedTime;
     $event->location = 0;
-    
+
     // Prüfen ob ein Datum in der URL übergeben wurde
     if ($this->uri->segment(3))
     {
       $ts = $this->uri->segment(3);
-      $preselectedTime = mktime(date("H"), floor(date("i")/5)*5, 0, date("n",$ts), date("j",$ts), date("Y",$ts));
+      $preselectedTime = mktime(date("H"), floor(date("i")/5)*5+1, 0, date("n",$ts), date("j",$ts), date("Y",$ts));
       $event->begintime = $preselectedTime;
-      $preselectedTime = mktime(date("H")+1, floor(date("i")/5)*5, 0, date("n",$ts), date("j",$ts), date("Y",$ts));
+      $preselectedTime = mktime(date("H")+1, floor(date("i")/5)*5+1, 0, date("n",$ts), date("j",$ts), date("Y",$ts));
       $event->endtime = $preselectedTime;
     }
     
@@ -63,7 +65,7 @@ class Event extends CI_Controller
     $data["creator"] = $this->Friends_model->get_user($event->creator);
     $data["event"] = $event;
     $data["members"] = $this->Event_model->getEventMembers($eventid);
-    $data["location"] = "TODO: Locationdetails...";
+    $data["location"] = $this->Location_model->getLocation($event->location);
     $data["comments"] = $this->Event_model->getComments($eventid);
     $this->layout->view("event/showevent", $data);
   }
@@ -71,16 +73,20 @@ class Event extends CI_Controller
   public function deleteevent()
   {
     $eventid = $this->uri->segment(3);    
-    if ($this->Event_model->deleteEvent($eventid))
-    {
-      redirect("timeline");      
-    }
-    else
-    {
-      // TODO: Fehlermeldung: Löschen nicht erlaubt ?
-    }
+    $this->Event_model->deleteEvent($eventid);
+    redirect("timeline");      
   }
   
+// --------------------------------------------------------------------------------------------------------------------
+
+  public function checkPlausibility()
+  {
+    $from = $this->input->post("from", true);
+    $to = $this->input->post("to", true);    
+    $result = $this->Event_model->checkPlausibility($from, $to);
+    echo $result;
+  }
+
 // --------------------------------------------------------------------------------------------------------------------
 
   public function insertComment()
@@ -106,8 +112,17 @@ class Event extends CI_Controller
     $eventid = $this->input->post("eventid", true);
     $memberid = $this->input->post("memberid", true);    
     $status = $this->input->post("status", true);    
-    $this->Event_model->setStatus($eventid, $memberid, $status);
-    echo "okay";  
+    
+    $event = $this->Event_model->getEvent($eventid);
+    $from = $event->begintime;
+    $to = $event->endtime;
+
+      $result = $this->Event_model->checkAttendance($from, $to);
+      if ($result == "okay")
+      {
+        $this->Event_model->setStatus($eventid, $memberid, $status);
+      }
+      echo $result;
   }
   
   public function updateBasedata()
@@ -129,9 +144,12 @@ class Event extends CI_Controller
     $from = mktime($from_hour, $from_minute, 0, $from_month, $from_day, $from_year);
     $to = mktime($to_hour, $to_minute, 0, $to_month, $to_day, $to_year);
   
-    $this->Event_model->setBasedata($eventid, $title, $from, $to);
-    
-    echo "okay";
+    $result = $this->Event_model->checkPlausibility($from, $to);  
+    if ($result == "okay")
+    {
+      $this->Event_model->setBasedata($eventid, $title, $from, $to);      
+    }
+    echo $result;
   }
 }
 ?>

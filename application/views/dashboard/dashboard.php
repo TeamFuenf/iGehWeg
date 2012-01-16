@@ -2,14 +2,15 @@
   <ul id="pages">
     <li>
         <div class="userprofile">
-        <img src="<? echo $user->picture; ?>"/>
-        Hallo, <?php echo $user->name; ?>
+          <img src="<? echo $user->picture; ?>"/>
+          Hallo, <?php echo $user->name; ?>
         </div>
         
         <?php echo $logoutlink; ?>
 		
         <div class="contentbox">
         	<ul>
+<<<<<<< HEAD
 			        <?php
 			          //echo "<ul>";
 			          // foreach ($knearestfriends as $friend)
@@ -75,6 +76,72 @@
 			   		</script>
 			   </li>
         		<li class="button_long red">
+=======
+			       <li id="friend_infoa">
+              <canvas id="nearestfriendsCanvas" width="640" height="640"></canvas>
+              <script>
+              var canvas = document.getElementById("nearestfriendsCanvas").getContext("2d");
+              
+              // Kreis
+              canvas.lineWidth = 3;
+              canvas.strokeStyle = "#9e9a93";
+              canvas.beginPath();
+              canvas.arc(320, 320, 250, 0, Math.PI*2, true);
+              canvas.closePath();
+              canvas.stroke();
+              canvas.beginPath();
+              canvas.arc(320, 320, 150, 0, Math.PI*2, true);
+              canvas.closePath();
+              canvas.stroke();
+              canvas.beginPath();
+              canvas.arc(320, 320, 50, 0, Math.PI*2, true);
+              canvas.closePath();
+              canvas.stroke();
+
+              // User zeichnen
+              <?php
+              $maxdist = 750;
+              $pxdist = 250;
+              $scalefactor = 1000.0;
+              
+              foreach ($friends as $friend)
+              {
+                $dx = floor($scalefactor * (71.5 * ($friend->lon - $user->lon))) * $pxdist / $maxdist;
+                $dy = -floor($scalefactor * (111.3 * ($friend->lat - $user->lat))) * $pxdist / $maxdist;
+                $dist = floor((sqrt(pow(71.5 * ($friend->lon - $user->lon),2) + pow(111.3 * ($friend->lat - $user->lat),2))) * 1000);
+                if ($dx != 0 && $dy != 0 && abs($dx) < $maxdist && abs($dy) < $maxdist)  
+                {
+                  echo "                                      
+                    canvas.font = '20px Segoe, Arial';
+                    canvas.lineWidth = 5;
+                    canvas.strokeStyle = '#585049';
+                    canvas.fillStyle = '#669933';
+                    canvas.beginPath();
+                    canvas.arc(320+".$dx.", 320+".$dy.", 15, 0, Math.PI*2, true);
+                    canvas.closePath();
+                    canvas.stroke();
+                    canvas.fill();                              
+                    canvas.fillStyle = '#585049';
+                    canvas.fillText('".$friend->name.": ".$dist."m', 340+".$dx.", 325+".$dy.");
+                  ";
+//                  echo "console.log('".$friend->name.":".$dx."/".$dy."');";
+                }
+              }            
+              ?>              
+
+              // Mittelpunkt
+              canvas.lineWidth = 3;
+              canvas.strokeStyle = "#585049";
+              canvas.fillStyle = "#585049";
+              canvas.beginPath();
+              canvas.arc(320, 320, 5, 0, Math.PI*2, true);
+              canvas.closePath();
+              canvas.stroke();
+              canvas.fill();                              
+              </script>			   
+            </li>
+        		<li>
+>>>>>>> b215361038ee0b6f8bcb7404628e3a9df04e5614
 			      	<?php
 			        	if (empty($newmessages) || count($newmessages) < 1)
 			            {

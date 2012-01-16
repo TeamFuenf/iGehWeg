@@ -10,36 +10,16 @@
     
     <link rel="apple-touch-icon" href="../images/apple-touch-icon.png" />
     <link rel="apple-touch-startup-image" href="../images/startup.png" />
-    
+
     <?php
     foreach ($css as $link)
     {
       echo $link;  
     }
-
-    foreach ($javascript as $link)
-    {
-      echo $link;  
-    }
     ?>
-    
   </head>
 
   <script>
-	  $(function () {
-	  	$("a:not(.external, .internal)").on('click', function(event){
-	  		event.preventDefault();
-	  		var url = $(this).attr('href');
-	  		console.log(url);
-	  		$.ajax({
-	  			url: url,
-	  			success: function(data) {
-	  				$('body').html(data);
-	  			}
-	  		})
-	  	})
-	  });
-	  
 	  function BlockMove(event)
 	  {
 	    // Tell Safari not to move the window.
