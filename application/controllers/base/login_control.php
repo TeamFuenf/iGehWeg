@@ -5,6 +5,7 @@ class Login_control extends CI_Controller {
   public function __construct()
   {
     parent::__construct();  
+    parse_str($_SERVER["QUERY_STRING"], $_GET); 
   }
 
   public function index()
@@ -25,6 +26,76 @@ class Login_control extends CI_Controller {
   	{
       $this->layout->view("/base/login");
   	}
+  }
+  
+  public function twitterlogin()
+  {
+    $params["key"] =  "NKjLJqkn5O09P7KfctZrw";
+    $params["secret"] = "jpFktjfRAEiuYXgWA0s5MuNQUsCnJgkgrdyxZmdcds";
+    $this->load->library("twitter_oauth", $params); 
+
+    if ($this->uri->segment(3) == "success")
+    {
+      $response = $this->twitter_oauth->get_access_token(false, $this->session->userdata("token_secret"));  
+      echo "Hallo ".$response["screen_name"];
+      // TODO: 
+      // - User ggf. erzeugen oder logindaten holen
+      // - Erfolgreichen Login und Username in Session speichern
+      // - Im Login Controller bei gesetzten Sessiondaten auf Dashboard weiterleiten, da bei Fokus der App Loginseite aufgerufen wird
+    }
+    else
+    {
+      $response = $this->twitter_oauth->get_request_token(site_url("login/twitter/success"));  
+      $this->session->set_userdata("token_secret", $response["token_secret"]);
+      redirect($response["redirect"]);        
+    }
+  }
+
+  public function googlelogin()
+  {
+    $this->load->library("openid");
+    try {
+      if(!isset($_GET["openid_mode"]))
+      {
+        $openid = new Openid("http://localhost");
+        $openid->identity = "https://www.google.com/accounts/o8/id";
+        $openid->required = array(
+          "namePerson",
+          "namePerson/first",
+          "namePerson/last",
+          "contact/email",
+        );      
+        header("Location: ".$openid->authUrl());
+      }
+      elseif ($_GET["openid_mode"] == "cancel")
+      {
+        echo "User has canceled authentication!";        
+      }
+      else
+      {
+        $openid = new Openid;
+        if($openid->validate())
+        {
+          $data = $openid->getAttributes();
+          $email = $data["contact/email"];
+          $first = $data["namePerson/first"];
+          $last = $data["namePerson/last"];
+          echo "Hallo ".$first." ".$last;
+          // TODO: 
+          // - User ggf. erzeugen oder logindaten holen
+          // - Erfolgreichen Login und Username in Session speichern
+          // - Im Login Controller bei gesetzten Sessiondaten auf Dashboard weiterleiten, da bei Fokus der App Loginseite aufgerufen wird
+        }
+        else
+        {
+          echo "User has not logged in.";
+        }
+      }
+    }
+    catch(ErrorException $e)
+    {
+      echo $e->getMessage();
+    }
   }
   
   public function validate_credentials() {
