@@ -38,11 +38,13 @@ class Friends_format_model extends CI_Model
 				} else {
 					$color_class = "blue";
 				}
-				$friends_list = $friends_list."<li class='friend_list_entry button_long ".$color_class."' id='".$item->id."'>
+				$friends_list = $friends_list."<li class='button_long ".$color_class."' id='".$item->id."'>
+				<span class='friend_list_entry list_entry'>
 				<img src='".$item->picture."'/>
-				".$item->name."
-				".anchor('/mail/'.$item->id, '<img src="../../images/message.png" />', array( 'class' => 'button_normal button_message_small', 'style' => 'float: right;'))."
-				></li>";
+				".$item->name." >
+				</span>
+				".anchor('/mail/'.$item->id, '<img src="../../images/message.png" />', array( 'class' => 'button_small'))."
+				</li>";
 				$count++;
 			}
 		}
@@ -73,6 +75,7 @@ class Friends_format_model extends CI_Model
     	  </div>
 		  */
     	$string = 	"<div class='button_side'>
+    				<h1>Freunde:</h1>
     				<div id='friends_add_button'>
     				 	<a href='/friends/friends_control/add_friends_main' class='button_normal'>+</a>
     				 </div>

@@ -27,12 +27,24 @@ class Group_format_model extends CI_Model
 				} else {
 					$color_class = "blue";
 				}
-				$format_groups = $format_groups." <li class='list_li button_long ".$color_class."'><span class='groups' id='".$item->id."'>".$item->name."</span><span class='delete_group' id='".$item->id."'>löschen</span></li>";
+				$format_groups = $format_groups." <li class='list_li button_long ".$color_class."'><span class='groups' id='".$item->id."'>".$item->name." > </span><span class='delete_group' id='".$item->id."'>löschen</span></li>";
 				$count++;
 			}
 		}
 		
 		$script_string = "	<script>
+								$('#new_group_field').hide();
+								$('#friends_add_button').on('click', function() {
+									if($('#friends_add_button>span').html() == '+') {
+										$('#new_group_field').show();
+										$('#friends_add_button>span').html('-');	
+									} else {
+										$('#new_group_field').hide();
+										$('#friends_add_button>span').html('+');
+									}
+									
+								});
+								
 								$('.groups').on('click', function() {
 									var detail_id = $(this).attr('id');
 									var windowwidth = $('#window').width();
@@ -72,20 +84,26 @@ class Group_format_model extends CI_Model
 								});
 							</script>";
 		
-		$string = "<h1>Gruppen:</h1>
+		$string = "<div class='button_side'>
+    				<div id='friends_add_button'>
+    				 	<span href='' class='button_normal'>+</span>
+    				 </div>
+					<h1>Gruppen:</h1>
+					<br/>
+					<div id='new_group_field'>
+					<span>Neue Gruppe:</span><br/>
+					<form>
+						<input type='text' id='group_name' />
+						<input type='button' value='OK' id='add_group' class='button_normal'/>
+					</form>
+					</div>
+					</div>
 					<br/>
 					<div class='contentbox contentbox_friends'>
     				 <ul>
 					".$format_groups."
 					</ul>
-					</div>
-					<br/>
-					<hr/>
-					<span>Neue Gruppe:</span><br/>
-					<form>
-						<input type='text' id='group_name' />
-						<input type='button' value='OK' id='add_group' class='button_normal'/>
-					</form>";
+					</div>";
 		
 		return $script_string.$string;
     }
@@ -121,13 +139,13 @@ class Group_format_model extends CI_Model
 								});
 							</script>";
 		
-		$string = "<h1>Mitglieder:</h1>
+		$string = "<h1 class='button_side'>Mitglieder:</h1>
 					<br/><br/>
 					<ul id='members_list' class='list'>
 					".$format_members."
 					</ul>
 					<br/>
-					<span id='back_to_groups' class='button_normal'>zurück</span>";
+					<span id='back_to_groups' class='button_normal button_side'>zurück</span>";
 		
 		return $script_string.$string;
     }
