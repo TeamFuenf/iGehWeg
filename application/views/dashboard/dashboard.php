@@ -10,7 +10,7 @@
 		
         <div class="contentbox">
         	<ul>
-<<<<<<< HEAD
+<!-- <<<<<<< HEAD
 			        <?php
 			          //echo "<ul>";
 			          // foreach ($knearestfriends as $friend)
@@ -76,7 +76,7 @@
 			   		</script>
 			   </li>
         		<li class="button_long red">
-=======
+======= -->
 			       <li id="friend_infoa">
               <canvas id="nearestfriendsCanvas" width="640" height="640"></canvas>
               <script>
@@ -141,7 +141,6 @@
               </script>			   
             </li>
         		<li>
->>>>>>> b215361038ee0b6f8bcb7404628e3a9df04e5614
 			      	<?php
 			        	if (empty($newmessages) || count($newmessages) < 1)
 			            {
