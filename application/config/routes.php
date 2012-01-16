@@ -85,9 +85,9 @@ $route["mail/(:any)"] = "messaging/messaging/show";
 
 // Location
 $route["location/add"] = "location/location/add";
-$route["location/getnewlocation/(:any)"] = "location/location/getnewlocation";
 $route["location/getLocationDetails"] = "location/location/getLocationDetails";
-$route["location/edit/(:any)"] = "location/location/edit";
+$route["location/getnewlocation/(:any)"] = "location/location/getnewlocation";
+$route["location/edit/(:any)"] = "location/location/editLocation";
 $route["location/update/(:any)"] = "location/location/updateLocation";
 $route["location/(:any)"] = "location/location/getLocation";
 
