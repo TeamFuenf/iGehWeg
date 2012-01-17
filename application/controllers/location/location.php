@@ -95,17 +95,17 @@ class Location extends CI_Controller {
   
   public function updateLocation()
   {
-    // if ($this->uri->segment(3))
-    // {
-      // $locid = $this->uri->segment(3);
-      // $name = $this->input->post("name", true);
-      // $street = $this->input->post("street", true);
-      // $city = $this->input->post("city", true);
-      // $internet = $this->input->post("internet", true);
-      // $email = $this->input->post("email", true);
-      // $type = $this->input->post("type", true);
-      // $this->Location_model->updateLocation($locid, $name, $street, $city, $type, $internet, $email);
-    // }
+    if ($this->uri->segment(3))
+    {
+      $locid = $this->uri->segment(3);
+      $name = $this->input->post("name", true);
+      $street = $this->input->post("street", true);
+      $city = $this->input->post("city", true);
+      $internet = $this->input->post("internet", true);
+      $email = $this->input->post("email", true);
+      $type = $this->input->post("type", true);
+      $this->Location_model->updateLocation($locid, $name, $street, $city, $type, $internet, $email);
+    }
     redirect('map/map/index');
   }
 
