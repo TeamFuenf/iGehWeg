@@ -107,7 +107,6 @@ class Location extends CI_Controller {
       $type = $this->input->post("type", true);
       $this->Location_model->updateLocation($locid, $name, $street, $city, $type, $internet, $email);
     }
-    redirect("timeline");
   }
 
 }

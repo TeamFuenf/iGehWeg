@@ -8,7 +8,7 @@
         ?>
         <h1 class="button_side">Events:</h1>
         <br/>
-        Eigene Events:
+       <h2>Eigene Events:</h2>
         <div class='contentbox contentbox_friends'>
         <ul>
         <?php 
@@ -28,7 +28,7 @@
               echo "<img src='../../images/newevent_".$color_class.".png'/>";
               echo $event->title;
               echo "</span>";              
-			  echo "<a href='event/edit/".$event->id."' class='button_small'><span status='none' eventid='".$event->id."'><img src='../../images/accept_".$color_class.".png' /></span></a>";
+			  echo "<a href='".site_url("event/edit")."/".$event->id."' class='button_small'><span status='none' eventid='".$event->id."'><img src='../../images/edit_".$color_class.".png' /></span></a>";
               echo "</li>";
 			  $count++;
           }
@@ -37,7 +37,7 @@
         </div>
         
               
-        Fremde Events:
+        <h2>Fremde Events:</h2>
         <div class='contentbox contentbox_friends'>
         <ul>
         <?php 

@@ -1,5 +1,5 @@
 <!DOCTYPE>
-<html>
+<html manifest="<?php echo site_url("cache.manifest")?>">
   <head>
     <title>meetupp</title>
     <meta charset="utf-8">

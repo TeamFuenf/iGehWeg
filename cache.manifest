@@ -1,0 +1,20 @@
+CACHE MANIFEST
+# 17.01.2012 13:36
+
+# Explicitly cached 'master entries'.
+CACHE:
+/css
+/images
+http://images.rawsteel.de.s3.amazonaws.com/meetupp/tiles2/*
+
+# Resources that require the user to be online.
+NETWORK:
+*
+
+# static.html will be served if main.py is inaccessible
+# offline.jpg will be served in place of all images in images/large/
+# offline.html will be served in place of all other .html files
+FALLBACK:
+#/main.py /static.html
+#images/large/ images/offline.jpg
+#*.html /offline.html

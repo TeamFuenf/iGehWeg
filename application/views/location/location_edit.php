@@ -1,5 +1,5 @@
 <script>
-  function finish()
+  function save()
   {
     var name = document.getElementById('name').value;
     var street = document.getElementById('street').value;
@@ -8,21 +8,22 @@
     var internet = document.getElementById('internet').value;
     var email = document.getElementById('email').value;
   
-  if (name == "") {
-    $("#errorMsg")
-    .html('Mindestens den Namen angeben.')
-    .show();
-  } else {
-    $.post("<?php echo site_url('location/update'); echo '/'.$location->id; ?>" , {
-        name: name,
-        street: street,
-        city: city,
-        type: type,
-        internet: internet,
-        email: email
-    });
-    pagePrev();
-  }
+    if (name == "") {
+      $("#errorMsg")
+      .html('Mindestens den Namen angeben.')
+      .show();
+    } else {
+      $.post("<?php echo site_url('location/update').'/'.$location->id; ?>" , {
+          name: name,
+          street: street,
+          city: city,
+          type: type,
+          internet: internet,
+          email: email
+      });
+      window.location.href = "<?php echo site_url("map");?>";
+    }
+    
   }
 </script>
 

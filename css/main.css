@@ -32,6 +32,13 @@ h1 {
 	color: #5A524B;
 }
 
+h2 {
+	font-size: 30px;
+	margin: 15px 5px 10px 0px;
+	padding: 0px;
+	color: #5A524B;
+}
+
 div#content
 {
   height: 790px;
