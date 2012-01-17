@@ -47,7 +47,7 @@
           {
             echo "<tr>";
             echo "<td>".$event->title."</td>";              
-            echo "<td width='200' align='right'><a href='event/edit/".$event->id."'><button status='none' eventid='".$event->id."'>bearbeiten</button></a></td>";              
+            echo "<td width='200' align='right'><a href='".site_url("event/edit")."/".$event->id."'><button status='none' eventid='".$event->id."'>bearbeiten</button></a></td>";              
             echo "</tr>";
           }
         ?>

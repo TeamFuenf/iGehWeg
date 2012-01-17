@@ -268,7 +268,7 @@ class Event_model extends CI_Model
       }
     }
     
-    if ($status == "invited")
+    if ($status == "invited" && trim($event->title) != "")
     {
       $event = $this->getEvent($eventid);
       $msg = "<b>Automatische Nachricht:</b>\nDu wurdest zum Event \"".$event->title."\" eingeladen.";
