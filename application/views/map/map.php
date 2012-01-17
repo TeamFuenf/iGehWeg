@@ -254,7 +254,8 @@ function initMap()
         }
       }
     }),
-    "selected" : new OpenLayers.Style({
+    "select" : new OpenLayers.Style({
+      fillOpacity: 1,
       pointRadius: "25"
     })
   });
@@ -275,12 +276,38 @@ function initMap()
         }
       }
     }),
-    "selected" : new OpenLayers.Style({
+    "select" : new OpenLayers.Style({
       pointRadius: "25"
     })
   });
   
-  var friendsStyle = new OpenLayers.Style({
+    var friendsStyle = new OpenLayers.StyleMap({
+    "default" : new OpenLayers.Style({
+      pointRadius: "20",
+      fillOpacity: 0.7,
+      externalGraphic: "${image}"
+    }, {
+      context: {
+        image: function(feature) {
+          if (feature.cluster.length == 1)
+          {
+            var imgurl = feature.cluster[0].attributes.picture;
+          }
+          else
+          {
+            var imgurl = "<?php echo base_url()."images/marker_friends.png"; ?>";
+          }
+          return imgurl;
+        }
+      }
+    }),
+    "select" : new OpenLayers.Style({
+      fillOpacity: 1.0,
+      pointRadius: "25"
+    })
+  });
+  
+  var oldfriendsStyle = new OpenLayers.Style({
     pointRadius: "20",
     fillColor: "#ffcc66",
     externalGraphic: "${image}"
@@ -300,9 +327,10 @@ function initMap()
     }
   });
 
+
   var buslinienStyle = new OpenLayers.StyleMap({
     "default": new OpenLayers.Style({
-      pointRadius: "5",
+      pointRadius: "10",
       fillOpacity: "0.5",    
       fillColor: "${pointcolor}",
       strokeOpacity: "0.5",
@@ -449,7 +477,7 @@ function openLocationPopup(evt)
       {
         var locationName = feature.cluster[i].attributes.name;
         var locationId = feature.cluster[i].attributes.id;
-        buffer += "<a class='locdetailsid' locdetailsid='" + locationId + "'>" + locationName + "</a><br>";
+        buffer += "<a class='tolocationdetails' locdetailsid='" + locationId + "'>" + locationName + "</a><br>";
       }
       buffer += "</ul>";
     }
@@ -458,7 +486,7 @@ function openLocationPopup(evt)
   {
     var locationName = feature.cluster[0].attributes.name;
     var locationId = feature.cluster[0].attributes.id;
-    buffer += "<a class='locdetailsid' locdetailsid='" + locationId + "'>" + locationName + "</a><br>";
+    buffer += "<a class='tolocationdetails' locdetailsid='" + locationId + "'>" + locationName + "</a><br>";
   }
   
   $("#popup")
@@ -467,9 +495,9 @@ function openLocationPopup(evt)
 }
 
 
-$("body").on("touchstart click", "a.locdetailsid", function() {
+$("body").on("touchstart click", "a.tolocationdetails", function() {
   var locationId = $(this).attr("locdetailsid");
-  $.post("<?php echo site_url("map/location"); ?>/" + locationId, function(data) {
+  $.post("<?php echo site_url("location"); ?>/" + locationId, function(data) {
     $("#locationdetails").html(data);
   });
   pageNext();
@@ -638,8 +666,9 @@ $("body").on("touchstart click", "li.layer", function(event) {
   }
 });
 
-// --- Location -----------------------------------------------------------------------------------
-  
+// --- new Location -----------------------------------------------------------------------------------
+
+// Neue Location auf der Map markieren
 function addNewLocation()
 {
   locations.setVisibility(false);
@@ -652,7 +681,7 @@ function addNewLocation()
   clickControl.activate();
 }
 
-
+// hinzufügen abbrechen
 function cancel()
 {
   locations.setVisibility(true);
@@ -667,7 +696,7 @@ function cancel()
   closePopup();
 }
 
-
+// weiter zur Eingabe der Location Details
 function next()
 {
   var buffer = "";  
@@ -693,6 +722,7 @@ function next()
   .show();
 }
 
+// Speichere neue Location in der Datenbank
 function addLocation()
 {
   var newlocname = document.getElementById('newlocname').value;
@@ -718,11 +748,6 @@ function addLocation()
   }
   
 }
-
-
-
-
-
 </script>
 
 <div id='window'>
@@ -738,12 +763,10 @@ function addLocation()
       </div>
       <script>initMap();</script>
     </li>
-    <li>
-<!--  Locationdetails anzeigen      -->
+    <li><!--  Locationdetails anzeigen      -->
       <div id='locationdetails'></div>
     </li>
-        <li>
-<!--  Location bearbieten      -->
+    <li><!--  Location bearbieten      -->
       <div id='locationdetailsedit'></div>
     </li>
   </ul>

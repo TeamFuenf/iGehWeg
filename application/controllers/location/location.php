@@ -68,7 +68,7 @@ class Location extends CI_Controller {
     {
       $locid = $this->uri->segment(2);
       $data['location'] = $this->Location_model->getLocation($locid);
-      $this->layout->view("location/location_details", $data);
+      $this->load->view("location/location_details", $data);
     }
   }
   
