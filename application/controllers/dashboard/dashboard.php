@@ -22,8 +22,8 @@ class Dashboard extends CI_Controller
 
    // $data["knearestfriends"] = $this->Friends_model->getKNearestFriends(5);
     
-    $data["eventlink"] = anchor("#", "<img src='../../images/event_new.png' /><div id='button_header'>Events<br><span class='additional_text'>Hier kannst du neue Events erstellen</span></div>", array( 'class' => 'list_entry'));
-    $data["locationlink"] = anchor("#", "<img src='../../images/location_edit.png' /><div id='button_header'>Locations<br><span class='additional_text'>Hier kannst du neue Locations hinzufügen</span></div>", array( 'class' => 'list_entry'));
+    $data["eventlink"] = anchor("#", "<img src='../../images/newevent_blue.png' /><div id='button_header'>Events<br><span class='additional_text'>Hier kannst du neue Events erstellen</span></div>", array( 'class' => 'list_entry'));
+    $data["friendlink"] = anchor("/friends/friends_control/add_friends_main", "<img src='../../images/groupmember_green.png' /><div id='button_header'>Freunde<br><span class='additional_text'>Hier kannst du neue Freunde finden</span></div>", array( 'class' => 'list_entry'));
 
 	$data["logoutlink"] = anchor("/base/login_control/logout", "<div id='logout_button'><img src='../../images/logout.png' /><p>Logout</p></div>");      
 
