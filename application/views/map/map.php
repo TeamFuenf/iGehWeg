@@ -109,7 +109,7 @@
     color:#ddd;
   }
   
-  button#button-location-add
+  button#button-location-new
   {
     position:absolute;
     top:10px;
@@ -242,7 +242,7 @@ function initMap()
     "default" : new OpenLayers.Style({
       pointRadius: "${radius}",
       fillOpacity: 0.5,
-      externalGraphic: "<?php echo base_url()."images/marker_star.png"; ?>"
+      externalGraphic: "<?php echo base_url()."images/marker_location.png"; ?>"
     }, {
       context: {
         radius: function(feature) {
@@ -259,12 +259,12 @@ function initMap()
       pointRadius: "25"
     })
   });
-  
+
   var eventsStyle = new OpenLayers.StyleMap({
     "default" : new OpenLayers.Style({
       pointRadius: "${radius}",
       fillOpacity: 0.5,
-      externalGraphic: "<?php echo base_url()."images/marker_clock.png"; ?>"
+      externalGraphic: "<?php echo base_url()."images/marker_event.png"; ?>"
     }, {
       context: {
         radius: function(feature) {
@@ -284,7 +284,7 @@ function initMap()
     var friendsStyle = new OpenLayers.StyleMap({
     "default" : new OpenLayers.Style({
       pointRadius: "20",
-      fillOpacity: 0.7,
+      fillOpacity: 0.5,
       externalGraphic: "${image}"
     }, {
       context: {
@@ -477,7 +477,7 @@ function openLocationPopup(evt)
       {
         var locationName = feature.cluster[i].attributes.name;
         var locationId = feature.cluster[i].attributes.id;
-        buffer += "<a class='tolocationdetails' locdetailsid='" + locationId + "'>" + locationName + "</a><br>";
+        buffer += "<li><img src='<?php echo site_url("images/marker_location.png"); ?>'><a class='locdetailsid' locdetailsid='" + locationId + "'>" + locationName + "</a></li>";
       }
       buffer += "</ul>";
     }
@@ -486,7 +486,7 @@ function openLocationPopup(evt)
   {
     var locationName = feature.cluster[0].attributes.name;
     var locationId = feature.cluster[0].attributes.id;
-    buffer += "<a class='tolocationdetails' locdetailsid='" + locationId + "'>" + locationName + "</a><br>";
+    buffer += "<img src='<?php echo site_url("images/marker_location.png"); ?>'><a class='locdetailsid' locdetailsid='" + locationId + "'>" + locationName + "</a><br>";
   }
   
   $("#popup")
@@ -495,7 +495,7 @@ function openLocationPopup(evt)
 }
 
 
-$("body").on("touchstart click", "a.tolocationdetails", function() {
+$("body").on("touchstart click", "a.locdetailsid", function() {
   var locationId = $(this).attr("locdetailsid");
   $.post("<?php echo site_url("location"); ?>/" + locationId, function(data) {
     $("#locationdetails").html(data);
@@ -567,7 +567,7 @@ function openEventsPopup(evt)
         var eventId = feature.cluster[i].attributes.eventid;
         var eventTitle = feature.cluster[i].attributes.title;
         var eventLink = "<?php echo site_url("event"); ?>/" + eventId;
-        buffer += "<li><a href='" + eventLink + "'>" + eventTitle + "</a></li>";
+        buffer += "<li><img src='<?php echo site_url("images/marker_event.png"); ?>'><a href='" + eventLink + "'>" + eventTitle + "</a></li>";
       }
       buffer += "</ul>";
     }
@@ -577,7 +577,7 @@ function openEventsPopup(evt)
     var eventId = feature.cluster[0].attributes.eventid;
     var eventTitle = feature.cluster[0].attributes.title;
     var eventLink = "<?php echo site_url("event"); ?>/" + eventId;
-    buffer = "<li><a href='" + eventLink + "'>" + eventTitle + "</a></li>";
+    buffer = "<li><img src='<?php echo site_url("images/marker_event.png"); ?>'><a href='" + eventLink + "'>" + eventTitle + "</a></li>";
   }
 
   $("#popup")

@@ -81,7 +81,7 @@ class Login_control extends CI_Controller {
           $email = $data["contact/email"];
           $first = $data["namePerson/first"];
           $last = $data["namePerson/last"];
-          $userid = $openid->data["openid_identity"];
+          $userid = $first.$last; 
           $username = $first." ".$last;
 
           // Nur für Demozwecke (!!) : Username als Kennwort setzen

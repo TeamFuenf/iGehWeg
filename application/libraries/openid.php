@@ -73,7 +73,9 @@ class Openid
 
     function __construct()
     {
-      $host = "http://localhost";
+      $CI =& get_instance();
+      $host = site_url("");
+      //$host = "http://localhost";
         $this->trustRoot = (strpos($host, '://') ? $host : 'http://' . $host);
         if ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off')
             || (isset($_SERVER['HTTP_X_FORWARDED_PROTO'])

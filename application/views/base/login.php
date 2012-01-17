@@ -5,8 +5,6 @@
 		<p id="login_logo">meetapp</p>
 	</div>
 
-  <a href="<?php echo site_url("login/google");?>">GOOGLE LOGIN</a>
-	
 	<?php
 		$linkExternal["class"] = "external";
     
