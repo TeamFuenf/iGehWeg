@@ -1,46 +1,14 @@
-<style>
-
-#events ul
-{
-  list-style-type:none;
-  margin:0px;
-  padding-left:20px;
-  padding-right:20px;
-  
-  width:auto;
-}
-
-#events button
-{
-  padding:10px;
-}
-
-#events a
-{
-  color:#666;
-  text-decoration:none;
-}  
-
-#ownevents,
-#participatingevents
-{
-  width:97%;
-  margin:0px auto;
-}
-
-</style>
-
 <div id="window">
   <ul id="pages">
     <li>
       <div id="events">
         <div id="userid" userid="<?php echo $userid; ?>"></div>
         <?php 
-        echo anchor("event/new","<button>neues Event erstellen</button>");
+        echo anchor("event/new","+", "class='button_normal button_side add_event'");
         ?>
-        
-        <h1>Eventübersicht</h1>  
-        <h2>Eigene Events</h2>
+        <h1 class="button_side">Events:</h1>
+        <br/>
+        Eigene Events:
         <table id="ownevents">
         <?php 
           foreach ($ownevents as $event)
@@ -52,7 +20,7 @@
           }
         ?>
         </table>      
-        <h2>Fremde Events</h2>
+        Fremde Events:
         <table id="participatingevents">
         <?php 
           if (count($participatingeventsts) > 0)
@@ -64,12 +32,12 @@
               echo "<td width='200' align='right'>";
               if ($event->status == "attending")
               {
-                echo "<button class='declineevent' eventid='".$event->id."'>nicht mehr teilnehmen</button></td>";                                              
+                echo "<button class='declineevent' eventid='".$event->id." button_normal'>nicht mehr teilnehmen</button></td>";                                              
               }
               else
               {
-                echo "<button class='acceptevent' eventid='".$event->id."'>teilnehmen</button>";
-                echo "<button class='declineevent' eventid='".$event->id."'>absagen</button></td>";                              
+                echo "<button class='acceptevent' eventid='".$event->id." button_normal'>teilnehmen</button>";
+                echo "<button class='declineevent' eventid='".$event->id." button_normal'>absagen</button></td>";                              
               }
               echo "</tr>";
             }

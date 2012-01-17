@@ -3,17 +3,17 @@
 class Friends_format_model extends CI_Model
 {
 
-	var $ajax_link = "$('a').on('click', function(event){
-					  		event.preventDefault();
-					  		var url = $(this).attr('href');
-					  		console.log(url);
-					  		$.ajax({
-					  			url: url,
-					  			success: function(data) {
-					  				$('body').html(data);
-					  			}
-					  		})
-					  	});";
+	var $ajax_link = "$('a.ajaxlinks').on('click', function(event){
+						event.preventDefault();
+						var url = $(this).attr('href');
+						console.log(url);
+						$.ajax({
+						url: url,
+						success: function(data) {
+						$('body').html(data);
+						}
+						})
+					 });";
 
     function __construct()
     {
@@ -78,10 +78,10 @@ class Friends_format_model extends CI_Model
     	$string = 	"<div class='button_side'>
     				<h1>Freunde:</h1>
     				<div id='friends_add_button'>
-    				 	<a href='/friends/friends_control/add_friends_main' class='button_normal'>+</a>
+    				 	<a href='/friends/friends_control/add_friends_main' class='button_normal ajaxlinks'>+</a>
     				 </div>
     				 <div id='friends_groups_button'>
-    				 	".anchor('/friends/groups_control', 'Gruppen', 'class="button_normal"')."
+    				 	".anchor('/friends/groups_control', 'Gruppen', 'class="button_normal ajaxlinks"')."
     				 </div>
     				 </div>
     				 <br />
@@ -105,7 +105,7 @@ class Friends_format_model extends CI_Model
 		if($groups != null) 
 		{
 			foreach($groups as $item) {
-				$gruppen = $gruppen." <a class='group_links button_normal red' href=''>".$item->name."</a>";
+				$gruppen = $gruppen." <a class='group_links button_normal red ajaxlinks' href=''>".$item->name."</a>";
 			}
 		}
 		

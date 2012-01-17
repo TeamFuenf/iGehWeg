@@ -27,6 +27,7 @@ class Location extends CI_Controller {
     $email = $this->input->post("email", true);
     $type = $this->input->post("type", true);
     $this->Location_model->addLocation($name, $lon, $lat, $street, $city, $type, $internet, $email);
+    redirect(base_url("timeline"));
   }
   
   public function getnewlocation()
@@ -87,7 +88,7 @@ class Location extends CI_Controller {
     {
       $locid = $this->uri->segment(3);
       $data['location'] = $this->Location_model->getLocation($locid);
-      $this->layout->view("location/location_edit", $data);
+      $this->load->view("location/location_edit", $data);
     }
   }
 
@@ -106,7 +107,6 @@ class Location extends CI_Controller {
       $type = $this->input->post("type", true);
       $this->Location_model->updateLocation($locid, $name, $street, $city, $type, $internet, $email);
     }
-    redirect('map/map/index');
   }
 
 }

@@ -299,11 +299,14 @@ div#friend_info {
 	color: white;
 	padding: 0px;
 	margin: 0px;
+	z-index: 1 !important;
 }
 
 canvas#nearestfriendsCanvas {
-	margin-top: -90px;
-	margin-bottom: 30px;
+/*	margin-top: -90px;*/
+	margin-top: 20px;
+	margin-bottom: 28px;
+	z-index: 1;
 }
 
 div#button_header {
@@ -315,11 +318,14 @@ span.additional_text {
 }
 
 div#logout_button {
-	float: right;
+/*	float: right;*/
+	position: absolute;
+	left: 530px;
 	background-image: url('../../images/controls_background.png');
 	border-radius: 0px 0px 5px 5px;
 	margin-right: 10px;
 	text-align: center;
+	z-index: 10;
 }
 
 div#logout_button a {
@@ -376,6 +382,44 @@ div#add_info {
 	margin: 10px;
 	font-size: 30px;
 	margin: 0px auto;
+}
+
+/* --- Events ------------------------------------------------------------------------------------------------------ */
+ 
+a.add_event {
+	float: right;
+}
+
+div#events {
+	margin-top: 5px;
+}
+ 
+#events ul
+{
+  list-style-type:none;
+  margin: 0px;
+  padding-left:20px;
+  padding-right:20px;
+  
+  width:auto;
+}
+
+/*#events button
+{
+  padding:10px;
+}
+
+#events a
+{
+  color:#666;
+  text-decoration:none;
+}*/  
+
+#ownevents,
+#participatingevents
+{
+  width:97%;
+  margin:0px auto;
 }
 
 /* --- Seiten ------------------------------------------------------------------------------------------------------ */
