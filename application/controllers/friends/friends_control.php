@@ -141,7 +141,7 @@ class Friends_control extends CI_Controller {
 		//$users = $this->friends_model->get_all_users_without_friends($this->userid);
 		
 		$this->load->model('friends/friends_format_model');
-		//Hier werden die Daten formatiert und zurückgegeben bei Klick auf "Benutzer hinzufügen"
+		//Hier werden die Daten formatiert und zurückgegeben bei Eingabe einer Buchstabenfolge
 		echo $this->friends_format_model->format_add_friends($users);
 	}
 }

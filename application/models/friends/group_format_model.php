@@ -27,7 +27,15 @@ class Group_format_model extends CI_Model
 				} else {
 					$color_class = "blue";
 				}
-				$format_groups = $format_groups." <li class='list_li button_long ".$color_class."'><span class='groups' id='".$item->id."'>".$item->name." > </span><span class='delete_group' id='".$item->id."'>löschen</span></li>";
+				
+				$format_groups = $format_groups." <li class='button_long ".$color_class."'>
+				<span class='friend_list_entry groups list_entry' id='".$item->id."'>
+				<img src='../../images/group_".$color_class.".png'/>
+				".$item->name."
+				<span class='arrow'>></span>
+				</span>
+				<span class='delete_group button_small' id='".$item->id."'><img src='../../images/delete_".$color_class.".png' /></span>
+				</li>";
 				$count++;
 			}
 		}
@@ -117,11 +125,24 @@ class Group_format_model extends CI_Model
 	 */
     function format_group_members($members) 
     {
+		$count = 0;    		
     	$format_members = "";
 		if($members != null) 
 		{
 			foreach($members as $item) {
-				$format_members = $format_members." <li class='group_members'>".$item->name."</li>";	
+				if($count % 2 == 0) {
+					$color_class = "green";
+				} else {
+					$color_class = "blue";
+				}
+				
+				$format_members = $format_members." <li class='button_long ".$color_class."'>
+				<span class='list_entry'>
+				<img src='".$item->picture."'/>
+				".$item->name."
+				</span>
+				</li>";
+				$count++;
 			}
 		}
 		
@@ -141,9 +162,11 @@ class Group_format_model extends CI_Model
 		
 		$string = "<h1 class='button_side'>Mitglieder:</h1>
 					<br/><br/>
-					<ul id='members_list' class='list'>
+					<div class='contentbox contentbox_friends'>
+					<ul>
 					".$format_members."
 					</ul>
+					</div>
 					<br/>
 					<span id='back_to_groups' class='button_normal button_side'>zurück</span>";
 		
