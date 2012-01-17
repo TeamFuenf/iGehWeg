@@ -18,19 +18,19 @@ class Login_model extends CI_Model
 		}
 	}
 	
-	public function create_user() {
-		$insert_data = array (
-			'username' => $this->input->post('username'),
-			'password' => md5($this->input->post('password')),
-		);
+	public function create_user($userid, $username, $password) {
+    $insert_data["id"] = $userid;
+		$insert_data["name"] = $username;
+		$insert_data["password"] = md5($password);
+
 		//Schaut ob der Benutzername schon vergeben ist
-		$this->db->where('username', $this->input->post('username'));
-		$query = $this->db->get('users');
+		$this->db->where("name", $username);
+		$query = $this->db->get("user");
 		
 		if($query->num_rows() > 0) { //vergeben
 			return false;
 		} else { //nicht vergeben, schreibt neuen User in DB
-			$insert = $this->db->insert('users', $insert_data);
+			$insert = $this->db->insert("user", $insert_data);
 			return $insert;			
 		}
 	}
