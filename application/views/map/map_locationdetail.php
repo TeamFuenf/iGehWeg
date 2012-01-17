@@ -1,5 +1,5 @@
 <script>
-$("body").on("touchstart click", "a#locationeditlink", function() {
+$("body").on("click", "a#locationeditlink", function() {
   var locationId = $(this).attr("locationeditid");
   $.post("<?php echo site_url("location/edit"); ?>/" + locationId, function(data) {
     $("#locationdetailsedit").html(data);

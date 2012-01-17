@@ -34,7 +34,8 @@ $(document).ready(function()
           if ($i == 0)
           {
             $hourOffset = date("G") * 20;
-            echo "<hr class='todayruler' style='top:".$hourOffset."px;'/>";
+            // echo "<hr class='todayruler' style='top:".$hourOffset."px;'/>";
+			echo "<div class='todayruler' style='top:".$hourOffset."px;'>now</div>";
             echo "<div class='day today' style='height:480px'>";            
           }
           else

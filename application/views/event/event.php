@@ -172,7 +172,7 @@
         <script>
           $(function() {
           
-            $("#location_order_az").on("touchstart click", function() {
+            $("#location_order_az").on("click", function() {
               var list = $("ul#eventlocations");
               var listLi = $("li", list);
               listLi.sort(function(a, b)
@@ -188,7 +188,7 @@
               });
             });
 
-            $("#location_order_distance").on("touchstart click", function() {
+            $("#location_order_distance").on("click", function() {
               var list = $("ul#eventlocations");
               var listLi = $("li", list);
               listLi.sort(function(a, b)
@@ -243,35 +243,47 @@
 
     <li>
       <div>
-        <h2>Teilnehmer</h2>
-        <table id="eventmembers">          
+        <h1 class="button_side">Teilnehmer:</h1>
+        <ul id="eventmembers">          
         <?php
+          $count = 0;
+		  $color_class = "";
+        
           foreach ($members as $member)
           {
-            echo "<tr>";
-            echo "<td width='64'><img src='".$member->picture."'/></td>";
-            echo "<td>".$member->name."</td>";  
+            if($count % 2 == 0) {
+					$color_class = "green";
+				} else {
+					$color_class = "blue";
+				}	
+          	
+            echo "<li class='button_long ".$color_class."' >";
+			echo "<span class='friend_list_entry list_entry'>";
+            echo "<img src='".$member->picture."'/>";
+            echo $member->name;  
+			echo "</span>";
                      
             if ($member->status == "invited")
             {
-              echo "<td width='200' align='right'><button status='invited' memberid='".$member->id."'>Einladung gesendet</button></td>";                                          
+              echo "<span status='invited' memberid='".$member->id."'><img src='../../images/remove_".$color_class.".png' /></span>";                                          
             }
             else
             if ($member->status == "attending")
             {
-              echo "<td width='200' align='right'><button status='attending' memberid='".$member->id."'>nimmt Teil</button></td>";                                          
+              echo "<span class='button_small' status='attending' memberid='".$member->id."'>nim</span>";                                          
             }
             else
             {
-              echo "<td width='200' align='right'><button status='none' memberid='".$member->id."'>einladen</button></td>";
+              echo "<span class='button_small' status='none' memberid='".$member->id."'><img src='../../images/add_".$color_class.".png' /></span>";
             }   
 
-            echo "</tr>";
+            echo "</li>";
+			$count++;
           }
         ?>
-        </table>
+        </ul>
         <br/>
-        <button class="button" id="eventbutton_members_prev">zurück</button>
+        <span class="button_normal button_side" id="eventbutton_members_prev">zurück</span>
       </div>
     </li> 
 

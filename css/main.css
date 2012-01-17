@@ -54,7 +54,7 @@ div#controls
   width: 640px;
   height: 127px;
   border-top: 1px solid #282521;
-  z-index: 1;
+  z-index: 11;
   background-image: url('../../images/controls_background.png');
   text-align:center;
 }
@@ -599,10 +599,11 @@ ul#eventlocations
   font-size:1.5em;
 }
 
-table#eventmembers
+ul#eventmembers
 {
-  width:97%;
+  width: 100%;
   margin:0px auto;
+  padding: 0px;
 }
   
 #eventmembers td:not(:first-child)
@@ -637,13 +638,20 @@ a.new_event_button {
 	float: right;
 }
 
-hr.todayruler
+div.todayruler
 {
+  font-size: 22px;
   position:relative;
-  width:200px;
+  width:63px;
+  height: 24px;
   margin:0px auto;
-  border-top:1px solid #fff;
-  z-index:999;
+  right: 38px;
+  padding: 0px;
+  /*border-top:1px solid #fff;*/
+  border-bottom: 3px solid #BE7844;
+  color: #BE7844;
+/*  color: #BE7844;*/
+  z-index: 10;
 }
 
 .day
@@ -659,7 +667,8 @@ hr.todayruler
 a
 {
   text-decoration:none;
-  color:#999;
+  color: #5A524B;
+/*  color:#999;*/
 }
 
 .day span.date
@@ -667,9 +676,10 @@ a
   position:relative;
   top:0px;
   left:0px;
-  border-top:1px solid #ccc;
+  border-top:1px solid #928875;
   padding-left:50px;
-  color:#ccc;
+/*  color:#ccc;*/
+  color: #5A524B;
   height:40px;
   width:100px;
   display:block;
@@ -677,22 +687,27 @@ a
 
 .day:nth-child(even)
 {
-  background-color:#e6e6e6;
+  background-color:#eaeaea;
 }
 
 .day:nth-child(odd)
 {
-  background-color:#e0e0e0;
+  background-color:#d1d0d0;
 }
 
 .event
 {
   box-shadow:inset 2px 0px 8px #999;
   position:absolute;
-  background-color:#2bc0e8;
+/*  background-color: #2bc0e8;*/
+  background-color: #75A6A3;
   color:#fff;
   width:25px;
   display:block;
+}
+
+.eventlabel a, .owneventlabel a {
+	color: #5A524B !important;
 }
 
 .eventlabel
@@ -701,9 +716,10 @@ a
   width:200px;
   left:-200px;
   display:block;
-  border-left:1px dotted #ccc;
+/*  border-left:1px dotted #ccc;*/
   padding-left:10px;
-  color:#999;
+/*  color:#999;*/
+  color: #5A524B !important;
 }
 
 .owneventlabel
@@ -712,7 +728,7 @@ a
   width:200px;
   left:-200px;
   display:block;
-  border-left:3px dotted #666;
+/*  border-left:3px dotted #666;*/
   padding-left:10px;
   color:#999;
 }
@@ -721,7 +737,7 @@ a
 {
   position:absolute;
   width:300px;
-  left:150px;
+  left: 70px;
   display:block;
   padding-right:10px;
   color:#999;
@@ -748,6 +764,7 @@ div#window
 
 div#scroll
 {
+  display: none;
   width:100%;
   height:25px;
   position:absolute;

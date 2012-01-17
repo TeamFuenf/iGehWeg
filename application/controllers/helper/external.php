@@ -14,7 +14,7 @@ class External extends CI_Controller
   public function ical()
   {
     header("Content-Type: text/Calendar");
-    header("Content-Disposition: inline; filename=calendar.ics");      
+    header("Content-Disposition: inline; filename=event.ics");      
     $eventid = $this->uri->segment(3);
     echo $this->Event_model->generateICal($eventid);  
   }

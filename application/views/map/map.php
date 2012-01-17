@@ -495,7 +495,7 @@ function openLocationPopup(evt)
 }
 
 
-$("body").on("touchstart click", "a.locdetailsid", function() {
+$("body").on("click", "a.locdetailsid", function() {
   var locationId = $(this).attr("locdetailsid");
   $.post("<?php echo site_url("location"); ?>/" + locationId, function(data) {
     $("#locationdetails").html(data);
@@ -646,7 +646,7 @@ function layermenu()
     .show();
 }
 
-$("body").on("touchstart click", "li.layer", function(event) {
+$("body").on("click", "li.layer", function(event) {
   var layername = $(this).attr("layer");
   var show = $(this).attr("show");
   

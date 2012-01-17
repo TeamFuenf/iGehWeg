@@ -70,7 +70,7 @@ $(document).ready(function() {
   /**
    * Nachricht senden und an die Nachrichtenleiste anhängen
    */
-  $("#sendmessage").on("touchstart click", function() {
+  $("#sendmessage").on("click", function() {
     var receiver = $("#receiver").val();
     var messagebody = $("#messagebox").val();
     
@@ -100,7 +100,7 @@ $(document).ready(function() {
   /**
    * Sendet eine Nachricht vom Posteingang aus
    */
-  $("#sendmessage_inbox").on("touchstart click", function() {
+  $("#sendmessage_inbox").on("click", function() {
     var receiver = $("#receiver").val();
     var messagebody = $("#messagebox").val();
     
@@ -118,7 +118,7 @@ $(document).ready(function() {
     });
   });
 
-  $(".deleteicon b").on("touchstart click", function(e) {
+  $(".deleteicon b").on("click", function(e) {
     e.preventDefault();
     
     var row = $(this).parents("tr");
@@ -143,7 +143,7 @@ $(document).ready(function()
   /**
    * Location updaten
    */
-  $("#eventlocations li").on("touchstart click", function()
+  $("#eventlocations li").on("click", function()
   {
     var eventid = $("#eventid").attr("eventid");
     var locationid = $(this).attr("locationid");
@@ -163,22 +163,33 @@ $(document).ready(function()
   /**
    * Teilnehmerstatus updaten
    */
-  $("#eventmembers button").on("touchstart click", function()
-  {   
+  $("#eventmembers span").on("click", function()
+  {
     var eventid = $("#eventid").attr("eventid");
     var memberid = $(this).attr("memberid");    
     var status = "";
+    var imgsrc = $(this).find("img").attr("src");
+    if(imgsrc == "../../images/add_green.png") {
+    	imgsrc = "../../images/remove_green.png"
+    } else if(imgsrc == "../../images/remove_green.png") {
+    	imgsrc = "../../images/add_green.png"
+    } else if(imgsrc == "../../images/add_blue.png") {
+    	imgsrc = "../../images/remove_blue.png"
+    } else if(imgsrc == "../../images/remove_blue.png") {
+    	imgsrc = "../../images/add_blue.png"
+    }
+    
     if ($(this).attr("status") == "none")
     {
       status = "invited";
       $(this).attr("status", "invited");
-      $(this).html("Einladung gesendet");
+      $(this).html("<img src='" + imgsrc + "' />");
     }
     else
     {
       status = "none";     
       $(this).attr("status", "none");
-      $(this).html("einladen");
+      $(this).html("<img src='" + imgsrc + "' />");
     }    
 
     $.post("../event/update/member", 
@@ -189,13 +200,13 @@ $(document).ready(function()
     });
   });
 
-  $("#eventbutton_members_prev").on("touchstart click", function()
+  $("#eventbutton_members_prev").on("click", function()
   {   
     pagePrev();
     $("#window").scrollTop($("ul #eventlocations > li.selected").offset().top - 100);
   });
   
-  $("#eventbutton_location_prev").on("touchstart click", function()
+  $("#eventbutton_location_prev").on("click", function()
   {   
     pagePrev();
     $("#window").scrollTop(0);
@@ -204,7 +215,7 @@ $(document).ready(function()
   /**
    * Basisdaten updaten
    */
-  $("#eventbutton_basedata_next").on("touchstart click", function()
+  $("#eventbutton_basedata_next").on("click", function()
   {   
     var eventid = $("#eventid").attr("eventid");
     var title = $("#eventname").val();
@@ -255,7 +266,7 @@ $(document).ready(function()
   /**
    * An Event teilnehmen
    */
-  $(".acceptevent").on("touchstart click", function()
+  $(".acceptevent").on("click", function()
   {
     var item = $(this).parent("li").removeClass("invited");    
     console.log(item);
@@ -283,7 +294,7 @@ $(document).ready(function()
   /**
    * Event absagen
    */
-  $(".declineevent").on("touchstart click", function()
+  $(".declineevent").on(" click", function()
   {
     var eventid = $(this).attr("eventid");
     var memberid = $("div#userid").attr("userid");
