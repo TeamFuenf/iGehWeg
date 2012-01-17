@@ -9,41 +9,73 @@
         <h1 class="button_side">Events:</h1>
         <br/>
         Eigene Events:
-        <table id="ownevents">
+        <div class='contentbox contentbox_friends'>
+        <ul>
         <?php 
+          $color_class = "";
+		  $count = 0;
+        
           foreach ($ownevents as $event)
           {
-            echo "<tr>";
-            echo "<td>".$event->title."</td>";              
-            echo "<td width='200' align='right'><a href='event/edit/".$event->id."'><button status='none' eventid='".$event->id."'>bearbeiten</button></a></td>";              
-            echo "</tr>";
+          	if($count % 2 == 0) {
+					$color_class = "green";
+				} else {
+					$color_class = "blue";
+				}
+			
+			  echo "<li class='button_long ".$color_class."'>";
+              echo "<span class='friend_list_entry groups list_entry_events'>";
+              echo "<img src='../../images/newevent_".$color_class.".png'/>";
+              echo $event->title;
+              echo "</span>";              
+			  echo "<a href='event/edit/".$event->id."' class='button_small'><span status='none' eventid='".$event->id."'><img src='../../images/accept_".$color_class.".png' /></span></a>";
+              echo "</li>";
+			  $count++;
           }
         ?>
-        </table>      
+        </ul>
+        </div>
+        
+              
         Fremde Events:
-        <table id="participatingevents">
+        <div class='contentbox contentbox_friends'>
+        <ul>
         <?php 
+          $color_class = "";
+          $count = 0;
+		
           if (count($participatingeventsts) > 0)
           {
             foreach ($participatingeventsts as $event)
             {
-              echo "<tr>";
-              echo "<td>".$event->title."</td>";              
-              echo "<td width='200' align='right'>";
+			  if($count % 2 == 0) {
+					$color_class = "green";
+				} else {
+					$color_class = "blue";
+				}
+			  
+			  echo "<li class='button_long ".$color_class."'>";
+              echo "<span class='friend_list_entry groups list_entry_events'>";
+              echo "<img src='../../images/newevent_".$color_class.".png'/>";
+              echo $event->title;
+              echo "</span>";              
               if ($event->status == "attending")
               {
-                echo "<button class='declineevent' eventid='".$event->id." button_normal'>nicht mehr teilnehmen</button></td>";                                              
+                echo "<span class='declineevent button_small' eventid='".$event->id."'><img src='../../images/delete_".$color_class.".png' /></span>";                                              
               }
               else
               {
-                echo "<button class='acceptevent' eventid='".$event->id." button_normal'>teilnehmen</button>";
-                echo "<button class='declineevent' eventid='".$event->id." button_normal'>absagen</button></td>";                              
+                echo "<span class='acceptevent button_small' eventid='".$event->id."'><img src='../../images/accept_".$color_class.".png' /></span>";
+                echo "<span class='declineevent button_small' eventid='".$event->id."'><img src='../../images/delete_".$color_class.".png' /></span>";                              
               }
-              echo "</tr>";
+              echo "</li>";
+			  $count++;
+			  
             }
           }
         ?>
-        </table>      
+        </ul>    
+        </div>  
       </div>
     </li>
   </ul>

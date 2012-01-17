@@ -7,142 +7,14 @@ $(document).ready(function()
   
 </script>
 
-<style>
-
-@font-face
-{  
-  font-family: Segoe;  
-  src: url(../../css/segoeui.ttf) format("truetype");  
-}  
-@font-face
-{  
-  font-family: SegoeLight;  
-  src: url(../../css/segoeuil.ttf) format("truetype");  
-}  
-
-h1
-{
-  width:40%;
-  padding:10px;
-  font-family: SegoeLight, verdana, helvetica, sans-serif;
-  color:#666;
-  font-size:40px;
-}
-
-div
-{
-  font-family:Segoe UI;
-}
-
-hr.todayruler
-{
-  position:relative;
-  width:200px;
-  margin:0px auto;
-  border-top:1px solid #fff;
-  z-index:999;
-}
-
-.day
-{
-  box-shadow:inset 2px 0px 8px #ccc;
-  position:relative;
-  left:45%;
-  color:#999;
-  width:25px;
-  height:48px;
-}
-
-a
-{
-  text-decoration:none;
-  color:#999;
-}
-
-.day span.date
-{
-  position:relative;
-  top:0px;
-  left:0px;
-  border-top:1px solid #ccc;
-  padding-left:50px;
-  color:#ccc;
-  height:40px;
-  width:100px;
-  display:block;
-}
-
-.day:nth-child(even)
-{
-  background-color:#e6e6e6;
-}
-
-.day:nth-child(odd)
-{
-  background-color:#e0e0e0;
-}
-
-.event
-{
-  box-shadow:inset 2px 0px 8px #999;
-  position:absolute;
-  background-color:#2bc0e8;
-  color:#fff;
-  width:25px;
-  display:block;
-}
-
-.eventlabel
-{
-  position:absolute;
-  width:200px;
-  left:-200px;
-  display:block;
-  border-left:1px dotted #ccc;
-  padding-left:10px;
-  color:#999;
-}
-
-.owneventlabel
-{
-  position:absolute;
-  width:200px;
-  left:-200px;
-  display:block;
-  border-left:3px dotted #666;
-  padding-left:10px;
-  color:#999;
-}
-
-.eventmembers
-{
-  position:absolute;
-  width:300px;
-  left:150px;
-  display:block;
-  padding-right:10px;
-  color:#999;
-}
-
-.eventmembers img
-{
-  width:48px;
-  height:48px;
-  margin:5px;
-  border-radius:5px;
-  vertical-align:middle;
-}
-
-</style>
-
 <div id="window">
   <ul id="pages">
     <li>
       <div id="timeline">        
-        <h1>Timeline</h1>
+        <h1>Timeline:</h1>
       <?php
-      echo anchor("event","<button>zu den Events</button>");
-      echo anchor("event/new","<button>Neues Event</button>");
+      echo anchor("event/new","neues Event", "class='button_normal new_event_button'");
+      echo anchor("event","Events", "class='button_normal'");
       
       $showDaysInAdvance = 14;
       for ($i=0; $i <= $showDaysInAdvance; $i++)
