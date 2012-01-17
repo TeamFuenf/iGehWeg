@@ -1,6 +1,7 @@
 <div id="window">
   <ul id="pages">
     <li>
+      
         <div class="userprofile">
           <img src="<? echo $user->picture; ?>"/>
           Hallo, <?php echo $user->name; ?>
@@ -9,6 +10,7 @@
         <?php echo $logoutlink; ?>
         
 		<div id="friend_info">
+		  <img id="circle_background" style="position:absolute;left:-9999px;" src="<?php echo site_url("images/back_test.png")?>"/>
 			  <?php 
                 $width = 640;
                 $height= 303; 
@@ -27,6 +29,11 @@
               <script>
               var canvas = document.getElementById("nearestfriendsCanvas").getContext("2d");
               
+              // Hintergrundbild laden
+              var imgObj = document.getElementById("circle_background");
+
+              canvas.globalCompositeOperation = "destination-under";
+
               // Kreis
               canvas.lineWidth = 3;
               canvas.strokeStyle = "#5A524B";
@@ -42,7 +49,7 @@
               canvas.arc(<? echo $width/2;?>, <? echo $height/2;?>, <? echo $radius3; ?>, 0, Math.PI*2, true);
               canvas.closePath();
               canvas.stroke();
-
+              
               // User zeichnen
               <?php              
               
@@ -57,21 +64,24 @@
                 {                  
                   echo "                                      
                     canvas.font = '15px Segoe, Arial';
-                    canvas.lineWidth = 5;
+                    canvas.lineWidth = 4;
                     canvas.strokeStyle = '#585049';
                     canvas.fillStyle = '#669933';
                     canvas.beginPath();
-                    canvas.arc(".($width/2 + $dx).", ".($height/2 + $dy).", 7, 0, Math.PI*2, true);
+                    canvas.arc(".($width/2 + $dx).", ".($height/2 + $dy).", 8, 0, Math.PI*2, true);
                     canvas.closePath();
                     canvas.stroke();
+                    var dx = ".($width/2 + $dx + 10).";
+                    var dy = ".($height/2 + $dy - 10).";
                     canvas.fill();
-                    canvas.fillRect(".($width/2 + $dx + 9).", ".($height/2 + $dy + 3).", 150, 20);                              
-                    canvas.fillStyle = '#585049';
-                    canvas.fillText('".$first_name[0].": ".$dist."m', ".($width/2 + $dx + 10).", ".($height/2 + $dy + 15).");
+                    canvas.drawImage(imgObj, dx, dy+20, 100, 20, dx, dy, 100, 20);
+                    canvas.fillStyle = '#666666';
+                    canvas.fillText('".$first_name[0].": ".$dist."m', dx+5, dy+15);
                   ";
+//                canvas.fillRect(".($width/2 + $dx + 9).", ".($height/2 + $dy + 3).", 150, 20);                              
                   $usedcoords[$dx][$dy] = $friend->name;
                 }
-              }            
+              }
               ?>              
 
               // Mittelpunkt
