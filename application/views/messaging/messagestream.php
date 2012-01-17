@@ -134,3 +134,9 @@ foreach($messages as $message)
     </li>
   </ul>
 </div>
+
+<script>
+  $(function() {
+    $("#window").scrollTop($("#messagecompose").offset().top);
+  });
+</script>
