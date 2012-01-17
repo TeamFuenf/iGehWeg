@@ -43,6 +43,11 @@ $route['404_override'] = '';
 
 // Hauptseiten
 $route["default_controller"] = "base/login_control";
+$route["login/twitter"] = "base/login_control/twitterlogin";
+$route["login/twitter/success"] = "base/login_control/twitterlogin/success";
+$route["login/google"] = "base/login_control/googlelogin";
+
+// Friends
 $route["friends"] = "friends/friends_control";
 
 // Map

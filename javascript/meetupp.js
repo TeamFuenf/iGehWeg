@@ -70,7 +70,7 @@ $(document).ready(function() {
   /**
    * Nachricht senden und an die Nachrichtenleiste anhängen
    */
-  $("#sendmessage").on("click", function() {
+  $("#sendmessage").on("touchstart click", function() {
     var receiver = $("#receiver").val();
     var messagebody = $("#messagebox").val();
     
@@ -100,7 +100,7 @@ $(document).ready(function() {
   /**
    * Sendet eine Nachricht vom Posteingang aus
    */
-  $("#sendmessage_inbox").on("click", function() {
+  $("#sendmessage_inbox").on("touchstart click", function() {
     var receiver = $("#receiver").val();
     var messagebody = $("#messagebox").val();
     
@@ -118,7 +118,7 @@ $(document).ready(function() {
     });
   });
 
-  $(".deleteicon b").on("click", function(e) {
+  $(".deleteicon b").on("touchstart click", function(e) {
     e.preventDefault();
     
     var row = $(this).parents("tr");
@@ -143,7 +143,7 @@ $(document).ready(function()
   /**
    * Location updaten
    */
-  $("#eventlocations li").on("click", function()
+  $("#eventlocations li").on("touchstart click", function()
   {
     var eventid = $("#eventid").attr("eventid");
     var locationid = $(this).attr("locationid");
@@ -163,7 +163,7 @@ $(document).ready(function()
   /**
    * Teilnehmerstatus updaten
    */
-  $("#eventmembers button").on("click", function()
+  $("#eventmembers button").on("touchstart click", function()
   {   
     var eventid = $("#eventid").attr("eventid");
     var memberid = $(this).attr("memberid");    
@@ -189,13 +189,13 @@ $(document).ready(function()
     });
   });
 
-  $("#eventbutton_members_prev").on("click", function()
+  $("#eventbutton_members_prev").on("touchstart click", function()
   {   
     pagePrev();
     $("#window").scrollTop($("ul #eventlocations > li.selected").offset().top - 100);
   });
   
-  $("#eventbutton_location_prev").on("click", function()
+  $("#eventbutton_location_prev").on("touchstart click", function()
   {   
     pagePrev();
     $("#window").scrollTop(0);
@@ -204,7 +204,7 @@ $(document).ready(function()
   /**
    * Basisdaten updaten
    */
-  $("#eventbutton_basedata_next").on("click", function()
+  $("#eventbutton_basedata_next").on("touchstart click", function()
   {   
     var eventid = $("#eventid").attr("eventid");
     var title = $("#eventname").val();
@@ -255,7 +255,7 @@ $(document).ready(function()
   /**
    * An Event teilnehmen
    */
-  $(".acceptevent").on("click", function()
+  $(".acceptevent").on("touchstart click", function()
   {
     var item = $(this).parent("li").removeClass("invited");    
     console.log(item);
@@ -283,7 +283,7 @@ $(document).ready(function()
   /**
    * Event absagen
    */
-  $(".declineevent").on("click", function()
+  $(".declineevent").on("touchstart click", function()
   {
     var eventid = $(this).attr("eventid");
     var memberid = $("div#userid").attr("userid");

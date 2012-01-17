@@ -109,7 +109,7 @@
     color:#ddd;
   }
   
-  button#button-location-add
+  button#button-location-new
   {
     position:absolute;
     top:10px;
@@ -242,7 +242,7 @@ function initMap()
     "default" : new OpenLayers.Style({
       pointRadius: "${radius}",
       fillOpacity: 0.5,
-      externalGraphic: "<?php echo base_url()."images/marker_star.png"; ?>"
+      externalGraphic: "<?php echo base_url()."images/marker_location.png"; ?>"
     }, {
       context: {
         radius: function(feature) {
@@ -254,16 +254,17 @@ function initMap()
         }
       }
     }),
-    "selected" : new OpenLayers.Style({
+    "select" : new OpenLayers.Style({
+      fillOpacity: 1,
       pointRadius: "25"
     })
   });
-  
+
   var eventsStyle = new OpenLayers.StyleMap({
     "default" : new OpenLayers.Style({
       pointRadius: "${radius}",
       fillOpacity: 0.5,
-      externalGraphic: "<?php echo base_url()."images/marker_clock.png"; ?>"
+      externalGraphic: "<?php echo base_url()."images/marker_event.png"; ?>"
     }, {
       context: {
         radius: function(feature) {
@@ -275,12 +276,38 @@ function initMap()
         }
       }
     }),
-    "selected" : new OpenLayers.Style({
+    "select" : new OpenLayers.Style({
       pointRadius: "25"
     })
   });
   
-  var friendsStyle = new OpenLayers.Style({
+    var friendsStyle = new OpenLayers.StyleMap({
+    "default" : new OpenLayers.Style({
+      pointRadius: "20",
+      fillOpacity: 0.5,
+      externalGraphic: "${image}"
+    }, {
+      context: {
+        image: function(feature) {
+          if (feature.cluster.length == 1)
+          {
+            var imgurl = feature.cluster[0].attributes.picture;
+          }
+          else
+          {
+            var imgurl = "<?php echo base_url()."images/marker_friends.png"; ?>";
+          }
+          return imgurl;
+        }
+      }
+    }),
+    "select" : new OpenLayers.Style({
+      fillOpacity: 1.0,
+      pointRadius: "25"
+    })
+  });
+  
+  var oldfriendsStyle = new OpenLayers.Style({
     pointRadius: "20",
     fillColor: "#ffcc66",
     externalGraphic: "${image}"
@@ -300,9 +327,10 @@ function initMap()
     }
   });
 
+
   var buslinienStyle = new OpenLayers.StyleMap({
     "default": new OpenLayers.Style({
-      pointRadius: "5",
+      pointRadius: "10",
       fillOpacity: "0.5",    
       fillColor: "${pointcolor}",
       strokeOpacity: "0.5",
@@ -449,7 +477,7 @@ function openLocationPopup(evt)
       {
         var locationName = feature.cluster[i].attributes.name;
         var locationId = feature.cluster[i].attributes.id;
-        buffer += "<a class='locdetailsid' locdetailsid='" + locationId + "'>" + locationName + "</a><br>";
+        buffer += "<li><img src='<?php echo site_url("images/marker_location.png"); ?>'><a class='locdetailsid' locdetailsid='" + locationId + "'>" + locationName + "</a></li>";
       }
       buffer += "</ul>";
     }
@@ -458,7 +486,7 @@ function openLocationPopup(evt)
   {
     var locationName = feature.cluster[0].attributes.name;
     var locationId = feature.cluster[0].attributes.id;
-    buffer += "<a class='locdetailsid' locdetailsid='" + locationId + "'>" + locationName + "</a><br>";
+    buffer += "<img src='<?php echo site_url("images/marker_location.png"); ?>'><a class='locdetailsid' locdetailsid='" + locationId + "'>" + locationName + "</a><br>";
   }
   
   $("#popup")
@@ -467,9 +495,9 @@ function openLocationPopup(evt)
 }
 
 
-$("body").on("click", "a.locdetailsid", function() {
+$("body").on("touchstart click", "a.locdetailsid", function() {
   var locationId = $(this).attr("locdetailsid");
-  $.post("<?php echo site_url("map/location"); ?>/" + locationId, function(data) {
+  $.post("<?php echo site_url("location"); ?>/" + locationId, function(data) {
     $("#locationdetails").html(data);
   });
   pageNext();
@@ -539,7 +567,7 @@ function openEventsPopup(evt)
         var eventId = feature.cluster[i].attributes.eventid;
         var eventTitle = feature.cluster[i].attributes.title;
         var eventLink = "<?php echo site_url("event"); ?>/" + eventId;
-        buffer += "<li><a href='" + eventLink + "'>" + eventTitle + "</a></li>";
+        buffer += "<li><img src='<?php echo site_url("images/marker_event.png"); ?>'><a href='" + eventLink + "'>" + eventTitle + "</a></li>";
       }
       buffer += "</ul>";
     }
@@ -549,7 +577,7 @@ function openEventsPopup(evt)
     var eventId = feature.cluster[0].attributes.eventid;
     var eventTitle = feature.cluster[0].attributes.title;
     var eventLink = "<?php echo site_url("event"); ?>/" + eventId;
-    buffer = "<li><a href='" + eventLink + "'>" + eventTitle + "</a></li>";
+    buffer = "<li><img src='<?php echo site_url("images/marker_event.png"); ?>'><a href='" + eventLink + "'>" + eventTitle + "</a></li>";
   }
 
   $("#popup")
@@ -577,26 +605,38 @@ function closePopup()
 
 // --- Layerswitcher -----------------------------------------------------------------
 
+var layervis = new Array();
+layervis["friends"] = <?php echo $layer["friends"]; ?>;
+layervis["events"] = <?php echo $layer["events"]; ?>;
+layervis["locations"] = <?php echo $layer["locations"]; ?>;
+layervis["buslinie1"] = <?php echo $layer["buslinie1"]; ?>;
+layervis["buslinie2"] = <?php echo $layer["buslinie2"]; ?>;
+layervis["buslinie5"] = <?php echo $layer["buslinie5"]; ?>;
+layervis["buslinie6"] = <?php echo $layer["buslinie6"]; ?>;
+layervis["buslinie7"] = <?php echo $layer["buslinie7"]; ?>;
+layervis["buslinie8"] = <?php echo $layer["buslinie8"]; ?>;
+layervis["buslinie9"] = <?php echo $layer["buslinie9"]; ?>;
+
 function layermenu()
 {
   var buffer = "";  
   buffer = "" +
   "Basislayer:" +
   "<ul>" +
-  "<li class='layer' layer='friends' show='<?php echo $layer["friends"]; ?>'>Freunde</li>" +
-  "<li class='layer' layer='events' show='<?php echo $layer["events"]; ?>'>Events</li>" +
-  "<li class='layer' layer='locations' show='<?php echo $layer["locations"]; ?>'>Locations</li>" +
+  "<li class='layer' layer='friends' show='" + layervis["friends"] + "'>Freunde</li>" +
+  "<li class='layer' layer='events' show='" + layervis["events"] + "'>Events</li>" +
+  "<li class='layer' layer='locations' show='" + layervis["locations"] + "'>Locations</li>" +
   "</ul>" +  
   "<hr/>" +
   "Buslinien:" +
   "<ul>" +
-  "<li class='layer' layer='buslinie1' show='<?php echo $layer["buslinie1"]; ?>'>Linie 1</li>" +
-  "<li class='layer' layer='buslinie2' show='<?php echo $layer["buslinie2"]; ?>'>Linie 2</li>" +
-  "<li class='layer' layer='buslinie5' show='<?php echo $layer["buslinie5"]; ?>'>Linie 5</li>" +  
-  "<li class='layer' layer='buslinie6' show='<?php echo $layer["buslinie6"]; ?>'>Linie 6</li>" +  
-  "<li class='layer' layer='buslinie7' show='<?php echo $layer["buslinie7"]; ?>'>Linie 7</li>" +  
-  "<li class='layer' layer='buslinie8' show='<?php echo $layer["buslinie8"]; ?>'>Linie 8</li>" +  
-  "<li class='layer' layer='buslinie9' show='<?php echo $layer["buslinie9"]; ?>'>Linie 9</li>" +  
+  "<li class='layer' layer='buslinie1' show='" + layervis["buslinie1"] + "'>Linie 1</li>" +
+  "<li class='layer' layer='buslinie2' show='" + layervis["buslinie2"] + "'>Linie 2</li>" +
+  "<li class='layer' layer='buslinie5' show='" + layervis["buslinie5"] + "'>Linie 5</li>" +  
+  "<li class='layer' layer='buslinie6' show='" + layervis["buslinie6"] + "'>Linie 6</li>" +  
+  "<li class='layer' layer='buslinie7' show='" + layervis["buslinie7"] + "'>Linie 7</li>" +  
+  "<li class='layer' layer='buslinie8' show='" + layervis["buslinie8"] + "'>Linie 8</li>" +  
+  "<li class='layer' layer='buslinie9' show='" + layervis["buslinie9"] + "'>Linie 9</li>" +  
   "</ul>" +  
   "<hr/>" +
   "<a href='javascript:closePopup()'>close</a>";
@@ -606,7 +646,7 @@ function layermenu()
     .show();
 }
 
-$("body").on("click", "li.layer", function(event) {
+$("body").on("touchstart click", "li.layer", function(event) {
   var layername = $(this).attr("layer");
   var show = $(this).attr("show");
   
@@ -614,18 +654,21 @@ $("body").on("click", "li.layer", function(event) {
   {
     window[layername].setVisibility(false);
     $(this).attr("show", "false");
+    layervis[layername] = false;
     $.post("<?php echo site_url("/map/map/saveLayerVisibility");?>", {layer: layername, visibility: false});
   }
   else
   {
     window[layername].setVisibility(true);
     $(this).attr("show", "true");    
+    layervis[layername] = true;
     $.post("<?php echo site_url("/map/map/saveLayerVisibility");?>", {layer: layername, visibility: true});
   }
 });
 
-// --- Location -----------------------------------------------------------------------------------
-  
+// --- new Location -----------------------------------------------------------------------------------
+
+// Neue Location auf der Map markieren
 function addNewLocation()
 {
   locations.setVisibility(false);
@@ -638,7 +681,7 @@ function addNewLocation()
   clickControl.activate();
 }
 
-
+// hinzufügen abbrechen
 function cancel()
 {
   locations.setVisibility(true);
@@ -653,7 +696,7 @@ function cancel()
   closePopup();
 }
 
-
+// weiter zur Eingabe der Location Details
 function next()
 {
   var buffer = "";  
@@ -679,6 +722,7 @@ function next()
   .show();
 }
 
+// Speichere neue Location in der Datenbank
 function addLocation()
 {
   var newlocname = document.getElementById('newlocname').value;
@@ -704,11 +748,6 @@ function addLocation()
   }
   
 }
-
-
-
-
-
 </script>
 
 <div id='window'>
@@ -724,12 +763,10 @@ function addLocation()
       </div>
       <script>initMap();</script>
     </li>
-    <li>
-<!--  Locationdetails anzeigen      -->
+    <li><!--  Locationdetails anzeigen      -->
       <div id='locationdetails'></div>
     </li>
-        <li>
-<!--  Location bearbieten      -->
+    <li><!--  Location bearbieten      -->
       <div id='locationdetailsedit'></div>
     </li>
   </ul>

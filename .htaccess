@@ -1,3 +1,5 @@
+AddType text/cache-manifest .manifest
+
 RewriteEngine on
 RewriteCond $1 !^(index\.php|cache\.manifest|images|css|gpx|javascript|robots\.txt)
 RewriteRule ^(.*)$ /index.php/$1 [L]
