@@ -268,7 +268,7 @@ p#login_logo {
 	padding: 0px;
 }
 
-input[type=text], input[type=password] {
+input[type=text], input[type=password], textarea, .selection input {
 	background: none repeat scroll 0 0 transparent;
 	display: block;
 	margin: 5px 0px;
@@ -405,9 +405,227 @@ span.list_entry_events {
 	width: 40%;
 	display: inline-block;
 	padding: 25px 0px 25px 25px;
-/*	border: 1px solid black;*/
 }
 
+/* Show Events */  
+
+a.edit_event_button img{
+	width: 60px;
+	height: 60px;
+}
+
+div#event_basedata table {
+	font-size: 30px;
+	margin: 5px;
+}
+
+div#outlinks {
+/*	float: right;*/
+/*	margin: 10px;*/
+}
+
+div#outlinks a {
+	background-color: #5A524B;
+	border-radius: 5px;
+	display: inline-block;
+	margin: 20px 20px 20px 0px;
+	padding: 0px;
+}
+
+div#outlinks img {
+	width: 80px;
+	height: 80px;
+	margin: 0px;
+}
+
+#event_creator {
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+
+#event_creator img {
+	width: 60px;
+	height: 60px;
+	border-radius: 5px;
+}
+
+#event_creator li {
+	padding: 25px;
+}
+ 
+ 
+#event_members ul
+{
+  margin:0px;
+  padding:0px;
+  list-style-type:none;
+}
+ 
+.eventmember_info
+{
+	margin: 25px !important;
+	display: inline-block;
+}
+
+
+#event_members li.invited img
+{
+  opacity:0.3;
+}
+
+#event_members li.invited
+{
+  color:#ccc;
+}
+
+.userimage
+{
+  width:64px;
+  height:64px;
+  border-radius:10px;
+  vertical-align:middle;
+}
+
+.single_comment {
+/*	width: 100%;*/
+}
+
+.button_long .sender, .button_long .comment {
+	display: inline-block;
+}
+
+.button_long .sender {
+	margin: 25px;
+}
+
+.single_comment .sender img {
+/*	vertical-align: bottom; */
+}
+
+#event_comments ul
+{
+  margin:0px;
+  padding:0px;
+  list-style-type:none;
+}
+
+#event_comments ul li
+{
+  padding-bottom:10px;
+}
+
+/*#event_comments div.sender
+{
+  width:200px;
+  float: left;
+}*/
+
+#event_comments div.comment
+{
+/*  float:left;*/
+}
+
+#event_comments .comment button {
+	float: right;
+	margin-right: 10px;
+	display: block;
+}
+
+#event_comments textarea
+{
+  resize: none;
+  width: 625px;
+  height:150px;
+  margin: 10px 10px 0px 5px !important;
+}
+
+/* Event erstellen/editieren */
+
+div#button_wrap {
+	width: 640px;
+}
+
+#location_order_az {
+	float: right;
+	margin-right: 10px;
+}
+
+#location_order_distance {
+	float: right;
+	margin-right: 10px;
+}
+
+div#location_choose {
+	margin: 5px;
+}
+
+div.selection {
+	margin: 30px 5px 0px 5px;
+}
+
+div.selection select {
+	font-size: 50px;
+	font-weight: normal;
+	border: 1px solid #928875;
+	padding: 5px;
+	border-radius: 5px;
+}
+
+ul#eventlocations
+{
+  width:90%;
+  margin:0px auto;
+  padding:0px;
+  list-style-type:none;
+}
+
+#eventlocations li
+{
+  color:#999;
+  border-bottom:1px solid #ccc;
+  padding:10px;
+  font-size:1em;
+}
+
+#eventlocations li.selected
+{
+  color:#eee;
+  background-color:#669933;
+}
+
+#eventlocations li b
+{
+  font-size:1.5em;
+}
+
+table#eventmembers
+{
+  width:97%;
+  margin:0px auto;
+}
+  
+#eventmembers td:not(:first-child)
+{
+  padding:10px;
+  font-size:1em;
+}
+
+#eventmembers tr
+{
+  color:#999;
+  border-bottom:1px solid #ccc;
+  padding:10px;
+  font-size:1em;
+}
+
+#eventmembers img
+{
+  -moz-border-radius:10px;
+  border-radius:10px;
+  width:64px;
+  height:64px;
+}
 
 /* --- Timeline ------------------------------------------------------------------------------------------------------ */
 

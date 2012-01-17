@@ -255,7 +255,7 @@ $(document).ready(function()
   /**
    * An Event teilnehmen
    */
-  $("button.acceptevent").on("click", function()
+  $(".acceptevent").on("click", function()
   {
     var item = $(this).parent("li").removeClass("invited");    
     console.log(item);
@@ -283,11 +283,11 @@ $(document).ready(function()
   /**
    * Event absagen
    */
-  $("button.declineevent").on("click", function()
+  $(".declineevent").on("click", function()
   {
     var eventid = $(this).attr("eventid");
     var memberid = $("div#userid").attr("userid");
-    var tr = $(this).parents("tr");
+    var tr = $(this).parent("li");
     tr.fadeOut();
 
     $.post("../event/update/member", 

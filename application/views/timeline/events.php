@@ -24,7 +24,7 @@
 				}
 			
 			  echo "<li class='button_long ".$color_class."'>";
-              echo "<span class='friend_list_entry groups list_entry_events'>";
+              echo "<span class='friend_list_entry groups list_entry'>";
               echo "<img src='../../images/newevent_".$color_class.".png'/>";
               echo $event->title;
               echo "</span>";              

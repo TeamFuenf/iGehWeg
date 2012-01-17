@@ -16,8 +16,8 @@ $(document).ready(function()
         comment = comment.replace(/\n/g, '<br />');
         comment = comment.replace(/\r/g, '<br />');        
         $("ul#comments").append(
-          "<li>"+
-          "<div class=\"sender\"><?php echo "<img class='userimage' src='".$user->picture."'>".$user->name; ?></div>"+
+          "<li class='button_long green'>"+
+          "<div class=\"sender\"><?php echo "<img class='userimage' src='".$user->picture."'>".$user->name; ?>:</div>"+
           "<div class=\"comment\">" + comment + "</div>"+
           "<div style=\"clear:both\"></div>"+
           "</li>"
@@ -32,112 +32,6 @@ $(document).ready(function()
 </script>
 <style>
 
-@font-face
-{  
-  font-family: Segoe;  
-  src: url(../../css/segoeui.ttf) format("truetype");  
-}  
-@font-face
-{  
-  font-family: SegoeLight;  
-  src: url(../../css/segoeuil.ttf) format("truetype");  
-}  
-
-h1
-{
-  font-family: SegoeLight, verdana, helvetica, sans-serif;
-  color:#666;
-  font-size:40px;
-}
-
-h2
-{
-  font-family: SegoeLight, verdana, helvetica, sans-serif;
-  color:#666;
-  font-size:20px;
-}
-
-#event_mapsnippet iframe
-{
-  width:300px;
-  height:300px;
-  margin:0px;
-  padding:0px;
-}
-
-#event_members ul
-{
-  margin:0px;
-  padding:0px;
-  list-style-type:none;
-}
-
-#event_members li img,
-#event_creator img
-{
-  color:#666;
-  width:64px;
-  height:64px;
-  border-radius:10px;
-  -moz-border-radius:10px;
-  margin-right:25px;
-  vertical-align:middle; 
-}
- 
-#event_members li
-{
-  height:70px;
-  padding-bottom:10px;
-}
-
-#event_members li.invited img
-{
-  opacity:0.3;
-}
-
-#event_members li.invited
-{
-  color:#ccc;
-}
-
-.userimage
-{
-  width:64px;
-  height:64px;
-  border-radius:10px;
-  vertical-align:middle;
-}
-
-#event_comments ul
-{
-  margin:0px;
-  padding:0px;
-  list-style-type:none;
-}
-
-#event_comments ul li
-{
-  padding-bottom:10px;
-}
-
-#event_comments div.sender
-{
-  width:200px;
-  float:left;
-}
-
-#event_comments div.comment
-{
-  float:left;
-}
-
-#event_comments textarea
-{
-  resize: none;
-  width:350px;
-  height:150px;
-}
-
 </style>
 
 <div id="window">
@@ -145,22 +39,38 @@ h2
     <li>
       <div>
         
-        <?php
-          if ($event->creator == $user->id)
-          {
-            $linkAttributes["class"] = "button";
-            echo anchor("event/edit/".$event->id, "Event bearbeiten", $linkAttributes);
-          }
-        ?>
+        
         
         <div id="event_basedata">
-          <table border="0" width="90%">
+          <table width="70%">
             <tr>
               <td colspan="2">
-                <h1><?php echo $event->title; ?></h1>
-              </td>
-              <td width="200" height="200" rowspan="5">               
-                <?php 
+                <h1 id="event_header_123"><?php echo $event->title; ?></h1>
+                <?php
+          if ($event->creator == $user->id)
+          {
+            $linkAttributes["class"] = "edit_event_button";
+            echo anchor("event/edit/".$event->id, "<img src='../../images/edit.png'", $linkAttributes);
+          }
+        ?>
+              </td>              
+            <tr><td colspan="2"><h2>Details:</h2></td></tr>
+            <tr>
+              <td>Location:</td>
+              <td><?php echo $location->name; ?></td>
+            </tr>
+            <tr>
+              <td>von:</td>
+              <td><?php echo date("H:i j.n.Y", $event->begintime); ?></td>
+            </tr>
+            <tr>
+              <td valign="top">bis:</td>
+              <td valign="top"><?php echo date("H:i j.n.Y", $event->endtime); ?></td>
+            </tr>
+          </table>
+        </div>
+		<div id="outlinks" class="button_side">
+          	<?php 
                   $linkAtts["class"] = "external button";                 
                   $link = site_url("event/show/".$event->id);
                   $twittermsg = urlencode("Ich nehme an ".$event->title." teil: ".$link);
@@ -170,53 +80,42 @@ h2
                     "Von:".date("H:i:s", $event->begintime)."-".date("H:i:s", $event->endtime)."\n".
                     $link
                   );
-                  echo anchor("event/ical/".$event->id, "iCal Download", $linkAtts)."<br/><br/>";
-                  echo anchor("http://twitter.com/?status=".$twittermsg, "Twitter", $linkAtts)."<br/><br/>";
-                  echo mailto("?subject=".$event->title."&body=".$mailmsg, "E-Mail", $linkAtts)."<br/><br/>";
-                  echo anchor("event/show/".$event->id, "Öffentlicher Link", $linkAtts)."<br/><br/>";
+                  echo anchor("event/ical/".$event->id, "<img src='../../images/logos/ical.png' />", $linkAtts)."";
+                  echo anchor("http://twitter.com/?status=".$twittermsg, "<img src='../../images/logos/twitter.png' />", $linkAtts)."";
+                  echo mailto("?subject=".$event->title."&body=".$mailmsg, "<img src='../../images/logos/email.png' />", $linkAtts)."";
+                  echo anchor("event/show/".$event->id, "<img src='../../images/logos/link.png' />", $linkAtts)."";
                 ?>
-                <!--
-                <iframe src="../../map/snippet/10" width="250" height="250" frameborder="0">
-                </iframe>
-                -->
-              </td>              
-            <tr><td colspan="2"><h2>Details</h2></td></tr>
-            <tr>
-              <td>Location</td>
-              <td><?php echo $location->name; ?></td>
-            </tr>
-            <tr>
-              <td>Von</td>
-              <td><?php echo date("H:i j.n.Y", $event->begintime); ?></td>
-            </tr>
-            <tr>
-              <td>Bis</td>
-              <td><?php echo date("H:i j.n.Y", $event->endtime); ?></td>
-            </tr>
-          </table>
-        </div>
+          </div>
+        <h2 class="button_side">Veranstalter:</h2>
+        	<ul id="event_creator">
+        		<li class='button_long'><?php echo img($creator->picture).$creator->name; ?></li>
+        	</ul>
 
-        <h2>Veranstalter</h2>
-        <div id="event_creator">
-		    <?php echo img($creator->picture).$creator->name; ?>               	
-        </div>
-
-        <h2>Teilnehmer</h2>
+        <h2 class="button_side">Teilnehmer:</h2>
         <div id="userid" style="display:none;" userid="<?php echo $user->id ?>"></div>
         <div id="event_members">
           <ul>          
           <?php
+          $color_class = "";
+		  $count = 0;
+          
           foreach ($members as $member)
           {
+          	if($count % 2 == 0) {
+					$color_class = "green";
+				} else {
+					$color_class = "blue";
+				}
+			
             if ($member->status == "invited")
             {
-              echo "<li class='invited'>";
+              echo "<li class='invited button_long ".$color_class."'>";
             }
             else
             {
-              echo "<li>";            
+              echo "<li class='button_long ".$color_class."'>";            
             }
-            echo img($member->picture).$member->name;
+            echo "<span class='eventmember_info'>".img($member->picture).$member->name."</span>";
 
             // Teilnehmer in der Nähe ?
             // member lon/lat für Distanz ?
@@ -225,27 +124,38 @@ h2
   
             if ($member->id == $user->id && ($member->status == "invited"))
             {
-              echo "<button class='acceptevent' eventid='".$event->id."'>Teilnehmen</button>";
+              echo "<span class='acceptevent button_small' eventid='".$event->id."'><img src='../../images/accept_".$color_class.".png' /></span>";
             }
             echo "</li>";
+            $count++;
           }
           ?>
           </ul>
         </div>
         
         <div id="event_comments">
-        <h2>Kommentare</h2>
+        <h2 class="button_side">Kommentare:</h2>
           <ul id="comments">
             <?php
+            $color_class = "";
+			$count = 0;
+            
             foreach ($comments as $comment)
             {
+              if($count % 2 == 0) {
+					$color_class = "red";
+				} else {
+					$color_class = "blue";
+				}	
+				
               echo "
-              <li>
-                <div class=\"sender\"><img class='userimage' src='".$comment->picture."'/>".$comment->name."</div>
+              <li class='button_long ".$color_class."'>
+                <div class=\"sender\"><img class='userimage' src='".$comment->picture."'/>".$comment->name.":</div>
                 <div class=\"comment\">".nl2br($comment->comment)."</div>
                 <div style=\"clear:both\"></div>
               </li>              
-              ";              
+              ";       
+			  $count++;       
             }            
             ?>
           </ul>
@@ -253,11 +163,11 @@ h2
             <li>
               <div class="sender">
               <?php 
-                echo "<img class='userimage' src='".$user->picture."'>".$user->name;
+                // echo "<img class='userimage' src='".$user->picture."'>".$user->name;
               ?></div>
               <div class="comment">
-                <textarea></textarea><br/>
-                <button name="send_comment">absenden</button>
+                <textarea placeholder="Kommentar eingeben..."></textarea>
+                <button class="button_normal" name="send_comment">absenden</button>
               </div>
               <div style="clear:both"></div>              
             </li>

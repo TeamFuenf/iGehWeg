@@ -1,88 +1,3 @@
-<style>
-@font-face
-{  
-  font-family: Segoe;  
-  src: url(../../css/segoeui.ttf) format("truetype");  
-}  
-@font-face
-{  
-  font-family: SegoeLight;  
-  src: url(../../css/segoeuil.ttf) format("truetype");  
-}  
-
-h1
-{
-  padding:10px;
-  font-family: SegoeLight, verdana, helvetica, sans-serif;
-  color:#666;
-  font-size:40px;
-}
-
-h2
-{
-  padding:10px;
-  font-family: SegoeLight, verdana, helvetica, sans-serif;
-  color:#666;
-  font-size:20px;
-}
-
-ul#eventlocations
-{
-  width:90%;
-  margin:0px auto;
-  padding:0px;
-  list-style-type:none;
-}
-
-#eventlocations li
-{
-  color:#999;
-  border-bottom:1px solid #ccc;
-  padding:10px;
-  font-size:1em;
-}
-
-#eventlocations li.selected
-{
-  color:#eee;
-  background-color:#669933;
-}
-
-#eventlocations li b
-{
-  font-size:1.5em;
-}
-
-table#eventmembers
-{
-  width:97%;
-  margin:0px auto;
-}
-  
-#eventmembers td:not(:first-child)
-{
-  padding:10px;
-  font-size:1em;
-}
-
-#eventmembers tr
-{
-  color:#999;
-  border-bottom:1px solid #ccc;
-  padding:10px;
-  font-size:1em;
-}
-
-#eventmembers img
-{
-  -moz-border-radius:10px;
-  border-radius:10px;
-  width:64px;
-  height:64px;
-}
-
-</style>
-
 <span id="eventid" eventid="<?php echo $eventid; ?>"></span>
 <?php $time = time();?>
 
@@ -91,12 +6,11 @@ table#eventmembers
     
     <li>
       <div>
-        <h1>Event bearbeiten</h1>
+        <h1 class="button_side">Event bearbeiten:</h1>
 
         <style>
           .selection
           {
-            font-family: SegoeLight, verdana, helvetica, sans-serif;
             font-size:1.5em;
             color:#999;
             padding-bottom:25px;
@@ -112,7 +26,6 @@ table#eventmembers
           
           .selection select
           {
-            font-family: SegoeLight, verdana, helvetica, sans-serif;
             color:#999;
             margin:0px;
             padding:0px;
@@ -122,12 +35,8 @@ table#eventmembers
           
           .selection input
           {
-            font-family: SegoeLight, verdana, helvetica, sans-serif;
-            color:#999;
-            margin:0px;
-            padding:0px;
-            border:0px;
-            background-color:transparent;
+          	width: 80% !important;
+          	display: inline-block;
           }
           
           button.delete
@@ -145,7 +54,7 @@ table#eventmembers
 
         <div class='selection'>
         <b>Titel:</b>
-        <input id='eventname' placeholder="<gib einen Eventtitel ein>" name='eventname' value='<?php echo $event->title; ?>'/>
+        <input id='eventname' placeholder="Eventtitel..." name='eventname' value='<?php echo $event->title; ?>'/>
         </div>
 
         <?php        
@@ -161,7 +70,7 @@ table#eventmembers
           $to_year = date("Y", $event->endtime);          
         
           echo "<div class='selection'>";
-          echo "<b>Von:</b>";          
+          echo "<b>von:</b>";          
           echo "<select id='from_hour'>";
           for ($i=0; $i < 24; $i++) {
             ($i == $from_hour) ? printf("<option selected value='%d'>%1$02d</option>", $i) : printf("<option value='%d'>%1$02d</option>", $i);
@@ -200,7 +109,7 @@ table#eventmembers
           
 
           echo "<div class='selection'>";
-          echo "<b>Bis:</b>";
+          echo "<b>bis:</b>";
           echo "<select id='to_hour'>";
           for ($i=0; $i < 24; $i++)
           {
@@ -243,7 +152,7 @@ table#eventmembers
 -->
         <div id="checkresult" class="notice"></div>
         
-        <button class="button" id="eventbutton_basedata_next">weiter</button>
+        <button class="button_normal button_side" id="eventbutton_basedata_next">weiter</button>
         
         <?php 
           if (!isset($event->new))
@@ -257,15 +166,13 @@ table#eventmembers
     </li>
     
     <li>
-      <div>
-        <h2>Location</h2>
-        <button class="button" id="eventbutton_location_prev">zurück</button>
-        <hr/>
+      <div id="location_choose">
+        <h1>Location:</h1>
         
         <script>
           $(function() {
           
-            $("#location_order_az").on("click", function() {
+            $("#location_order_az").on("touchstart click", function() {
               var list = $("ul#eventlocations");
               var listLi = $("li", list);
               listLi.sort(function(a, b)
@@ -281,7 +188,7 @@ table#eventmembers
               });
             });
 
-            $("#location_order_distance").on("click", function() {
+            $("#location_order_distance").on("touchstart click", function() {
               var list = $("ul#eventlocations");
               var listLi = $("li", list);
               listLi.sort(function(a, b)
@@ -298,8 +205,13 @@ table#eventmembers
           
           });
         </script>
-        <button id="location_order_az">Alphabetisch</button>
-        <button id="location_order_distance">nach Entfernung</button>
+        
+        <div id="button_wrap">
+	        <span class="button_normal" id="location_order_az">a-z</span>
+	        <span class="button_normal" id="location_order_distance">Distanz</span>
+	        
+	        <span class="button_normal" id="eventbutton_location_prev">zurück</span>
+        </div>
         <hr/>
             
         <ul id="eventlocations">            
