@@ -249,10 +249,23 @@ class Event_model extends CI_Model
     
     if ($status != "none")
     {
+      $this->db->where("eventid", $eventid);
+      $this->db->where("memberid", $memberid);
+      $query = $this->db->get("event_member");
+            
       $data["eventid"] = $eventid;
       $data["memberid"] = $memberid;
       $data["status"] = $status;
-      $this->db->insert("event_member", $data);      
+      if ($query->num_rows() > 0)
+      {
+        $this->db->where("eventid", $eventid);
+        $this->db->where("memberid", $memberid);
+        $this->db->update("event_member", $data);              
+      }
+      else
+      {
+        $this->db->insert("event_member", $data);              
+      }
     }
     
     if ($status == "invited")
@@ -291,7 +304,7 @@ class Event_model extends CI_Model
   public function checkPlausibility($from, $to)
   {
     $userid = $this->session->userdata("userid");
-    
+
     // Sind die Zeitpunkte in der richtigen Reihenfolge ?
     if ($to < $from)
     {
