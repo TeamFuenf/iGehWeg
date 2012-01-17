@@ -326,24 +326,9 @@ function initMap()
 
 // --- Layers -----------------------------------------------------------------
     
-  locations = new OpenLayers.Layer.Vector("Locations", {
-    visibility: <? echo $layer["locations"];?>,
-    strategies: [locationsStrategy],
-    styleMap: locationStyle
-  });
-  
-  friends = new OpenLayers.Layer.Vector("Friends", {
-    visibility: <? echo $layer["friends"];?>,
-    strategies: [friendsStrategy],
-    styleMap: friendsStyle
-  });
-
-  events = new OpenLayers.Layer.Vector("Events", {
-    visibility: <? echo $layer["events"];?>,
-    strategies: [eventsStrategy],
-    styleMap: eventsStyle
-  });
-  
+  locations = new OpenLayers.Layer.Vector("Locations", { visibility: <? echo $layer["locations"];?>, strategies: [locationsStrategy], styleMap: locationStyle });
+  friends = new OpenLayers.Layer.Vector("Friends", { visibility: <? echo $layer["friends"];?>, strategies: [friendsStrategy], styleMap: friendsStyle });
+  events = new OpenLayers.Layer.Vector("Events", { visibility: <? echo $layer["events"];?>, strategies: [eventsStrategy], styleMap: eventsStyle });  
   buslinie1 = new OpenLayers.Layer.Vector("Linie 1", { visibility: <?php echo $layer["buslinie1"]; ?>, strategies: [buslinesStrategy], styleMap: buslinienStyle });
   buslinie2 = new OpenLayers.Layer.Vector("Linie 2", { visibility: <?php echo $layer["buslinie2"]; ?>, strategies: [buslinesStrategy], styleMap: buslinienStyle });
   buslinie5 = new OpenLayers.Layer.Vector("Linie 5", { visibility: <?php echo $layer["buslinie5"]; ?>, strategies: [buslinesStrategy], styleMap: buslinienStyle });
@@ -351,75 +336,37 @@ function initMap()
   buslinie7 = new OpenLayers.Layer.Vector("Linie 7", { visibility: <?php echo $layer["buslinie7"]; ?>, strategies: [buslinesStrategy], styleMap: buslinienStyle });
   buslinie8 = new OpenLayers.Layer.Vector("Linie 8", { visibility: <?php echo $layer["buslinie8"]; ?>, strategies: [buslinesStrategy], styleMap: buslinienStyle });
   buslinie9 = new OpenLayers.Layer.Vector("Linie 9", { visibility: <?php echo $layer["buslinie9"]; ?>, strategies: [buslinesStrategy], styleMap: buslinienStyle });
-  
-  newlocation = new OpenLayers.Layer.Vector("newLocation", {
-    visibility: false,
-    styleMap: locationStyle
-  });   
+  newlocation = new OpenLayers.Layer.Vector("newLocation", { visibility: false, styleMap: locationStyle });   
 
-  map.addLayer(buslinie1);
-  map.addLayer(buslinie2);
-  map.addLayer(buslinie5);
-  map.addLayer(buslinie6);
-  map.addLayer(buslinie7);
-  map.addLayer(buslinie8);
-  map.addLayer(buslinie9);  
-  map.addLayer(friends);
-  map.addLayer(locations);
-  map.addLayer(events);
-  map.addLayer(newlocation);
+  map.addLayers([buslinie1, buslinie2, buslinie5, buslinie6, buslinie7, buslinie8, buslinie9, friends, locations, events, newlocation]);
 
   selectControl = new OpenLayers.Control.SelectFeature(
-    [
-      friends, 
-      locations, 
-      newlocation, 
-      events,
-      buslinie1,
-      buslinie2,
-      buslinie5,
-      buslinie6,
-      buslinie7,
-      buslinie8,
-      buslinie9
-    ], { clickout: true, toggle: false, multiple: false, hover: false}
+    [friends, locations, newlocation, events, buslinie1, buslinie2, buslinie5, buslinie6, buslinie7, buslinie8, buslinie9], 
+    { clickout: true, toggle: false, multiple: false, hover: false}
   );
   
   map.addControl(selectControl);
   selectControl.activate();
   
   clickControl = new OpenLayers.Control.Click();
-  map.addControl(clickControl);
   clickControl.deactivate();
-  
-        
+  map.addControl(clickControl);
+          
 // --- Eventhandlers ----------------------------------------------------------
   
   locations.events.on({
-    "featureselected": function(evt) {
-      openLocationPopup(evt);
-    },
-    "featureunselected": function(evt) {
-      closePopup();
-    }
+    "featureselected": function(evt) { openLocationPopup(evt); },
+    "featureunselected": function(evt) { closePopup(); }
   });          
 
   friends.events.on({
-    "featureselected": function(evt) {
-      openFriendsPopup(evt);
-    },
-    "featureunselected": function(evt) {
-      closePopup();
-    }
+    "featureselected": function(evt) { openFriendsPopup(evt); },
+    "featureunselected": function(evt) { closePopup(); }
   });          
 
   events.events.on({
-    "featureselected": function(evt) {
-      openEventsPopup(evt);
-    },
-    "featureunselected": function(evt) {
-      closePopup();
-    }
+    "featureselected": function(evt) { openEventsPopup(evt); },
+    "featureunselected": function(evt) { closePopup(); }
   });  
   
   buslinie1.events.on({"featureselected": function(evt) { openBuslinienPopup(evt); }, "featureunselected": function(evt) { closePopup(); }});
@@ -646,10 +593,10 @@ function layermenu()
   "<li class='layer' layer='buslinie1' show='<?php echo $layer["buslinie1"]; ?>'>Linie 1</li>" +
   "<li class='layer' layer='buslinie2' show='<?php echo $layer["buslinie2"]; ?>'>Linie 2</li>" +
   "<li class='layer' layer='buslinie5' show='<?php echo $layer["buslinie5"]; ?>'>Linie 5</li>" +  
-  "<li class='layer' layer='buslinie5' show='<?php echo $layer["buslinie6"]; ?>'>Linie 6</li>" +  
-  "<li class='layer' layer='buslinie5' show='<?php echo $layer["buslinie7"]; ?>'>Linie 7</li>" +  
-  "<li class='layer' layer='buslinie5' show='<?php echo $layer["buslinie8"]; ?>'>Linie 8</li>" +  
-  "<li class='layer' layer='buslinie5' show='<?php echo $layer["buslinie9"]; ?>'>Linie 9</li>" +  
+  "<li class='layer' layer='buslinie6' show='<?php echo $layer["buslinie6"]; ?>'>Linie 6</li>" +  
+  "<li class='layer' layer='buslinie7' show='<?php echo $layer["buslinie7"]; ?>'>Linie 7</li>" +  
+  "<li class='layer' layer='buslinie8' show='<?php echo $layer["buslinie8"]; ?>'>Linie 8</li>" +  
+  "<li class='layer' layer='buslinie9' show='<?php echo $layer["buslinie9"]; ?>'>Linie 9</li>" +  
   "</ul>" +  
   "<hr/>" +
   "<a href='javascript:closePopup()'>close</a>";

@@ -124,6 +124,7 @@ class Event extends CI_Controller
       {
         $this->Event_model->setStatus($eventid, $memberid, $status);
       }
+
       echo $result;
   }
   
@@ -145,8 +146,18 @@ class Event extends CI_Controller
     
     $from = mktime($from_hour, $from_minute, 0, $from_month, $from_day, $from_year);
     $to = mktime($to_hour, $to_minute, 0, $to_month, $to_day, $to_year);
-  
-    $result = $this->Event_model->checkPlausibility($from, $to);  
+
+    $this->db->where("id", $eventid);
+    $query = $this->db->get("event");
+    if ($query->num_rows() == 0)
+    {
+      $result = $this->Event_model->checkPlausibility($from, $to);      
+    }
+    else
+    {
+      $result = "okay";
+    }
+    
     if ($result == "okay")
     {
       $this->Event_model->setBasedata($eventid, $title, $from, $to);      

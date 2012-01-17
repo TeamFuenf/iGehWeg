@@ -257,12 +257,16 @@ $(document).ready(function()
    */
   $("button.acceptevent").on("click", function()
   {
+    var item = $(this).parent("li").removeClass("invited");    
+    console.log(item);
+    
     var eventid = $(this).attr("eventid");
     var memberid = $("div#userid").attr("userid");
     var button_accept = $(this);
     var button_decline = $(this).siblings("button.declineevent");
-    //button_accept.remove();
-    //button_decline.html("nicht mehr teilnehmen");
+    
+    button_accept.remove();
+    button_decline.html("nicht mehr teilnehmen");
 
     $.post("../event/update/member", 
     {

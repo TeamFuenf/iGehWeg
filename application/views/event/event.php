@@ -305,8 +305,8 @@ table#eventmembers
         <ul id="eventlocations">            
         <?php
           foreach ($locations as $location)
-          {            
-            if ($location->id == $event->location)
+          {
+            if ($location->id === $event->location)
             {
               $selectedModifier = "class='selected'";
             }
