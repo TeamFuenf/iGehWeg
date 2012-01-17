@@ -1,137 +1,3 @@
-<style>
-  div.olControlAttribution
-  {
-    display:none;
-  }
-
-  .olControlScaleLine
-  {
-    width:100px;
-    position:relative;
-    bottom:0px;
-    left:540px;
-    padding: 4px;
-  }
-
-  div.olControlScaleLineTop
-  {
-    color:#000;
-    font-size:20px;
-  }
-
-  div.olControlScaleLineBottom
-  {
-    display:none;
-  }
-      
-  div.olMapViewport
-  {
-    z-index: 0;
-  }
-  
-  div#map
-  {
-    width:640px;
-  }
-  
-  div#popup
-  {
-    display:none;
-    width:540px;
-    background-color:#fff;
-    position:absolute;
-    left:50px;
-    top:50px;
-    z-index:999;
-    border-radius:5px;
-    padding:0px;
-    margin:0px;
-    overflow:hidden;
-  
-    -webkit-box-shadow: 25px 5px 300px 5px rgba(0, 0, 0, 0.5);
-    -moz-box-shadow: 25px 5px 300px 5px rgba(0, 0, 0, 0.5);
-    box-shadow: 25px 5px 300px 5px rgba(0, 0, 0, 0.5); 
-  }
-  
-  div#popup p
-  {
-    padding:10px;
-  }
-  
-  div#popup ul
-  {
-    margin:0px;
-    padding:0px;
-    list-style-type:none;
-  }
-  
-  div#popup input
-  {
-    width:40px;
-    height:40px;
-  }
-  
-  div#popup li
-  {
-    padding:20px;
-  }
-  
-  div#popup li:not(:last-child)
-  {
-    border-bottom:1px solid #999;
-  }
-  
-  div#popup a
-  {
-    text-decoration:none;
-    color:#999;
-  }
-  
-  div#popup li img
-  {
-    padding-right:20px;
-    vertical-align:middle;
-  }
-
-  div#popup li.layer
-  {
-    padding:5px;
-    border:0px;
-  }
-
-  div#popup li.layer[show=true]
-  {
-    color:#666;
-  }
-
-  div#popup li.layer[show=false]
-  {
-    color:#ddd;
-  }
-  
-  button#button-location-new
-  {
-    position:absolute;
-    top:10px;
-    left:10px;
-    z-index:990;
-  }
-  
-  button#button-location-new-cancel, button#button-location-new-next, div#popupErrorMsg
-  {
-    display:none;
-  }
-
-  button#layerswitcher
-  {
-    position:absolute;
-    top:650px;
-    left:10px;
-    z-index:990;
-  }
-  
-</style>
-
 <script>
   
 var map, selectControl, clickControl;
@@ -489,13 +355,12 @@ function openLocationPopup(evt)
     buffer += "<img src='<?php echo site_url("images/marker_location.png"); ?>'><a class='locdetailsid' locdetailsid='" + locationId + "'>" + locationName + "</a><br>";
   }
   
-  $("#popup")
-    .html(buffer)
-    .show();
+  $("#popup").find("#content").html(buffer);
+  $("#popup").show();
 }
 
 
-$("body").on("click", "a.locdetailsid", function() {
+$("body").on("touchstart", "a.locdetailsid", function() {
   var locationId = $(this).attr("locdetailsid");
   $.post("<?php echo site_url("location"); ?>/" + locationId, function(data) {
     $("#locationdetails").html(data);
@@ -542,9 +407,8 @@ function openFriendsPopup(evt)
     buffer = "<ul><li><a href='" + link + "'><img width='64px' height='64px' style='border-radius:10px' src='" + friendPicture + "'/>" + friendName+"</a></li></ul>";
   }
 
-  $("#popup")
-    .html(buffer)
-    .show();
+  $("#popup").find("#content").html(buffer);
+  $("#popup").show();
 }
 
 function openEventsPopup(evt)
@@ -580,9 +444,8 @@ function openEventsPopup(evt)
     buffer = "<li><img src='<?php echo site_url("images/marker_event.png"); ?>'><a href='" + eventLink + "'>" + eventTitle + "</a></li>";
   }
 
-  $("#popup")
-    .html(buffer)
-    .show();
+  $("#popup").find("#content").html(buffer);
+  $("#popup").show();
 }
 
 function openBuslinienPopup(evt)
@@ -593,14 +456,14 @@ function openBuslinienPopup(evt)
 
   var buffer = "<p>Bushaltestelle:<br> " + linie + "&nbsp;<span style='color:" + color + "'>&#9679;</span><br><b>" + name + "</b></p>";
 
-  $("#popup")
-    .html(buffer)
-    .show();
+  $("#popup").find("#content").html(buffer);
+  $("#popup").show();
 }
 
 function closePopup()
 {
   $("#popup").hide();
+  $("#popup").find("#popup_close_button").show();
 }
 
 // --- Layerswitcher -----------------------------------------------------------------
@@ -621,15 +484,14 @@ function layermenu()
 {
   var buffer = "";  
   buffer = "" +
-  "Basislayer:" +
-  "<ul>" +
+  "<h1>Basismarker:</h1>" +
+  "<ul class='popup_liste'>" +
   "<li class='layer' layer='friends' show='" + layervis["friends"] + "'>Freunde</li>" +
   "<li class='layer' layer='events' show='" + layervis["events"] + "'>Events</li>" +
   "<li class='layer' layer='locations' show='" + layervis["locations"] + "'>Locations</li>" +
-  "</ul>" +  
-  "<hr/>" +
-  "Buslinien:" +
-  "<ul>" +
+  "</ul>" + 
+  "<h1 style='clear: both;'>Buslinien:</h1>" +
+  "<ul class='popup_liste'>" +
   "<li class='layer' layer='buslinie1' show='" + layervis["buslinie1"] + "'>Linie 1</li>" +
   "<li class='layer' layer='buslinie2' show='" + layervis["buslinie2"] + "'>Linie 2</li>" +
   "<li class='layer' layer='buslinie5' show='" + layervis["buslinie5"] + "'>Linie 5</li>" +  
@@ -637,16 +499,14 @@ function layermenu()
   "<li class='layer' layer='buslinie7' show='" + layervis["buslinie7"] + "'>Linie 7</li>" +  
   "<li class='layer' layer='buslinie8' show='" + layervis["buslinie8"] + "'>Linie 8</li>" +  
   "<li class='layer' layer='buslinie9' show='" + layervis["buslinie9"] + "'>Linie 9</li>" +  
-  "</ul>" +  
-  "<hr/>" +
-  "<a href='javascript:closePopup()'>close</a>";
+  "</ul>" +
+  "<span style='clear: both;' />";
 
-  $("#popup")
-    .html(buffer)
-    .show();
+  $("#popup").find("#content").html(buffer);
+  $("#popup").show();
 }
 
-$("body").on("click", "li.layer", function(event) {
+$("body").on("touchstart", "li.layer", function(event) {
   var layername = $(this).attr("layer");
   var show = $(this).attr("show");
   
@@ -701,25 +561,25 @@ function next()
 {
   var buffer = "";  
   buffer = "" +
-  "<button id='button-location-add-back' class='buttons-location-add' type='button' onclick='closePopup()'>Zurück</button>" +
-  "<button id='button-location-add-cancel' class='buttons-location-add' type='button' onclick='cancel()'>Abbrechen</button>" +
-  "<button id='button-location-add-save' class='buttons-location-add' type='button' onclick='addLocation()'>Fertig</button>" +
-  "<br/>" +
+  "<span class='button_map' id='button-location-add-back' class='buttons-location-add' type='button' onclick='closePopup()'>Zurück</span>" +
+  "<span class='button_map' id='button-location-add-cancel' class='buttons-location-add' type='button' onclick='cancel()'>Abbrechen</span>" +
+  "<span class='button_map' id='button-location-add-save' class='buttons-location-add' type='button' onclick='addLocation()'>Fertig</span>" +
+  "<br/><br/>" +
   "Daten der neuen Location:<br/>" +
-  "<input type='text' name='newlocname' id='newlocname' placeholder='Name'><br/>" + 
-  "<input type='text' name='newlocstreet' id='newlocstreet' placeholder='Straße'><br/>" +
-  "<input type='text' name='newloccity' id='newloccity' placeholder='Stadt'><br/>" +
-  "<input type='text' name='newloctype' id='newloctype' placeholder='Typ'><br/>" +
-  "<input type='url' name='newlocinternet' id='newlocinternet' placeholder='Homepage'><br/>" +
-  "<input type='email' name='newlocemail' id='newlocemail' placeholder='E-Mailadresse'><br/>" +
+  "<input type='text' name='newlocname' id='newlocname' placeholder='Name'>" + 
+  "<input type='text' name='newlocstreet' id='newlocstreet' placeholder='Straße'>" +
+  "<input type='text' name='newloccity' id='newloccity' placeholder='Stadt'>" +
+  "<input type='text' name='newloctype' id='newloctype' placeholder='Typ'>" +
+  "<input type='text' name='newlocinternet' id='newlocinternet' placeholder='Homepage'>" +
+  "<input type='text' name='newlocemail' id='newlocemail' placeholder='E-Mailadresse'>" +
   "<div id='popupErrorMsg'>Bitte mindestens den Namen angeben.</div>";
   
   $(".buttons-location-new")
   .hide();
   
-  $("#popup")
-  .html(buffer)
-  .show();
+  $("#popup").find("#content").html(buffer);
+  $("#popup").find("#popup_close_button").hide();
+  $("#popup").show();
 }
 
 // Speichere neue Location in der Datenbank
@@ -745,6 +605,7 @@ function addLocation()
         lon: newlocationlonlat.lon,
         lat: newlocationlonlat.lat
     });
+    window.location.href = "<?php echo site_url('map'); ?>";
   }
   
 }
@@ -753,13 +614,16 @@ function addLocation()
 <div id='window'>
   <ul id='pages'>
     <li>
-      <div id='popup'>Popup</div>
+      <div id='popup'>
+      	<div id="content"></div>
+      	<span onClick='closePopup()' id='popup_close_button'>schließen</span>
+      </div>
       
       <div id='map'>
-        <button id='layerswitcher' type='button' onclick='layermenu()'>Layer</button>
-        <button id='button-location-new' class='buttons-location-new' type='button' onclick='addNewLocation()'>+ Location</button>
-        <button id='button-location-new-cancel' class='buttons-location-new' type='button' onclick='cancel()'>Abbrechen</button>
-        <button id='button-location-new-next' class='buttons-location-new' type='button' onclick='next()'>Weiter</button>
+        <span class="button_map" id='layerswitcher' type='button' onclick='layermenu()'>Optionen</span>
+        <span class="button_map" id='button-location-new' class='buttons-location-new' type='button' onclick='addNewLocation()'>+ Location</span>
+        <span class="button_map" id='button-location-new-cancel' class='buttons-location-new' type='button' onclick='cancel()'>Abbrechen</span>
+        <span class="button_map" id='button-location-new-next' class='buttons-location-new' type='button' onclick='next()'>Weiter</span>
       </div>
       <script>initMap();</script>
     </li>
