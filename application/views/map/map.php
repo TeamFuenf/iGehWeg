@@ -467,7 +467,7 @@ function openLocationPopup(evt)
 }
 
 
-$("body").on("click", "a.locdetailsid", function() {
+$("body").on("touchstart click", "a.locdetailsid", function() {
   var locationId = $(this).attr("locdetailsid");
   $.post("<?php echo site_url("map/location"); ?>/" + locationId, function(data) {
     $("#locationdetails").html(data);
@@ -577,26 +577,38 @@ function closePopup()
 
 // --- Layerswitcher -----------------------------------------------------------------
 
+var layervis = new Array();
+layervis["friends"] = <?php echo $layer["friends"]; ?>;
+layervis["events"] = <?php echo $layer["events"]; ?>;
+layervis["locations"] = <?php echo $layer["locations"]; ?>;
+layervis["buslinie1"] = <?php echo $layer["buslinie1"]; ?>;
+layervis["buslinie2"] = <?php echo $layer["buslinie2"]; ?>;
+layervis["buslinie5"] = <?php echo $layer["buslinie5"]; ?>;
+layervis["buslinie6"] = <?php echo $layer["buslinie6"]; ?>;
+layervis["buslinie7"] = <?php echo $layer["buslinie7"]; ?>;
+layervis["buslinie8"] = <?php echo $layer["buslinie8"]; ?>;
+layervis["buslinie9"] = <?php echo $layer["buslinie9"]; ?>;
+
 function layermenu()
 {
   var buffer = "";  
   buffer = "" +
   "Basislayer:" +
   "<ul>" +
-  "<li class='layer' layer='friends' show='<?php echo $layer["friends"]; ?>'>Freunde</li>" +
-  "<li class='layer' layer='events' show='<?php echo $layer["events"]; ?>'>Events</li>" +
-  "<li class='layer' layer='locations' show='<?php echo $layer["locations"]; ?>'>Locations</li>" +
+  "<li class='layer' layer='friends' show='" + layervis["friends"] + "'>Freunde</li>" +
+  "<li class='layer' layer='events' show='" + layervis["events"] + "'>Events</li>" +
+  "<li class='layer' layer='locations' show='" + layervis["locations"] + "'>Locations</li>" +
   "</ul>" +  
   "<hr/>" +
   "Buslinien:" +
   "<ul>" +
-  "<li class='layer' layer='buslinie1' show='<?php echo $layer["buslinie1"]; ?>'>Linie 1</li>" +
-  "<li class='layer' layer='buslinie2' show='<?php echo $layer["buslinie2"]; ?>'>Linie 2</li>" +
-  "<li class='layer' layer='buslinie5' show='<?php echo $layer["buslinie5"]; ?>'>Linie 5</li>" +  
-  "<li class='layer' layer='buslinie6' show='<?php echo $layer["buslinie6"]; ?>'>Linie 6</li>" +  
-  "<li class='layer' layer='buslinie7' show='<?php echo $layer["buslinie7"]; ?>'>Linie 7</li>" +  
-  "<li class='layer' layer='buslinie8' show='<?php echo $layer["buslinie8"]; ?>'>Linie 8</li>" +  
-  "<li class='layer' layer='buslinie9' show='<?php echo $layer["buslinie9"]; ?>'>Linie 9</li>" +  
+  "<li class='layer' layer='buslinie1' show='" + layervis["buslinie1"] + "'>Linie 1</li>" +
+  "<li class='layer' layer='buslinie2' show='" + layervis["buslinie2"] + "'>Linie 2</li>" +
+  "<li class='layer' layer='buslinie5' show='" + layervis["buslinie5"] + "'>Linie 5</li>" +  
+  "<li class='layer' layer='buslinie6' show='" + layervis["buslinie6"] + "'>Linie 6</li>" +  
+  "<li class='layer' layer='buslinie7' show='" + layervis["buslinie7"] + "'>Linie 7</li>" +  
+  "<li class='layer' layer='buslinie8' show='" + layervis["buslinie8"] + "'>Linie 8</li>" +  
+  "<li class='layer' layer='buslinie9' show='" + layervis["buslinie9"] + "'>Linie 9</li>" +  
   "</ul>" +  
   "<hr/>" +
   "<a href='javascript:closePopup()'>close</a>";
@@ -606,7 +618,7 @@ function layermenu()
     .show();
 }
 
-$("body").on("click", "li.layer", function(event) {
+$("body").on("touchstart click", "li.layer", function(event) {
   var layername = $(this).attr("layer");
   var show = $(this).attr("show");
   
@@ -614,12 +626,14 @@ $("body").on("click", "li.layer", function(event) {
   {
     window[layername].setVisibility(false);
     $(this).attr("show", "false");
+    layervis[layername] = false;
     $.post("<?php echo site_url("/map/map/saveLayerVisibility");?>", {layer: layername, visibility: false});
   }
   else
   {
     window[layername].setVisibility(true);
     $(this).attr("show", "true");    
+    layervis[layername] = true;
     $.post("<?php echo site_url("/map/map/saveLayerVisibility");?>", {layer: layername, visibility: true});
   }
 });

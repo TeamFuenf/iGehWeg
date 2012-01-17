@@ -265,7 +265,7 @@ table#eventmembers
         <script>
           $(function() {
           
-            $("#location_order_az").on("click", function() {
+            $("#location_order_az").on("touchstart click", function() {
               var list = $("ul#eventlocations");
               var listLi = $("li", list);
               listLi.sort(function(a, b)
@@ -281,7 +281,7 @@ table#eventmembers
               });
             });
 
-            $("#location_order_distance").on("click", function() {
+            $("#location_order_distance").on("touchstart click", function() {
               var list = $("ul#eventlocations");
               var listLi = $("li", list);
               listLi.sort(function(a, b)

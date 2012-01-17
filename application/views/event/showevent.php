@@ -2,7 +2,7 @@
 $(document).ready(function()
 {
 
-  $("button[name=send_comment]").on("click", function()
+  $("button[name=send_comment]").on("touchstart click", function()
   {
     var comment = $("textarea").val();
     if (comment != "")
