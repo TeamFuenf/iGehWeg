@@ -24,10 +24,14 @@
 	</script>
 </head>
 <body>
+	<div class="button_side">
+	<h1>Freunde hinzufügen:</h1>
 	<?php 
-		echo form_input('searchname', 'Type in name...', 'id="search_field"'); 
-		//echo anchor('/friends', 'BACK TO FRIENDS', 'id="back_to_friends_button"');
+		$attr = array( 'name' => 'searchname', 'id' => 'search_field', 'placeholder' => 'Name...');
+		echo form_input($attr); 
 	?>
+	</div>
+	<br/>
 	<div id="add_friend">
 		<?php echo $detail_string; ?>
 	</div>

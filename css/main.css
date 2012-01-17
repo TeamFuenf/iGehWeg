@@ -133,6 +133,7 @@ li.button_long {
 	margin: 0px;
 /*	padding: 25px;*/
 	text-align: left;
+	font-size: 30px;
 }
 
 li.button_long a {
@@ -205,7 +206,7 @@ a.button_long #new_messages {
 }
 
 .list_entry {
-	width: 74%;
+	width: 70%;
 	display: inline-block;
 	padding: 25px 0px 25px 25px;
 /*	border: 1px solid black;*/
@@ -214,9 +215,24 @@ a.button_long #new_messages {
 .button_small {
 	float: right;
 	width: 20%;
-	background-color: blue;
-	padding: 25px 0px;
+	padding: 25px 0px 25px 0px;
+/*	margin-right: 60px;*/
 	text-align: center;
+/*	border-radius: 5px;*/
+	border-left: 1px dashed #707070;
+}
+
+.button_small.blue {
+/*	background-color: #93ccc9;*/
+}
+
+.button_small.green {
+/*	background-color: #abd6b3;*/
+}
+
+.arrow {
+	float: right;
+/*	margin-right: 40px;*/
 }
 
 /* --- Login ------------------------------------------------------------------------------------------------------- */
@@ -356,28 +372,10 @@ div#friend_detail_image img {
 
 /* --- Gruppen ----------------------------------------------------------------------------------------------------- */
 
-.delete_group {
-	float: right;
-	background: #AE1515;
-	padding: 4px;
-	color: white;
-	border-radius: 4px;
-}
-
-/*--------GROUP MEMBERS------------*/
-
-ul.list {
-	margin: 0px;
-	padding: 0px;
-}
-
-ul.list>li {
-	clear: both;
-	cursor: pointer;
-	font-size: 1em;
-	padding: 10px;
-	border-bottom: 1px solid #CCCCCC;
-	list-style: none;
+div#add_info {
+	margin: 10px;
+	font-size: 30px;
+	margin: 0px auto;
 }
 
 /* --- Seiten ------------------------------------------------------------------------------------------------------ */

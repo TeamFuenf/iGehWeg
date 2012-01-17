@@ -38,12 +38,13 @@ class Friends_format_model extends CI_Model
 				} else {
 					$color_class = "blue";
 				}
-				$friends_list = $friends_list."<li class='button_long ".$color_class."' id='".$item->id."'>
-				<span class='friend_list_entry list_entry'>
+				$friends_list = $friends_list."<li class='button_long ".$color_class."' >
+				<span class='friend_list_entry list_entry' id='".$item->id."'>
 				<img src='".$item->picture."'/>
-				".$item->name." >
+				".$item->name." 
+				<span class='arrow'>></span>
 				</span>
-				".anchor('/mail/'.$item->id, '<img src="../../images/message.png" />', array( 'class' => 'button_small'))."
+				".anchor('/mail/'.$item->id, '<img src="../../images/message_'.$color_class.'.png" />', array( 'class' => 'button_small '.$color_class))."
 				</li>";
 				$count++;
 			}
@@ -160,8 +161,8 @@ class Friends_format_model extends CI_Model
 					<span id='delete_user' class='button_normal'>Löschen</span> ".anchor('/mail/'.$details->id, '<img src="../../images/message.png" />', array( 'class' => 'button_normal', 'style' => ''))."
 					</div>
 					<hr />
-					<span>Gruppen:</span><br/>
 					<div class='button_side'>
+					<span>Gruppen:</span><br/>
 					".$gruppen."
 					<span id='add_to_button' class='button_normal'>+</span>
 					</div>
@@ -248,10 +249,11 @@ class Friends_format_model extends CI_Model
 								".$this->ajax_link."
 							</script>";
 		
-		$string = "	<span class='group_list'>Gruppen ohne Benutzer:</span><br/>
+		$string = "	<h1 class='button_side'>Gruppen hinzufügen:</h1>
+					<span class='group_list button_side'>Gruppen ohne Benutzer:</span><br/>
 					<div class='button_side'>".$groups_without."</div>
 					<hr />
-					<span class='group_list'>Gruppen mit Benutzer:</span><br/>
+					<span class='group_list button_side'>Gruppen mit Benutzer:</span><br/>
 					<div class='button_side'>".$groups_with."</div>
 					<hr />
 					<div class='button_side'>
@@ -270,10 +272,23 @@ class Friends_format_model extends CI_Model
     function format_add_friends($users) 
     {
     	$users_list = "";
-		
+    	$color_class = "";
+		$count = 0;
     	if(!is_null($users)) {
 			foreach($users as $item) {
-				$users_list = $users_list."<li class='users_list_entry' id='".$item->id."'><img src='".$item->picture."'/>".$item->name."</li>";
+				if($count % 2 == 0) {
+					$color_class = "green";
+				} else {
+					$color_class = "blue";
+				}
+				
+				$users_list = $users_list."<li class='users_list_entry button_long ".$color_class."' id='".$item->id."'>
+				<span class='friend_list_entry list_entry'>
+				<img src='".$item->picture."'/>
+				".$item->name." 
+				</span>
+				</li>";
+				$count++;
 			}
 		}
 		
@@ -297,9 +312,11 @@ class Friends_format_model extends CI_Model
 		
 		
     	$string = 	"<div id='add_info'></div>
-    	<ul id='users_list'>"
+    				 <div class='contentbox contentbox_friends'>
+    				 <ul>"
     				 	.$users_list."
-    				 </ul>";
+    				 </ul>
+    				 </div>";
 					
 		return $string.$string_script;
     }
