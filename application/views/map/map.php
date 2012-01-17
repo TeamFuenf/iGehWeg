@@ -466,7 +466,6 @@ function openLocationPopup(evt)
     .show();
 }
 
-
 $("body").on("touchstart click", "a.locdetailsid", function() {
   var locationId = $(this).attr("locdetailsid");
   $.post("<?php echo site_url("map/location"); ?>/" + locationId, function(data) {
