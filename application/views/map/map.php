@@ -502,7 +502,7 @@ function openLocationPopup(evt)
       {
         var locationName = feature.cluster[i].attributes.name;
         var locationId = feature.cluster[i].attributes.id;
-        buffer += "<a href='javascript:getLocationDetails(" + locationId + ")'>" + locationName + "</a><br>";
+        buffer += "<a class='locdetailsid' locdetailsid='" + locationId + "'>" + locationName + "</a><br>";
       }
       buffer += "</ul>";
     }
@@ -511,13 +511,26 @@ function openLocationPopup(evt)
   {
     var locationName = feature.cluster[0].attributes.name;
     var locationId = feature.cluster[0].attributes.id;
-    buffer += "<a href='javascript:getLocationDetails(" + locationId + ")'>" + locationName + "</a><br>";
+    buffer += "<a class='locdetailsid' locdetailsid='" + locationId + "'>" + locationName + "</a><br>";
   }
   
   $("#popup")
     .html(buffer)
     .show();
 }
+
+
+$("body").on("click", "a.locdetailsid", function() {
+  var locationId = $(this).attr("locdetailsid");
+  $.post("<?php echo site_url("map/location"); ?>/" + locationId, function(data) {
+    $("#locationdetails").html(data);
+  });
+  pageNext();
+});
+
+
+
+
 
 function openFriendsPopup(evt)
 {
@@ -741,18 +754,11 @@ function addLocation()
         lon: newlocationlonlat.lon,
         lat: newlocationlonlat.lat
     });
-    $.get("<?php echo site_url('map'); ?>");
   }
   
 }
 
-function getLocationDetails(id)
-{
-  $.post("<?php echo site_url("map/location"); ?>/" + id, function(data) {
-    $("#locationdetails").html(data);
-  });
-  pageNext();
-}
+
 
 
 
@@ -772,8 +778,12 @@ function getLocationDetails(id)
       <script>initMap();</script>
     </li>
     <li>
-<!--  bestehende Location bearbieten/löschen      -->
+<!--  Locationdetails anzeigen      -->
       <div id='locationdetails'></div>
+    </li>
+        <li>
+<!--  Location bearbieten      -->
+      <div id='locationdetailsedit'></div>
     </li>
   </ul>
 </div>

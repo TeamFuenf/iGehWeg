@@ -1,6 +1,3 @@
-<style>
-  
-</style>
 <script>
   function finish()
   {
@@ -24,25 +21,17 @@
         internet: internet,
         email: email
     });
+    pagePrev();
   }
   }
 </script>
 
-<div id="window">
-  <ul id="pages">
-    <li>
-      <div id='locationedit'>
-        <button id='button-location-cancel' class='buttonlocation' type='button' onclick='pagePrev()'>Abbrechen</button>
-        <button id='button-location-finish' class='buttonlocation' type='button' onclick='finish()'>Fertig</button>
-        <input type='text' name='name' id='name' placeholder='Name' value='<?php echo $location->name; ?>'><br/>
-        <input type='text' name='street' id='street' placeholder='Straße' value='<?php echo $location->street; ?>'><br/>
-        <input type='text' name='city' id='city' placeholder='Stadt' value='<?php echo $location->city; ?>'><br/>
-        <input type='text' name='type' id='type' placeholder='Typ' value='<?php echo $location->type; ?>'><br/>
-        <input type='text' name='internet' id='internet' placeholder='Homepage' value='<?php echo $location->internet; ?>'><br/>
-        <input type='text' name='email' id='email' placeholder='E-Mail' value='<?php echo $location->email; ?>'><br/>
-        <div id='errorMsg'></div>
-      </div>
-      
-    </li>
-  </ul>
-</div>
+<button id='button-location-cancel' class='buttonlocation' type='button' onclick='pagePrev()'>Abbrechen</button>
+<button id='button-location-finish' class='buttonlocation' type='button' onclick='save()'>Fertig</button>
+<input type='text' name='name' id='name' placeholder='Name' value='<?php echo $location->name; ?>'><br/>
+<input type='text' name='street' id='street' placeholder='Straße' value='<?php echo $location->street; ?>'><br/>
+<input type='text' name='city' id='city' placeholder='Stadt' value='<?php echo $location->city; ?>'><br/>
+<input type='text' name='type' id='type' placeholder='Typ' value='<?php echo $location->type; ?>'><br/>
+<input type='text' name='internet' id='internet' placeholder='Homepage' value='<?php echo $location->internet; ?>'><br/>
+<input type='text' name='email' id='email' placeholder='E-Mail' value='<?php echo $location->email; ?>'><br/>
+<div id='errorMsg'></div>
