@@ -156,9 +156,10 @@ class Login_control extends CI_Controller {
       $username = $this->input->post("username", true);
       $password = $this->input->post("password", true);
       
-      if($query = $this->login_model->create_user($username, $password))
+      if($query = $this->login_model->create_user(uniqid("user"), $username, $password))
       {
-			 $this->layout->view('/base/signup_success');
+        redirect(site_url(""));
+			 //$this->layout->view('/base/signup_success');
       }
       else
       {

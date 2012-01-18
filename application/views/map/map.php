@@ -93,11 +93,11 @@ function initMap()
   friendsStrategy.distance = 50;
 
   var locationsStrategy = new OpenLayers.Strategy.Cluster();
-  locationsStrategy.distance = 45;
+  locationsStrategy.distance = 50;
   locationsStrategy.threshold = 1;
 
   var eventsStrategy = new OpenLayers.Strategy.Cluster();
-  eventsStrategy.distance = 45;
+  eventsStrategy.distance = 50;
   eventsStrategy.threshold = 1;
 
   var buslinesStrategy = new OpenLayers.Strategy.Cluster();
@@ -112,9 +112,9 @@ function initMap()
     }, {
       context: {
         radius: function(feature) {
-          var pix = 15;
+          var pix = 30;
           if(feature.cluster) {
-            pix = Math.min(feature.attributes.count, 7) + 15;
+            pix = Math.min(feature.attributes.count, 7) + 30;
           }
           return pix;
         }
@@ -134,9 +134,9 @@ function initMap()
     }, {
       context: {
         radius: function(feature) {
-          var pix = 15;
+          var pix = 30;
           if(feature.cluster) {
-            pix = Math.min(feature.attributes.count, 7) + 15;
+            pix = Math.min(feature.attributes.count, 7) + 30;
           }
           return pix;
         }
@@ -149,7 +149,7 @@ function initMap()
   
     var friendsStyle = new OpenLayers.StyleMap({
     "default" : new OpenLayers.Style({
-      pointRadius: "20",
+      pointRadius: "30",
       fillOpacity: 0.5,
       externalGraphic: "${image}"
     }, {
@@ -169,7 +169,7 @@ function initMap()
     }),
     "select" : new OpenLayers.Style({
       fillOpacity: 1.0,
-      pointRadius: "25"
+      pointRadius: "30"
     })
   });
   
@@ -196,7 +196,7 @@ function initMap()
 
   var buslinienStyle = new OpenLayers.StyleMap({
     "default": new OpenLayers.Style({
-      pointRadius: "10",
+      pointRadius: "20",
       fillOpacity: "0.5",    
       fillColor: "${pointcolor}",
       strokeOpacity: "0.5",
@@ -214,7 +214,7 @@ function initMap()
       }
     }),
     "select": new OpenLayers.Style({
-      pointRadius: "15"
+      pointRadius: "30"
     })
   });
 
