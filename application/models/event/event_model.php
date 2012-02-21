@@ -124,6 +124,9 @@ class Event_model extends CI_Model
     return $query->row();
   }
 
+  /*
+   * Liefert alle Events für einen bestimmten User
+   */
   public function getEventsForUser($userid)
   {
     $sql = "
@@ -140,6 +143,9 @@ class Event_model extends CI_Model
     return $query->result();    
   }
   
+  /*
+   * Liefert alle selbst erstellen Events des aktuellen Users
+   */
   public function getOwnEvents()
   {
     $userid = $this->session->userdata("userid");
@@ -149,6 +155,9 @@ class Event_model extends CI_Model
     return $query->result();
   }
   
+  /*
+   * Liefert alle Events an denen der aktuelle User teilnimmt oder eingeladen wurde 
+   */
   public function getParticipatingEvents()
   {
     $userid = $this->session->userdata("userid");
@@ -161,6 +170,9 @@ class Event_model extends CI_Model
     return $query->result();
   }
   
+  /*
+   * Liefert alle Events an denen ein User beteiligt ist mit zusätzlichen Daten für die Darstellung in der Timeline
+   */
   public function getEventsForTimeline()
   {
     $userid = $this->session->userdata("userid");
@@ -197,6 +209,9 @@ class Event_model extends CI_Model
     return $query->result();
   }
 
+  /*
+   * Liefert alle Teilnehmer eines Events, egal ob diese bereits zugesagt haben oder nicht
+   */
   public function getMembersForEvent($eventid)
   { 
     $userid = $this->session->userdata("userid");
@@ -221,6 +236,10 @@ class Event_model extends CI_Model
   
 // --------------------------------------------------------------------------------------------------------------------
 
+  /*
+   * Methode für AJAX Zugriff
+   * Setzt/Aktualisiert die Locationdaten eines Events
+   */
   public function setLocation($eventid, $locationid)
   {
     $event = $this->getEvent($eventid);
@@ -241,6 +260,10 @@ class Event_model extends CI_Model
     }
   }
   
+  /*
+   * Methode für AJAX Zugriff
+   * Setzt/Aktualisiert den Mitgliedsstatus eines Users für ein bestimmtes Event
+   */
   public function setStatus($eventid, $memberid, $status)
   {
     $this->db->where("eventid", $eventid);
@@ -276,6 +299,10 @@ class Event_model extends CI_Model
     }
   }
 
+  /*
+   * Methode für AJAX Zugriff
+   * Setzt/Aktualisiert die Stammdaten eines Events
+   */
   public function setBasedata($eventid, $title, $from, $to)
   {
     $event = $this->getEvent($eventid);
@@ -348,6 +375,9 @@ class Event_model extends CI_Model
     return "okay";
   }
 
+  /*
+   * Prüft ob der aktuelle User an einem Event teilnehmen kann oder es Überschneidungen gibt 
+   */
   public function checkAttendance($from, $to)
   {
     $userid = $this->session->userdata("userid");
@@ -409,6 +439,9 @@ class Event_model extends CI_Model
 
 // --------------------------------------------------------------------------------------------------------------------
 
+  /*
+   * Event in iCal Formatierung
+   */
   public function generateICal($eventid)
   {
     $event = $this->getEvent($eventid);
@@ -452,6 +485,9 @@ class Event_model extends CI_Model
   
 // --------------------------------------------------------------------------------------------------------------------
 
+  /*
+   * Hilfsmethode: Löscht leere oder irrtümlich angelegte Events aus der Datenbank
+   */
   public function cleanup()
   {
     $userid = $this->session->userdata("userid");

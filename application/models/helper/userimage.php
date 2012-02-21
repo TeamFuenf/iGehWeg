@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Erzeugt Userbilder in bestimmten Größen und Darstellungen mit Hilfe der GDLib
+ */
 class Userimage extends CI_Model
 {
   function __construct()
@@ -28,6 +31,9 @@ class Userimage extends CI_Model
 
 // ----------------------------------------------------------------------------
    
+   /*
+    * erzeugt ein normales Userbild
+    */
     public function plain($userid)
     {
       $image = @imagecreatetruecolor($this->plainsize[0], $this->plainsize[1]);
@@ -41,6 +47,9 @@ class Userimage extends CI_Model
       imagepng($image);
     }
   
+    /*
+     * erzeugt ein Userbild in der Darstellung eines Kartenmarkers
+     */
     public function marker($userid)
     {
       $pw = $this->markersize[0];
@@ -77,6 +86,9 @@ class Userimage extends CI_Model
       imagepng($image);
     }
 
+    /*
+     * Erzeugt ein Userbild für die Darstellung in der Timeline
+     */
     public function timeline($userid)
     {
       $pw = $this->timelinesize[0];

@@ -77,6 +77,10 @@ ORDER BY time DESC
     $this->db->update("message", $message);          
   }
 
+  /*
+   * Liefert alle Nachrichten die der aktuelle User mit einem anderen User ausgetauscht hat.
+   * (Geordnet nach Absendedatum)
+   */
   public function getMessageStream($userid)
   {
     $id1 = $this->session->userdata("userid");
@@ -108,6 +112,9 @@ ORDER BY time DESC
   
 // --------------------------------------------------------------------------------------------------------------------
 
+  /*
+   * Erstellt das Formular um eine neue Nachricht abzusenden
+   */
   public function getNewMessageForm($receiver="")
   {
     $userid = $this->session->userdata("userid");

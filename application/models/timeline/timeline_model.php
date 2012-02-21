@@ -10,7 +10,10 @@ class Timeline_model extends CI_Model
   }
   
 // --------------------------------------------------------------------------------------------------------------------
-
+  
+  /*
+   * Liefert alle Eigenen Events mit einem Bearbeiten Button zurück
+   */
   public function getOwnEvents($userid)
   {
     $events = $this->Event_model->getOwnEvents($userid);    
@@ -36,6 +39,9 @@ class Timeline_model extends CI_Model
     return $buffer;
   }
 
+  /*
+   * Liefert alle Events zu denen der User eingeladen wurde
+   */
   public function getForeignEvents($userid)
   {
     $events = $this->Event_model->getForeignEvents($userid);    

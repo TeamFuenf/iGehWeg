@@ -32,6 +32,9 @@ class Map_model extends CI_Model
     return $query->result();
   }
   
+  /*
+   * Aktualisiert die Geodaten (WGS84) für einen User in der Datenbank
+   */
   public function updateUserGeo($userid, $lon, $lat)
   {
     $data["lon"] = $lon;
