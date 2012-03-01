@@ -4,7 +4,6 @@
 		<p>Willkommen bei</p>
 		<p id="login_logo">meetapp</p>
 	</div>
-
 	<?php
 		$linkExternal["class"] = "external";
     

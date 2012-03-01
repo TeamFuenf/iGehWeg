@@ -30,25 +30,19 @@ class Friends_model extends CI_Model
       return $query->result();
     }
 
-    	/**
-	 * Holt einen Benutzer.
-	 * 
-	 * <- $user_id
-	 * -> Objekt mit id, name und picture
+    /**
+	 * Gibt die Daten eines Benutzers zurück.
 	 */
     function get_user($user_id) 
     {
       	$this->db->where("id", $user_id);      
     	$query = $this->db->get("user");
 		return $query->row();
-		//return $query->result();
     }
 	
 	/**
-	 * Holt alle Benutzer.
+	 * Gibt die Daten aller vorhandenen Benutzer zurück.
 	 * 
-	 * <- 
-	 * -> Objekt mit id, name und picture
 	 */
     function get_all_users() 
     {      
@@ -57,15 +51,12 @@ class Friends_model extends CI_Model
     }
 	
 	/**
-	 * Holt alle Benutzer ohne die Freunde eines Users.
+	 * Gibt alle Benutzer exklusiver der Freunde eines Benutzer mit einer bestimmten ID zurück.
 	 * 
-	 * <- User id
-	 * -> Objekt mit id, name und picture
 	 */
     function get_all_users_without_friends($user_id) 
     {      
     	$query = $this->db->query("SELECT * FROM user WHERE user.id <> '".$user_id."' AND user.id NOT IN (SELECT friendid FROM friend WHERE id = '".$user_id."');");
-		//$query = $this->db->query("SELECT * FROM user;");
 		if($query->num_rows() > 0) 
 		{
 			foreach($query->result() as $item) 
@@ -78,15 +69,13 @@ class Friends_model extends CI_Model
     }
 	
 	/**
-	 * Sucht Benutzer ohne die Freunde eines Users.
+	 * Funktion für die Benutzersuche beim Freunde hinzufügen.
+	 * Durchsucht alle Benutzer ohne die Freunde des suchenden Benutzers.
 	 * 
-	 * <- User id
-	 * -> Objekt mit id, name und picture
 	 */
     function search_users_without_friends($user_id, $input) 
     {      
     	$query = $this->db->query("SELECT * FROM user WHERE user.id <> '".$user_id."' AND user.name LIKE '%".$input."%' AND user.id NOT IN (SELECT friendid FROM friend WHERE id = '".$user_id."');");
-		//$query = $this->db->query("SELECT * FROM user;");
 		if($query->num_rows() > 0) 
 		{
 			foreach($query->result() as $item) 
@@ -99,10 +88,8 @@ class Friends_model extends CI_Model
     }
 
 	/**
-	 * Holt alle Freunde eines Benutzeres.
+	 * Gibt alle Freunde eines Benutzers zurück.
 	 * 
-	 * <- $user_id
-	 * -> $data Array mit allen Freunden mit id, name und picture
 	 */
     function get_friends($user_id) 
     {	  
@@ -111,24 +98,11 @@ class Friends_model extends CI_Model
       $this->db->join("user", "user.id = friend.friendid");
       $query = $this->db->get();
       return $query->result();
-/*
-      if($query->num_rows() > 0) 
-      {
-			foreach ($query->result() as $row)
-			{
-				$data[] = $row;
-			}
-			
-			return $data;
-		  }
-*/      
     } 
 
 	/**
-	 * Fügt Freund zur Freundesliste eines Benutzers.
+	 * Fügt einen Freund zur Freundesliste eines Benutzers hinzu.
 	 * 
-	 * <- $friend_id, $user_id
-	 * -> nix
 	 */
 	function add_friend($friend_id, $user_id) 
 	{
@@ -138,8 +112,6 @@ class Friends_model extends CI_Model
 	/**
 	 * Löscht Freund aus der Freundesliste eines Benutzers.
 	 * 
-	 * <- $friend_id, $user_id
-	 * -> nix
 	 */
 	function delete_friend($friend_id, $user_id) 
 	{
@@ -148,10 +120,8 @@ class Friends_model extends CI_Model
 	}
 	
 	/**
-	 * Holt alle Gruppen eines Benutzeres.
+	 * Gibt alle vorhandenen Gruppen eines Benutzers zurück.
 	 * 
-	 * <- $user_id
-	 * -> $data Array mit allen Gruppen mit id, name
 	 */
 	function get_groups($user_id) 
 	{
@@ -169,10 +139,7 @@ class Friends_model extends CI_Model
 	}
 	
 	/**
-	 * Holt alle Gruppen eines Benutzeres mit bestimmten Freund darin.
-	 * 
-	 * <- $user_id
-	 * -> $data Array mit den Gruppen mit id, name
+	 * Gibt alle Gruppen eines Benutzers zurück in dem sich ein bestimmter Freund (anderer Benutzer) befindet.
 	 */
 	function get_groups_with_friend($user_id, $friend_id) 
 	{
@@ -190,10 +157,7 @@ class Friends_model extends CI_Model
 	}
 	
 	/**
-	 * Holt alle Gruppen eines Benutzeres ohne bestimmten Freund darin.
-	 * 
-	 * <- $user_id
-	 * -> $data Array mit den Gruppen mit id, name
+	 * Gibt alle Gruppen eines Benutzers zurück in dem sich ein bestimmter Freund (anderer Benutzer) NICHT befindet.
 	 */
 	function get_groups_without_friend($user_id, $friend_id) 
 	{
@@ -211,10 +175,7 @@ class Friends_model extends CI_Model
 	}
 	
 	/**
-	 * Holt alle Mitglieder einer Gruppen.
-	 * 
-	 * <- $group_id
-	 * -> $data Array mit allen Mitgliedern einer Gruppe mit id, name und picture
+	 * Gibt alle Mitglieder einer Gruppe zurück.
 	 */
 	function get_group_members($group_id) 
 	{
@@ -232,26 +193,17 @@ class Friends_model extends CI_Model
 	}
 	
 	/**
-	 * Erstellt Gruppe für einen Benutzer.
+	 * Erstellt eine neue Gruppe für einen Benutzer.
 	 * 
-	 * <- $group_name, $user_id
-	 * -> nix
 	 */
 	function create_group($group_name, $user_id) 
-	{/*
-		$query = $this->db->query("SELECT * FROM `groups` WHERE name = '".$group_name."' AND userid = '".$user_id."';");
-		
-		if($query->num_rows() == 0) 
-		{*/
+	{
 			$this->db->query("INSERT INTO `groups` (userid, name) VALUES ('".$user_id."', '".$group_name."');");
-		//}		
 	}
 	
 	/**
-	 * Löscht Gruppe.
+	 * Löscht eine bestimmte Gruppe.
 	 * 
-	 * <- $group_id
-	 * -> nix
 	 */
 	function delete_group($group_id) 
 	{
@@ -260,10 +212,8 @@ class Friends_model extends CI_Model
 	}
 	
 	/**
-	 * Fügt Freund aus der Freundesliste des aktuellen Benutzers zu einer Gruppe hinzu.
+	 * Fügt einen Freund aus der Freundesliste des Benutzers zu einer Gruppe hinzu.
 	 * 
-	 * <- $group_id, $friend_id
-	 * -> nix
 	 */
 	function add_to_group($group_id, $friend_id) 
 	{
@@ -276,25 +226,11 @@ class Friends_model extends CI_Model
 	}
 	
 	/**
-	 * Löscht Freund aus einer Gruppe.
+	 * Löscht einen Freund aus einer Gruppe.
 	 * 
-	 * <- $group_id, $friend_id
-	 * -> nix
 	 */
 	function delete_from_group($group_id, $friend_id) 
-	{/*
-		$query = $this->db->query("SELECT userid, name FROM `groups` WHERE id = '".$group_id."';");
-		
-		if($query->num_rows() > 0) 
-		{
-			foreach($query->result() as $item) 
-			{
-				$data[] = $item;
-			}
-			
-			$this->db->query("DELETE FROM `groups` WHERE name = '".$data[0]->name."' AND userid = '".$data[0]->userid."' AND friendid = '".$friend_id."';");
-		}	*/
-		
+	{
 		$query = $this->db->query("SELECT * FROM `group_member` WHERE groupid = '".$group_id."' AND memberid = '".$friend_id."';");
 		
 		if($query->num_rows() != 0) 

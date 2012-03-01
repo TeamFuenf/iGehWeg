@@ -1,5 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+/**
+ * Default Controller. Wird beim Start der Anwendung aufgerufen. Ist für den normalen Login, 
+ * TwitterLogin, GoogleLogin, Logout und das Anlegen von neuen Benutzern verantwortlich.
+ */
 class Login_control extends CI_Controller {
 
   public function __construct()
@@ -9,6 +12,10 @@ class Login_control extends CI_Controller {
     parse_str($_SERVER["QUERY_STRING"], $_GET); 
   }
 
+  /**
+   * Überprüft ob ein Benutzer schon eingeloggt ist (durch Cookie) und falls dies zutrifft wird er 
+   * sofot zum Dashboard weitergeleitet. Falls nicht gelangt er zu Loginseite.
+   */
   public function index()
   {
     $is_logged_in = $this->session->userdata("is_logged_in");
@@ -29,6 +36,9 @@ class Login_control extends CI_Controller {
   	}
   }
   
+  /**
+   * Realisiert den Login über Twitter.
+   */
   public function twitterlogin()
   {
     $params["key"] =  "NKjLJqkn5O09P7KfctZrw";
@@ -52,6 +62,9 @@ class Login_control extends CI_Controller {
     }
   }
 
+  /**
+   * Realisiert den Login über Google.
+   */
   public function googlelogin()
   {
     $this->load->library("openid");
@@ -106,6 +119,10 @@ class Login_control extends CI_Controller {
     }
   }
   
+  /**
+   * Validiert den Benutzernamen und leitet bei korrektem Namen zum Dashboard weiter. Falls nicht wird
+   * wieder die index()-Funktion aufgerufen.
+   */
   public function validate_credentials()
   {
     $query = $this->login_model->validate();
@@ -130,11 +147,17 @@ class Login_control extends CI_Controller {
   	}
   }
   
+  /**
+   * Leitet den Benutzer zur Registrierungsseite weiter.
+   */
   public function signup()
   {
     $this->layout->view("/base/signup_view");
   }
   
+  /**
+   * Erstellt neuen Benutzer bei validen Eingaben.
+   */
   public function create_user()
   {
     //Prüft ob die Eingaben passen
@@ -159,7 +182,6 @@ class Login_control extends CI_Controller {
       if($query = $this->login_model->create_user(uniqid("user"), $username, $password))
       {
         redirect(site_url(""));
-			 //$this->layout->view('/base/signup_success');
       }
       else
       {
@@ -168,6 +190,9 @@ class Login_control extends CI_Controller {
     }
   }
   
+  /**
+   * Loggt einen Benutzer wieder aus.
+   */
   public function logout()
   {
     $this->CI =& get_instance();        

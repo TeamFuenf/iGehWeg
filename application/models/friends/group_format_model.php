@@ -9,13 +9,12 @@ class Group_format_model extends CI_Model
     }
 	
 	/**
+	 * Formatiert die Gruppen Hauptseite mit der Übersicht über alle Gruppen eines Benutzer mit html und js.
 	 * 
-	 * 
-	 * <- 
-	 * -> 
 	 */
     function format_group_main($groups) 
     {
+    	//Formatierung aller Gruppen als Liste.
     	$format_groups = "";
 		$count = 0;
 		
@@ -40,6 +39,7 @@ class Group_format_model extends CI_Model
 			}
 		}
 		
+		//JS-Skriptcode der Seite.
 		$script_string = "	<script>
 								$('#new_group_field').hide();
 								$('#friends_add_button').on('click', function() {
@@ -92,6 +92,7 @@ class Group_format_model extends CI_Model
 								});
 							</script>";
 		
+		//HTML-Code der Seite.
 		$string = "<div class='button_side'>
     				<div id='friends_add_button'>
     				 	<span href='' class='button_normal'>+</span>
@@ -113,18 +114,18 @@ class Group_format_model extends CI_Model
 					</ul>
 					</div>";
 		
+		//Rückgabestring mit HTML- und JS-Code.
 		return $script_string.$string;
     }
 	
 	
 	/**
+	 * Formatiert die Seite zum Anzeigen aller Mitglieder einer bestimmten Gruppe.
 	 * 
-	 * 
-	 * <- 
-	 * -> 
 	 */
     function format_group_members($members) 
     {
+    	// Formatierung aller Mitglieder als Liste
 		$count = 0;    		
     	$format_members = "";
 		if($members != null) 
@@ -146,6 +147,7 @@ class Group_format_model extends CI_Model
 			}
 		}
 		
+		//JS-Skriptcode der Seite.
 		$script_string = "<script>
 								$('#back_to_groups').on('click', function() {
 									$.ajax({
@@ -160,6 +162,7 @@ class Group_format_model extends CI_Model
 								});
 							</script>";
 		
+		//HTML-Code der Seite.
 		$string = "<h1 class='button_side'>Mitglieder:</h1>
 					<br/><br/>
 					<div class='contentbox contentbox_friends'>
@@ -170,6 +173,7 @@ class Group_format_model extends CI_Model
 					<br/>
 					<span id='back_to_groups' class='button_normal button_side'>zurück</span>";
 		
+		//Rückgabestring mit HTML- und JS-Code.
 		return $script_string.$string;
     }
 }

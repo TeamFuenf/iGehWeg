@@ -167,25 +167,12 @@ li.button_long img {
 	vertical-align: bottom;
 	border-radius: 4px;
 }
-/*
-a.button_long #new_messages {
-	color: black;
-	font-size: 22px;
-	border: 2px solid black;
-	display: inline-block;
-	background-color: #E12D2D;
-	width: 25px;
-	height: 25px;
-	border-radius: 20px;
-	margin-left: -70px;
-	margin-right: 40px;
-}*/
 
 .button_normal {
 	background-color: #928875;
 	border: none;
     border-radius: 4px;
-  /*color: white; */ /* Schriftfarbe der Buttons in weiß besser???  */
+  /*color: white; */
 	color: #5A524B;
     font-size: 50px;
     font-family: segoeui;
@@ -245,17 +232,8 @@ a.button_long #new_messages {
 	border-left: 1px dashed #707070;
 }
 
-.button_small.blue {
-/*	background-color: #93ccc9;*/
-}
-
-.button_small.green {
-/*	background-color: #abd6b3;*/
-}
-
 .arrow {
 	float: right;
-/*	margin-right: 40px;*/
 }
 
 /* --- Login ------------------------------------------------------------------------------------------------------- */
@@ -301,7 +279,7 @@ input[type=submit], #login_form>form>a, #signup_form>form>a {
 	background-color: #928875;
 	border: none;
     border-radius: 4px 4px 4px 4px;
-  /*color: white; */ /* Schriftfarbe der Buttons in weiß besser???  */
+  /*color: white; */
 	color: #5A524B;
     font-size: 50px;
     font-family: segoeui;
@@ -435,11 +413,6 @@ div#event_basedata table {
 	margin: 5px;
 }
 
-div#outlinks {
-/*	float: right;*/
-/*	margin: 10px;*/
-}
-
 div#outlinks a {
 	background-color: #5A524B;
 	border-radius: 5px;
@@ -503,20 +476,12 @@ div#outlinks img {
   vertical-align:middle;
 }
 
-.single_comment {
-/*	width: 100%;*/
-}
-
 .button_long .sender, .button_long .comment {
 	display: inline-block;
 }
 
 .button_long .sender {
 	margin: 25px;
-}
-
-.single_comment .sender img {
-/*	vertical-align: bottom; */
 }
 
 #event_comments ul
@@ -529,17 +494,6 @@ div#outlinks img {
 #event_comments ul li
 {
   padding-bottom:10px;
-}
-
-/*#event_comments div.sender
-{
-  width:200px;
-  float: left;
-}*/
-
-#event_comments div.comment
-{
-/*  float:left;*/
 }
 
 #event_comments .comment button {
@@ -852,10 +806,6 @@ div.olControlAttribution
     padding:0px;
     margin:0px;
     overflow:hidden;
-/*  
-    -webkit-box-shadow: 25px 5px 300px 5px rgba(0, 0, 0, 0.5);
-    -moz-box-shadow: 25px 5px 300px 5px rgba(0, 0, 0, 0.5);
-    box-shadow: 25px 5px 300px 5px rgba(0, 0, 0, 0.5); */
   }
   
   div#popup p
@@ -1023,50 +973,3 @@ ul#pages>li
   margin:25px 0;
   background:#ccc;
 }
-
-/* --- Buttons ----------------------------------------------------------------------------------------------------- */
-
-/* http://css3button.net/13291 */
-
-/*button
-{
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 16px;
-  color: #606060;
-  padding: 5px 8px;
-  background-color:#e9e9e9;
-  border-radius: 4px;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-  border: 1px solid #afafaf;
-  -moz-box-shadow:
-    0px 1px 1px rgba(000,000,000,0.1),
-    inset 0px 1px 1px rgba(255,255,255,1);
-  -webkit-box-shadow:
-    0px 1px 1px rgba(000,000,000,0.1),
-    inset 0px 1px 1px rgba(255,255,255,1);
-}
-
-button a
-{
-  text-decoration:none;  
-}
-
-button.grey
-{
-  color: #606060;
-  background-color:#e9e9e9;
-}
-
-button.green
-{
-  color: #eeeeee;
-  background-color:#669933;
-}
-
-button.darkgrey
-{
-  color: #ffffff;
-  background-color:#666666;
-}*/
-

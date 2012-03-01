@@ -3,6 +3,10 @@
 class Friends_format_model extends CI_Model
 {
 
+	/*
+	 * Da die Seiten dynamisch erstellt werden muss hier die JS-Funktion für
+	 * den Ajax-Aufruf von Links seperat hinzugefügt werden.
+	 */  
 	var $ajax_link = "$('a.ajaxlinks').on('click', function(event){
 						event.preventDefault();
 						var url = $(this).attr('href');
@@ -21,13 +25,12 @@ class Friends_format_model extends CI_Model
     }
 	
 	/**
-	 * 
-	 * 
-	 * <- 
-	 * -> 
+	 * Formatiert die erste Seite der "Freunde-Anzeigen-Seite" inkl. html und js.
+	 * Gibt eine Liste der Freunde eines Users zurück. 
 	 */
     function format_friend_main($current_user, $friends) 
     {
+    	//Formatierung aller Freunde als Liste.
     	$friends_list = "";
 		$count = 0;
 		
@@ -50,6 +53,7 @@ class Friends_format_model extends CI_Model
 			}
 		}
 		
+		//JS-Skriptcode der Seite
 		$string_script = " <script>
 						$('.friend_list_entry').on('click', function() {
 							var detail_id = $(this).attr('id');
@@ -69,12 +73,8 @@ class Friends_format_model extends CI_Model
 						});
 						".$this->ajax_link."						
 						</script>";
-		/*
-		  <div id='friends_current_user'>
-    	     <img class='big_user_image' src='".$current_user->picture."' />"
-    		 .$current_user->name."
-    	  </div>
-		  */
+
+		//HTML-Code der Seite.
     	$string = 	"<div class='button_side'>
     				<h1>Freunde:</h1>
     				<div id='friends_add_button'>
@@ -90,17 +90,16 @@ class Friends_format_model extends CI_Model
     				 	.$friends_list."
     				 </ul></div>";
 					
+		//Rückgabestring mit HTML- und JS-Code.
 		return $string.$string_script;
     }
 	
 	/**
-	 * 
-	 * 
-	 * <- 
-	 * -> 
+	 * Formatiert die Detail-Seite eines Freundes inkl. html und js.
 	 */
     function format_friend_details($details, $groups) 
     {
+    	//Formatierung aller Gruppen als Links.
     	$gruppen = "";
 		if($groups != null) 
 		{
@@ -109,6 +108,7 @@ class Friends_format_model extends CI_Model
 			}
 		}
 		
+		//JS-Skriptcode der Seite
 		$script_string = "	<script>
 								$('#back_button').on('click', function(){
 									$('#pages').animate({left : '0px'}, 1000);
@@ -150,6 +150,7 @@ class Friends_format_model extends CI_Model
 								".$this->ajax_link."
 							</script>";
 		
+		//HTML-Code der Seite.
 		$string = "	<div id='friend_details'>
 						<div id='friend_detail_image'>
 							<img class='big_user_image' src='".$details->picture."' />
@@ -170,17 +171,17 @@ class Friends_format_model extends CI_Model
 					<div class='button_side'>
 					<span id='back_button' class='button_normal'>zurück</span></div>";
 		
+		//Rückgabestring mit HTML- und JS-Code.
 		return $script_string.$string;
 	}
 	
-		/**
+	/**
+	 * Formatiert die Seite zum Zuordnen der Freunde zu einer Gruppe hinzufügen inkl. hmtl und js.  
 	 * 
-	 * 
-	 * <- 
-	 * -> 
 	 */
     function format_add_to_group($groups_with_friend, $groups_without_friend, $friend_id) 
     {
+    	// Formatierung aller Gruppen mit bestimmtem Freund als Links.
     	$groups_with = "";
 		if($groups_with_friend != null) 
 		{
@@ -188,7 +189,7 @@ class Friends_format_model extends CI_Model
 				$groups_with = $groups_with." <span class='button_normal red del_group' id='".$item->id."' href=''>".$item->name."</span>";	
 			}
 		}
-		
+		// Formatierung aller Gruppen ohne bestimmtem Freund als Links.
 		$groups_without = "";
 		if($groups_without_friend != null) 
 		{
@@ -197,6 +198,7 @@ class Friends_format_model extends CI_Model
 			}
 		}
 		
+		//JS-Skriptcode der Seite.
 		$script_string = "	<script>
 								$('#to_details_button').on('click', function() {
 									var detail_id = '".$friend_id."';
@@ -248,7 +250,8 @@ class Friends_format_model extends CI_Model
 								});
 								".$this->ajax_link."
 							</script>";
-		
+							
+		//HTML-Code der Seite.
 		$string = "	<h1 class='button_side'>Gruppen hinzufügen:</h1>
 					<span class='group_list button_side'>Gruppen ohne Benutzer:</span><br/>
 					<div class='button_side'>".$groups_without."</div>
@@ -260,17 +263,17 @@ class Friends_format_model extends CI_Model
 					<span id='to_details_button' class='button_normal'>zurück</span>
 					</div>";
 		
+		//Rückgabestring mit HTML- und JS-Code.
 		return $script_string.$string;
     }
 	
 	/**
+	 * Formatiert die Seite zum Hinzufügen von Freunden inkl. hmtl und js
 	 * 
-	 * 
-	 * <- 
-	 * -> 
 	 */
     function format_add_friends($users) 
     {
+    	// Formatierung der noch nicht als Freunde hinzugefügten Benutzer als Liste.
     	$users_list = "";
     	$color_class = "";
 		$count = 0;
@@ -292,6 +295,7 @@ class Friends_format_model extends CI_Model
 			}
 		}
 		
+		//JS-Skriptcode der Seite.
 		$string_script = " <script>
 							$('.users_list_entry').on('click', function() {
 								var detail_id = $(this).attr('id');
@@ -310,7 +314,7 @@ class Friends_format_model extends CI_Model
 							".$this->ajax_link."
 							</script>";
 		
-		
+		//HTML-Code der Seite.
     	$string = 	"<div id='add_info'></div>
     				 <div class='contentbox contentbox_friends'>
     				 <ul>"
@@ -318,6 +322,7 @@ class Friends_format_model extends CI_Model
     				 </ul>
     				 </div>";
 					
+		//Rückgabestring mit HTML- und JS-Code.
 		return $string.$string_script;
     }
 	

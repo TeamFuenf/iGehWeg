@@ -1,4 +1,7 @@
 <?php
+/**
+ * Controller für die Freundeseite.
+ */
 class Friends_control extends CI_Controller {
 
 	var $userid;
@@ -9,6 +12,9 @@ class Friends_control extends CI_Controller {
 		$this->userid = $this->session->userdata('userid');
 	}
 
+	/**
+	 * Leitet auf die Freunde-Seite weiter.
+	 */
 	function index()
 	{
 		$this->load->model('friends/friends_model');
@@ -18,7 +24,8 @@ class Friends_control extends CI_Controller {
 	}
 	
 	/*
-	 * FRIENDS MAIN
+	 * Lädt Freunde-Model, holt Freunde aus der Datenbank und gibt die Seite formatiert zurück beim Aufruf der
+	 * Freunde-Seite. 
 	 */
 	function get_friends() 
 	{
@@ -37,7 +44,8 @@ class Friends_control extends CI_Controller {
 	}
 	
 	/*
-	 * FRIEND DETAIL
+	 * Beim Aufruf einer Detailseite eines Freundes werden die Detail-Daten des Freundes geholt und die
+	 * Seite formatiert zurückgegeben.
 	 */
 	function get_detail($detail_id) 
 	{
@@ -55,7 +63,7 @@ class Friends_control extends CI_Controller {
 	}
 	
 	/*
-	 * GET GROUPS
+	 * Wird beim Hinzufügen von Freunden zu einer Gruppe aufgerufen um die vorhandenen Gruppen anzuzeigen (Freund-zu-Gruppe-Seite).
 	 */
 	function get_groups($friend_id) 
 	{
@@ -71,7 +79,7 @@ class Friends_control extends CI_Controller {
 	}
 
 	/*
-	 * ADD TO GROUP
+	 * Wird aufgerufen wenn ein Freund einer Gruppe hinzugefügt wird (Freund-zu-Gruppe-Seite).
 	 */
 	function add_groups($friend_id, $group_id) 
 	{
@@ -81,7 +89,7 @@ class Friends_control extends CI_Controller {
 		 
 		
 	/*
-	 * DELETE FROM GROUP
+	 * Wird aufgerufen wenn ein Benutzer eine seiner Gruppen löscht (Freund-zu-Gruppe-Seite).
 	 */
 	function del_groups($friend_id, $group_id) 
 	{
@@ -90,7 +98,7 @@ class Friends_control extends CI_Controller {
 	}
 	
 	/*
-	 * DELETE FRIEND
+	 * Wird aufgerufen wenn ein Benutzer einen seiner Freunde aus seiner Freundesliste löscht (Freund-Details-Seite).
 	 */
 	function del_friend($friend_id) 
 	{
@@ -99,7 +107,7 @@ class Friends_control extends CI_Controller {
 	}
 	
 	/*
-	 * ADD FRIEND MAIN
+	 * Wird aufgerufen wenn ein Benutzer die Freund-Hinzufügen-Seite aufruft.
 	 */
 	function add_friends_main() 
 	{
@@ -114,7 +122,7 @@ class Friends_control extends CI_Controller {
 	}
 	
 	/*
-	 * ADD FRIEND
+	 * Wird aufgerufen wenn ein Benutzer einen Freund zu seiner Freundesliste hinzufügt (Freund-Hinzufügen-Seite).
 	 */
 	function add_friend($friend_id) 
 	{
@@ -129,16 +137,12 @@ class Friends_control extends CI_Controller {
 	}
 	
 	/*
-	 * SEARCH FRIEND
+	 * Wird aufgerufen wenn ein Benutzer die Freund-Suchen-Seite aufruft.
 	 */
 	function search_friend($input) 
 	{
 		$this->load->model('friends/friends_model');
 		$users = $this->friends_model->search_users_without_friends($this->userid, $input);
-		
-		
-		
-		//$users = $this->friends_model->get_all_users_without_friends($this->userid);
 		
 		$this->load->model('friends/friends_format_model');
 		//Hier werden die Daten formatiert und zurückgegeben bei Eingabe einer Buchstabenfolge

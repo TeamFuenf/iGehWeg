@@ -7,17 +7,26 @@ class Login_model extends CI_Model
 	{
 		parent::__construct();
 	}
-
+	
+	/* 
+	 * Validiert beim Login den eingegebenen Benutzernamen und das Passwort.
+	 * Benutzername und Passwort werden per HTTP-Post übergeben.
+	 * Wenn der Benutzername vorhanden ist und das zugehörige Passwort übereinstimmt, dann werden
+	 * die Daten des Benutzers zurückgegeben. 
+	 */
 	public function validate() {
 		$this->db->where('name', $this->input->post('username'));
 		$this->db->where('password', md5($this->input->post('password')));
 		$query = $this->db->get('user');
 		
 		if($query->num_rows() == 1) {
-			return $query;
+			return $query->result();
 		}
 	}
 	
+	/*
+	 * Legt einen neuen Benutzer mit übergebenem Benutzernamen, Passwort und ID an.
+	 */
 	public function create_user($userid, $username, $password) {
     $insert_data["id"] = $userid;
 		$insert_data["name"] = $username;
@@ -35,6 +44,10 @@ class Login_model extends CI_Model
 		}
 	}
 
+	/*
+	 * Testfunktion zum Wechseln der Benutzer ohne Login.
+	 * Wird in der Final-Version nicht verwendent.
+	 */
   	public function getUsers()
   	{
     	$users = array();
